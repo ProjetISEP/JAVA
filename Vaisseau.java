@@ -61,6 +61,7 @@ public class Vaisseau {
 	}
 	public void move() {
 		x=x-7;
+		
 	}
 	public void bordure() {
 		if (y<=0){

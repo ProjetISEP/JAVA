@@ -20,7 +20,6 @@ public class Terrain {
 
 
 	Terrain(double xter, double yter, double largeur, double hauteur) {
-		System.out.print("fre");
 		this.xter = xter;
 		this.yter = yter;
 		this.largeur = largeur;
@@ -29,54 +28,83 @@ public class Terrain {
 	public static List<Terrain> getListeTerrain(){
 		return myrectangle;
 	}
+	public double getxter(){
+		return xter;
+	}
+	public double getyter(){
+		return yter;
+	}
+	public double getlargeur(){
+		return largeur;
+	}
+	public double gethauteur(){
+		return hauteur;
+	}
+	
 
-
-	public static void tableauAleatoire(){ // Génere un tableau aléatoire pour la fonction decor
+	public static double[] tableauAleatoire(){ // Génere un tableau aléatoire pour la fonction decor
 		for(int i=0;i!=300;i++){
 			double nb=Math.random();
 			tab[i]=nb;
 		}
+		return tab;
 	}	
 	public static void decor(){
-		for(int i=0;i!=100;i++){
+		for(int i=0;i!=200;i++){
 			if(i<20){
-				StdDraw.filledRectangle(xrectangle+i*400, 500, 180,i*100+1000);//le haut
-				StdDraw.filledRectangle(xrectangle+i*400, 9500, 180,i*100+1000);//le bas
+				StdDraw.filledRectangle(xrectangle+i*400, 500, 180,i*100+1000);//le bas
+				StdDraw.filledRectangle(xrectangle+i*400, 9500, 180,i*100+1000);//le haut
 				System.out.println(xrectangle+i*400);
 			}else{
-				StdDraw.filledRectangle(xrectangle+i*400, 500,tab[i]*140+50,1000+tab[i]*2300);//le haut
-				StdDraw.filledRectangle(xrectangle+i*400, 9500,tab[i]*140+50,1000+(2300-(tab[i]*2300)));//le bas	
+				StdDraw.filledRectangle(xrectangle+i*400, 500,tab[i]*140+50,1000+tab[i]*2300);//le bas
+				StdDraw.filledRectangle(xrectangle+i*400, 9500,tab[i]*140+50,1000+(2300-(tab[i]*2300)));//le haut	
 			}
 			xrectangle=xrectangle-0.5;
 			Color RANDOM=new Color((int)R,(int)G,(int)B);
 			StdDraw.setPenColor(RANDOM);
 		}
 	}
-	public static void colision(){
-		for(int i=0;i!=3;i++){
-			if(i<20){
-				StdDraw.filledRectangle(xrectangle+i*400, 500, 180,i*100+1000);//le haut
-				StdDraw.filledRectangle(xrectangle+i*400, 9500, 180,i*100+1000);//le bas
-				System.out.println(xrectangle+i*400);
-			}else{
-				StdDraw.filledRectangle(xrectangle+i*400, 500,tab[i]*140+50,1000+tab[i]*2300);//le haut
-				StdDraw.filledRectangle(xrectangle+i*400, 9500,tab[i]*140+50,1000+(2300-(tab[i]*2300)));//le bas	
-			}
-			xrectangle=xrectangle-0.5;
-			Color RANDOM=new Color((int)R,(int)G,(int)B);
-			StdDraw.setPenColor(RANDOM);
-		}
-		myVaisseau=Isep.getListeVaisseau();
-		myVaisseau.get(0).getx();
-		myVaisseau.get(0).gety();
-	}
-	public static void show(){
-		//StdDraw.filledRectangle(5000, 5000, 1000,1000);
+	public void show(){
+		StdDraw.filledRectangle(xter, yter, largeur,hauteur);
 		Color RANDOM=new Color((int)R,(int)G,(int)B);
 		StdDraw.setPenColor(RANDOM);
+		xter=xter-100;
 	}
-	public static void show2(){
-		StdDraw.filledRectangle(5000, 5000, 1000,1000);
+	public void colision(){
+		myVaisseau=Isep.getListeVaisseau();
+		
+		double intermediaire=yter+hauteur;
+		System.out.println("y du vaisseau"+myVaisseau.get(0).gety());
+		System.out.println("yter du terrain"+intermediaire);
+		
+		if(xter+100>myVaisseau.get(0).getx() && xter-100<myVaisseau.get(0).getx() && intermediaire>myVaisseau.get(0).gety()){
+			System.out.println("Colision");
+			System.out.println("Colision");
+			System.out.println("Colision");
+			System.out.println("Colision");
+			System.out.println("Colision");
+			String vrai="vrai";
+			myVaisseau.get(0).vies("vrai");
+			
+		}
+	}
+	public void colision1(){
+		myVaisseau=Isep.getListeVaisseau();
+		
+		double intermediaire=yter+hauteur;
+		System.out.println("y du vaisseau"+myVaisseau.get(0).gety());
+		System.out.println("yter du terrain"+intermediaire);
+		
+		if(xter+100>myVaisseau.get(0).getx() && xter-100<myVaisseau.get(0).getx() && intermediaire>myVaisseau.get(0).gety()){
+			System.out.println("Colision");
+			System.out.println("Colision");
+			System.out.println("Colision");
+			System.out.println("Colision");
+			System.out.println("Colision");
+			String vrai="vrai";
+			myVaisseau.get(0).vies("vrai");
+			
+		}
 	}
 	
 

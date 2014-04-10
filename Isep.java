@@ -35,23 +35,38 @@ public class Isep {
 		myVaisseau.add(new Vaisseau(3000, 5000, 0, 0,3));
 		myAsteroide.add(new Asteroide(X_MAX, 0, 0, 0,1));
 		myAsteroide.add(new Asteroide(X_MAX/2, 0, 0, 0,1));
-		
-		myrectangle.add(new Terrain(5000, 5000, 1000, 1000));
-		
-		Terrain.tableauAleatoire();
+
+		// CREATION  D'OBJETS POUR LE TERRAIN
+		double tab1[]=Terrain.tableauAleatoire();
+		myrectangle=Terrain.getListeTerrain();
+		for(int i=0;i!=200;i++){
+			if(i<20){
+				myrectangle.add(new Terrain(10000+i*450, 500,170,i*100+1000));//le bas
+				myrectangle.add(new Terrain(10000+i*400, 9500,170,i*100+1000));//le haut
+			}else{
+				
+				myrectangle.add(new Terrain(xrectangle+i*400, 500,tab1[i]*140+50,1100+(2500-(tab1[i]*2500))));
+				myrectangle.add(new Terrain(xrectangle+i*400, 9500,tab1[i]*140+50,1100+tab1[i]*2500));
+			}
+		}
+		// FIN CREATION D'OBJETS
 		while (true) {
-			//StdDraw.clear(Color.black);
+
 			StdDraw.clear();
-			//Terrain.show();
-			
-			//Terrain.show2();
-			
-			
-			
-			Terrain.decor();
-			//Terrain.colision();
-			
-			
+			for(int i=0;i!=200;i++){
+				//myrectangle.get(i).show();
+				
+				if(i%2==0){
+					myrectangle.get(i).colision();
+					myrectangle.get(i).show();
+					StdDraw.filledRectangle(myrectangle.get(i).getxter(), myrectangle.get(i).getyter(), myrectangle.get(i).getlargeur(),myrectangle.get(i).gethauteur());
+				//}else{
+				//	myrectangle.get(i).colision1();
+				}
+			}
+			//Terrain.decor();
+
+
 			//VAISSEAU********************************************
 			//JOUEUR1
 			if(StdDraw.isKeyPressed(38))
