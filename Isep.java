@@ -39,41 +39,20 @@ public class Isep {
 		myAsteroide.add(new Asteroide(X_MAX/2, 0, 0, 0,1));
 
 		// CREATION  D'OBJETS POUR LE TERRAIN
-		double tab1[]=Terrain.tableauAleatoire();
 		myrectangle=Terrain.getListeTerrain();
-		for(int i=0;i!=200;i++){
-			if(i<20){
-				myrectangle.add(new Terrain(10000+i*450, 500,170,i*100+1000));//le bas
-				myrectangle.add(new Terrain(10000+i*400, 9500,170,i*100+1000));//le haut
-			}else{
-				if(tab1[i]<0.5){
-					myrectangle.add(new Terrain(xrectangle+i*400, 500,170,900+(3600-(tab1[i]*3600))));
-					myrectangle.add(new Terrain(xrectangle+i*400, 9500,170,900+tab1[i]*3600));
-				}else{
-					myrectangle.add(new Terrain(xrectangle+i*400, 500,170,900+(3600-(tab1[i]*3600))));
-					myrectangle.add(new Terrain(xrectangle+i*400, 9500,170,900+tab1[i]*3600));
-				}
-
-			}
-		}
+		Terrain.generateTerrain();
 		// FIN CREATION D'OBJETS
 		while (true) {
-
 			StdDraw.clear();
-			for(int i=0;i!=200;i++){			
+			for(int i=0;i!=myrectangle.size();i++){
+				StdDraw.filledRectangle(myrectangle.get(i).getxter(), myrectangle.get(i).getyter(), myrectangle.get(i).getlargeur(),myrectangle.get(i).gethauteur());
+				myrectangle.get(i).show();
 				if(i%2==0){
 					myrectangle.get(i).colision();
-					myrectangle.get(i).show();
-					StdDraw.filledRectangle(myrectangle.get(i).getxter(), myrectangle.get(i).getyter(), myrectangle.get(i).getlargeur(),myrectangle.get(i).gethauteur());
 				}else{
 					myrectangle.get(i).colision1();
-					myrectangle.get(i).show();
-					StdDraw.filledRectangle(myrectangle.get(i).getxter(), myrectangle.get(i).getyter(), myrectangle.get(i).getlargeur(),myrectangle.get(i).gethauteur());
 				}
 			}
-			//Terrain.decor();
-
-
 			//VAISSEAU********************************************
 			//JOUEUR1
 			if(StdDraw.isKeyPressed(38))
@@ -110,8 +89,6 @@ public class Isep {
 				(myVaisseau.get(i)).score();
 				myVaisseau.get(i).vies();
 			}
-			System.out.println("vaisseau 0: " + myVaisseau.get(0).getlife());
-			System.out.println("vaisseau 1: " + myVaisseau.get(1).getlife());
 			//ASTEROIDE******************************************************
 			for(int i=0;i!=myAsteroide.size();i=i+1){
 				(myAsteroide.get(i)).move();

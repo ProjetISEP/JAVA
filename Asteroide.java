@@ -13,11 +13,8 @@ public class Asteroide {
 	public static double Y_MAX = 10000;
 	public static int seconde=0;
 	private int lifeAste;
-
 	public static List<Missile> myMissile =new ArrayList<>();
 	public static List<Asteroide> myAsteroide =new ArrayList<>();
-
-
 	Asteroide(double xAste, double yAste, double vxAste, double vyAste, int lifeAste) {
 		System.out.println("Création d'un asteroide avec des paramètres !");
 		this.xAste = xAste;
@@ -30,7 +27,7 @@ public class Asteroide {
 		return yAste;
 	}
 	public void move() {
-		xAste=xAste-10;
+		xAste=xAste-100;
 		if(xAste==0){
 			xAste=X_MAX+600;
 			double p=Math.random()*10000;
@@ -53,8 +50,6 @@ public class Asteroide {
 
 			for(int i=0;i!=myMissile.size();i=i+1){
 				//for(int j=myAsteroide.size()-1;j!=-1;){
-
-
 					//System.out.println(" "+(myMissile.get(i)).getymissile() +" "+ (myAsteroide.get(j)).yAste+"");
 				if((myAsteroide.get(0)).yAste<(myMissile.get(i)).getymissile()+300 && myAsteroide.get(0).yAste>(myMissile.get(i)).getymissile()-300 && (myAsteroide.get(0)).xAste<(myMissile.get(i)).getxmissile()+300 && myAsteroide.get(0).xAste>(myMissile.get(i)).getxmissile()-300){
 					//if((myAsteroide.get(j)).yAste<(myMissile.get(i)).getymissile()+300 && myAsteroide.get(j).yAste>(myMissile.get(i)).getymissile()-300 && (myAsteroide.get(j)).xAste<(myMissile.get(i)).getxmissile()+300 && myAsteroide.get(j).xAste>(myMissile.get(i)).getxmissile()-300){
@@ -63,7 +58,6 @@ public class Asteroide {
 						System.out.println("*******************Collison*****************");
 						System.out.println("********************************************************");
 						System.out.println();
-
 					}else{
 					}
 				}

@@ -39,36 +39,47 @@ public class Terrain {
 	public double gethauteur(){
 		return hauteur;
 	}
-
-
 	public static double[] tableauAleatoire(){ // Génere un tableau aléatoire pour la fonction decor
-		for(int i=0;i!=300;i++){
+		tab[0]=Math.random();
+		System.out.println(tab[0]);
+		int k=0;
+		for(int i=1;i!=300;i++){
 			double nb=Math.random();
-			tab[i]=nb;
+			if(tab[i-1]<0.1){
+				tab[i]=tab[i-1]+0.3*nb;
+				k=0;
+			}
+			if(tab[i-1]>0.9){
+				tab[i]=tab[i-1]-0.3*nb;
+				k=1;
+			}
+			if(k==0){
+				tab[i]=tab[i-1]+0.3*nb;
+			}else if(k==1){
+				tab[i]=tab[i-1]-0.3*nb;
+			}
+			System.out.println(tab[i]);
 		}
 		return tab;
 	}
-	/*
-	public static void decor(){
-		for(int i=0;i!=200;i++){
+	public static void generateTerrain(){
+		double tab1[]=Terrain.tableauAleatoire();
+		myrectangle=Terrain.getListeTerrain();
+		for(int i=0;i!=290;i++){
 			if(i<20){
-				StdDraw.filledRectangle(xrectangle+i*400, 500, 180,i*100+1000);//le bas
-				StdDraw.filledRectangle(xrectangle+i*400, 9500, 180,i*100+1000);//le haut
-				System.out.println(xrectangle+i*400);
+				myrectangle.add(new Terrain(10000+i*450, 200,170,i*100+1000));//le bas
+				myrectangle.add(new Terrain(10000+i*400, 9800,170,i*100+1000));//le haut
 			}else{
-				StdDraw.filledRectangle(xrectangle+i*400, 500,tab[i]*140+50,1000+tab[i]*2300);//le bas
-				StdDraw.filledRectangle(xrectangle+i*400, 9500,tab[i]*140+50,1000+(2300-(tab[i]*2300)));//le haut	
+				myrectangle.add(new Terrain(xrectangle+i*400, 200,170,700+(3900-(tab1[i]*3550))));
+				myrectangle.add(new Terrain(xrectangle+i*400, 9800,170,700+tab1[i]*3900));
 			}
-			xrectangle=xrectangle-0.5;
-			Color RANDOM=new Color((int)R,(int)G,(int)B);
-			StdDraw.setPenColor(RANDOM);
 		}
-	}*/
+	}
 	public void show(){
 		StdDraw.filledRectangle(xter, yter, largeur,hauteur);
 		Color RANDOM=new Color((int)R,(int)G,(int)B);
 		StdDraw.setPenColor(RANDOM);
-		xter=xter-200;
+		xter=xter-130;
 	}
 	public void colision(){//POUR LES COLISIONS AVEC LES RECTANGLES DU BAS
 		myVaisseau=Isep.getListeVaisseau();		
