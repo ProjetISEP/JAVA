@@ -41,9 +41,7 @@ public class Asteroide {
 	public void colision() { //colision entre vaisseau et astéroide
 		myVaisseau=Isep.getListeVaisseau();
 		if(yAste<myVaisseau.get(0).gety()+1000 && yAste>myVaisseau.get(0).gety()-1000 && xAste<myVaisseau.get(0).getx()+200 && xAste>myVaisseau.get(0).getx()-200){
-			String vrai="vrai";
-			myVaisseau.get(0).vies("vrai");
-
+			myVaisseau.get(0).setLife();
 		}
 	}
 	public void colisionMissileAsteroide() { //colision entre missile et astéroide

@@ -2,7 +2,6 @@ import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class Terrain {
 	public static double X_MAX = 10000;
 	public static double Y_MAX = 10000;
@@ -40,7 +39,7 @@ public class Terrain {
 	public double gethauteur(){
 		return hauteur;
 	}
-	
+
 
 	public static double[] tableauAleatoire(){ // Génere un tableau aléatoire pour la fonction decor
 		for(int i=0;i!=300;i++){
@@ -48,7 +47,8 @@ public class Terrain {
 			tab[i]=nb;
 		}
 		return tab;
-	}	
+	}
+	/*
 	public static void decor(){
 		for(int i=0;i!=200;i++){
 			if(i<20){
@@ -63,49 +63,31 @@ public class Terrain {
 			Color RANDOM=new Color((int)R,(int)G,(int)B);
 			StdDraw.setPenColor(RANDOM);
 		}
-	}
+	}*/
 	public void show(){
 		StdDraw.filledRectangle(xter, yter, largeur,hauteur);
 		Color RANDOM=new Color((int)R,(int)G,(int)B);
 		StdDraw.setPenColor(RANDOM);
-		xter=xter-100;
+		xter=xter-200;
 	}
-	public void colision(){
-		myVaisseau=Isep.getListeVaisseau();
-		
+	public void colision(){//POUR LES COLISIONS AVEC LES RECTANGLES DU BAS
+		myVaisseau=Isep.getListeVaisseau();		
 		double intermediaire=yter+hauteur;
-		System.out.println("y du vaisseau"+myVaisseau.get(0).gety());
-		System.out.println("yter du terrain"+intermediaire);
-		
-		if(xter+100>myVaisseau.get(0).getx() && xter-100<myVaisseau.get(0).getx() && intermediaire>myVaisseau.get(0).gety()){
-			System.out.println("Colision");
-			System.out.println("Colision");
-			System.out.println("Colision");
-			System.out.println("Colision");
-			System.out.println("Colision");
-			String vrai="vrai";
-			myVaisseau.get(0).vies("vrai");
-			
+		for(int k=0;k!=myVaisseau.size();k++){
+			if(xter+100>myVaisseau.get(k).getx() && xter-100<myVaisseau.get(k).getx() && intermediaire>myVaisseau.get(k).gety()){
+				myVaisseau.get(k).setLife();	
+			}
 		}
 	}
-	public void colision1(){
+	public void colision1(){//POUR LES COLISIONS AVEC LES RECTANGLES DU HAUT
 		myVaisseau=Isep.getListeVaisseau();
-		
-		double intermediaire=yter+hauteur;
-		System.out.println("y du vaisseau"+myVaisseau.get(0).gety());
-		System.out.println("yter du terrain"+intermediaire);
-		
-		if(xter+100>myVaisseau.get(0).getx() && xter-100<myVaisseau.get(0).getx() && intermediaire>myVaisseau.get(0).gety()){
-			System.out.println("Colision");
-			System.out.println("Colision");
-			System.out.println("Colision");
-			System.out.println("Colision");
-			System.out.println("Colision");
-			String vrai="vrai";
-			myVaisseau.get(0).vies("vrai");
-			
+		double intermediaire=yter-hauteur;
+		for(int k=0;k!=myVaisseau.size();k++){
+			if(xter+100>myVaisseau.get(k).getx() && xter-100<myVaisseau.get(k).getx() && intermediaire<myVaisseau.get(k).gety()){
+				myVaisseau.get(k).setLife();
+			}
 		}
 	}
-	
+
 
 }
