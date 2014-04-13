@@ -88,6 +88,9 @@ public class Isep {
 				(myVaisseau.get(i)).move();
 				(myVaisseau.get(i)).score();
 				myVaisseau.get(i).vies();
+				if(myVaisseau.get(i).getlife()<=0){//Condition de fin de partie
+					Vaisseau.FinDePartie();
+				}
 			}
 			//ASTEROIDE******************************************************
 			for(int i=0;i!=myAsteroide.size();i=i+1){

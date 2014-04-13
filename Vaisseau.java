@@ -29,9 +29,11 @@ public class Vaisseau {
 	}
 	public void vies(){
 		myVaisseau=Isep.getListeVaisseau();
-		String lifeString=Integer.toString(life);
-		StdDraw.text(7000,9500,lifeString);
-		StdDraw.setPenColor(Color.WHITE);
+		for(int k=0;k!=myVaisseau.size();k++){
+			String lifeString=Integer.toString(myVaisseau.get(k).life);
+			StdDraw.text(7000+k*1000,9500,lifeString);
+			StdDraw.setPenColor(Color.WHITE);
+		}
 	}
 	public double getx(){
 		return x;
@@ -57,7 +59,7 @@ public class Vaisseau {
 			score=score+400;
 		if(8000<x && x<10000)
 			score=score+600;
-		
+
 		String rrr=Integer.toString(score);
 		StdDraw.text(5000,9000,rrr);
 		StdDraw.setPenColor(Color.magenta);	
@@ -90,6 +92,13 @@ public class Vaisseau {
 	}
 	public void right() {
 		x = x + 100;
+	}
+	public static void FinDePartie(){
+		int totalLife=0;
+		int [] tableauLife= new int[myVaisseau.size()];
+		for(int k=0;k!=myVaisseau.size();k++){
+			
+		}
 	}
 	public void paint0(){
 		StdDraw.picture(x, y, "./src/vaisseau1.png",180);
