@@ -26,8 +26,14 @@ public class Asteroide {
 	public double getPositionyAste() {
 		return yAste;
 	}
+	public double getlifeAste() {
+		return lifeAste;
+	}
+	public void setLifeAste(){
+		lifeAste=lifeAste-1;
+	}
 	public void move() {
-		xAste=xAste-100;
+		xAste=xAste-50;
 		if(xAste==0){
 			xAste=X_MAX+600;
 			double p=Math.random()*10000;
@@ -42,29 +48,27 @@ public class Asteroide {
 		}
 	}
 	public void colisionMissileAsteroide() { //colision entre missile et astéroide
-
 		myMissile=Isep.getListeMissile();
 		myAsteroide=Isep.getListeAsteroide();
-
 		if(myMissile.size()!=0 && myAsteroide.size()!=0){
-
 			for(int i=0;i!=myMissile.size();i=i+1){
-				//for(int j=myAsteroide.size()-1;j!=-1;){
-					//System.out.println(" "+(myMissile.get(i)).getymissile() +" "+ (myAsteroide.get(j)).yAste+"");
-				if((myAsteroide.get(0)).yAste<(myMissile.get(i)).getymissile()+300 && myAsteroide.get(0).yAste>(myMissile.get(i)).getymissile()-300 && (myAsteroide.get(0)).xAste<(myMissile.get(i)).getxmissile()+300 && myAsteroide.get(0).xAste>(myMissile.get(i)).getxmissile()-300){
+				for(int k=0;k!=myAsteroide.size();k=k+1){
+				if((myAsteroide.get(k)).yAste<(myMissile.get(i)).getymissile()+300 && myAsteroide.get(k).yAste>(myMissile.get(i)).getymissile()-300 && (myAsteroide.get(k)).xAste<(myMissile.get(i)).getxmissile()+300 && myAsteroide.get(k).xAste>(myMissile.get(i)).getxmissile()-300){
 					//if((myAsteroide.get(j)).yAste<(myMissile.get(i)).getymissile()+300 && myAsteroide.get(j).yAste>(myMissile.get(i)).getymissile()-300 && (myAsteroide.get(j)).xAste<(myMissile.get(i)).getxmissile()+300 && myAsteroide.get(j).xAste>(myMissile.get(i)).getxmissile()-300){
-						System.out.println("********************************************************");
-						System.out.println("*********************Collison*****************************");
-						System.out.println("*******************Collison*****************");
-						System.out.println("********************************************************");
-						System.out.println();
-					}else{
-					}
+					System.out.println("********************************************************");
+					System.out.println("*********************Collison*****************************");
+					System.out.println("*******************Collison*****************");
+					System.out.println("********************************************************");
+					System.out.println();
+					myAsteroide.get(k).setLifeAste();
 				}
+				}
+				
 			}
-	//	}	
+		}	
 	}
 	public void paint1(){
-		StdDraw.picture(xAste, yAste, "./src/asteroide.png",360);
+			StdDraw.picture(xAste, yAste, "./src/asteroide.png",360);
+
 	}
 }

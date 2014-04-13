@@ -35,8 +35,8 @@ public class Isep {
 
 		myVaisseau.add(new Vaisseau(3000, 5000, 0, 0,10));
 		myVaisseau.add(new Vaisseau(6000, 5000, 0, 0,10));
-		myAsteroide.add(new Asteroide(X_MAX, 0, 0, 0,1));
-		myAsteroide.add(new Asteroide(X_MAX/2, 0, 0, 0,1));
+		myAsteroide.add(new Asteroide(X_MAX, 0, 0, 0,2));
+		myAsteroide.add(new Asteroide(X_MAX/2, 0, 0, 0,2));
 
 		// CREATION  D'OBJETS POUR LE TERRAIN
 		myrectangle=Terrain.getListeTerrain();
@@ -92,7 +92,11 @@ public class Isep {
 			//ASTEROIDE******************************************************
 			for(int i=0;i!=myAsteroide.size();i=i+1){
 				(myAsteroide.get(i)).move();
-				(myAsteroide.get(i)).paint1();
+				if(myAsteroide.get(i).getlifeAste()>0){
+					 //myAsteroide.add(new Asteroide(X_MAX, 0, 0, 0,2));
+					//myAsteroide.add(new Asteroide(X_MAX, 0, 0, 0,2));
+					(myAsteroide.get(i)).paint1();
+				}
 				(myAsteroide.get(i)).colision();
 				(myAsteroide.get(i)).colisionMissileAsteroide();
 			}

@@ -79,7 +79,7 @@ public class Terrain {
 		StdDraw.filledRectangle(xter, yter, largeur,hauteur);
 		Color RANDOM=new Color((int)R,(int)G,(int)B);
 		StdDraw.setPenColor(RANDOM);
-		xter=xter-130;
+		xter=xter-110;
 	}
 	public void colision(){//POUR LES COLISIONS AVEC LES RECTANGLES DU BAS
 		myVaisseau=Isep.getListeVaisseau();		
