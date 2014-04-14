@@ -8,21 +8,23 @@ public class Terrain {
 	public static double xrectangle=10000;
 	public static List<Vaisseau> myVaisseau =new ArrayList<>();
 	public static List<Terrain> myrectangle =new ArrayList<>();
-	private double xter;
-	private double yter;
-	private double largeur;
-	private double hauteur;
+	protected double xter;
+	protected double yter;
+	protected double largeur;
+	protected double hauteur;
+	protected double speed;
 	public static double[] tab = new double[300];
 	static double R=Math.random()*255;
 	static double G=Math.random()*255;
 	static double B=Math.random()*255;
 
 
-	Terrain(double xter, double yter, double largeur, double hauteur) {
+	Terrain(double xter, double yter, double largeur, double hauteur, double speed) {
 		this.xter = xter;
 		this.yter = yter;
 		this.largeur = largeur;
 		this.hauteur = hauteur;
+		this.speed = speed;
 	}
 	public static List<Terrain> getListeTerrain(){
 		return myrectangle;
@@ -39,9 +41,12 @@ public class Terrain {
 	public double gethauteur(){
 		return hauteur;
 	}
+	public void setSpeed(int newSpeed){
+		myVaisseau=Isep.getListeVaisseau();
+		speed=newSpeed;		
+	}
 	public static double[] tableauAleatoire(){ // Génere un tableau aléatoire pour la fonction decor
 		tab[0]=Math.random();
-		System.out.println(tab[0]);
 		int k=0;
 		for(int i=1;i!=300;i++){
 			double nb=Math.random();
@@ -58,7 +63,6 @@ public class Terrain {
 			}else if(k==1){
 				tab[i]=tab[i-1]-0.3*nb;
 			}
-			System.out.println(tab[i]);
 		}
 		return tab;
 	}
@@ -67,19 +71,22 @@ public class Terrain {
 		myrectangle=Terrain.getListeTerrain();
 		for(int i=0;i!=290;i++){
 			if(i<20){
-				myrectangle.add(new Terrain(10000+i*450, 200,170,i*100+1000));//le bas
-				myrectangle.add(new Terrain(10000+i*400, 9800,170,i*100+1000));//le haut
+				myrectangle.add(new Terrain(10000+i*450, 200,170,i*100+1000,110));//le bas
+				myrectangle.add(new Terrain(10000+i*400, 9800,170,i*100+1000,110));//le haut
+			}else if (i<40 && i>=20){ // POUR LES ZONES PARTICULIERES
+				myrectangle.add(new TerrainParticulier(xrectangle+i*400, 200,170,700+(3900-(tab1[i]*3550)),110));
+				myrectangle.add(new TerrainParticulier(xrectangle+i*400, 9800,170,700+tab1[i]*3900,110));
 			}else{
-				myrectangle.add(new Terrain(xrectangle+i*400, 200,170,700+(3900-(tab1[i]*3550))));
-				myrectangle.add(new Terrain(xrectangle+i*400, 9800,170,700+tab1[i]*3900));
+				myrectangle.add(new Terrain(xrectangle+i*400, 200,170,700+(3900-(tab1[i]*3550)),110));
+				myrectangle.add(new Terrain(xrectangle+i*400, 9800,170,700+tab1[i]*3900,110));
 			}
 		}
 	}
 	public void show(){
 		StdDraw.filledRectangle(xter, yter, largeur,hauteur);
 		Color RANDOM=new Color((int)R,(int)G,(int)B);
-		StdDraw.setPenColor(RANDOM);
-		xter=xter-110;
+		StdDraw.setPenColor(Color.black);
+		xter=xter-speed;
 	}
 	public void colision(){//POUR LES COLISIONS AVEC LES RECTANGLES DU BAS
 		myVaisseau=Isep.getListeVaisseau();		
@@ -99,6 +106,4 @@ public class Terrain {
 			}
 		}
 	}
-
-
 }

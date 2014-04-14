@@ -13,19 +13,21 @@ public class Vaisseau {
 	private double x;
 	private double vy;
 	private double vx;
-	public static int score=0;
+	private int score;
 
 	static double R=Math.random()*255;
 	static double G=Math.random()*255;
 	static double B=Math.random()*255;
 	private int life;
 
-	Vaisseau(double x, double y, double vx, double vy, int life) {
+	Vaisseau(double x, double y, double vx, double vy, int life,int score) {
 		this.x = x;
 		this.y = y;
 		this.vx = vx;
 		this.vy = vy;
 		this.life=life;
+		this.score=score;
+		
 	}
 	public void vies(){
 		myVaisseau=Isep.getListeVaisseau();
@@ -44,6 +46,9 @@ public class Vaisseau {
 	public int getlife(){
 		return life;
 	}
+	public int getScore(){
+		return score;
+	}
 	public void setLife(){
 		myVaisseau=Isep.getListeVaisseau();
 		life=getlife()-1;		
@@ -59,10 +64,13 @@ public class Vaisseau {
 			score=score+400;
 		if(8000<x && x<10000)
 			score=score+600;
-
-		String rrr=Integer.toString(score);
-		StdDraw.text(5000,9000,rrr);
-		StdDraw.setPenColor(Color.magenta);	
+		
+		for(int k=0;k!=myVaisseau.size();k++){
+			String scoreString=Integer.toString(myVaisseau.get(k).score);
+			StdDraw.text(7000+k*1000,8500,scoreString);
+			StdDraw.setPenColor(Color.WHITE);
+		}
+			
 	}
 	public void move() {
 		x=x-7;
@@ -93,7 +101,7 @@ public class Vaisseau {
 	public void right() {
 		x = x + 100;
 	}
-	public static void FinDePartie(){
+	public static void FinDePartie(){// A TERMINER
 		int totalLife=0;
 		int [] tableauLife= new int[myVaisseau.size()];
 		for(int k=0;k!=myVaisseau.size();k++){
