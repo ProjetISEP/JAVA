@@ -9,16 +9,17 @@ public class Missile {
 	private double ymissile;
 	private double xmissile;
 	private double vymissile;
-	private static double vxmissile=120;//variable de classe(static) ///////////////////////
+	private static double vxmissile=220;//variable de classe ///////////////////////
 	private double rmissile;
-
-	Missile(double xmissile, double ymissile, double vxmissile, double vymissile, double rmissile) {
-		//System.out.println("Création d'un missile avec des paramètres !");
+	private int joueur;
+	Missile(double xmissile, double ymissile, double vxmissile, double vymissile, double rmissile, int pJoueur) {//Ajout d'un parametre en plus : le missile appartient Ã  un seul joueur
+		//System.out.println("CrÃ©ation d'un missile avec des paramÃ¨tres !");
 		this.xmissile = xmissile;
 		this.ymissile = ymissile;
 		this.vxmissile = vxmissile;
 		this.vymissile = vymissile;
 		this.rmissile=rmissile;
+		joueur=pJoueur;
 	}
 	//LES GETTERS
 	public double getxmissile(){
@@ -27,21 +28,20 @@ public class Missile {
 	public double getymissile(){
 		return ymissile;
 	}
-	public static double getvxmissile(){//Creation du getter pour la variable de classe vxmissile
-		
-		return vxmissile;
+	public static double getvxmissile(){///////////////////////////////////////////////////////////////
+		 		return vxmissile;
+		 }
+	public int getJoueurMissile(){
+		return joueur;
 	}
 	// LES SETTERS
 	public void setxmissile(double setxmissile){
 		xmissile=setxmissile+xmissile;
 	}
 	
-	
-//	boolean retour=false;
 	public void missile() {
-		//StdDraw.filledSquare(xmissile,ymissile,100);
-		StdDraw.filledRectangle(this.xmissile, this.ymissile, this.rmissile+100, this.rmissile);//le +qqch est la longeur du missile
-		StdDraw.setPenColor(Color.green);
-		this.xmissile=this.xmissile+vxmissile;	
-	}
+		 		StdDraw.filledRectangle(this.xmissile, this.ymissile, this.rmissile+100, this.rmissile);//le +qqch est la longeur du missile
+		  		StdDraw.setPenColor(Color.green);
+		 		this.xmissile=this.xmissile+vxmissile;	
+		  	}
 }
