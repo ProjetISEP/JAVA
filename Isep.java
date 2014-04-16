@@ -65,7 +65,7 @@ public class Isep {
 
 
 		int tab[]=Ralentir();// tableau pour les zones de ralentissement
-
+		boolean missile = false;
 		while (true) {
 			StdDraw.clear();
 
@@ -88,9 +88,9 @@ public class Isep {
 				}
 			}
 			//***************************************************
-			
-			
-			
+
+
+
 			//VAISSEAU********************************************
 			//JOUEUR1
 			if(StdDraw.isKeyPressed(38))
@@ -101,8 +101,17 @@ public class Isep {
 				(myVaisseau.get(0)).right();
 			if(StdDraw.isKeyPressed(40))
 				(myVaisseau.get(0)).bottom();
-			if(StdDraw.isKeyPressed(32)){//quand on appuie sur espace
-				myMissile.add( new Missile(myVaisseau.get(0).getx(), myVaisseau.get(0).gety(), 0, 0,r));
+			if (!StdDraw.isKeyPressed(32)) {//Si on n'appuye pas sur espace
+				missile = false;
+			}
+			if (missile == false) {
+				if (StdDraw.isKeyPressed(32)) {//L'idée est qu'en restant appuyé sur espace il y aura seulement un ajout à la liste puisque missile sera "tru
+					// quand on appuie sur espace
+
+					myMissile.add(new Missile(myVaisseau.get(0).getx(),myVaisseau.get(0).gety(), Missile.getvxmissile(), 0, r));
+					missile = true;
+
+				}
 			}
 			//JOUEUR2
 			if(StdDraw.isKeyPressed(90))
