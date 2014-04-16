@@ -9,7 +9,7 @@ public class Missile {
 	private double ymissile;
 	private double xmissile;
 	private double vymissile;
-	private static double vxmissile=120;//variable de classe ///////////////////////
+	private static double vxmissile=220;//variable de classe ///////////////////////
 	private double rmissile;
 
 	Missile(double xmissile, double ymissile, double vxmissile, double vymissile, double rmissile) {

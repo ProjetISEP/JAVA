@@ -8,14 +8,16 @@ public class TerrainParticulier extends Terrain  {
 		StdDraw.setPenColor(RANDOM);
 		xter=xter-speed;
 		
-		//PARTIE GRAVITE
+		
 		for(int i=0;i!=myVaisseau.size();i=i+1){
-			if(xter<10000 && xter>0){
-				myVaisseau.get(i).setY(1.5);
+			if(xter<10000 && xter>0){//PARTIE GRAVITE
+				myVaisseau.get(i).setY(1.3); // setY est dans la class Vaisseau
+			}else{
 			}
+			
 		}
 	}
-	public void setSpeed(int newSpeed){
+	public void setSpeed(int newSpeed){//NOUVELLE VITESSE DES TERRAINS
 		myVaisseau=Isep.getListeVaisseau();
 		speed=newSpeed;		
 	}

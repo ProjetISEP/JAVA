@@ -27,15 +27,6 @@ public class Vaisseau {
 		this.vy = vy;
 		this.life=life;
 		this.score=score;
-		
-	}
-	public void vies(){
-		myVaisseau=Isep.getListeVaisseau();
-		for(int k=0;k!=myVaisseau.size();k++){
-			String lifeString=Integer.toString(myVaisseau.get(k).life);
-			StdDraw.text(7000+k*1000,9500,lifeString);
-			StdDraw.setPenColor(Color.WHITE);
-		}
 	}
 	public double getx(){
 		return x;
@@ -48,6 +39,14 @@ public class Vaisseau {
 	}
 	public int getScore(){
 		return score;
+	}
+	public void vies(){
+		myVaisseau=Isep.getListeVaisseau();
+		for(int k=0;k!=myVaisseau.size();k++){
+			String lifeString=Integer.toString(myVaisseau.get(k).life);
+			StdDraw.text(7000+k*1000,9500,lifeString);
+			StdDraw.setPenColor(Color.WHITE);
+		}
 	}
 	public void setLife(){
 		myVaisseau=Isep.getListeVaisseau();
@@ -77,7 +76,6 @@ public class Vaisseau {
 	}
 	public void move() {
 		x=x-10;
-		
 	}
 	public void bordure() {
 		if (y<=0){
@@ -104,11 +102,33 @@ public class Vaisseau {
 	public void right() {
 		x = x + 100;
 	}
+	public static void controlPlayer1normal(){
+		if(StdDraw.isKeyPressed(38))
+			(myVaisseau.get(0)).top();
+		if(StdDraw.isKeyPressed(37))
+			(myVaisseau.get(0)).left();
+		if(StdDraw.isKeyPressed(39))
+			(myVaisseau.get(0)).right();
+		if(StdDraw.isKeyPressed(40))
+			(myVaisseau.get(0)).bottom();
+	}
+	public static void controlPlayer1inverse(){
+		if(StdDraw.isKeyPressed(38))
+			(myVaisseau.get(0)).bottom();
+		if(StdDraw.isKeyPressed(37))
+			(myVaisseau.get(0)).right();
+		if(StdDraw.isKeyPressed(39))
+			(myVaisseau.get(0)).left();
+		if(StdDraw.isKeyPressed(40))
+			(myVaisseau.get(0)).top();
+	}
 	public static void FinDePartie(){// A TERMINER
 		int totalLife=0;
 		int [] tableauLife= new int[myVaisseau.size()];
 		for(int k=0;k!=myVaisseau.size();k++){
-			
+			if(myVaisseau.get(k).getlife()==0){
+				
+			}
 		}
 	}
 	public void paint0(){

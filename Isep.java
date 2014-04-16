@@ -24,14 +24,14 @@ public class Isep {
 	public static List<Vaisseau> getListeVaisseau(){
 		return myVaisseau;
 	}
-	public static int [] Ralentir(){
-		int [] tableauRalentissement= new int[10];
+	public static int [] Ralentir(int nbvaleurs){
+		int [] tableauRalentissement= new int[nbvaleurs];
 		double nb=20000+Math.random()*40000;
 		int entier=caster(nb);
 		tableauRalentissement[0]=entier;
 		System.out.println(tableauRalentissement[0]);
 		for(int k=1;k!=tableauRalentissement.length;k++){
-			tableauRalentissement[k]=tableauRalentissement[k-1]+caster(20000+Math.random()*50000);	
+			tableauRalentissement[k]=tableauRalentissement[k-1]+caster(20000+Math.random()*100000);	
 			System.out.println(tableauRalentissement[k]);
 		}
 		return tableauRalentissement;
@@ -42,10 +42,6 @@ public class Isep {
 		int nb100=entier+(100-nbIntermedaire);
 		return nb100;
 	}
-
-
-
-
 	public static void main(String[] args){
 		StdDraw.setCanvasSize(900, 500);
 		StdDraw.setXscale(0,X_MAX);
@@ -64,7 +60,7 @@ public class Isep {
 
 
 
-		int tab[]=Ralentir();// tableau pour les zones de ralentissement
+		int tab[]=Ralentir(10);// tableau pour les zones de ralentissement
 		boolean missile = false;
 		while (true) {
 			StdDraw.clear();
@@ -82,7 +78,7 @@ public class Isep {
 					if(myVaisseau.get(0).getScore()<=tab[k]+100 && myVaisseau.get(0).getScore()>=tab[k]-100){
 						myrectangle.get(i).setSpeed(20);// on baisse la vitesse 
 					}
-					if(myVaisseau.get(0).getScore()<=tab[k]+10100 && myVaisseau.get(0).getScore()>=tab[k]+9900){
+					if(myVaisseau.get(0).getScore()<=tab[k]+20100 && myVaisseau.get(0).getScore()>=tab[k]+19900){
 						myrectangle.get(i).setSpeed(60);//on la réaugmente (10000 unités de score plus tard)
 					}
 				}
@@ -92,15 +88,10 @@ public class Isep {
 
 
 			//VAISSEAU********************************************
+			
 			//JOUEUR1
-			if(StdDraw.isKeyPressed(38))
-				(myVaisseau.get(0)).top();
-			if(StdDraw.isKeyPressed(37))
-				(myVaisseau.get(0)).left();
-			if(StdDraw.isKeyPressed(39))
-				(myVaisseau.get(0)).right();
-			if(StdDraw.isKeyPressed(40))
-				(myVaisseau.get(0)).bottom();
+			Vaisseau.controlPlayer1normal();
+			
 			if (!StdDraw.isKeyPressed(32)) {//Si on n'appuye pas sur espace
 				missile = false;
 			}

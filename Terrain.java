@@ -45,10 +45,10 @@ public class Terrain {
 		myVaisseau=Isep.getListeVaisseau();
 		speed=newSpeed;		
 	}
-	public static double[] tableauAleatoire(){ // Génere un tableau aléatoire pour la fonction decor
+	public static double[] tableauAleatoire(int nbvaleurs){ // Génere un tableau aléatoire pour la fonction decor
 		tab[0]=Math.random();
 		int k=0;
-		for(int i=1;i!=300;i++){
+		for(int i=1;i!=nbvaleurs;i++){
 			double nb=Math.random();
 			if(tab[i-1]<0.1){
 				tab[i]=tab[i-1]+0.3*nb;
@@ -67,7 +67,7 @@ public class Terrain {
 		return tab;
 	}
 	public static void generateTerrain(){
-		double tab1[]=Terrain.tableauAleatoire();
+		double tab1[]=Terrain.tableauAleatoire(300);
 		myrectangle=Terrain.getListeTerrain();
 		for(int i=0;i!=290;i++){
 			if(i<20){
