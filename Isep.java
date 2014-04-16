@@ -6,7 +6,6 @@ public class Isep {
 	public static double Y_MAX = 10000;
 	public static double xrectangle=10000;
 	public static float r = 60;
-	public static int d = 0;
 	static double R=Math.random()*255;
 	static double G=Math.random()*255;
 	static double B=Math.random()*255;
@@ -25,48 +24,70 @@ public class Isep {
 	public static List<Vaisseau> getListeVaisseau(){
 		return myVaisseau;
 	}
+	public static int [] Ralentir(){
+		int [] tableauRalentissement= new int[10];
+		double nb=20000+Math.random()*40000;
+		int entier=caster(nb);
+		tableauRalentissement[0]=entier;
+		System.out.println(tableauRalentissement[0]);
+		for(int k=1;k!=tableauRalentissement.length;k++){
+			tableauRalentissement[k]=tableauRalentissement[k-1]+caster(20000+Math.random()*50000);	
+			System.out.println(tableauRalentissement[k]);
+		}
+		
+		return tableauRalentissement;
+	}
+	public static int caster(double nbBrut){ //fonction qui permet de retourner un multiple de 100
+		int entier=(int)nbBrut;
+		int nbIntermedaire=entier%100;
+		int nb100=entier+(100-nbIntermedaire);
+		return nb100;
+	}
+
+
+
+
 	public static void main(String[] args){
 		StdDraw.setCanvasSize(900, 500);
 		StdDraw.setXscale(0,X_MAX);
 		StdDraw.setYscale(0,Y_MAX);
 
 
-		myVaisseau.add(new Vaisseau(3000, 5000, 0, 0,3));
-		myVaisseau.add(new Vaisseau(3000, 5000, 0, 0,3));
-		myAsteroide.add(new Asteroide(X_MAX, 0, 0, 0,1));
-		myAsteroide.add(new Asteroide(X_MAX/2, 0, 0, 0,1));
+		myVaisseau.add(new Vaisseau(3000, 5000, 0, 0,10,0));
+		myVaisseau.add(new Vaisseau(6000, 5000, 0, 0,10,0));
+		myAsteroide.add(new Asteroide(X_MAX, 0, 0, 0,2));
+		myAsteroide.add(new Asteroide(X_MAX/2, 0, 0, 0,2));
 
 		// CREATION  D'OBJETS POUR LE TERRAIN
-		double tab1[]=Terrain.tableauAleatoire();
 		myrectangle=Terrain.getListeTerrain();
-		for(int i=0;i!=200;i++){
-			if(i<20){
-				myrectangle.add(new Terrain(10000+i*450, 500,170,i*100+1000));//le bas
-				myrectangle.add(new Terrain(10000+i*400, 9500,170,i*100+1000));//le haut
-			}else{
-				
-				myrectangle.add(new Terrain(xrectangle+i*400, 500,tab1[i]*140+50,1100+(2500-(tab1[i]*2500))));
-				myrectangle.add(new Terrain(xrectangle+i*400, 9500,tab1[i]*140+50,1100+tab1[i]*2500));
-			}
-		}
+		Terrain.generateTerrain();
 		// FIN CREATION D'OBJETS
-		while (true) {
 
+
+
+		int tab[]=Ralentir();
+		boolean missile = false;
+		while (true) {
 			StdDraw.clear();
-			for(int i=0;i!=200;i++){
-				//myrectangle.get(i).show();
-				
+
+
+
+			for(int i=0;i!=myrectangle.size();i++){
+				myrectangle.get(i).show();
 				if(i%2==0){
 					myrectangle.get(i).colision();
-					myrectangle.get(i).show();
-					StdDraw.filledRectangle(myrectangle.get(i).getxter(), myrectangle.get(i).getyter(), myrectangle.get(i).getlargeur(),myrectangle.get(i).gethauteur());
-				//}else{
-				//	myrectangle.get(i).colision1();
+				}else{
+					myrectangle.get(i).colision1();
+				}
+				for(int k=0;k<=5;k++){
+					if(myVaisseau.get(0).getScore()<=tab[k]+100 && myVaisseau.get(0).getScore()>=tab[k]-100){
+						myrectangle.get(i).setSpeed(20);
+					}
+					if(myVaisseau.get(0).getScore()<=tab[k]+10100 && myVaisseau.get(0).getScore()>=tab[k]+9900){
+						myrectangle.get(i).setSpeed(110);
+					}
 				}
 			}
-			//Terrain.decor();
-
-
 			//VAISSEAU********************************************
 			//JOUEUR1
 			if(StdDraw.isKeyPressed(38))
@@ -77,9 +98,19 @@ public class Isep {
 				(myVaisseau.get(0)).right();
 			if(StdDraw.isKeyPressed(40))
 				(myVaisseau.get(0)).bottom();
-			if(StdDraw.isKeyPressed(32)){//quand on appuie sur espace
-				myMissile.add( new Missile(myVaisseau.get(0).getx(), myVaisseau.get(0).gety(), 0, 0,r));
+			if (!StdDraw.isKeyPressed(32)) {//Si on n'appuye pas sur espace
+				missile = false;
 			}
+			if (missile == false) {
+				if (StdDraw.isKeyPressed(32)) {//L'idée est qu'en restant appuyé sur espace il y aura seulement un ajout à la liste puisque 'missile' sera "true"
+					// quand on appuie sur espace
+
+					myMissile.add(new Missile(myVaisseau.get(0).getx(),myVaisseau.get(0).gety(), Missile.getvxmissile(), 0, r));//Missile.getvxmissile() va chercher la valeur de la vitesse
+					missile = true;
+
+				}
+			}
+
 			//JOUEUR2
 			if(StdDraw.isKeyPressed(90))
 				(myVaisseau.get(1)).top();
@@ -92,21 +123,37 @@ public class Isep {
 			if(StdDraw.isKeyPressed(69)){//quand on appuie sur espace
 				myMissile.add( new Missile(myVaisseau.get(1).getx(), myVaisseau.get(1).gety(), 0, 0,r));
 			}
+
+
+
+			//*************************************************************
+
+
+
+
 			for(int i=0;i!=myVaisseau.size();i=i+1){
-				(myVaisseau.get(i)).bordure();
 				if(i==0){
 					(myVaisseau.get(i)).paint0();
 				} else if(i==1){
 					(myVaisseau.get(i)).paint1();
 				}
+				(myVaisseau.get(i)).bordure();
 				(myVaisseau.get(i)).move();
 				(myVaisseau.get(i)).score();
+				myVaisseau.get(i).vies();
+				if(myVaisseau.get(i).getlife()<=0){//Condition de fin de partie
+					Vaisseau.FinDePartie();
+				}
+
 			}
-			myVaisseau.get(0).vies("false");
 			//ASTEROIDE******************************************************
 			for(int i=0;i!=myAsteroide.size();i=i+1){
 				(myAsteroide.get(i)).move();
-				(myAsteroide.get(i)).paint1();
+				if(myAsteroide.get(i).getlifeAste()>0){
+					//myAsteroide.add(new Asteroide(X_MAX, 0, 0, 0,2));
+					//myAsteroide.add(new Asteroide(X_MAX, 0, 0, 0,2));
+					(myAsteroide.get(i)).paint1();
+				}
 				(myAsteroide.get(i)).colision();
 				(myAsteroide.get(i)).colisionMissileAsteroide();
 			}

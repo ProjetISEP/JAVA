@@ -9,11 +9,11 @@ public class Missile {
 	private double ymissile;
 	private double xmissile;
 	private double vymissile;
-	private double vxmissile;
+	private static double vxmissile=120;//variable de classe(static) ///////////////////////
 	private double rmissile;
 
 	Missile(double xmissile, double ymissile, double vxmissile, double vymissile, double rmissile) {
-		System.out.println("Création d'un missile avec des paramètres !");
+		//System.out.println("Création d'un missile avec des paramètres !");
 		this.xmissile = xmissile;
 		this.ymissile = ymissile;
 		this.vxmissile = vxmissile;
@@ -27,14 +27,21 @@ public class Missile {
 	public double getymissile(){
 		return ymissile;
 	}
+	public static double getvxmissile(){//Creation du getter pour la variable de classe vxmissile
+		
+		return vxmissile;
+	}
 	// LES SETTERS
 	public void setxmissile(double setxmissile){
 		xmissile=setxmissile+xmissile;
 	}
 	
+	
+//	boolean retour=false;
 	public void missile() {
-		StdDraw.filledSquare(xmissile,ymissile,100);
+		//StdDraw.filledSquare(xmissile,ymissile,100);
+		StdDraw.filledRectangle(this.xmissile, this.ymissile, this.rmissile+100, this.rmissile);//le +qqch est la longeur du missile
 		StdDraw.setPenColor(Color.green);
-		xmissile=xmissile+100;
+		this.xmissile=this.xmissile+vxmissile;	
 	}
 }

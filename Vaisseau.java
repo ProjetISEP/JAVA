@@ -13,36 +13,46 @@ public class Vaisseau {
 	private double x;
 	private double vy;
 	private double vx;
-	public static int score=0;
+	private int score;
 
 	static double R=Math.random()*255;
 	static double G=Math.random()*255;
 	static double B=Math.random()*255;
-	private static int life;
+	private int life;
 
-	Vaisseau(double x, double y, double vx, double vy, int life) {
-		System.out.println("Création d'un Vaisseau avec des paramètres !");
+	Vaisseau(double x, double y, double vx, double vy, int life,int score) {
 		this.x = x;
 		this.y = y;
 		this.vx = vx;
 		this.vy = vy;
 		this.life=life;
+		this.score=score;
+		
 	}
-	public void vies(String t){
+	public void vies(){
 		myVaisseau=Isep.getListeVaisseau();
-		if(t.equals("vrai")){
-			life=life-1;
-			StdDraw.picture(myVaisseau.get(0).getx(), myVaisseau.get(0).gety(), "./src/crash.png");
+		for(int k=0;k!=myVaisseau.size();k++){
+			String lifeString=Integer.toString(myVaisseau.get(k).life);
+			StdDraw.text(7000+k*1000,9500,lifeString);
+			StdDraw.setPenColor(Color.WHITE);
 		}
-		String lifeString=Integer.toString(life);
-		StdDraw.text(7000,9000,lifeString);
-		StdDraw.setPenColor(Color.WHITE);
 	}
 	public double getx(){
 		return x;
 	}
 	public double gety(){
 		return y;
+	}
+	public int getlife(){
+		return life;
+	}
+	public int getScore(){
+		return score;
+	}
+	public void setLife(){
+		myVaisseau=Isep.getListeVaisseau();
+		life=getlife()-1;		
+		StdDraw.picture(x,y, "./src/crash.png");
 	}
 	public void score() {
 		myVaisseau=Isep.getListeVaisseau();
@@ -54,14 +64,17 @@ public class Vaisseau {
 			score=score+400;
 		if(8000<x && x<10000)
 			score=score+600;
-
-		String rrr=Integer.toString(score);
-		StdDraw.text(5000,9000,rrr);
-		StdDraw.setPenColor(Color.magenta);	
+		
+		for(int k=0;k!=myVaisseau.size();k++){
+			String scoreString=Integer.toString(myVaisseau.get(k).score);
+			StdDraw.text(7000+k*1000,8500,scoreString);
+			StdDraw.setPenColor(Color.WHITE);
+		}
+			
 	}
 	public void move() {
 		x=x-7;
-		
+
 	}
 	public void bordure() {
 		if (y<=0){
@@ -73,7 +86,7 @@ public class Vaisseau {
 		}else if(y>Y_MAX){
 			y= Y_MAX-100;
 		}
-		
+
 	}
 
 	public void top() {
@@ -87,6 +100,13 @@ public class Vaisseau {
 	}
 	public void right() {
 		x = x + 100;
+	}
+	public static void FinDePartie(){// A TERMINER
+		int totalLife=0;
+		int [] tableauLife= new int[myVaisseau.size()];
+		for(int k=0;k!=myVaisseau.size();k++){
+			
+		}
 	}
 	public void paint0(){
 		StdDraw.picture(x, y, "./src/vaisseau1.png",180);
