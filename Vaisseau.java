@@ -54,6 +54,9 @@ public class Vaisseau {
 		life=getlife()-1;		
 		StdDraw.picture(x,y, "./src/crash.png");
 	}
+	public void setY(double gravite){ //POUR LA GRAVITE
+		y=y-gravite;
+	}
 	public void score() {
 		myVaisseau=Isep.getListeVaisseau();
 		if(0<x && x<4000)
@@ -73,8 +76,8 @@ public class Vaisseau {
 			
 	}
 	public void move() {
-		x=x-7;
-
+		x=x-10;
+		
 	}
 	public void bordure() {
 		if (y<=0){

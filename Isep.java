@@ -34,7 +34,6 @@ public class Isep {
 			tableauRalentissement[k]=tableauRalentissement[k-1]+caster(20000+Math.random()*50000);	
 			System.out.println(tableauRalentissement[k]);
 		}
-		
 		return tableauRalentissement;
 	}
 	public static int caster(double nbBrut){ //fonction qui permet de retourner un multiple de 100
@@ -65,29 +64,33 @@ public class Isep {
 
 
 
-		int tab[]=Ralentir();
+		int tab[]=Ralentir();// tableau pour les zones de ralentissement
 
 		while (true) {
 			StdDraw.clear();
 
 
-
+			//RECTANGLES********************************************
 			for(int i=0;i!=myrectangle.size();i++){
 				myrectangle.get(i).show();
 				if(i%2==0){
-					myrectangle.get(i).colision();
+					myrectangle.get(i).colision();//colision avec le bas
 				}else{
-					myrectangle.get(i).colision1();
+					myrectangle.get(i).colision1();//colision avec le haut
 				}
-				for(int k=0;k<=5;k++){
+				for(int k=0;k<=5;k++){ //boucle pour les ralentissements
 					if(myVaisseau.get(0).getScore()<=tab[k]+100 && myVaisseau.get(0).getScore()>=tab[k]-100){
-						myrectangle.get(i).setSpeed(20);
+						myrectangle.get(i).setSpeed(20);// on baisse la vitesse 
 					}
 					if(myVaisseau.get(0).getScore()<=tab[k]+10100 && myVaisseau.get(0).getScore()>=tab[k]+9900){
-						myrectangle.get(i).setSpeed(110);
+						myrectangle.get(i).setSpeed(110);//on la réaugmente (10000 unités de score plus tard)
 					}
 				}
 			}
+			//***************************************************
+			
+			
+			
 			//VAISSEAU********************************************
 			//JOUEUR1
 			if(StdDraw.isKeyPressed(38))
@@ -119,8 +122,6 @@ public class Isep {
 			//*************************************************************
 
 
-
-
 			for(int i=0;i!=myVaisseau.size();i=i+1){
 				if(i==0){
 					(myVaisseau.get(i)).paint0();
@@ -139,10 +140,11 @@ public class Isep {
 			//ASTEROIDE******************************************************
 			for(int i=0;i!=myAsteroide.size();i=i+1){
 				(myAsteroide.get(i)).move();
-				if(myAsteroide.get(i).getlifeAste()>0){
-					//myAsteroide.add(new Asteroide(X_MAX, 0, 0, 0,2));
-					//myAsteroide.add(new Asteroide(X_MAX, 0, 0, 0,2));
+				if(myAsteroide.get(i).getlifeAste()>0){//on cache l'astéroide si il n'a plu de vie
 					(myAsteroide.get(i)).paint1();
+				}
+				if(myAsteroide.get(i).getlifeAste()==0){// on en rajoute un si un atéroide a été supprimé
+					myAsteroide.add(new Asteroide(X_MAX, Math.random()*10000, 0, 0,2));
 				}
 				(myAsteroide.get(i)).colision();
 				(myAsteroide.get(i)).colisionMissileAsteroide();
