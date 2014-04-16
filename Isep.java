@@ -1,7 +1,6 @@
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
-////
 public class Isep {
 	public static double X_MAX = 10000;
 	public static double Y_MAX = 10000;
@@ -84,7 +83,7 @@ public class Isep {
 						myrectangle.get(i).setSpeed(20);// on baisse la vitesse 
 					}
 					if(myVaisseau.get(0).getScore()<=tab[k]+10100 && myVaisseau.get(0).getScore()>=tab[k]+9900){
-						myrectangle.get(i).setSpeed(110);//on la rï¿½augmente (10000 unitï¿½s de score plus tard)
+						myrectangle.get(i).setSpeed(60);//on la réaugmente (10000 unités de score plus tard)
 					}
 				}
 			}
@@ -106,7 +105,7 @@ public class Isep {
 				missile = false;
 			}
 			if (missile == false) {
-				if (StdDraw.isKeyPressed(32)) {//L'idï¿½e est qu'en restant appuyï¿½ sur espace il y aura seulement un ajout ï¿½ la liste puisque missile sera "tru
+				if (StdDraw.isKeyPressed(32)) {//L'idée est qu'en restant appuyé sur espace il y aura seulement un ajout à la liste puisque missile sera "tru
 					// quand on appuie sur espace
 
 					myMissile.add(new Missile(myVaisseau.get(0).getx(),myVaisseau.get(0).gety(), Missile.getvxmissile(), 0, r));
@@ -150,10 +149,10 @@ public class Isep {
 			//ASTEROIDE******************************************************
 			for(int i=0;i!=myAsteroide.size();i=i+1){
 				(myAsteroide.get(i)).move();
-				if(myAsteroide.get(i).getlifeAste()>0){//on cache l'astï¿½roide si il n'a plu de vie
+				if(myAsteroide.get(i).getlifeAste()>0){//on cache l'astéroide si il n'a plu de vie
 					(myAsteroide.get(i)).paint1();
 				}
-				if(myAsteroide.get(i).getlifeAste()==0){// on en rajoute un si un atï¿½roide a ï¿½tï¿½ supprimï¿½
+				if(myAsteroide.get(i).getlifeAste()==0){// on en rajoute un si un atéroide a été supprimé
 					myAsteroide.add(new Asteroide(X_MAX, Math.random()*10000, 0, 0,2));
 				}
 				(myAsteroide.get(i)).colision();

@@ -71,17 +71,17 @@ public class Terrain {
 		myrectangle=Terrain.getListeTerrain();
 		for(int i=0;i!=290;i++){
 			if(i<20){
-				myrectangle.add(new Terrain(10000+i*450, 200,170,i*100+1000,110));//le bas
-				myrectangle.add(new Terrain(10000+i*400, 9800,170,i*100+1000,110));//le haut
+				myrectangle.add(new Terrain(10000+i*450, 200,170,i*100+1000,60));//le bas
+				myrectangle.add(new Terrain(10000+i*400, 9800,170,i*100+1000,60));//le haut
 			}else if (i<50 && i>=30){ // POUR LES ZONES PARTICULIERES
-				myrectangle.add(new TerrainParticulier(xrectangle+i*400, 200,170,700+(3900-(tab1[i]*3550)),110));
-				myrectangle.add(new TerrainParticulier(xrectangle+i*400, 9800,170,700+tab1[i]*3900,110));
+				myrectangle.add(new TerrainParticulier(xrectangle+i*400, 200,170,700+(3900-(tab1[i]*3550)),60));
+				myrectangle.add(new TerrainParticulier(xrectangle+i*400, 9800,170,700+tab1[i]*3900,60));
 			}else if (i<100 && i>=80){ // POUR LES ZONES PARTICULIERES
-				myrectangle.add(new TerrainParticulier(xrectangle+i*400, 200,170,700+(3900-(tab1[i]*3550)),110));
-				myrectangle.add(new TerrainParticulier(xrectangle+i*400, 9800,170,700+tab1[i]*3900,110));
+				myrectangle.add(new TerrainParticulier(xrectangle+i*400, 200,170,700+(3900-(tab1[i]*3550)),60));
+				myrectangle.add(new TerrainParticulier(xrectangle+i*400, 9800,170,700+tab1[i]*3900,60));
 			}else{
-				myrectangle.add(new Terrain(xrectangle+i*400, 200,170,700+(3900-(tab1[i]*3550)),110));
-				myrectangle.add(new Terrain(xrectangle+i*400, 9800,170,700+tab1[i]*3900,110));
+				myrectangle.add(new Terrain(xrectangle+i*400, 200,170,700+(3900-(tab1[i]*3550)),60));
+				myrectangle.add(new Terrain(xrectangle+i*400, 9800,170,700+tab1[i]*3900,60));
 			}
 		}
 	}
