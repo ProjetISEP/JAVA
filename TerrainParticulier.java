@@ -2,7 +2,6 @@ import java.awt.Color;
 public class TerrainParticulier extends Terrain  {
 
 	public void show(){
-<<<<<<< HEAD
 		myVaisseau=Isep.getListeVaisseau();	
 		StdDraw.filledRectangle(xter, yter, largeur,hauteur);
 		Color RANDOM=new Color((int)R,(int)G,(int)B);
@@ -20,14 +19,6 @@ public class TerrainParticulier extends Terrain  {
 		myVaisseau=Isep.getListeVaisseau();
 		speed=newSpeed;		
 	}
-=======
-		StdDraw.filledRectangle(xter, yter, largeur,hauteur);
-		Color RANDOM=new Color((int)R,(int)G,(int)B);
-		StdDraw.setPenColor(RANDOM);
-		xter=xter-110;
-	}
-	
->>>>>>> 5f484d90ae434ecfaf5827c57bb0310c8a977bf8
 	TerrainParticulier(double xter, double yter, double largeur, double hauteur,double vitesse) {
 		super(xter, yter, largeur, hauteur, vitesse);
 	}
