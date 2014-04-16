@@ -24,17 +24,16 @@ public class Isep {
 	public static List<Vaisseau> getListeVaisseau(){
 		return myVaisseau;
 	}
-	public static int [] Ralentir(){
-		int [] tableauRalentissement= new int[10];
+	public static int [] Ralentir(int nbvaleurs){
+		int [] tableauRalentissement= new int[nbvaleurs];
 		double nb=20000+Math.random()*40000;
 		int entier=caster(nb);
 		tableauRalentissement[0]=entier;
 		System.out.println(tableauRalentissement[0]);
 		for(int k=1;k!=tableauRalentissement.length;k++){
-			tableauRalentissement[k]=tableauRalentissement[k-1]+caster(20000+Math.random()*50000);	
+			tableauRalentissement[k]=tableauRalentissement[k-1]+caster(20000+Math.random()*100000);	
 			System.out.println(tableauRalentissement[k]);
 		}
-		
 		return tableauRalentissement;
 	}
 	public static int caster(double nbBrut){ //fonction qui permet de retourner un multiple de 100
@@ -43,18 +42,14 @@ public class Isep {
 		int nb100=entier+(100-nbIntermedaire);
 		return nb100;
 	}
-
-
-
-
 	public static void main(String[] args){
 		StdDraw.setCanvasSize(900, 500);
 		StdDraw.setXscale(0,X_MAX);
 		StdDraw.setYscale(0,Y_MAX);
 
 
-		myVaisseau.add(new Vaisseau(3000, 5000, 0, 0,10,0));
-		myVaisseau.add(new Vaisseau(6000, 5000, 0, 0,10,0));
+		myVaisseau.add(new Vaisseau(3000, 5000, 0, 0, 10, 0,0));//Les derniers chiffres correspondent aux matricules
+		myVaisseau.add(new Vaisseau(6000, 5000, 0, 0, 10, 0,1));
 		myAsteroide.add(new Asteroide(X_MAX, 0, 0, 0,2));
 		myAsteroide.add(new Asteroide(X_MAX/2, 0, 0, 0,2));
 
@@ -65,52 +60,56 @@ public class Isep {
 
 
 
-		int tab[]=Ralentir();
-		boolean missile = false;
+		int tab[]=Ralentir(10);// tableau pour les zones de ralentissement
+		boolean missileJ1 = false;
+		boolean missileJ2 = false;
 		while (true) {
 			StdDraw.clear();
 
 
-
+			//RECTANGLES********************************************
 			for(int i=0;i!=myrectangle.size();i++){
 				myrectangle.get(i).show();
 				if(i%2==0){
-					myrectangle.get(i).colision();
+					myrectangle.get(i).colision();//colision avec le bas
 				}else{
-					myrectangle.get(i).colision1();
+					myrectangle.get(i).colision1();//colision avec le haut
 				}
-				for(int k=0;k<=5;k++){
+				for(int k=0;k<=5;k++){ //boucle pour les ralentissements
 					if(myVaisseau.get(0).getScore()<=tab[k]+100 && myVaisseau.get(0).getScore()>=tab[k]-100){
-						myrectangle.get(i).setSpeed(20);
+						myrectangle.get(i).setSpeed(20);// on baisse la vitesse 
 					}
-					if(myVaisseau.get(0).getScore()<=tab[k]+10100 && myVaisseau.get(0).getScore()>=tab[k]+9900){
-						myrectangle.get(i).setSpeed(110);
+					if(myVaisseau.get(0).getScore()<=tab[k]+20100 && myVaisseau.get(0).getScore()>=tab[k]+19900){
+						myrectangle.get(i).setSpeed(60);//on la rï¿½augmente (10000 unitï¿½s de score plus tard)
 					}
 				}
 			}
+			//***************************************************
+
+
+
 			//VAISSEAU********************************************
+			
 			//JOUEUR1
-			if(StdDraw.isKeyPressed(38))
-				(myVaisseau.get(0)).top();
-			if(StdDraw.isKeyPressed(37))
-				(myVaisseau.get(0)).left();
-			if(StdDraw.isKeyPressed(39))
-				(myVaisseau.get(0)).right();
-			if(StdDraw.isKeyPressed(40))
-				(myVaisseau.get(0)).bottom();
-			if (!StdDraw.isKeyPressed(32)) {//Si on n'appuye pas sur espace
-				missile = false;
+			Vaisseau.controlPlayer1normal();
+			
+			if (!StdDraw.isKeyPressed(32)) {// Si on n'appuye pas sur espace
+				missileJ1 = false;
 			}
-			if (missile == false) {
-				if (StdDraw.isKeyPressed(32)) {//L'idée est qu'en restant appuyé sur espace il y aura seulement un ajout à la liste puisque 'missile' sera "true"
+			if (missileJ1 == false) {
+				if (StdDraw.isKeyPressed(32)) {// L'idï¿½e est qu'en restant
+												// appuyï¿½ sur espace il y aura
+												// seulement un ajout ï¿½ la liste
+												// puisque missile sera "tru
 					// quand on appuie sur espace
 
-					myMissile.add(new Missile(myVaisseau.get(0).getx(),myVaisseau.get(0).gety(), Missile.getvxmissile(), 0, r));//Missile.getvxmissile() va chercher la valeur de la vitesse
-					missile = true;
-
+					myMissile.add(new Missile(myVaisseau.get(0).getx(),
+							myVaisseau.get(0).gety(), Missile.getvxmissile(),
+							0, r, myVaisseau.get(0).getMat()));
+					missileJ1 = true;
+					
 				}
 			}
-
 			//JOUEUR2
 			if(StdDraw.isKeyPressed(90))
 				(myVaisseau.get(1)).top();
@@ -120,15 +119,20 @@ public class Isep {
 				(myVaisseau.get(1)).right();
 			if(StdDraw.isKeyPressed(83))
 				(myVaisseau.get(1)).bottom();
-			if(StdDraw.isKeyPressed(69)){//quand on appuie sur espace
-				myMissile.add( new Missile(myVaisseau.get(1).getx(), myVaisseau.get(1).gety(), 0, 0,r));
+			if (!StdDraw.isKeyPressed(69)) {// Si on n'appuye pas sur espace
+				missileJ2 = false;
+			}
+			if (missileJ2 == false) {
+				if (StdDraw.isKeyPressed(69)) {// quand on appuie sur espace
+					myMissile.add(new Missile(myVaisseau.get(1).getx(),
+							myVaisseau.get(1).gety(), Missile.getvxmissile(),
+							0, r,myVaisseau.get(1).getMat()));
+					missileJ2 = true;
+				}
 			}
 
 
-
 			//*************************************************************
-
-
 
 
 			for(int i=0;i!=myVaisseau.size();i=i+1){
@@ -149,10 +153,11 @@ public class Isep {
 			//ASTEROIDE******************************************************
 			for(int i=0;i!=myAsteroide.size();i=i+1){
 				(myAsteroide.get(i)).move();
-				if(myAsteroide.get(i).getlifeAste()>0){
-					//myAsteroide.add(new Asteroide(X_MAX, 0, 0, 0,2));
-					//myAsteroide.add(new Asteroide(X_MAX, 0, 0, 0,2));
+				if(myAsteroide.get(i).getlifeAste()>0){//on cache l'astï¿½roide si il n'a plu de vie
 					(myAsteroide.get(i)).paint1();
+				}
+				if(myAsteroide.get(i).getlifeAste()==0){// on en rajoute un si un atï¿½roide a ï¿½tï¿½ supprimï¿½
+					myAsteroide.add(new Asteroide(X_MAX, Math.random()*10000, 0, 0,2));
 				}
 				(myAsteroide.get(i)).colision();
 				(myAsteroide.get(i)).colisionMissileAsteroide();
@@ -161,6 +166,11 @@ public class Isep {
 			for(int i=0;i!=myMissile.size();i=i+1){
 				(myMissile.get(i)).missile();
 			}
+			
+			for(int i=0;i!=myVaisseau.size();i++){
+				
+				(myVaisseau.get(i)).colisionMissileVaisseau();
+				}
 			StdDraw.show(10);
 		}
 	}
