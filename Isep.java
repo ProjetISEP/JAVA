@@ -1,4 +1,4 @@
-import java.awt.Color;
+﻿import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 public class Isep {
@@ -42,14 +42,8 @@ public class Isep {
 		int nb100=entier+(100-nbIntermedaire);
 		return nb100;
 	}
-<<<<<<< HEAD
-<<<<<<< HEAD
-	
-	
-=======
->>>>>>> 58c80d6203c6c802f7754e9140ee875c8debf9b5
-=======
->>>>>>> 58c80d6203c6c802f7754e9140ee875c8debf9b5
+
+
 	public static void main(String[] args){
 		StdDraw.setCanvasSize(900, 500);
 		StdDraw.setXscale(0,X_MAX);
@@ -71,14 +65,8 @@ public class Isep {
 		int tab[]=Ralentir(10);// tableau pour les zones de ralentissement
 		boolean missileJ1 = false;
 		boolean missileJ2 = false;
-<<<<<<< HEAD
-<<<<<<< HEAD
 		Audio son = new Audio();
-        son.start();
-=======
->>>>>>> 58c80d6203c6c802f7754e9140ee875c8debf9b5
-=======
->>>>>>> 58c80d6203c6c802f7754e9140ee875c8debf9b5
+		son.start();
 		while (true) {
 			StdDraw.clear();
 
@@ -96,7 +84,7 @@ public class Isep {
 						myrectangle.get(i).setSpeed(20);// on baisse la vitesse 
 					}
 					if(myVaisseau.get(0).getScore()<=tab[k]+20100 && myVaisseau.get(0).getScore()>=tab[k]+19900){
-						myrectangle.get(i).setSpeed(60);//on la r�augmente (10000 unit�s de score plus tard)
+						myrectangle.get(i).setSpeed(60);//on la reaugmente (10000 unit�s de score plus tard)
 					}
 				}
 			}
@@ -105,8 +93,6 @@ public class Isep {
 
 
 			//VAISSEAU********************************************
-<<<<<<< HEAD
-<<<<<<< HEAD
 
 			//JOUEUR1
 			Vaisseau.controlPlayer1normal();
@@ -115,46 +101,17 @@ public class Isep {
 				missileJ1 = false;
 			}
 			if (missileJ1 == false) {
-				if (StdDraw.isKeyPressed(32)) {// L'id�e est qu'en restant
-												// appuy sur espace il y aura
-												// seulement un ajout � la liste
-												// puisque missile sera "tru
-					                             // quand on appuie sur espace
-
-=======
-=======
->>>>>>> 58c80d6203c6c802f7754e9140ee875c8debf9b5
-			
-			//JOUEUR1
-			Vaisseau.controlPlayer1normal();
-			
-			if (!StdDraw.isKeyPressed(32)) {// Si on n'appuye pas sur espace
-				missileJ1 = false;
-			}
-			if (missileJ1 == false) {
-				if (StdDraw.isKeyPressed(32)) {// L'id�e est qu'en restant
-												// appuy� sur espace il y aura
-												// seulement un ajout � la liste
-												// puisque missile sera "tru
+				if (StdDraw.isKeyPressed(32)) {// L'idee est qu'en restant
+					// appuy sur espace il y aura
+					// seulement un ajout  la liste
+					// puisque missile sera "tru
 					// quand on appuie sur espace
 
-<<<<<<< HEAD
->>>>>>> 58c80d6203c6c802f7754e9140ee875c8debf9b5
-=======
->>>>>>> 58c80d6203c6c802f7754e9140ee875c8debf9b5
 					myMissile.add(new Missile(myVaisseau.get(0).getx(),
 							myVaisseau.get(0).gety(), Missile.getvxmissile(),
 							0, r, myVaisseau.get(0).getMat()));
 					missileJ1 = true;
-<<<<<<< HEAD
-<<<<<<< HEAD
 
-=======
-					
->>>>>>> 58c80d6203c6c802f7754e9140ee875c8debf9b5
-=======
-					
->>>>>>> 58c80d6203c6c802f7754e9140ee875c8debf9b5
 				}
 			}
 			//JOUEUR2
@@ -203,7 +160,7 @@ public class Isep {
 				if(myAsteroide.get(i).getlifeAste()>0){//on cache l'ast�roide si il n'a plu de vie
 					(myAsteroide.get(i)).paint1();
 				}
-				if(myAsteroide.get(i).getlifeAste()==0){// on en rajoute un si un at�roide a �t� supprim�
+				if(myAsteroide.get(i).getlifeAste()==0){// on en rajoute un si un asteroide est supprime
 					myAsteroide.add(new Asteroide(X_MAX, Math.random()*10000, 0, 0,2));
 				}
 				(myAsteroide.get(i)).colision();
@@ -213,23 +170,11 @@ public class Isep {
 			for(int i=0;i!=myMissile.size();i=i+1){
 				(myMissile.get(i)).missile();
 			}
-<<<<<<< HEAD
-<<<<<<< HEAD
 
 			for(int i=0;i!=myVaisseau.size();i++){
 
-=======
-			
-			for(int i=0;i!=myVaisseau.size();i++){
-				
->>>>>>> 58c80d6203c6c802f7754e9140ee875c8debf9b5
-=======
-			
-			for(int i=0;i!=myVaisseau.size();i++){
-				
->>>>>>> 58c80d6203c6c802f7754e9140ee875c8debf9b5
 				(myVaisseau.get(i)).colisionMissileVaisseau();
-				}
+			}
 			StdDraw.show(10);
 		}
 	}
