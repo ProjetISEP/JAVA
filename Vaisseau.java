@@ -1,11 +1,11 @@
-import java.awt.Color;
+﻿import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Vaisseau {
 	public static List<Vaisseau> myVaisseau =new ArrayList<>();
 	public static List<Missile> myMissile = new ArrayList<>();
-	
+
 	public static double X_MAX = 10000;
 	public static double Y_MAX = 10000;
 	public static float r = 6;
@@ -16,7 +16,7 @@ public class Vaisseau {
 	private double vx;
 	private int score;
 	private int matricule;
-	
+
 	static double R=Math.random()*255;
 	static double G=Math.random()*255;
 	static double B=Math.random()*255;
@@ -27,27 +27,10 @@ public class Vaisseau {
 		this.y = y;
 		this.vx = vx;
 		this.vy = vy;
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-		this.life=life;
-		this.score=score;
-=======
-=======
->>>>>>> 58c80d6203c6c802f7754e9140ee875c8debf9b5
-=======
->>>>>>> 58c80d6203c6c802f7754e9140ee875c8debf9b5
 		this.life = life;
 		this.score = score;
 		matricule = pMatricule;
 
-<<<<<<< HEAD
-<<<<<<< HEAD
->>>>>>> 58c80d6203c6c802f7754e9140ee875c8debf9b5
-=======
->>>>>>> 58c80d6203c6c802f7754e9140ee875c8debf9b5
-=======
->>>>>>> 58c80d6203c6c802f7754e9140ee875c8debf9b5
 	}
 	public double getx(){
 		return x;
@@ -61,24 +44,9 @@ public class Vaisseau {
 	public int getScore(){
 		return score;
 	}
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
 	public int getMat() {
 		return matricule;
 	}
->>>>>>> 58c80d6203c6c802f7754e9140ee875c8debf9b5
-=======
-	public int getMat() {
-		return matricule;
-	}
->>>>>>> 58c80d6203c6c802f7754e9140ee875c8debf9b5
-=======
-	public int getMat() {
-		return matricule;
-	}
->>>>>>> 58c80d6203c6c802f7754e9140ee875c8debf9b5
 	public void vies(){
 		myVaisseau=Isep.getListeVaisseau();
 		for(int k=0;k!=myVaisseau.size();k++){
@@ -105,13 +73,13 @@ public class Vaisseau {
 			score=score+400;
 		if(8000<x && x<10000)
 			score=score+600;
-		
+
 		for(int k=0;k!=myVaisseau.size();k++){
 			String scoreString=Integer.toString(myVaisseau.get(k).score);
 			StdDraw.text(7000+k*1000,8500,scoreString);
 			StdDraw.setPenColor(Color.WHITE);
 		}
-			
+
 	}
 	public void move() {
 		x=x-10;
@@ -166,7 +134,7 @@ public class Vaisseau {
 		int [] tableauLife= new int[myVaisseau.size()];
 		for(int k=0;k!=myVaisseau.size();k++){
 			if(myVaisseau.get(k).getlife()==0){
-				
+
 			}
 		}
 	}
@@ -176,7 +144,7 @@ public class Vaisseau {
 	public void paint1(){
 		StdDraw.picture(x, y, "./src/vaisseau2.png",180);
 	}
-	
+
 	public void colisionMissileVaisseau() {//methode qui permet de faire apparaitre un crash lorsqu'un vaisseau se prend un missile 
 		myVaisseau = Isep.getListeVaisseau();
 
