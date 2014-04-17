@@ -42,14 +42,16 @@ public class Isep {
 		int nb100=entier+(100-nbIntermedaire);
 		return nb100;
 	}
+	
+	
 	public static void main(String[] args){
 		StdDraw.setCanvasSize(900, 500);
 		StdDraw.setXscale(0,X_MAX);
 		StdDraw.setYscale(0,Y_MAX);
 
 
-		myVaisseau.add(new Vaisseau(3000, 5000, 0, 0,10,0));
-		myVaisseau.add(new Vaisseau(6000, 5000, 0, 0,10,0));
+		myVaisseau.add(new Vaisseau(3000, 5000, 0, 0, 10, 0,0));//Les derniers chiffres correspondent aux matricules
+		myVaisseau.add(new Vaisseau(6000, 5000, 0, 0, 10, 0,1));
 		myAsteroide.add(new Asteroide(X_MAX, 0, 0, 0,2));
 		myAsteroide.add(new Asteroide(X_MAX/2, 0, 0, 0,2));
 
@@ -61,7 +63,10 @@ public class Isep {
 
 
 		int tab[]=Ralentir(10);// tableau pour les zones de ralentissement
-		boolean missile = false;
+		boolean missileJ1 = false;
+		boolean missileJ2 = false;
+		Audio son = new Audio();
+        son.start();
 		while (true) {
 			StdDraw.clear();
 
@@ -79,7 +84,7 @@ public class Isep {
 						myrectangle.get(i).setSpeed(20);// on baisse la vitesse 
 					}
 					if(myVaisseau.get(0).getScore()<=tab[k]+20100 && myVaisseau.get(0).getScore()>=tab[k]+19900){
-						myrectangle.get(i).setSpeed(60);//on la réaugmente (10000 unités de score plus tard)
+						myrectangle.get(i).setSpeed(60);//on la rï¿½augmente (10000 unitï¿½s de score plus tard)
 					}
 				}
 			}
@@ -88,19 +93,24 @@ public class Isep {
 
 
 			//VAISSEAU********************************************
-			
+
 			//JOUEUR1
 			Vaisseau.controlPlayer1normal();
-			
-			if (!StdDraw.isKeyPressed(32)) {//Si on n'appuye pas sur espace
-				missile = false;
-			}
-			if (missile == false) {
-				if (StdDraw.isKeyPressed(32)) {//L'idée est qu'en restant appuyé sur espace il y aura seulement un ajout à la liste puisque missile sera "tru
-					// quand on appuie sur espace
 
-					myMissile.add(new Missile(myVaisseau.get(0).getx(),myVaisseau.get(0).gety(), Missile.getvxmissile(), 0, r));
-					missile = true;
+			if (!StdDraw.isKeyPressed(32)) {// Si on n'appuye pas sur espace
+				missileJ1 = false;
+			}
+			if (missileJ1 == false) {
+				if (StdDraw.isKeyPressed(32)) {// L'idï¿½e est qu'en restant
+												// appuy sur espace il y aura
+												// seulement un ajout ï¿½ la liste
+												// puisque missile sera "tru
+					                             // quand on appuie sur espace
+
+					myMissile.add(new Missile(myVaisseau.get(0).getx(),
+							myVaisseau.get(0).gety(), Missile.getvxmissile(),
+							0, r, myVaisseau.get(0).getMat()));
+					missileJ1 = true;
 
 				}
 			}
@@ -113,10 +123,17 @@ public class Isep {
 				(myVaisseau.get(1)).right();
 			if(StdDraw.isKeyPressed(83))
 				(myVaisseau.get(1)).bottom();
-			if(StdDraw.isKeyPressed(69)){//quand on appuie sur espace
-				myMissile.add( new Missile(myVaisseau.get(1).getx(), myVaisseau.get(1).gety(), 0, 0,r));
+			if (!StdDraw.isKeyPressed(69)) {// Si on n'appuye pas sur espace
+				missileJ2 = false;
 			}
-
+			if (missileJ2 == false) {
+				if (StdDraw.isKeyPressed(69)) {// quand on appuie sur espace
+					myMissile.add(new Missile(myVaisseau.get(1).getx(),
+							myVaisseau.get(1).gety(), Missile.getvxmissile(),
+							0, r,myVaisseau.get(1).getMat()));
+					missileJ2 = true;
+				}
+			}
 
 
 			//*************************************************************
@@ -140,10 +157,10 @@ public class Isep {
 			//ASTEROIDE******************************************************
 			for(int i=0;i!=myAsteroide.size();i=i+1){
 				(myAsteroide.get(i)).move();
-				if(myAsteroide.get(i).getlifeAste()>0){//on cache l'astéroide si il n'a plu de vie
+				if(myAsteroide.get(i).getlifeAste()>0){//on cache l'astï¿½roide si il n'a plu de vie
 					(myAsteroide.get(i)).paint1();
 				}
-				if(myAsteroide.get(i).getlifeAste()==0){// on en rajoute un si un atéroide a été supprimé
+				if(myAsteroide.get(i).getlifeAste()==0){// on en rajoute un si un atï¿½roide a ï¿½tï¿½ supprimï¿½
 					myAsteroide.add(new Asteroide(X_MAX, Math.random()*10000, 0, 0,2));
 				}
 				(myAsteroide.get(i)).colision();
@@ -153,6 +170,11 @@ public class Isep {
 			for(int i=0;i!=myMissile.size();i=i+1){
 				(myMissile.get(i)).missile();
 			}
+
+			for(int i=0;i!=myVaisseau.size();i++){
+
+				(myVaisseau.get(i)).colisionMissileVaisseau();
+				}
 			StdDraw.show(10);
 		}
 	}

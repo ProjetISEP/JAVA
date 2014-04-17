@@ -4,7 +4,8 @@ import java.util.List;
 
 public class Vaisseau {
 	public static List<Vaisseau> myVaisseau =new ArrayList<>();
-
+	public static List<Missile> myMissile = new ArrayList<>();
+	
 	public static double X_MAX = 10000;
 	public static double Y_MAX = 10000;
 	public static float r = 6;
@@ -14,19 +15,27 @@ public class Vaisseau {
 	private double vy;
 	private double vx;
 	private int score;
-
+	private int matricule;
+	
 	static double R=Math.random()*255;
 	static double G=Math.random()*255;
 	static double B=Math.random()*255;
 	private int life;
-
-	Vaisseau(double x, double y, double vx, double vy, int life,int score) {
+	Vaisseau(double x, double y, double vx, double vy, int life, int score,
+			int pMatricule) {//Un vaisseau possède une matricule pour la reconnaissance des missiles
 		this.x = x;
 		this.y = y;
 		this.vx = vx;
 		this.vy = vy;
+<<<<<<< HEAD
 		this.life=life;
 		this.score=score;
+=======
+		this.life = life;
+		this.score = score;
+		matricule = pMatricule;
+
+>>>>>>> 58c80d6203c6c802f7754e9140ee875c8debf9b5
 	}
 	public double getx(){
 		return x;
@@ -40,6 +49,12 @@ public class Vaisseau {
 	public int getScore(){
 		return score;
 	}
+<<<<<<< HEAD
+=======
+	public int getMat() {
+		return matricule;
+	}
+>>>>>>> 58c80d6203c6c802f7754e9140ee875c8debf9b5
 	public void vies(){
 		myVaisseau=Isep.getListeVaisseau();
 		for(int k=0;k!=myVaisseau.size();k++){
@@ -136,5 +151,36 @@ public class Vaisseau {
 	}
 	public void paint1(){
 		StdDraw.picture(x, y, "./src/vaisseau2.png",180);
+	}
+	
+	public void colisionMissileVaisseau() {//methode qui permet de faire apparaitre un crash lorsqu'un vaisseau se prend un missile 
+		myVaisseau = Isep.getListeVaisseau();
+
+		myMissile = Isep.getListeMissile();
+		for (int i = 0; i != myMissile.size(); i++) {
+
+			for (int k = 0; k != myVaisseau.size(); k++) {
+				if (this.matricule != k) {
+
+					if (myMissile.get(i).getxmissile() < myVaisseau.get(k)
+							.getx() + 300
+							&& myMissile.get(i).getxmissile() > myVaisseau.get(
+									k).getx() - 300
+							&& myMissile.get(i).getymissile() < myVaisseau.get(
+									k).gety() + 300
+							&& myMissile.get(i).getymissile() > myVaisseau.get(
+									k).gety() - 300
+							&& ((myMissile.get(i)).getJoueurMissile()) == (this.matricule)) {//seul les missiles "etrangers" ont de l'impact les vaisseau ne seront pas detruits par leurs propres missiles
+						StdDraw.picture(myVaisseau.get(k).getx(), myVaisseau
+								.get(k).gety(), "./src/crash.png");
+						System.out.println(this.matricule);
+						// MANQUE L'ENLEVEMENT DES VIES
+					}
+
+				}
+
+			}
+
+		}
 	}
 }
