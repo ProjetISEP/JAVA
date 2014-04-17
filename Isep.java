@@ -42,8 +42,11 @@ public class Isep {
 		int nb100=entier+(100-nbIntermedaire);
 		return nb100;
 	}
+<<<<<<< HEAD
 	
 	
+=======
+>>>>>>> 58c80d6203c6c802f7754e9140ee875c8debf9b5
 	public static void main(String[] args){
 		StdDraw.setCanvasSize(900, 500);
 		StdDraw.setXscale(0,X_MAX);
@@ -65,8 +68,11 @@ public class Isep {
 		int tab[]=Ralentir(10);// tableau pour les zones de ralentissement
 		boolean missileJ1 = false;
 		boolean missileJ2 = false;
+<<<<<<< HEAD
 		Audio son = new Audio();
         son.start();
+=======
+>>>>>>> 58c80d6203c6c802f7754e9140ee875c8debf9b5
 		while (true) {
 			StdDraw.clear();
 
@@ -93,6 +99,7 @@ public class Isep {
 
 
 			//VAISSEAU********************************************
+<<<<<<< HEAD
 
 			//JOUEUR1
 			Vaisseau.controlPlayer1normal();
@@ -107,11 +114,31 @@ public class Isep {
 												// puisque missile sera "tru
 					                             // quand on appuie sur espace
 
+=======
+			
+			//JOUEUR1
+			Vaisseau.controlPlayer1normal();
+			
+			if (!StdDraw.isKeyPressed(32)) {// Si on n'appuye pas sur espace
+				missileJ1 = false;
+			}
+			if (missileJ1 == false) {
+				if (StdDraw.isKeyPressed(32)) {// L'id�e est qu'en restant
+												// appuy� sur espace il y aura
+												// seulement un ajout � la liste
+												// puisque missile sera "tru
+					// quand on appuie sur espace
+
+>>>>>>> 58c80d6203c6c802f7754e9140ee875c8debf9b5
 					myMissile.add(new Missile(myVaisseau.get(0).getx(),
 							myVaisseau.get(0).gety(), Missile.getvxmissile(),
 							0, r, myVaisseau.get(0).getMat()));
 					missileJ1 = true;
+<<<<<<< HEAD
 
+=======
+					
+>>>>>>> 58c80d6203c6c802f7754e9140ee875c8debf9b5
 				}
 			}
 			//JOUEUR2
@@ -170,9 +197,15 @@ public class Isep {
 			for(int i=0;i!=myMissile.size();i=i+1){
 				(myMissile.get(i)).missile();
 			}
+<<<<<<< HEAD
 
 			for(int i=0;i!=myVaisseau.size();i++){
 
+=======
+			
+			for(int i=0;i!=myVaisseau.size();i++){
+				
+>>>>>>> 58c80d6203c6c802f7754e9140ee875c8debf9b5
 				(myVaisseau.get(i)).colisionMissileVaisseau();
 				}
 			StdDraw.show(10);
