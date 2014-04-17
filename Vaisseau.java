@@ -29,9 +29,12 @@ public class Vaisseau {
 		this.vy = vy;
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 		this.life=life;
 		this.score=score;
 =======
+=======
+>>>>>>> 58c80d6203c6c802f7754e9140ee875c8debf9b5
 =======
 >>>>>>> 58c80d6203c6c802f7754e9140ee875c8debf9b5
 		this.life = life;
@@ -39,6 +42,9 @@ public class Vaisseau {
 		matricule = pMatricule;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> 58c80d6203c6c802f7754e9140ee875c8debf9b5
+=======
 >>>>>>> 58c80d6203c6c802f7754e9140ee875c8debf9b5
 =======
 >>>>>>> 58c80d6203c6c802f7754e9140ee875c8debf9b5
@@ -57,6 +63,12 @@ public class Vaisseau {
 	}
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	public int getMat() {
+		return matricule;
+	}
+>>>>>>> 58c80d6203c6c802f7754e9140ee875c8debf9b5
 =======
 	public int getMat() {
 		return matricule;

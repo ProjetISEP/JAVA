@@ -43,8 +43,11 @@ public class Isep {
 		return nb100;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	
 	
+=======
+>>>>>>> 58c80d6203c6c802f7754e9140ee875c8debf9b5
 =======
 >>>>>>> 58c80d6203c6c802f7754e9140ee875c8debf9b5
 	public static void main(String[] args){
@@ -69,8 +72,11 @@ public class Isep {
 		boolean missileJ1 = false;
 		boolean missileJ2 = false;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		Audio son = new Audio();
         son.start();
+=======
+>>>>>>> 58c80d6203c6c802f7754e9140ee875c8debf9b5
 =======
 >>>>>>> 58c80d6203c6c802f7754e9140ee875c8debf9b5
 		while (true) {
@@ -100,6 +106,7 @@ public class Isep {
 
 			//VAISSEAU********************************************
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 			//JOUEUR1
 			Vaisseau.controlPlayer1normal();
@@ -115,6 +122,8 @@ public class Isep {
 					                             // quand on appuie sur espace
 
 =======
+=======
+>>>>>>> 58c80d6203c6c802f7754e9140ee875c8debf9b5
 			
 			//JOUEUR1
 			Vaisseau.controlPlayer1normal();
@@ -129,13 +138,20 @@ public class Isep {
 												// puisque missile sera "tru
 					// quand on appuie sur espace
 
+<<<<<<< HEAD
+>>>>>>> 58c80d6203c6c802f7754e9140ee875c8debf9b5
+=======
 >>>>>>> 58c80d6203c6c802f7754e9140ee875c8debf9b5
 					myMissile.add(new Missile(myVaisseau.get(0).getx(),
 							myVaisseau.get(0).gety(), Missile.getvxmissile(),
 							0, r, myVaisseau.get(0).getMat()));
 					missileJ1 = true;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+					
+>>>>>>> 58c80d6203c6c802f7754e9140ee875c8debf9b5
 =======
 					
 >>>>>>> 58c80d6203c6c802f7754e9140ee875c8debf9b5
@@ -198,9 +214,15 @@ public class Isep {
 				(myMissile.get(i)).missile();
 			}
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 			for(int i=0;i!=myVaisseau.size();i++){
 
+=======
+			
+			for(int i=0;i!=myVaisseau.size();i++){
+				
+>>>>>>> 58c80d6203c6c802f7754e9140ee875c8debf9b5
 =======
 			
 			for(int i=0;i!=myVaisseau.size();i++){
