@@ -1,7 +1,6 @@
 ﻿import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
-//test github
 public class Isep {
 	public static double X_MAX = 10000;
 	public static double Y_MAX = 10000;
