@@ -13,7 +13,8 @@ public class Terrain {
 	protected double largeur;
 	protected double hauteur;
 	protected static double speed=60;
-	public static double[] tab = new double[300];
+	protected static int tailleterrain=290;
+	public static double[] tab = new double[3000];
 	static double R=Math.random()*255;
 	static double G=Math.random()*255;
 	static double B=Math.random()*255;
@@ -67,9 +68,9 @@ public class Terrain {
 		return tab;
 	}
 	public static void generateTerrain(){
-		double tab1[]=Terrain.tableauAleatoire(300);
+		double tab1[]=Terrain.tableauAleatoire(tailleterrain);
 		myrectangle=Terrain.getListeTerrain();
-		for(int i=0;i!=290;i++){
+		for(int i=0;i!=tailleterrain;i++){
 			if(i<20){// 
 				myrectangle.add(new Terrain(10000+i*450, 200,170,i*100+1000,speed));//le bas
 				myrectangle.add(new Terrain(10000+i*400, 9800,170,i*100+1000,speed));//le haut

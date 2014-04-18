@@ -16,7 +16,7 @@ public class Vaisseau {
 	private double vx;
 	private int score;
 	private int matricule;
-
+	
 	static double R=Math.random()*255;
 	static double G=Math.random()*255;
 	static double B=Math.random()*255;
@@ -110,6 +110,7 @@ public class Vaisseau {
 		x = x + 40;
 	}
 	public static void controlPlayer1normal(){
+		if(!TerrainParticulier.toucheinversee){
 		if(StdDraw.isKeyPressed(38))
 			(myVaisseau.get(0)).top();
 		if(StdDraw.isKeyPressed(37))
@@ -118,8 +119,20 @@ public class Vaisseau {
 			(myVaisseau.get(0)).right();
 		if(StdDraw.isKeyPressed(40))
 			(myVaisseau.get(0)).bottom();
+		}
+		else{
+			if(StdDraw.isKeyPressed(40))
+				(myVaisseau.get(0)).top();
+			if(StdDraw.isKeyPressed(39))
+				(myVaisseau.get(0)).left();
+			if(StdDraw.isKeyPressed(37))
+				(myVaisseau.get(0)).right();
+			if(StdDraw.isKeyPressed(38))
+				(myVaisseau.get(0)).bottom();
+			
+		}
 	}
-	public static void controlPlayer1inverse(){
+/*	public static void controlPlayer1inverse(){
 		if(StdDraw.isKeyPressed(38))
 			(myVaisseau.get(0)).bottom();
 		if(StdDraw.isKeyPressed(37))
@@ -128,7 +141,7 @@ public class Vaisseau {
 			(myVaisseau.get(0)).left();
 		if(StdDraw.isKeyPressed(40))
 			(myVaisseau.get(0)).top();
-	}
+	}*/
 	public static void FinDePartie(){// A TERMINER
 		int totalLife=0;
 		int [] tableauLife= new int[myVaisseau.size()];
