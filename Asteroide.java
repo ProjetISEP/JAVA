@@ -16,7 +16,7 @@ public class Asteroide {
 	public static List<Missile> myMissile =new ArrayList<>();
 	public static List<Asteroide> myAsteroide =new ArrayList<>();
 	Asteroide(double xAste, double yAste, double vxAste, double vyAste, int lifeAste) {
-		System.out.println("Création d'un asteroide avec des paramètres !");
+	//	System.out.println("Création d'un asteroide avec des paramètres !");
 		this.xAste = xAste;
 		this.yAste = yAste;
 		this.vxAste = vxAste;
@@ -55,11 +55,11 @@ public class Asteroide {
 				for(int k=0;k!=myAsteroide.size();k=k+1){
 				if((myAsteroide.get(k)).yAste<(myMissile.get(i)).getymissile()+300 && myAsteroide.get(k).yAste>(myMissile.get(i)).getymissile()-300 && (myAsteroide.get(k)).xAste<(myMissile.get(i)).getxmissile()+300 && myAsteroide.get(k).xAste>(myMissile.get(i)).getxmissile()-300){
 					//if((myAsteroide.get(j)).yAste<(myMissile.get(i)).getymissile()+300 && myAsteroide.get(j).yAste>(myMissile.get(i)).getymissile()-300 && (myAsteroide.get(j)).xAste<(myMissile.get(i)).getxmissile()+300 && myAsteroide.get(j).xAste>(myMissile.get(i)).getxmissile()-300){
-					System.out.println("********************************************************");
+				/*	System.out.println("********************************************************");
 					System.out.println("*********************Collison*****************************");
 					System.out.println("*******************Collison*****************");
 					System.out.println("********************************************************");
-					System.out.println();
+					System.out.println();*/
 					myAsteroide.get(k).setLifeAste();
 				}
 				}

@@ -1,7 +1,6 @@
 ﻿import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
-//testamontour
 public class Isep {
 	public static double X_MAX = 10000;
 	public static double Y_MAX = 10000;
@@ -15,6 +14,7 @@ public class Isep {
 	public static List<Missile> myMissile =new ArrayList<>();
 	public static List<Vaisseau> myVaisseau =new ArrayList<>();
 	public static List<Terrain> myrectangle =new ArrayList<>();
+	public static List<Missile> myMines =new ArrayList<>();////////////////////////////////////////////////////////
 	//GETTERS DES LISTES
 	public static List<Missile> getListeMissile(){
 		return myMissile;
@@ -30,10 +30,10 @@ public class Isep {
 		double nb=20000+Math.random()*40000;
 		int entier=caster(nb);
 		tableauRalentissement[0]=entier;
-		System.out.println(tableauRalentissement[0]);
+		//System.out.println(tableauRalentissement[0]);
 		for(int k=1;k!=tableauRalentissement.length;k++){
 			tableauRalentissement[k]=tableauRalentissement[k-1]+caster(20000+Math.random()*100000);	
-			System.out.println(tableauRalentissement[k]);
+		//	System.out.println(tableauRalentissement[k]);
 		}
 		return tableauRalentissement;
 	}
@@ -66,8 +66,10 @@ public class Isep {
 		int tab[]=Ralentir(10);// tableau pour les zones de ralentissement
 		boolean missileJ1 = false;
 		boolean missileJ2 = false;
-		Audio son = new Audio();
-		son.start();
+		boolean mineJ1=false;
+	//	Audio son = new Audio();
+	//	son.start();
+		int mineCount=0;
 		while (true) {
 			StdDraw.clear();
 
@@ -115,6 +117,22 @@ public class Isep {
 
 				}
 			}
+			
+			if (!StdDraw.isKeyPressed(17)) {// Si on n'appuye pas sur espace
+				mineJ1 = false;
+			}
+			if (mineJ1 == false) {
+				if (StdDraw.isKeyPressed(17)) {//
+					
+
+					myMines.add(new Missile(myVaisseau.get(0).getx(),
+							myVaisseau.get(0).gety(), Missile.getvxmissile(),
+							0, r, myVaisseau.get(0).getMat()));
+					mineJ1 = true;
+
+				}
+			}
+			
 			//JOUEUR2
 			if(StdDraw.isKeyPressed(90))
 				(myVaisseau.get(1)).top();
@@ -147,7 +165,7 @@ public class Isep {
 					(myVaisseau.get(i)).paint1();
 				}
 				(myVaisseau.get(i)).bordure();
-				(myVaisseau.get(i)).move();
+				//(myVaisseau.get(i)).move();
 				(myVaisseau.get(i)).score();
 				myVaisseau.get(i).vies();
 				if(myVaisseau.get(i).getlife()<=0){//Condition de fin de partie
@@ -171,11 +189,19 @@ public class Isep {
 			for(int i=0;i!=myMissile.size();i=i+1){
 				(myMissile.get(i)).missile();
 			}
+			
+			for(int i=mineCount;i!=myMines.size();i=i+1){
+				(myMines.get(i)).demiparabole(myVaisseau.get(0).getx(),myVaisseau.get(0).gety(), -10, 10);
+				
+				mineCount=mineCount+1;
+			}
+		
 
 			for(int i=0;i!=myVaisseau.size();i++){
 
 				(myVaisseau.get(i)).colisionMissileVaisseau();
 			}
+		
 			StdDraw.show(10);
 		}
 	}

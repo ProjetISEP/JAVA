@@ -81,9 +81,9 @@ public class Vaisseau {
 		}
 
 	}
-	public void move() {
+	/*public void move() {
 		x=x-10;
-	}
+	}*/
 	public void bordure() {
 		if (y<=0){
 			y=100;
@@ -98,16 +98,16 @@ public class Vaisseau {
 	}
 
 	public void top() {
-		y = y + 100;
+		y = y + 75;
 	}
 	public void bottom() {
-		y = y - 100;
+		y = y - 75;
 	}
 	public void left() {
-		x = x - 100;
+		x = x - 40;
 	}
 	public void right() {
-		x = x + 100;
+		x = x + 40;
 	}
 	public static void controlPlayer1normal(){
 		if(StdDraw.isKeyPressed(38))
@@ -144,6 +144,12 @@ public class Vaisseau {
 	public void paint1(){
 		StdDraw.picture(x, y, "./src/vaisseau2.png",180);
 	}
+	
+	/*
+	 public void paint2(){
+		StdDraw.picture(x, y, "./src/vaisseau3.png",180);
+	}
+	  */
 
 	public void colisionMissileVaisseau() {//methode qui permet de faire apparaitre un crash lorsqu'un vaisseau se prend un missile 
 		myVaisseau = Isep.getListeVaisseau();
@@ -165,6 +171,7 @@ public class Vaisseau {
 							&& ((myMissile.get(i)).getJoueurMissile()) == (this.matricule)) {//seul les missiles "etrangers" ont de l'impact les vaisseau ne seront pas detruits par leurs propres missiles
 						StdDraw.picture(myVaisseau.get(k).getx(), myVaisseau
 								.get(k).gety(), "./src/crash.png");
+						
 						System.out.println(this.matricule);
 						// MANQUE L'ENLEVEMENT DES VIES
 					}
@@ -175,4 +182,7 @@ public class Vaisseau {
 
 		}
 	}
+	
+	
+
 }

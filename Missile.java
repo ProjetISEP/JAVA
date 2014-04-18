@@ -6,14 +6,14 @@ public class Missile {
 
 	public static List<Vaisseau> myVaisseau =new ArrayList<>();
 
-	private double ymissile;
-	private double xmissile;
-	private double vymissile;
-	private static double vxmissile=220;//variable de classe ///////////////////////
-	private double rmissile;
-	private int joueur;
-	Missile(double xmissile, double ymissile, double vxmissile, double vymissile, double rmissile, int pJoueur) {//Ajout d'un parametre en plus : le missile appartient à un seul joueur
-		//System.out.println("Création d'un missile avec des paramètres !");
+	protected double ymissile;
+	protected double xmissile;
+	protected double vymissile;
+	protected static double vxmissile=220;//variable de classe ///////////////////////
+	protected double rmissile;
+	protected int joueur;
+	Missile(double xmissile, double ymissile, double vxmissile, double vymissile, double rmissile, int pJoueur) {//Ajout d'un parametre en plus : le missile appartient ï¿½ un seul joueur
+		//System.out.println("Crï¿½ation d'un missile avec des paramï¿½tres !");
 		this.xmissile = xmissile;
 		this.ymissile = ymissile;
 		this.vxmissile = vxmissile;
@@ -40,8 +40,43 @@ public class Missile {
 	}
 
 	public void missile() {
+				StdDraw.setPenColor(Color.green);
 		 		StdDraw.filledRectangle(this.xmissile, this.ymissile, this.rmissile+100, this.rmissile);//le +qqch est la longeur du missile
-		  		StdDraw.setPenColor(Color.green);
-		 		this.xmissile=this.xmissile+vxmissile;	
+		  		this.xmissile=this.xmissile+vxmissile;	
 		  	}
+	
+	public void demiparabole(double x0, double y0, double v0x, double g) {///////////////////////////////////////////////////////////////////////
+	
+	///	x0=myVaisseau.get(0).getx();
+	//	y0=myVaisseau.get(0).gety();
+		
+		double y;
+		double x;
+
+		// double t=0;
+		double t = 0;
+		double tmax = Math.sqrt(2 * y0 / g);// ici tmax correspond Ã  l'arret du
+											// missime une fois au sol mais dans
+											// le jeu le missile peut s'arreter
+											// sur le vaisseau adverse ou dans
+											// le decor
+		// StdDraw.picture(x0, y0, "./src/mines.png",180);
+		for (int i = 0; i <= 10000000; i=i+100) {
+			t = i * ((double) (tmax / (y0 / 2.0)));
+			if (t >= tmax)
+				break;
+
+			x = v0x * t + x0;
+			y = -(g / 2.0) * Math.pow((double) (x / v0x), 2) - (g / 2.0)
+					* Math.pow((double) (x0 / v0x), 2) + g * x * x0
+					* Math.pow((double) (1 / v0x), 2) + y0;
+		
+			StdDraw.picture(x, y, "./src/mines.png", 180);
+			StdDraw.show(1);
+			System.out.println(y);
+
+		}
+	}
+	
+	
 }

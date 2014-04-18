@@ -12,7 +12,7 @@ public class Terrain {
 	protected double yter;
 	protected double largeur;
 	protected double hauteur;
-	protected double speed;
+	protected static double speed=60;
 	public static double[] tab = new double[300];
 	static double R=Math.random()*255;
 	static double G=Math.random()*255;
@@ -70,18 +70,18 @@ public class Terrain {
 		double tab1[]=Terrain.tableauAleatoire(300);
 		myrectangle=Terrain.getListeTerrain();
 		for(int i=0;i!=290;i++){
-			if(i<20){
-				myrectangle.add(new Terrain(10000+i*450, 200,170,i*100+1000,60));//le bas
-				myrectangle.add(new Terrain(10000+i*400, 9800,170,i*100+1000,60));//le haut
+			if(i<20){// 
+				myrectangle.add(new Terrain(10000+i*450, 200,170,i*100+1000,speed));//le bas
+				myrectangle.add(new Terrain(10000+i*400, 9800,170,i*100+1000,speed));//le haut
 			}else if (i<50 && i>=30){ // POUR LES ZONES PARTICULIERES
-				myrectangle.add(new TerrainParticulier(xrectangle+i*400, 200,170,700+(3900-(tab1[i]*3550)),60));
-				myrectangle.add(new TerrainParticulier(xrectangle+i*400, 9800,170,700+tab1[i]*3900,60));
+				myrectangle.add(new TerrainParticulier(xrectangle+i*400, 200,170,700+(3900-(tab1[i]*3550)),speed));
+				myrectangle.add(new TerrainParticulier(xrectangle+i*400, 9800,170,700+tab1[i]*3900,speed));
 			}else if (i<100 && i>=80){ // POUR LES ZONES PARTICULIERES
-				myrectangle.add(new TerrainParticulier(xrectangle+i*400, 200,170,700+(3900-(tab1[i]*3550)),60));
-				myrectangle.add(new TerrainParticulier(xrectangle+i*400, 9800,170,700+tab1[i]*3900,60));
+				myrectangle.add(new TerrainParticulier(xrectangle+i*400, 200,170,700+(3900-(tab1[i]*3550)),speed));
+				myrectangle.add(new TerrainParticulier(xrectangle+i*400, 9800,170,700+tab1[i]*3900,speed));
 			}else{
-				myrectangle.add(new Terrain(xrectangle+i*400, 200,170,700+(3900-(tab1[i]*3550)),60));
-				myrectangle.add(new Terrain(xrectangle+i*400, 9800,170,700+tab1[i]*3900,60));
+				myrectangle.add(new Terrain(xrectangle+i*400, 200,170,700+(3900-(tab1[i]*3550)),speed));
+				myrectangle.add(new Terrain(xrectangle+i*400, 9800,170,700+tab1[i]*3900,speed));
 			}
 		}
 	}
