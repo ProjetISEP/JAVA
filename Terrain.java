@@ -12,7 +12,7 @@ public class Terrain {
 	protected double yter;
 	protected double largeur;
 	protected double hauteur;
-	protected static double speed=60;
+	protected static double speed=120;
 	protected static int tailleterrain=290;
 	public static double[] tab = new double[3000];
 	static double R=Math.random()*255;
@@ -68,14 +68,14 @@ public class Terrain {
 		return tab;
 	}
 	public static void generateTerrain(){
-		double tab1[]=Terrain.tableauAleatoire(tailleterrain);
-		myrectangle=Terrain.getListeTerrain();
+		double tab1[]=tableauAleatoire(tailleterrain);
+		myrectangle=getListeTerrain();
 		for(int i=0;i!=tailleterrain;i++){
 			if(i<20){// 
-				myrectangle.add(new Terrain(10000+i*450, 200,170,i*100+1000,speed));//le bas
+				myrectangle.add(new Terrain(10000+i*450, 200,170,i*100+1000,speed));//le bas /* variation lineaire croissante de la hauteur */
 				myrectangle.add(new Terrain(10000+i*400, 9800,170,i*100+1000,speed));//le haut
 			}else if (i<50 && i>=30){ // POUR LES ZONES PARTICULIERES
-				myrectangle.add(new TerrainParticulier(xrectangle+i*400, 200,170,700+(3900-(tab1[i]*3550)),speed));
+				myrectangle.add(new TerrainParticulier(xrectangle+i*400, 200,170,700+(3900-(tab1[i]*3550)),speed));//le 3900 est une translation
 				myrectangle.add(new TerrainParticulier(xrectangle+i*400, 9800,170,700+tab1[i]*3900,speed));
 			}else if (i<100 && i>=80){ // POUR LES ZONES PARTICULIERES
 				myrectangle.add(new TerrainParticulier(xrectangle+i*400, 200,170,700+(3900-(tab1[i]*3550)),speed));
@@ -92,6 +92,8 @@ public class Terrain {
 		StdDraw.setPenColor(Color.black);
 		xter=xter-speed;
 	}
+	
+
 	public void colision(){//POUR LES COLISIONS AVEC LES RECTANGLES DU BAS
 		myVaisseau=Isep.getListeVaisseau();		
 		double intermediaire=yter+hauteur;

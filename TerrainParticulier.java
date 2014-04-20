@@ -1,7 +1,10 @@
 import java.awt.Color;
+import java.util.ArrayList;
+import java.util.List;
 
 public class TerrainParticulier extends Terrain  {
-	public static boolean toucheinversee;
+
+	public static List<Terrain> myrectangle =new ArrayList<>();
 	public void show(){
 		myVaisseau=Isep.getListeVaisseau();	
 		StdDraw.filledRectangle(xter, yter, largeur,hauteur);
@@ -10,19 +13,6 @@ public class TerrainParticulier extends Terrain  {
 		xter=xter-speed;
 		
 		
-		for(int i=0;i!=myVaisseau.size();i=i+1){
-			if(xter<10000 && xter>0){//PARTIE GRAVITE
-				toucheinversee=true;//la fonction de controle des touches a besoin du while true pour etre executé du coup elle est remise dans la classe Isep
-				myVaisseau.get(i).setY(1.3); // setY est dans la class Vaisseau
-				System.out.println("gravité");
-			
-			}
-			else{
-				toucheinversee=false;
-				System.out.println("pas de gravité");
-			}
-			
-		}
 	}
 	public void setSpeed(int newSpeed){//NOUVELLE VITESSE DES TERRAINS
 		myVaisseau=Isep.getListeVaisseau();

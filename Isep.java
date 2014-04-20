@@ -58,7 +58,9 @@ public class Isep {
 
 		// CREATION  D'OBJETS POUR LE TERRAIN
 		myrectangle=Terrain.getListeTerrain();
+		System.out.println("Chargement...");
 		Terrain.generateTerrain();
+
 		// FIN CREATION D'OBJETS
 
 
@@ -76,7 +78,8 @@ public class Isep {
 
 			//RECTANGLES********************************************
 			for(int i=0;i!=myrectangle.size();i++){
-				myrectangle.get(i).show();
+			//	System.out.println(myrectangle.size());
+				myrectangle.get(i).show();//methode qui permet le defilement de chaque rectangle de la liste
 				if(i%2==0){
 					myrectangle.get(i).colision();//colision avec le bas
 				}else{
@@ -91,15 +94,31 @@ public class Isep {
 					}
 				}
 			}
-			//***************************************************
+		
 
+			//***************************************************
+		
 
 
 			//VAISSEAU********************************************
 
 			//JOUEUR1
-			Vaisseau.controlPlayer1normal();
-
+			Vaisseau.controlPlayer1();
+			Vaisseau.controlPlayer2();
+			
+			//INVERSEMENT DES TOUCHES************************
+			for(int i=0;i!=myVaisseau.size();i++){
+				myVaisseau.get(i).toucheInversee(180,300);	//	Intervalle (numero du rectangle) a choisir 
+			}//*****************
+			
+			
+			//GRAVITE************************
+			for(int i=0;i!=myVaisseau.size();i++){
+				myVaisseau.get(i).gravite(0,155);	// Intervalle (numero du rectangle) a choisir 
+			}//*****************
+			
+			
+			
 			if (!StdDraw.isKeyPressed(32)) {// Si on n'appuye pas sur espace
 				missileJ1 = false;
 			}
@@ -134,14 +153,7 @@ public class Isep {
 			}
 			
 			//JOUEUR2
-			if(StdDraw.isKeyPressed(90))
-				(myVaisseau.get(1)).top();
-			if(StdDraw.isKeyPressed(81))
-				(myVaisseau.get(1)).left();
-			if(StdDraw.isKeyPressed(68))
-				(myVaisseau.get(1)).right();
-			if(StdDraw.isKeyPressed(83))
-				(myVaisseau.get(1)).bottom();
+			
 			if (!StdDraw.isKeyPressed(69)) {// Si on n'appuye pas sur espace
 				missileJ2 = false;
 			}
@@ -190,16 +202,17 @@ public class Isep {
 				(myMissile.get(i)).missile();
 			}
 			
+		
+			for(int i=0;i!=myVaisseau.size();i++){
+
+				(myVaisseau.get(i)).colisionMissileVaisseau();
+			}
+			
+			//MINES**********************************************************
 			for(int i=mineCount;i!=myMines.size();i=i+1){
 				(myMines.get(i)).demiparabole(myVaisseau.get(0).getx(),myVaisseau.get(0).gety(), -10, 10);
 				
 				mineCount=mineCount+1;
-			}
-		
-
-			for(int i=0;i!=myVaisseau.size();i++){
-
-				(myVaisseau.get(i)).colisionMissileVaisseau();
 			}
 		
 			StdDraw.show(10);
