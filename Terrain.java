@@ -12,7 +12,7 @@ public class Terrain {
 	protected double yter;
 	protected double largeur;
 	protected double hauteur;
-	protected static double speed=120;
+	protected static double speed=100;
 	protected static int tailleterrain=290;
 	public static double[] tab = new double[3000];
 	static double R=Math.random()*255;

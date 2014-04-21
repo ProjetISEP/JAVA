@@ -9,10 +9,11 @@ public class Missile {
 	protected double ymissile;
 	protected double xmissile;
 	protected double vymissile;
-	protected static double vxmissile=220;//variable de classe ///////////////////////
+	protected static double vxmissile=120;//variable de classe ///////////////////////
 	protected double rmissile;
 	protected int joueur;
-	Missile(double xmissile, double ymissile, double vxmissile, double vymissile, double rmissile, int pJoueur) {//Ajout d'un parametre en plus : le missile appartient � un seul joueur
+	//protected int acceleration;
+	Missile(double xmissile, double ymissile, double vxmissile, double vymissile, double rmissile, int pJoueur/*, int pAcceleration*/) {//Ajout d'un parametre en plus : le missile appartient � un seul joueur
 		//System.out.println("Cr�ation d'un missile avec des param�tres !");
 		this.xmissile = xmissile;
 		this.ymissile = ymissile;
@@ -20,6 +21,7 @@ public class Missile {
 		this.vymissile = vymissile;
 		this.rmissile=rmissile;
 		joueur=pJoueur;
+		//acceleration=pAcceleration;
 	}
 	//LES GETTERS
 	public double getxmissile(){
@@ -42,10 +44,17 @@ public class Missile {
 	public void missile() {
 				StdDraw.setPenColor(Color.green);
 		 		StdDraw.filledRectangle(this.xmissile, this.ymissile, this.rmissile+100, this.rmissile);//le +qqch est la longeur du missile
-		  		this.xmissile=this.xmissile+vxmissile;	
+		  		this.xmissile=this.xmissile+this.vxmissile;	
+		  		
 		  	}
 	
-	public void demiparabole(double x0, double y0, double v0x, double g) {///////////////////////////////////////////////////////////////////////
+	public void mines(){//A ne pas effacer, la methode herité se trouve a la classe Mines
+		
+	}
+	
+
+	
+/*	public void demiparabole(double x0, double y0, double v0x, double g) {///////////////////////////////////////////////////////////////////////
 	
 	///	x0=myVaisseau.get(0).getx();
 	//	y0=myVaisseau.get(0).gety();
@@ -76,7 +85,7 @@ public class Missile {
 			System.out.println(y);
 
 		}
-	}
+	}*/
 	
 	
 }

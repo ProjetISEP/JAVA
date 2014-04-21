@@ -6,6 +6,7 @@ public class Vaisseau {
 	public static List<Vaisseau> myVaisseau = new ArrayList<>();
 	public static List<Missile> myMissile = new ArrayList<>();
 	public static List<Terrain> myrectangle = new ArrayList<>();
+	public static List<Missile> myMines =new ArrayList<>();
 	public static boolean toucheinversee;
 	public static double X_MAX = 10000;
 	public static double Y_MAX = 10000;
@@ -224,7 +225,7 @@ public class Vaisseau {
 						StdDraw.picture(myVaisseau.get(k).getx(), myVaisseau
 								.get(k).gety(), "./src/crash.png");
 
-						System.out.println(this.matricule);
+					//	System.out.println(this.matricule);
 						// MANQUE L'ENLEVEMENT DES VIES
 					}
 
@@ -233,6 +234,43 @@ public class Vaisseau {
 			}
 
 		}
+	}
+	
+	
+	
+	public void colisionMineVaisseau(){
+		myMines=Isep.myMines;
+		myVaisseau = Isep.myVaisseau;
+		for (int i = 0; i != myMines.size(); i++) {
+
+			for (int k = 0; k != myVaisseau.size(); k++) {
+				if (this.matricule != k) {
+
+					if (myMines.get(i).getxmissile() < myVaisseau.get(k)
+							.getx() + 300
+							&& myMines.get(i).getxmissile() > myVaisseau.get(
+									k).getx() - 300
+							&& myMines.get(i).getymissile() < myVaisseau.get(
+									k).gety() + 700
+							&& myMines.get(i).getymissile() > myVaisseau.get(
+									k).gety() - 700
+							&& ((myMines.get(i)).getJoueurMissile()) == (this.matricule)) {////seul les missiles "etrangers" ont de l'impact les vaisseau ne seront pas detruits par leurs propres missiles
+						StdDraw.picture(myVaisseau.get(k).getx(), myVaisseau
+								.get(k).gety(), "./src/crash.png");
+
+					//	System.out.println(this.matricule);
+						// MANQUE L'ENLEVEMENT DES VIES
+					}
+
+				}
+
+			}
+
+		}
+		
+		
+		
+		
 	}
 
 	public void toucheInversee(int x1, int x2) {// la fonction de controle des touches a besoin du while true pour etre executé du
@@ -244,10 +282,10 @@ public class Vaisseau {
 				&& this.x <= myrectangle.get(x2).getxter()) {//Il faut que la position en x du vaisseau soit compris entre x1eme rectangle et x2eme rectangle
 															//pour que l'effet s'applique
 			toucheinversee = true;
-			System.out.println("inverse");
+		//	System.out.println("inverse");
 		} else {
 			toucheinversee = false;
-			System.out.println("pas inversée");
+	//		System.out.println("pas inversée");
 		}
 
 	}
@@ -257,9 +295,9 @@ public class Vaisseau {
 		if (this.x >= myrectangle.get(x1).getxter()
 				&& this.x <= myrectangle.get(x2).getxter()) {// PARTIE GRAVITE
 			this.setY(45); // setY est dans la class Vaisseau
-			System.out.println("gravité");
+		//	System.out.println("gravité");
 		} else {
-			System.out.println("pas de gravité");
+		//	System.out.println("pas de gravité");
 		}
 	}
 

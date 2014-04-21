@@ -69,6 +69,7 @@ public class Isep {
 		boolean missileJ1 = false;
 		boolean missileJ2 = false;
 		boolean mineJ1=false;
+		boolean mineJ2=false;
 	//	Audio son = new Audio();
 	//	son.start();
 		int mineCount=0;
@@ -100,7 +101,7 @@ public class Isep {
 		
 
 
-			//VAISSEAU********************************************
+			//VAISSEAU*******************************************
 
 			//JOUEUR1
 			Vaisseau.controlPlayer1();
@@ -108,13 +109,13 @@ public class Isep {
 			
 			//INVERSEMENT DES TOUCHES************************
 			for(int i=0;i!=myVaisseau.size();i++){
-				myVaisseau.get(i).toucheInversee(180,300);	//	Intervalle (numero du rectangle) a choisir 
+				myVaisseau.get(i).toucheInversee(300,400);	//	Intervalle (numero du rectangle) a choisir 
 			}//*****************
 			
 			
 			//GRAVITE************************
 			for(int i=0;i!=myVaisseau.size();i++){
-				myVaisseau.get(i).gravite(0,155);	// Intervalle (numero du rectangle) a choisir 
+				myVaisseau.get(i).gravite(150,200);	// Intervalle (numero du rectangle) a choisir 
 			}//*****************
 			
 			
@@ -122,6 +123,7 @@ public class Isep {
 			if (!StdDraw.isKeyPressed(32)) {// Si on n'appuye pas sur espace
 				missileJ1 = false;
 			}
+			
 			if (missileJ1 == false) {
 				if (StdDraw.isKeyPressed(32)) {// L'idee est qu'en restant
 					// appuy sur espace il y aura
@@ -133,11 +135,11 @@ public class Isep {
 							myVaisseau.get(0).gety(), Missile.getvxmissile(),
 							0, r, myVaisseau.get(0).getMat()));
 					missileJ1 = true;
-
+				
 				}
 			}
 			
-			if (!StdDraw.isKeyPressed(17)) {// Si on n'appuye pas sur espace
+			/*if (!StdDraw.isKeyPressed(17)) {// Si on n'appuye pas sur espace
 				mineJ1 = false;
 			}
 			if (mineJ1 == false) {
@@ -150,7 +152,22 @@ public class Isep {
 					mineJ1 = true;
 
 				}
+			}*/
+			
+			if (!StdDraw.isKeyPressed(517)) {// 
+			mineJ1 = false;
+		}
+		if (mineJ1 == false) {
+			if (StdDraw.isKeyPressed(517)) {// 517 correspond à la touche "!"
+				
+
+				myMines.add(new Mines(myVaisseau.get(0).getx(),
+						myVaisseau.get(0).gety(),  Missile.getvxmissile(),
+						0, 0, myVaisseau.get(0).getMat(),Terrain.speed,4));//Deux paramètres ont été rajoutés : la vitesse de la mine et son acceleration, même si on voit getvxmissile on ne travaillera que sur vxMine
+				mineJ1 = true;
+
 			}
+		}
 			
 			//JOUEUR2
 			
@@ -166,6 +183,21 @@ public class Isep {
 				}
 			}
 
+			
+			if (!StdDraw.isKeyPressed(70)) {// 70 = touche F
+				mineJ2 = false;
+			}
+			if (mineJ2 == false) {
+				if (StdDraw.isKeyPressed(70)) {// 
+					
+
+					myMines.add(new Mines(myVaisseau.get(1).getx(),
+							myVaisseau.get(1).gety(),  Missile.getvxmissile(),
+							0, 0, myVaisseau.get(1).getMat(),Terrain.speed,4));//Deux paramètres ont été rajoutés : la vitesse de la mine et son acceleration, même si on voit getvxmissile on ne travaillera que sur vxMine
+					mineJ2 = true;
+
+				}
+			}
 
 			//*************************************************************
 
@@ -209,11 +241,25 @@ public class Isep {
 			}
 			
 			//MINES**********************************************************
-			for(int i=mineCount;i!=myMines.size();i=i+1){
+			
+			
+			for(int i=0;i!=myMines.size();i=i+1){
+				(myMines.get(i)).mines();
+			}
+			
+			
+			for(int i=0;i!=myVaisseau.size();i++){
+
+				(myVaisseau.get(i)).colisionMineVaisseau();
+			}
+			
+			/*for(int i=mineCount;i!=myMines.size();i=i+1){
 				(myMines.get(i)).demiparabole(myVaisseau.get(0).getx(),myVaisseau.get(0).gety(), -10, 10);
 				
 				mineCount=mineCount+1;
-			}
+			}*/
+			
+			
 		
 			StdDraw.show(10);
 		}
