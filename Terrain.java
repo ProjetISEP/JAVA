@@ -47,13 +47,14 @@ public class Terrain {
 		myVaisseau=Isep.getListeVaisseau();
 		speed=newSpeed;		
 	}
+	
 	public void show(){
 		StdDraw.filledRectangle(xter, yter, largeur,hauteur);
 		Color RANDOM=new Color((int)R,(int)G,(int)B);
 		StdDraw.setPenColor(Color.black);
 		xter=xter-speed;
 	}
-
+	
 
 	public void colision(){//POUR LES COLISIONS AVEC LES RECTANGLES DU BAS
 		myVaisseau=Isep.getListeVaisseau();		
