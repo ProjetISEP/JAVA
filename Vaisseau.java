@@ -10,8 +10,8 @@ public class Vaisseau {
 	public static boolean toucheinversee;
 	public static double X_MAX = 10000;
 	public static double Y_MAX = 10000;
-	public static float r = 6;
 	public static double t = 0;
+	public static boolean gravite;
 	protected double y;
 	protected double x;
 	protected double vy;
@@ -179,10 +179,7 @@ public class Vaisseau {
 	
 	
 	
-	public void ai(){}
 	
-	public void controlAI(){
-	}
 	/*
 	 * public static void controlPlayer1inverse(){ if(StdDraw.isKeyPressed(38))
 	 * (myVaisseau.get(0)).bottom(); if(StdDraw.isKeyPressed(37))
@@ -302,12 +299,15 @@ public class Vaisseau {
 	}
 
 	public void gravite(int x1, int x2) {
+		
 		myrectangle = Terrain.getListeTerrain();
 		if (this.x >= myrectangle.get(x1).getxter()
 				&& this.x <= myrectangle.get(x2).getxter()) {// PARTIE GRAVITE
 			this.setY(45); // setY est dans la class Vaisseau
+			gravite=true;
 		//	System.out.println("gravité");
 		} else {
+			gravite=false;
 		//	System.out.println("pas de gravité");
 		}
 	}

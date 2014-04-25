@@ -15,6 +15,10 @@ public class Isep {
 	protected static int tailleterrain=290;
 	public static double[] tab = new double[3000];
 	public static boolean multi = false;
+	public static boolean missileJ1 = false;
+	public static boolean missileJ2 = false;
+	public static boolean mineJ1 = false;
+	public static boolean mineJ2 = false;
 	public static String niveau;
 	public static List<Asteroide> myAsteroide = new ArrayList<>();
 	public static List<Missile> myMissile = new ArrayList<>();
@@ -128,7 +132,7 @@ public class Isep {
 																	// aux
 															// matricules
 		//myVaisseau.add(new Vaisseau(6000, 5000, 0, 0, 10, 0, 1));
-		myVaisseau.add(new AI(6000, 5000, 0, 0, 10, 0, 1,false,false,false,false));
+		myVaisseau.add(new AI(6000, 5000, 0, 0, 10, 0, 1,false,false,false,false, false, false));
 		myAsteroide.add(new Asteroide(X_MAX, 0, 0, 0, 2));
 		myAsteroide.add(new Asteroide(X_MAX / 2, 0, 0, 0, 2));
 
@@ -140,11 +144,8 @@ public class Isep {
 		// FIN CREATION D'OBJETS
 	
 		int tab[] = Ralentir(10);// tableau pour les zones de ralentissement
-		boolean missileJ1 = false;
-		boolean missileJ2 = false;
-		boolean mineJ1 = false;
-		boolean mineJ2 = false;
-		// Audio son = new Audio();
+		
+		 //Audio son = new Audio();
 		// son.start();
 		System.out.println("Quel mode voulez vous ? (Multi/AI) :");//Au depart on nous demande quel mode choisir 
 		Scanner sc = new Scanner(System.in);
@@ -412,7 +413,7 @@ public class Isep {
 					}
 				}
 
-for (int i=0;i!=myVaisseau.size();i++){
+				for (int i=0;i!=myVaisseau.size();i++){
 					
 					myVaisseau.get(i).cercle();
 				}
@@ -426,7 +427,7 @@ for (int i=0;i!=myVaisseau.size();i++){
 
 				// INVERSEMENT DES TOUCHES************************
 				for (int i = 0; i != myVaisseau.size()-1; i++) {
-					myVaisseau.get(i).toucheInversee(300, 400); // Intervalle
+				//	myVaisseau.get(i).toucheInversee(300, 400); // Intervalle
 																// (numero du
 																// rectangle) a
 																// choisir
@@ -434,7 +435,7 @@ for (int i=0;i!=myVaisseau.size();i++){
 
 				// GRAVITE************************
 				for (int i = 0; i != myVaisseau.size(); i++) {//Les deux vaisseaux seront affecté par la gravité
-				//	myVaisseau.get(i).gravite(150, 200); // Intervalle (numero
+					//myVaisseau.get(i).gravite(150, 390); // Intervalle (numero
 															// du rectangle) a
 															// choisir
 				}// *****************
@@ -501,9 +502,13 @@ for (int i=0;i!=myVaisseau.size();i++){
 				}
 
 				// JOUEUR ordi
-
-				vaisseauBleu.ai();
-				vaisseauBleu.controlAI();
+				
+				vaisseauBleu.aiMove();
+				vaisseauBleu.controlAImove();
+				vaisseauBleu.aiMissile();
+				vaisseauBleu.aiMine();
+				vaisseauBleu.controlAImissilemine();
+				
 				//StdDraw.setPenColor(Color.pink);
 				//StdDraw.filledRectangle(2000, 5000, (500)/2.0, (2000)/2.0);
 				for(int i=0;i<=myrectangle.size();i++){
@@ -518,6 +523,10 @@ for (int i=0;i!=myVaisseau.size();i++){
 				vaisseauBleu.setBottom(false);
 				vaisseauBleu.setLeft(false);
 				vaisseauBleu.setRight(false);
+			//	vaisseauBleu.setMissile(false);
+				vaisseauBleu.setMine(false);
+				
+				
 
 				// *************************************************************
 

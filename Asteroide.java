@@ -26,6 +26,9 @@ public class Asteroide {
 	public double getPositionyAste() {
 		return yAste;
 	}
+	public double getPositionxAste() {
+		return xAste;
+	}
 	public double getlifeAste() {
 		return lifeAste;
 	}
@@ -43,8 +46,10 @@ public class Asteroide {
 
 	public void colision() { //colision entre vaisseau et astéroide
 		myVaisseau=Isep.getListeVaisseau();
-		if(yAste<myVaisseau.get(0).gety()+1000 && yAste>myVaisseau.get(0).gety()-1000 && xAste<myVaisseau.get(0).getx()+200 && xAste>myVaisseau.get(0).getx()-200){
-			myVaisseau.get(0).setLife();
+		for(int i=0;i!=myVaisseau.size();i++){//colision pour tout les vaisseaux
+			if(yAste<myVaisseau.get(i).gety()+1000 && yAste>myVaisseau.get(i).gety()-1000 && xAste<myVaisseau.get(i).getx()+200 && xAste>myVaisseau.get(i).getx()-200){
+				myVaisseau.get(i).setLife();
+			}
 		}
 	}
 	public void colisionMissileAsteroide() { //colision entre missile et astéroide

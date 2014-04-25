@@ -42,7 +42,10 @@ public class Missile {
 	}
 
 	public void missile() {
-				StdDraw.setPenColor(Color.green);
+				if(this.joueur==0)
+					StdDraw.setPenColor(Color.green);
+				else
+					StdDraw.setPenColor(Color.red);
 		 		StdDraw.filledRectangle(this.xmissile, this.ymissile, this.rmissile+100, this.rmissile);//le +qqch est la longeur du missile
 		  		this.xmissile=this.xmissile+this.vxmissile;	
 		  		
