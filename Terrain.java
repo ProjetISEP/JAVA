@@ -47,6 +47,7 @@ public class Terrain {
 		myVaisseau=Isep.getListeVaisseau();
 		speed=newSpeed;		
 	}
+
 	public void show(){
 		StdDraw.filledRectangle(xter, yter, largeur,hauteur);
 		Color RANDOM=new Color((int)R,(int)G,(int)B);

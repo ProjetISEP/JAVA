@@ -10,14 +10,14 @@ public class Vaisseau {
 	public static boolean toucheinversee;
 	public static double X_MAX = 10000;
 	public static double Y_MAX = 10000;
-	public static float r = 6;
 	public static double t = 0;
-	private double y;
-	private double x;
-	private double vy;
-	private double vx;
-	private int score;
-	private int matricule;
+	public static boolean gravite;
+	protected double y;
+	protected double x;
+	protected double vy;
+	protected double vx;
+	protected int score;
+	protected int matricule;
 
 	static double R = Math.random() * 255;
 	static double G = Math.random() * 255;
@@ -26,7 +26,7 @@ public class Vaisseau {
 
 	Vaisseau(double x, double y, double vx, double vy, int life, int score,
 			int pMatricule) {// Un vaisseau possède une matricule pour la
-		// reconnaissance des missiles
+								// reconnaissance des missiles
 		this.x = x;
 		this.y = y;
 		this.vx = vx;
@@ -43,6 +43,10 @@ public class Vaisseau {
 
 	public double gety() {
 		return y;
+	}
+
+	public void sety(double py){
+		y=py;
 	}
 
 	public int getlife() {
@@ -173,6 +177,9 @@ public class Vaisseau {
 		}
 	}
 
+
+
+
 	/*
 	 * public static void controlPlayer1inverse(){ if(StdDraw.isKeyPressed(38))
 	 * (myVaisseau.get(0)).bottom(); if(StdDraw.isKeyPressed(37))
@@ -190,21 +197,22 @@ public class Vaisseau {
 		}
 	}
 
-	public void paint0() {
-		StdDraw.picture(x, y, "./src/vaisseau1.png", 180);
+	public static String intToString(int i) {
+
+		String s = "" + i;
+		return s;
 	}
 
-	public void paint1() {
-		StdDraw.picture(x, y, "./src/vaisseau2.png", 180);
+	public void paint(int i) {
+		StdDraw.picture(x, y, "./src/vaisseau"+intToString(i)+".png", 180);
 	}
 
-	/*
-	 * public void paint2(){ StdDraw.picture(x, y, "./src/vaisseau3.png",180); }
-	 */
+
+
 
 	public void colisionMissileVaisseau() {// methode qui permet de faire
-		// apparaitre un crash lorsqu'un
-		// vaisseau se prend un missile
+											// apparaitre un crash lorsqu'un
+											// vaisseau se prend un missile
 		myVaisseau = Isep.getListeVaisseau();
 
 		myMissile = Isep.getListeMissile();
@@ -217,15 +225,15 @@ public class Vaisseau {
 							.getx() + 300
 							&& myMissile.get(i).getxmissile() > myVaisseau.get(
 									k).getx() - 300
-									&& myMissile.get(i).getymissile() < myVaisseau.get(
-											k).gety() + 300
-											&& myMissile.get(i).getymissile() > myVaisseau.get(
-													k).gety() - 300
-													&& ((myMissile.get(i)).getJoueurMissile()) == (this.matricule)) {////seul les missiles "etrangers" ont de l'impact les vaisseau ne seront pas detruits par leurs propres missiles
+							&& myMissile.get(i).getymissile() < myVaisseau.get(
+									k).gety() + 300
+							&& myMissile.get(i).getymissile() > myVaisseau.get(
+									k).gety() - 300
+							&& ((myMissile.get(i)).getJoueurMissile()) == (this.matricule)) {////seul les missiles "etrangers" ont de l'impact les vaisseau ne seront pas detruits par leurs propres missiles
 						StdDraw.picture(myVaisseau.get(k).getx(), myVaisseau
 								.get(k).gety(), "./src/crash.png");
 
-						//	System.out.println(this.matricule);
+					//	System.out.println(this.matricule);
 						// MANQUE L'ENLEVEMENT DES VIES
 					}
 
@@ -250,15 +258,15 @@ public class Vaisseau {
 							.getx() + 300
 							&& myMines.get(i).getxmissile() > myVaisseau.get(
 									k).getx() - 300
-									&& myMines.get(i).getymissile() < myVaisseau.get(
-											k).gety() + 700
-											&& myMines.get(i).getymissile() > myVaisseau.get(
-													k).gety() - 700
-													&& ((myMines.get(i)).getJoueurMissile()) == (this.matricule)) {////seul les missiles "etrangers" ont de l'impact les vaisseau ne seront pas detruits par leurs propres missiles
+							&& myMines.get(i).getymissile() < myVaisseau.get(
+									k).gety() + 700
+							&& myMines.get(i).getymissile() > myVaisseau.get(
+									k).gety() - 700
+							&& ((myMines.get(i)).getJoueurMissile()) == (this.matricule)) {////seul les missiles "etrangers" ont de l'impact les vaisseau ne seront pas detruits par leurs propres missiles
 						StdDraw.picture(myVaisseau.get(k).getx(), myVaisseau
 								.get(k).gety(), "./src/crash.png");
 
-						//	System.out.println(this.matricule);
+					//	System.out.println(this.matricule);
 						// MANQUE L'ENLEVEMENT DES VIES
 					}
 
@@ -274,26 +282,42 @@ public class Vaisseau {
 	}
 
 	public void toucheInversee(int x1, int x2) {// la fonction de controle des touches a besoin du while true pour etre executé du
-		// coup elle est remise dans la
-		// classe Isep
+												// coup elle est remise dans la
+												// classe Isep
 		myrectangle = Terrain.getListeTerrain();
-		if (this.x >= myrectangle.get(x1).getxter() && this.x <= myrectangle.get(x2).getxter()) {//Il faut que la position en x du vaisseau soit compris entre x1eme rectangle et x2eme rectangle
-			//pour que l'effet s'applique
+
+		if (this.x >= myrectangle.get(x1).getxter()
+				&& this.x <= myrectangle.get(x2).getxter()) {//Il faut que la position en x du vaisseau soit compris entre x1eme rectangle et x2eme rectangle
+															//pour que l'effet s'applique
 			toucheinversee = true;
-			System.out.println("inverse");
-		}else{
+		//	System.out.println("inverse");
+		} else {
 			toucheinversee = false;
-			System.out.println("pas inversée");
+	//		System.out.println("pas inversée");
+		}
+
+	}
+
+	public void gravite(int x1, int x2) {
+
+		myrectangle = Terrain.getListeTerrain();
+		if (this.x >= myrectangle.get(x1).getxter()
+				&& this.x <= myrectangle.get(x2).getxter()) {// PARTIE GRAVITE
+			this.setY(45); // setY est dans la class Vaisseau
+			gravite=true;
+		//	System.out.println("gravité");
+		} else {
+			gravite=false;
+		//	System.out.println("pas de gravité");
 		}
 	}
-	public void gravite(int x1, int x2) {
-		myrectangle = Terrain.getListeTerrain();
-		if (this.x >= myrectangle.get(x1).getxter()	&& this.x <= myrectangle.get(x2).getxter()) {// PARTIE GRAVITE
-			this.setY(20); // setY est dans la class Vaisseau
-			//	System.out.println("gravité");
-		} else {
-			//	System.out.println("pas de gravité");
-		}
+
+	public void cercle(){
+		myVaisseau = Isep.myVaisseau;
+		StdDraw.circle(this.x, this.y, 500);
+
+
+
 	}
 
 }
