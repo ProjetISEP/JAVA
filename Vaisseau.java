@@ -24,15 +24,15 @@ public class Vaisseau {
 	static double B = Math.random() * 255;
 	private int life;
 
-	Vaisseau(double x, double y, double vx, double vy, int life, int score,
+	Vaisseau(double px, double py, double pvx, double pvy, int plife, int pscore,
 			int pMatricule) {// Un vaisseau possède une matricule pour la
 								// reconnaissance des missiles
-		this.x = x;
-		this.y = y;
-		this.vx = vx;
-		this.vy = vy;
-		this.life = life;
-		this.score = score;
+		this.x = px;
+		this.y = py;
+		this.vx = pvx;
+		this.vy = pvy;
+		this.life = plife;
+		this.score = pscore;
 		matricule = pMatricule;
 
 	}
@@ -98,10 +98,6 @@ public class Vaisseau {
 		}
 
 	}
-
-	/*
-	 * public void move() { x=x-10; }
-	 */
 	public void bordure() {
 		if (y <= 0) {
 			y = 100;
@@ -118,19 +114,15 @@ public class Vaisseau {
 	public void top() {
 		y = y + 75;
 	}
-
 	public void bottom() {
 		y = y - 75;
 	}
-
 	public void left() {
 		x = x - 40;
 	}
-
 	public void right() {
 		x = x + 40;
 	}
-
 	public static void controlPlayer1() {
 		if (!toucheinversee) {
 			if (StdDraw.isKeyPressed(38))
@@ -176,17 +168,29 @@ public class Vaisseau {
 
 		}
 	}
+	public static void controlPlayer3() {
+		if (!toucheinversee) {
+			if(StdDraw.isKeyPressed(85))
+				(myVaisseau.get(2)).top();
+			if(StdDraw.isKeyPressed(72))
+				(myVaisseau.get(2)).left();
+			if(StdDraw.isKeyPressed(75))
+				(myVaisseau.get(2)).right();
+			if(StdDraw.isKeyPressed(74))
+				(myVaisseau.get(2)).bottom();
+		} else {
+			if (StdDraw.isKeyPressed(74))
+				(myVaisseau.get(2)).top();
+			if (StdDraw.isKeyPressed(75))
+				(myVaisseau.get(2)).left();
+			if (StdDraw.isKeyPressed(72))
+				(myVaisseau.get(2)).right();
+			if (StdDraw.isKeyPressed(85))
+				(myVaisseau.get(2)).bottom();
 
+		}
+	}
 
-
-
-	/*
-	 * public static void controlPlayer1inverse(){ if(StdDraw.isKeyPressed(38))
-	 * (myVaisseau.get(0)).bottom(); if(StdDraw.isKeyPressed(37))
-	 * (myVaisseau.get(0)).right(); if(StdDraw.isKeyPressed(39))
-	 * (myVaisseau.get(0)).left(); if(StdDraw.isKeyPressed(40))
-	 * (myVaisseau.get(0)).top(); }
-	 */
 	public static void FinDePartie() {// A TERMINER
 		int totalLife = 0;
 		int[] tableauLife = new int[myVaisseau.size()];
@@ -303,7 +307,7 @@ public class Vaisseau {
 		myrectangle = Terrain.getListeTerrain();
 		if (this.x >= myrectangle.get(x1).getxter()
 				&& this.x <= myrectangle.get(x2).getxter()) {// PARTIE GRAVITE
-			this.setY(45); // setY est dans la class Vaisseau
+			this.setY(10); // setY est dans la class Vaisseau
 			gravite=true;
 		//	System.out.println("gravité");
 		} else {
@@ -315,9 +319,6 @@ public class Vaisseau {
 	public void cercle(){
 		myVaisseau = Isep.myVaisseau;
 		StdDraw.circle(this.x, this.y, 500);
-
-
-
 	}
 
 }

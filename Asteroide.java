@@ -37,7 +37,7 @@ public class Asteroide {
 	}
 	public void move() {
 		xAste=xAste-50;
-		if(xAste==0){
+		if(xAste==-500){
 			xAste=X_MAX+600;
 			double p=Math.random()*10000;
 			yAste=p;

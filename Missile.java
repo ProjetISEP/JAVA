@@ -42,18 +42,21 @@ public class Missile {
 	}
 
 	public void missile() {
-				StdDraw.setPenColor(Color.green);
+				if(this.joueur==0)
+					StdDraw.setPenColor(Color.green);
+				else
+					StdDraw.setPenColor(Color.red);
 		 		StdDraw.filledRectangle(this.xmissile, this.ymissile, this.rmissile+100, this.rmissile);//le +qqch est la longeur du missile
 		  		this.xmissile=this.xmissile+this.vxmissile;	
-		  		
-		  	}
-	
-	public void mines(){//A ne pas effacer, la methode herité se trouve a la classe Mines
-		
-	}
-	
 
-	
+		  	}
+
+	public void mines(){//A ne pas effacer, la methode herité se trouve a la classe Mines
+
+	}
+
+
+
 /*	public void demiparabole(double x0, double y0, double v0x, double g) {///////////////////////////////////////////////////////////////////////
 	
 	///	x0=myVaisseau.get(0).getx();
@@ -86,6 +89,6 @@ public class Missile {
 
 		}
 	}*/
-	
-	
+
+
 }

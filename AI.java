@@ -142,14 +142,11 @@ public void setMine(boolean pMine){
 
 						if(myVaisseau.get(0).getx()+2000<=this.x && Math.abs(posYBoutRecthaut-posYBoutRectbas)<=4000){//Si le vaisseau adverse (J1) est proche du vaisseau AI et qu-il y a un passage etroit, il largue une mine 
 							this.mine=true;
-
 							k=k+2;
 							break;
 						}
 						else{
 							this.mine=false;
-
-
 						}
 						if(Math.abs(this.x+1000-myrectangle.get(k).getxter())<=100)
 							k=k+2;
@@ -208,5 +205,9 @@ public void setMine(boolean pMine){
 					}
 				}
 
+			}
+			public void cercle(){
+				myVaisseau = Isep.myVaisseau;
+				StdDraw.circle(this.x, this.y, 500);
 			}
 }
