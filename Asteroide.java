@@ -74,6 +74,7 @@ public class Asteroide {
 	}
 	public void paint1(){
 			StdDraw.picture(xAste, yAste, "./src/asteroide.png",360);
+		
 
 	}
 }

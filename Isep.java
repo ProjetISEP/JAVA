@@ -168,6 +168,7 @@ public class Isep {
 
 
 		while (true) {
+			StdDraw.clear();
 			if (multi) {//Toute cette partie correspond au mode multi à 1, 2 ou 3 joueurs
 
 
@@ -231,15 +232,15 @@ public class Isep {
 				}
 
 			}else{
-				AI vaisseauBleu=(AI) myVaisseau.get(1);//ici myVaisseau.get(1) correspond au vaisseau bleu (i.e l'ordi) mais defois i 
-
 				// JOUEUR ordi
+				AI vaisseauBleu=(AI) myVaisseau.get(1);//ici myVaisseau.get(1) correspond au vaisseau bleu (i.e l'ordi) mais defois i 
+			
 				vaisseauBleu.aiMove();
 				vaisseauBleu.controlAImove();
 				vaisseauBleu.aiMissile();
-				//vaisseauBleu.aiMine();
+				vaisseauBleu.aiMine();
 				vaisseauBleu.controlAImissilemine();
-
+			
 				//StdDraw.setPenColor(Color.pink);
 				//StdDraw.filledRectangle(2000, 5000, (500)/2.0, (2000)/2.0);
 				for(int i=0;i<=myrectangle.size();i++){
@@ -254,7 +255,7 @@ public class Isep {
 				vaisseauBleu.setBottom(false);
 				vaisseauBleu.setLeft(false);
 				vaisseauBleu.setRight(false);
-				//	vaisseauBleu.setMissile(false);
+				//vaisseauBleu.setMissile(false);
 				vaisseauBleu.setMine(false);
 
 				AI.droiteTour=AI.droiteTour+1;
@@ -264,7 +265,7 @@ public class Isep {
 
 
 
-			StdDraw.clear();
+		
 
 			// RECTANGLES********************************************
 			for (int i = 0; i != myrectangle.size(); i++) {
@@ -343,12 +344,13 @@ public class Isep {
 			// *************************************************************
 
 			for (int i = 0; i != myVaisseau.size(); i = i + 1) {
-				myVaisseau.get(i).cercle();
+			
 				(myVaisseau.get(i)).paint(i+1);
 				(myVaisseau.get(i)).bordure();
 				(myVaisseau.get(i)).score();
 				myVaisseau.get(i).vies();
 				(myVaisseau.get(i)).colisionMissileVaisseau();
+				(myVaisseau.get(i)).colisionMineVaisseau();
 				if (myVaisseau.get(i).getlife() <= 0) {// Condition de fin de partie
 					Vaisseau.FinDePartie();
 				}

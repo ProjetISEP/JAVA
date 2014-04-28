@@ -316,9 +316,5 @@ public class Vaisseau {
 		}
 	}
 
-	public void cercle(){
-		myVaisseau = Isep.myVaisseau;
-		StdDraw.circle(this.x, this.y, 500);
-	}
 
 }

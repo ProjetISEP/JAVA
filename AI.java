@@ -14,6 +14,7 @@ public static int droiteTour=0;
 public static List<Terrain> myrectangle =new ArrayList<>();
 public static List<Asteroide> myAsteroide =new ArrayList<>();
 
+
 	AI(double x, double y, double vx, double vy, int life, int score, int pMatricule, boolean pTop,boolean pBottom,boolean pLeft,boolean pRight,boolean pMissile,boolean pMine) {
 		super(x, y, vx, vy, life, score, pMatricule);
 		top=pTop;
@@ -56,6 +57,7 @@ public void setMissile(boolean pMissile){
 public void setMine(boolean pMine){
 	mine=pMine;
 }
+
 		//FONCTION AI ****************************************************************
 			public void aiMove(){//Methode qui permet au vaisseau de s'adapter aux situtation
 				myrectangle=Terrain.getListeTerrain();
@@ -120,7 +122,7 @@ public void setMine(boolean pMine){
 			}
 
 			public void aiMine(){
-
+				myVaisseau=Isep.myVaisseau;//L'erreur des mines c'etait qu'il manquait d'importer la liste (non vide) de "myVaisseau"
 				if(Isep.niveau.equals("Normal")){
 
 					if(myVaisseau.get(0).getx()+2000<=this.x){
@@ -136,6 +138,7 @@ public void setMine(boolean pMine){
 				}
 
 				if(Isep.niveau.equals("Hard")){
+					
 					while(k!=myrectangle.size()){
 						double posYBoutRecthaut=myrectangle.get(k+1).getyter()-myrectangle.get(k+1).gethauteur();//la coordonnée en y des rectangles bleus qu'on voit
 						double posYBoutRectbas=myrectangle.get(k).getyter()+myrectangle.get(k).gethauteur();
@@ -206,8 +209,5 @@ public void setMine(boolean pMine){
 				}
 
 			}
-			public void cercle(){
-				myVaisseau = Isep.myVaisseau;
-				StdDraw.circle(this.x, this.y, 500);
-			}
+		
 }
