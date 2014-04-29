@@ -146,7 +146,7 @@ public class Isep {
 		System.out.println("Quel mode voulez vous ? (Multi/AI) :");//Au depart on nous demande quel mode choisir 
 		Scanner sc = new Scanner(System.in);
 		String demande = sc.nextLine();
-		
+
 		if (demande.equals("Multi")){
 			multi = true;
 			System.out.println("Combien de joueurs? 1/2/3");
@@ -234,13 +234,13 @@ public class Isep {
 			}else{
 				// JOUEUR ordi
 				AI vaisseauBleu=(AI) myVaisseau.get(1);//ici myVaisseau.get(1) correspond au vaisseau bleu (i.e l'ordi) mais defois i 
-			
+
 				vaisseauBleu.aiMove();
 				vaisseauBleu.controlAImove();
 				vaisseauBleu.aiMissile();
 				vaisseauBleu.aiMine();
 				vaisseauBleu.controlAImissilemine();
-			
+
 				for(int i=0;i<=myrectangle.size();i++){
 					if(i%2!=0){
 						StdDraw.setPenColor(Color.green);
@@ -263,7 +263,7 @@ public class Isep {
 
 
 
-		
+
 
 			// RECTANGLES********************************************
 			for (int i = 0; i != myrectangle.size(); i++) {
@@ -289,20 +289,6 @@ public class Isep {
 			// JOUEUR1
 			Vaisseau.controlPlayer1();
 
-			// INVERSEMENT DES TOUCHES************************
-			for (int i = 0; i != myVaisseau.size(); i++) {
-				for(int k=0;k!=tabZonesParticuliere.length;k++){
-					myVaisseau.get(i).toucheInversee(2*tabZonesParticuliere[k],2*tabZonesParticuliere[k]+100);	//	Intervalle (numero du rectangle) a choisir
-				}
-			}// *****************
-
-			// GRAVITE************************
-			for (int i = 0; i != myVaisseau.size(); i++) {
-				for(int j=0;j!=tabZonesParticuliere.length;j++){
-					myVaisseau.get(i).gravite(2*tabZonesParticuliere[j],2*tabZonesParticuliere[j]+60);	// Intervalle (numero du rectangle) a choisir
-				}
-			}
-			// *****************
 			if (!StdDraw.isKeyPressed(32)) {// Si on n'appuye pas sur espace
 				missileJ1 = false;
 			}
@@ -338,11 +324,12 @@ public class Isep {
 
 				}
 			}
+			
 			//VAISSEAU
 			// *************************************************************
 
 			for (int i = 0; i != myVaisseau.size(); i = i + 1) {
-			
+
 				(myVaisseau.get(i)).paint(i+1);
 				(myVaisseau.get(i)).bordure();
 				(myVaisseau.get(i)).score();
@@ -352,6 +339,13 @@ public class Isep {
 				if (myVaisseau.get(i).getlife() <= 0) {// Condition de fin de partie
 					Vaisseau.FinDePartie();
 				}
+				
+				//ZONES PARTICULIERES************************
+				for(int k=0;k!=tabZonesParticuliere.length;k++){
+					myVaisseau.get(i).toucheInversee(2*tabZonesParticuliere[k],2*tabZonesParticuliere[k]+60);	// INVERSEMENT DES TOUCHES************************
+					myVaisseau.get(i).gravite(2*tabZonesParticuliere[k],2*tabZonesParticuliere[k]+60);// GRAVITE************************
+				}
+				//********* FIN ZONE PARTICULIERE
 
 			}
 			// ASTEROIDE******************************************************
