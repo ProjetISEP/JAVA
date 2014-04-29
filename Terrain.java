@@ -62,6 +62,7 @@ public class Terrain {
 		for(int k=0;k!=myVaisseau.size();k++){
 			if(xter+100>myVaisseau.get(k).getx() && xter-100<myVaisseau.get(k).getx() && intermediaire>myVaisseau.get(k).gety()){
 				myVaisseau.get(k).setLife();	
+				myVaisseau.get(k).setY(-200);
 			}
 		}
 	}
@@ -71,6 +72,7 @@ public class Terrain {
 		for(int k=0;k!=myVaisseau.size();k++){
 			if(xter+100>myVaisseau.get(k).getx() && xter-100<myVaisseau.get(k).getx() && intermediaire<myVaisseau.get(k).gety()){
 				myVaisseau.get(k).setLife();
+				myVaisseau.get(k).setY(200);
 			}
 		}
 	}

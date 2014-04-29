@@ -12,8 +12,8 @@ public class Isep {
 	static double R = Math.random() * 255;
 	static double G = Math.random() * 255;
 	static double B = Math.random() * 255;
-	protected static double speed=100;
-	protected static int tailleterrain=290;
+	protected static double speed=80;
+	protected static int tailleterrain=600;
 	public static double[] tab = new double[3000];
 	public static boolean multi = false;
 	public static boolean missileJ1 = false;
@@ -78,18 +78,18 @@ public class Isep {
 		int k=0;
 		for(int i=1;i!=nbvaleurs;i++){
 			double nb=Math.random();
-			if(tab[i-1]<0.1){
-				tab[i]=tab[i-1]+0.3*nb;
+			if(tab[i-1]<0.02){
+				tab[i]=tab[i-1]+0.13*nb;
 				k=0;
 			}
-			if(tab[i-1]>0.9){
-				tab[i]=tab[i-1]-0.3*nb;
+			if(tab[i-1]>0.98){
+				tab[i]=tab[i-1]-0.13*nb;
 				k=1;
 			}
 			if(k==0){
-				tab[i]=tab[i-1]+0.3*nb;
+				tab[i]=tab[i-1]+0.13*nb;
 			}else if(k==1){
-				tab[i]=tab[i-1]-0.3*nb;
+				tab[i]=tab[i-1]-0.13*nb;
 			}
 		}
 		return tab;
@@ -99,20 +99,20 @@ public class Isep {
 		myrectangle=Terrain.getListeTerrain();
 		for(int i=0;i!=tailleterrain;i++){
 			if(i<20){
-				myrectangle.add(new Terrain(10000+i*450, 200,170,i*100+1000,speed));//le bas /* variation lineaire croissante de la hauteur */
-				myrectangle.add(new Terrain(10000+i*400, 9800,170,i*100+1000,speed));//le haut
+				myrectangle.add(new Terrain(10000+i*200, 200,90,i*100+1000,speed));//le bas /* variation lineaire croissante de la hauteur */
+				myrectangle.add(new Terrain(10000+i*200, 9800,90,i*100+1000,speed));//le haut
 			}else if(i>tabZonesParticuliere[0] && i<tabZonesParticuliere[0]+30){ // POUR LES ZONES PARTICULIERES
-				myrectangle.add(new TerrainParticulier(xrectangle+i*400, 200,170,800+(3900-(tab1[i]*3550)),speed));//le 3900 est une translation
-				myrectangle.add(new TerrainParticulier(xrectangle+i*400, 9800,170,800+tab1[i]*3900,speed));
+				myrectangle.add(new TerrainParticulier(xrectangle+i*200, 200,90,500+(3900-(tab1[i]*3550)),speed));//le 3900 est une translation
+				myrectangle.add(new TerrainParticulier(xrectangle+i*200, 9800,90,500+tab1[i]*3900,speed));
 			}else if(i>tabZonesParticuliere[1] && i<tabZonesParticuliere[1]+30){ // POUR LES ZONES PARTICULIERES
-				myrectangle.add(new TerrainParticulier(xrectangle+i*400, 200,170,800+(3900-(tab1[i]*3550)),speed));//le 3900 est une translation
-				myrectangle.add(new TerrainParticulier(xrectangle+i*400, 9800,170,800+tab1[i]*3900,speed));
+				myrectangle.add(new TerrainParticulier(xrectangle+i*200, 200,90,500+(3900-(tab1[i]*3550)),speed));//le 3900 est une translation
+				myrectangle.add(new TerrainParticulier(xrectangle+i*200, 9800,90,500+tab1[i]*3900,speed));
 			}else if(i>tabZonesParticuliere[2] && i<tabZonesParticuliere[2]+30){ // POUR LES ZONES PARTICULIERES
-				myrectangle.add(new TerrainParticulier(xrectangle+i*400, 200,170,800+(3900-(tab1[i]*3550)),speed));//le 3900 est une translation
-				myrectangle.add(new TerrainParticulier(xrectangle+i*400, 9800,170,800+tab1[i]*3900,speed));
+				myrectangle.add(new TerrainParticulier(xrectangle+i*200, 200,90,500+(3900-(tab1[i]*3550)),speed));//le 3900 est une translation
+				myrectangle.add(new TerrainParticulier(xrectangle+i*200, 9800,90,500+tab1[i]*3900,speed));
 			}else{
-				myrectangle.add(new Terrain(xrectangle+i*400, 200,170,800+(3900-(tab1[i]*3550)),speed));
-				myrectangle.add(new Terrain(xrectangle+i*400, 9800,170,800+tab1[i]*3900,speed));
+				myrectangle.add(new Terrain(xrectangle+i*200, 200,90,500+(3900-(tab1[i]*3550)),speed));
+				myrectangle.add(new Terrain(xrectangle+i*200, 9800,90,500+tab1[i]*3900,speed));
 			}
 
 
@@ -141,7 +141,7 @@ public class Isep {
 		int tab[] = Ralentir(10);// tableau pour les zones de ralentissement
 
 		//Audio son = new Audio();
-		// son.start();
+		//son.start();
 
 		System.out.println("Quel mode voulez vous ? (Multi/AI) :");//Au depart on nous demande quel mode choisir 
 		Scanner sc = new Scanner(System.in);
@@ -241,8 +241,6 @@ public class Isep {
 				vaisseauBleu.aiMine();
 				vaisseauBleu.controlAImissilemine();
 			
-				//StdDraw.setPenColor(Color.pink);
-				//StdDraw.filledRectangle(2000, 5000, (500)/2.0, (2000)/2.0);
 				for(int i=0;i<=myrectangle.size();i++){
 					if(i%2!=0){
 						StdDraw.setPenColor(Color.green);
