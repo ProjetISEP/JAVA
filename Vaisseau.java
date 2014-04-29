@@ -26,7 +26,7 @@ public class Vaisseau {
 
 	Vaisseau(double px, double py, double pvx, double pvy, int plife, int pscore,
 			int pMatricule) {// Un vaisseau possède une matricule pour la
-								// reconnaissance des missiles
+		// reconnaissance des missiles
 		this.x = px;
 		this.y = py;
 		this.vx = pvx;
@@ -64,9 +64,13 @@ public class Vaisseau {
 	public void vies() {
 		myVaisseau = Isep.getListeVaisseau();
 		for (int k = 0; k != myVaisseau.size(); k++) {
-			String lifeString = Integer.toString(myVaisseau.get(k).life);
-			StdDraw.text(7000 + k * 1000, 9500, lifeString);
-			StdDraw.setPenColor(Color.WHITE);
+			for (int g = 0; g != myVaisseau.get(k).life; g++) {
+				StdDraw.picture(6000+1500*k+g*120, 8000, "./src/vie.png", 250, 280);
+			}
+			if(myVaisseau.get(k).life==0){
+				StdDraw.text(X_MAX/2, Y_MAX/2, "GAME OVER");
+				StdDraw.setPenColor(Color.blue);
+			}
 		}
 	}
 
@@ -215,8 +219,8 @@ public class Vaisseau {
 
 
 	public void colisionMissileVaisseau() {// methode qui permet de faire
-											// apparaitre un crash lorsqu'un
-											// vaisseau se prend un missile
+		// apparaitre un crash lorsqu'un
+		// vaisseau se prend un missile
 		myVaisseau = Isep.getListeVaisseau();
 
 		myMissile = Isep.getListeMissile();
@@ -229,15 +233,15 @@ public class Vaisseau {
 							.getx() + 300
 							&& myMissile.get(i).getxmissile() > myVaisseau.get(
 									k).getx() - 300
-							&& myMissile.get(i).getymissile() < myVaisseau.get(
-									k).gety() + 300
-							&& myMissile.get(i).getymissile() > myVaisseau.get(
-									k).gety() - 300
-							&& ((myMissile.get(i)).getJoueurMissile()) == (this.matricule)) {////seul les missiles "etrangers" ont de l'impact les vaisseau ne seront pas detruits par leurs propres missiles
+									&& myMissile.get(i).getymissile() < myVaisseau.get(
+											k).gety() + 300
+											&& myMissile.get(i).getymissile() > myVaisseau.get(
+													k).gety() - 300
+													&& ((myMissile.get(i)).getJoueurMissile()) == (this.matricule)) {////seul les missiles "etrangers" ont de l'impact les vaisseau ne seront pas detruits par leurs propres missiles
 						StdDraw.picture(myVaisseau.get(k).getx(), myVaisseau
 								.get(k).gety(), "./src/crash.png");
 
-					//	System.out.println(this.matricule);
+						//	System.out.println(this.matricule);
 						// MANQUE L'ENLEVEMENT DES VIES
 					}
 
@@ -262,15 +266,15 @@ public class Vaisseau {
 							.getx() + 300
 							&& myMines.get(i).getxmissile() > myVaisseau.get(
 									k).getx() - 300
-							&& myMines.get(i).getymissile() < myVaisseau.get(
-									k).gety() + 700
-							&& myMines.get(i).getymissile() > myVaisseau.get(
-									k).gety() - 700
-							&& ((myMines.get(i)).getJoueurMissile()) == (this.matricule)) {////seul les missiles "etrangers" ont de l'impact les vaisseau ne seront pas detruits par leurs propres missiles
+									&& myMines.get(i).getymissile() < myVaisseau.get(
+											k).gety() + 700
+											&& myMines.get(i).getymissile() > myVaisseau.get(
+													k).gety() - 700
+													&& ((myMines.get(i)).getJoueurMissile()) == (this.matricule)) {////seul les missiles "etrangers" ont de l'impact les vaisseau ne seront pas detruits par leurs propres missiles
 						StdDraw.picture(myVaisseau.get(k).getx(), myVaisseau
 								.get(k).gety(), "./src/crash.png");
 
-					//	System.out.println(this.matricule);
+						//	System.out.println(this.matricule);
 						// MANQUE L'ENLEVEMENT DES VIES
 					}
 
@@ -286,18 +290,18 @@ public class Vaisseau {
 	}
 
 	public void toucheInversee(int x1, int x2) {// la fonction de controle des touches a besoin du while true pour etre executé du
-												// coup elle est remise dans la
-												// classe Isep
+		// coup elle est remise dans la
+		// classe Isep
 		myrectangle = Terrain.getListeTerrain();
 
 		if (this.x >= myrectangle.get(x1).getxter()
 				&& this.x <= myrectangle.get(x2).getxter()) {//Il faut que la position en x du vaisseau soit compris entre x1eme rectangle et x2eme rectangle
-															//pour que l'effet s'applique
+			//pour que l'effet s'applique
 			toucheinversee = true;
-		//	System.out.println("inverse");
+			//	System.out.println("inverse");
 		} else {
 			toucheinversee = false;
-	//		System.out.println("pas inversée");
+			//		System.out.println("pas inversée");
 		}
 
 	}
@@ -309,10 +313,10 @@ public class Vaisseau {
 				&& this.x <= myrectangle.get(x2).getxter()) {// PARTIE GRAVITE
 			this.setY(10); // setY est dans la class Vaisseau
 			gravite=true;
-		//	System.out.println("gravité");
+			//	System.out.println("gravité");
 		} else {
 			gravite=false;
-		//	System.out.println("pas de gravité");
+			//	System.out.println("pas de gravité");
 		}
 	}
 
