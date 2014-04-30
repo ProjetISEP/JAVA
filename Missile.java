@@ -12,8 +12,9 @@ public class Missile {
 	protected static double vxmissile=120;//variable de classe ///////////////////////
 	protected double rmissile;
 	protected int joueur;
+	protected boolean life;
 	//protected int acceleration;
-	Missile(double xmissile, double ymissile, double vxmissile, double vymissile, double rmissile, int pJoueur/*, int pAcceleration*/) {//Ajout d'un parametre en plus : le missile appartient � un seul joueur
+	Missile(double xmissile, double ymissile, double vxmissile, double vymissile, double rmissile, int pJoueur,boolean pLife) {//Ajout d'un parametre en plus : le missile appartient � un seul joueur
 		//System.out.println("Cr�ation d'un missile avec des param�tres !");
 		this.xmissile = xmissile;
 		this.ymissile = ymissile;
@@ -21,7 +22,7 @@ public class Missile {
 		this.vymissile = vymissile;
 		this.rmissile=rmissile;
 		joueur=pJoueur;
-		//acceleration=pAcceleration;
+		life=pLife;
 	}
 	//LES GETTERS
 	public double getxmissile(){
@@ -44,8 +45,10 @@ public class Missile {
 	public void missile() {
 				if(this.joueur==0)
 					StdDraw.setPenColor(Color.green);
-				else
+				else if(this.joueur==1)
 					StdDraw.setPenColor(Color.red);
+				else
+					StdDraw.setPenColor(Color.blue);
 		 		StdDraw.filledRectangle(this.xmissile, this.ymissile, this.rmissile+100, this.rmissile);//le +qqch est la longeur du missile
 		  		this.xmissile=this.xmissile+this.vxmissile;	
 

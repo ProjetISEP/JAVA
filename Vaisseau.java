@@ -12,6 +12,8 @@ public class Vaisseau {
 	public static double Y_MAX = 10000;
 	public static double t = 0;
 	public static boolean gravite;
+	public static boolean collisionmissile;
+	public static boolean collisionmine;
 	protected double y;
 	protected double x;
 	protected double vy;
@@ -64,9 +66,9 @@ public class Vaisseau {
 	public void vies() {
 		myVaisseau = Isep.getListeVaisseau();
 		for (int k = 0; k != myVaisseau.size(); k++) {
-			for (int g = 0; g != myVaisseau.get(k).life; g++) {
-				StdDraw.picture(6000+1500*k+g*120, 8000, "./src/vie.png", 250, 280);
-			}
+			/*for (int g = 0; g != myVaisseau.get(k).life; g++) {
+				//StdDraw.picture(6000+1500*k+g*120, 8000, "./src/vie.png", 250, 280);
+			}*/
 			if(myVaisseau.get(k).life==0){
 				StdDraw.text(X_MAX/2, Y_MAX/2, "GAME OVER");
 				StdDraw.setPenColor(Color.blue);
@@ -240,8 +242,8 @@ public class Vaisseau {
 													&& ((myMissile.get(i)).getJoueurMissile()) == (this.matricule)) {////seul les missiles "etrangers" ont de l'impact les vaisseau ne seront pas detruits par leurs propres missiles
 						StdDraw.picture(myVaisseau.get(k).getx(), myVaisseau
 								.get(k).gety(), "./src/crash.png");
-
-						//	System.out.println(this.matricule);
+							myMissile.get(i).life=false;
+					
 						// MANQUE L'ENLEVEMENT DES VIES
 					}
 
@@ -273,8 +275,8 @@ public class Vaisseau {
 													&& ((myMines.get(i)).getJoueurMissile()) == (this.matricule)) {////seul les missiles "etrangers" ont de l'impact les vaisseau ne seront pas detruits par leurs propres missiles
 						StdDraw.picture(myVaisseau.get(k).getx(), myVaisseau
 								.get(k).gety(), "./src/crash.png");
-
-						//	System.out.println(this.matricule);
+						myMines.get(i).life=false;
+						
 						// MANQUE L'ENLEVEMENT DES VIES
 					}
 

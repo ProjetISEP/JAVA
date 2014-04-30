@@ -18,7 +18,7 @@ public class Isep {
     public static boolean multi=false;
     public static boolean ai=false;
     public static boolean menu=true;
-	 public static boolean navigation=true;
+	public static boolean navigation=true;
 	public static boolean missileJ1 = false;
 	public static boolean missileJ2 = false;
 	public static boolean missileJ3 = false;
@@ -164,14 +164,14 @@ public class Isep {
                             if(StdDraw.mousePressed()){
                                     nbjoueurs=1;
                                     
-                                    myVaisseau.add(new Vaisseau(3000, 3000, 0, 0, 10, 0, 0));
+                                    myVaisseau.add(new Vaisseau(3000, 3000, 0, 0, 1000, 0, 0));
                                     navigation=false;
                             }
                     }else if(3777<StdDraw.mouseX() && 6332>StdDraw.mouseX() && 754<StdDraw.mouseY() && 3900>StdDraw.mouseY()){
                             if(StdDraw.mousePressed()){
                                     nbjoueurs=2;
                                     for(int g=0;g<nbjoueurs;g++){
-                        				myVaisseau.add(new Vaisseau(3000, 3000+g*1000, 0, 0, 10, 0, g));
+                        				myVaisseau.add(new Vaisseau(3000, 3000+g*1000, 0, 0, 1000, 0, g));
                         			}
                                     navigation=false;
                             }
@@ -179,7 +179,7 @@ public class Isep {
                             if(StdDraw.mousePressed()){
                                     nbjoueurs=3;
                                     for(int g=0;g<nbjoueurs;g++){
-                        				myVaisseau.add(new Vaisseau(3000, 3000+g*1000, 0, 0, 10, 0, g));
+                        				myVaisseau.add(new Vaisseau(3000, 3000+g*1000, 0, 0, 1000, 0, g));
                         			}
                                     navigation=false;
                             }
@@ -189,14 +189,14 @@ public class Isep {
                     if(380<StdDraw.mouseX() && 3863>StdDraw.mouseX() && 842<StdDraw.mouseY() && 4978>StdDraw.mouseY()){
                             if(StdDraw.mousePressed()){
                             	myVaisseau.add(new Vaisseau(3000, 5000, 0, 0, 10, 0, 0));
-                    			myVaisseau.add(new AI(6000, 5000, 0, 0, 10, 0, 1,false,false,false,false, false, false));
+                    			myVaisseau.add(new AI(6000, 5000, 0, 0, 1000, 0, 1,false,false,false,false, false, false));
                                     navigation=false;
                                     niveau="Normal";
                             }
                     }else if(5900<StdDraw.mouseX() && 9400>StdDraw.mouseX() && 842<StdDraw.mouseY() && 4978>StdDraw.mouseY()){
                             if(StdDraw.mousePressed()){
                             	myVaisseau.add(new Vaisseau(3000, 5000, 0, 0, 10, 0, 0));
-                    			myVaisseau.add(new AI(6000, 5000, 0, 0, 10, 0, 1,false,false,false,false, false, false));
+                    			myVaisseau.add(new AI(6000, 5000, 0, 0, 1000, 0, 1,false,false,false,false, false, false));
                                     navigation=false;
                                     niveau="Hard";
                             }
@@ -254,7 +254,7 @@ public class Isep {
 			if (multi) {//Toute cette partie correspond au mode multi à 1, 2 ou 3 joueurs
 
 
-				if(nbjoueurs==2){
+				if(nbjoueurs>=2){
 					// JOUEUR2
 					Vaisseau.controlPlayer2();
 					if (!StdDraw.isKeyPressed(69)) {// Si on n'appuye pas sur E
@@ -265,7 +265,7 @@ public class Isep {
 							myMissile.add(new Missile(myVaisseau.get(1).getx(),
 									myVaisseau.get(1).gety(), Missile
 									.getvxmissile(), 0, r, myVaisseau
-									.get(1).getMat()));
+									.get(1).getMat(),true));
 							missileJ2 = true;
 						}
 					}
@@ -278,12 +278,12 @@ public class Isep {
 							myMines.add(new Mines(myVaisseau.get(1).getx(),
 									myVaisseau.get(1).gety(), Missile
 									.getvxmissile(), 0, 0, myVaisseau
-									.get(1).getMat(), Terrain.speed, 4));
+									.get(1).getMat(), true, Terrain.speed, 4));
 							mineJ2 = true;
 
 						}
 					}
-				}else if(nbjoueurs==3){
+				}if(nbjoueurs==3){
 					// JOUEUR3
 					Vaisseau.controlPlayer3();
 
@@ -295,7 +295,7 @@ public class Isep {
 							myMissile.add(new Missile(myVaisseau.get(2).getx(),
 									myVaisseau.get(2).gety(), Missile
 									.getvxmissile(), 0, r, myVaisseau
-									.get(2).getMat()));
+									.get(2).getMat(),true));
 							missileJ3 = true;
 						}
 					}
@@ -307,7 +307,7 @@ public class Isep {
 							myMines.add(new Mines(myVaisseau.get(2).getx(),
 									myVaisseau.get(2).gety(), Missile
 									.getvxmissile(), 0, 0, myVaisseau
-									.get(2).getMat(), Terrain.speed, 4));
+									.get(2).getMat(), true, Terrain.speed, 4));
 							mineJ3 = true;
 
 						}
@@ -385,7 +385,7 @@ public class Isep {
 					myMissile.add(new Missile(myVaisseau.get(0).getx(),
 							myVaisseau.get(0).gety(), Missile
 							.getvxmissile(), 0, r, myVaisseau
-							.get(0).getMat()));
+							.get(0).getMat(),true));
 					missileJ1 = true;
 				}
 			}
@@ -397,7 +397,7 @@ public class Isep {
 					myMines.add(new Mines(myVaisseau.get(0).getx(),
 							myVaisseau.get(0).gety(), Missile
 							.getvxmissile(), 0, 0, myVaisseau
-							.get(0).getMat(), Terrain.speed, 4));// Deux paramètres ont été rajoutés : la vitesse de la mine et son 
+							.get(0).getMat(), true, Terrain.speed, 4));// Deux paramètres ont été rajoutés : la vitesse de la mine et son 
 					// acceleration, même si on voit getvxmissile on ne travaillera que sur vxMine
 					mineJ1 = true;
 
@@ -444,12 +444,20 @@ public class Isep {
 			}
 			// MISSILE**********************************************************
 			for (int i = 0; i != myMissile.size(); i = i + 1) {
-				(myMissile.get(i)).missile();
+				if(myMissile.get(i).life)
+					(myMissile.get(i)).missile();
+				else
+					(myMissile.get(i)).setxmissile(20000);
+					
 			}
 			// MINES**********************************************************
 
 			for (int i = 0; i != myMines.size(); i = i + 1) {
-				(myMines.get(i)).mines();
+				if(myMines.get(i).life)
+					(myMines.get(i)).mines();
+				else
+					(myMines.get(i)).setxmissile(20000);
+					
 			}
 			StdDraw.show(10);
 		}

@@ -8,11 +8,12 @@ public class Mines extends Missile{
 	private int acceleration;//
 	private double vxMine;//La vxmine a ete rajouté pour ne pas modifier la valeur de vxmissile;
 	
-	Mines(double xmissile, double ymissile, double vxmissile, double vymissile, double rmissile, int pJoueur, double pVxMine, int pAcceleration) {
-		super(xmissile, ymissile, vxmissile, vymissile, rmissile, pJoueur);
+	Mines(double xmissile, double ymissile, double vxmissile, double vymissile, double rmissile, int pJoueur, boolean pLife, double pVxMine, int pAcceleration) {
+		super(xmissile, ymissile, vxmissile, vymissile, rmissile, pJoueur, pLife);
 		vxMine=pVxMine;
 		acceleration=pAcceleration;
 	}
+	
 	
 	public void mines(){
 		StdDraw.picture(this.xmissile, this.ymissile, "./src/mine2.png", 180);

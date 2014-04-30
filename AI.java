@@ -127,9 +127,10 @@ public void setMine(boolean pMine){
 
 					if(myVaisseau.get(0).getx()+2000<=this.x){
 						this.mine=true;
-
+				
 					}
 					else{
+						System.out.println("ok");
 						this.mine=false;
 
 					}
@@ -143,9 +144,10 @@ public void setMine(boolean pMine){
 						double posYBoutRecthaut=myrectangle.get(k+1).getyter()-myrectangle.get(k+1).gethauteur();//la coordonnée en y des rectangles bleus qu'on voit
 						double posYBoutRectbas=myrectangle.get(k).getyter()+myrectangle.get(k).gethauteur();
 
-						if(myVaisseau.get(0).getx()+2000<=this.x && Math.abs(posYBoutRecthaut-posYBoutRectbas)<=4000){//Si le vaisseau adverse (J1) est proche du vaisseau AI et qu-il y a un passage etroit, il largue une mine 
+						if(myVaisseau.get(0).getx()+2000<=this.x && Math.abs(posYBoutRecthaut-posYBoutRectbas)<=4700){//Si le vaisseau adverse (J1) est proche du vaisseau AI et qu-il y a un passage etroit, il largue une mine 
 							this.mine=true;
 							k=k+2;
+							System.out.println("ok");
 							break;
 						}
 						else{
@@ -186,7 +188,7 @@ public void setMine(boolean pMine){
 						myMissile.add(new Missile(myVaisseau.get(1).getx(),
 								myVaisseau.get(1).gety(), Missile
 										.getvxmissile(), 0, Isep.r, myVaisseau
-										.get(1).getMat()));
+										.get(1).getMat(),true));
 
 						Isep.missileJ2 = true;
 
@@ -201,7 +203,7 @@ public void setMine(boolean pMine){
 							myMines.add(new Mines(myVaisseau.get(1).getx(),
 								myVaisseau.get(1).gety(), Missile
 										.getvxmissile(), 0, 0, myVaisseau
-										.get(1).getMat(), Terrain.speed, 4));
+										.get(1).getMat(), true, Terrain.speed, 4));
 
 						Isep.mineJ2 = true;
 
