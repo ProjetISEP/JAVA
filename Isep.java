@@ -15,7 +15,10 @@ public class Isep {
 	protected static double speed=80;
 	protected static int tailleterrain=600;
 	public static double[] tab = new double[3000];
-	public static boolean multi = false;
+    public static boolean multi=false;
+    public static boolean ai=false;
+    public static boolean menu=true;
+	 public static boolean navigation=true;
 	public static boolean missileJ1 = false;
 	public static boolean missileJ2 = false;
 	public static boolean missileJ3 = false;
@@ -142,7 +145,86 @@ public class Isep {
 
 		//Audio son = new Audio();
 		//son.start();
+		
+		
+		
+		
+		
+		while(navigation){
 
+
+           /* if(StdDraw.mousePressed()){
+                    System.out.println("x:"+StdDraw.mouseX());
+                    System.out.println("y:"+StdDraw.mouseY());
+            }*/
+            StdDraw.show();
+            if(multi){
+                    StdDraw.picture( X_MAX/2,  Y_MAX/2, "./src/menu_multi.png");
+                    if(380<StdDraw.mouseX() && 1858>StdDraw.mouseX() && 754<StdDraw.mouseY() && 3900>StdDraw.mouseY()){
+                            if(StdDraw.mousePressed()){
+                                    nbjoueurs=1;
+                                    
+                                    myVaisseau.add(new Vaisseau(3000, 3000, 0, 0, 10, 0, 0));
+                                    navigation=false;
+                            }
+                    }else if(3777<StdDraw.mouseX() && 6332>StdDraw.mouseX() && 754<StdDraw.mouseY() && 3900>StdDraw.mouseY()){
+                            if(StdDraw.mousePressed()){
+                                    nbjoueurs=2;
+                                    for(int g=0;g<nbjoueurs;g++){
+                        				myVaisseau.add(new Vaisseau(3000, 3000+g*1000, 0, 0, 10, 0, g));
+                        			}
+                                    navigation=false;
+                            }
+                    }else if(7114<StdDraw.mouseX() && 9681>StdDraw.mouseX() && 754<StdDraw.mouseY() && 3900>StdDraw.mouseY()){
+                            if(StdDraw.mousePressed()){
+                                    nbjoueurs=3;
+                                    for(int g=0;g<nbjoueurs;g++){
+                        				myVaisseau.add(new Vaisseau(3000, 3000+g*1000, 0, 0, 10, 0, g));
+                        			}
+                                    navigation=false;
+                            }
+                    }
+            }else if(ai){
+                    StdDraw.picture( X_MAX/2,  Y_MAX/2, "./src/menu_ai.png");
+                    if(380<StdDraw.mouseX() && 3863>StdDraw.mouseX() && 842<StdDraw.mouseY() && 4978>StdDraw.mouseY()){
+                            if(StdDraw.mousePressed()){
+                            	myVaisseau.add(new Vaisseau(3000, 5000, 0, 0, 10, 0, 0));
+                    			myVaisseau.add(new AI(6000, 5000, 0, 0, 10, 0, 1,false,false,false,false, false, false));
+                                    navigation=false;
+                                    niveau="Normal";
+                            }
+                    }else if(5900<StdDraw.mouseX() && 9400>StdDraw.mouseX() && 842<StdDraw.mouseY() && 4978>StdDraw.mouseY()){
+                            if(StdDraw.mousePressed()){
+                            	myVaisseau.add(new Vaisseau(3000, 5000, 0, 0, 10, 0, 0));
+                    			myVaisseau.add(new AI(6000, 5000, 0, 0, 10, 0, 1,false,false,false,false, false, false));
+                                    navigation=false;
+                                    niveau="Hard";
+                            }
+                    }
+            }else if(menu){
+                    StdDraw.picture( X_MAX/2,  Y_MAX/2, "./src/menu_principal.png");        
+                    if(210<StdDraw.mouseX() && 3200>StdDraw.mouseX() && 4400<StdDraw.mouseY() && 7046>StdDraw.mouseY()){
+                            if(StdDraw.mousePressed()){
+                                    multi=true;
+                                    ai=false;
+                                    menu=false;
+                            }
+                    }else if(6784<StdDraw.mouseX() && 9803>StdDraw.mouseX() && 4472<StdDraw.mouseY() && 7024>StdDraw.mouseY()){
+                            if(StdDraw.mousePressed()){
+                                    ai=true;
+                                    multi=false;
+                                    menu=false;
+                            }
+                    }
+            }
+    }
+		
+		
+		System.out.println("le jeu commence");
+		
+		
+		
+/*
 		System.out.println("Quel mode voulez vous ? (Multi/AI) :");//Au depart on nous demande quel mode choisir 
 		Scanner sc = new Scanner(System.in);
 		String demande = sc.nextLine();
@@ -164,7 +246,7 @@ public class Isep {
 		}
 
 
-
+		*/
 
 
 		while (true) {
@@ -172,65 +254,65 @@ public class Isep {
 			if (multi) {//Toute cette partie correspond au mode multi à 1, 2 ou 3 joueurs
 
 
+				if(nbjoueurs==2){
+					// JOUEUR2
+					Vaisseau.controlPlayer2();
+					if (!StdDraw.isKeyPressed(69)) {// Si on n'appuye pas sur E
+						missileJ2 = false;
+					}
+					if (missileJ2 == false) {
+						if (StdDraw.isKeyPressed(69)) {// quand on appuie sur E
+							myMissile.add(new Missile(myVaisseau.get(1).getx(),
+									myVaisseau.get(1).gety(), Missile
+									.getvxmissile(), 0, r, myVaisseau
+									.get(1).getMat()));
+							missileJ2 = true;
+						}
+					}
 
-				// JOUEUR2
-				Vaisseau.controlPlayer2();
-				if (!StdDraw.isKeyPressed(69)) {// Si on n'appuye pas sur E
-					missileJ2 = false;
-				}
-				if (missileJ2 == false) {
-					if (StdDraw.isKeyPressed(69)) {// quand on appuie sur E
-						myMissile.add(new Missile(myVaisseau.get(1).getx(),
-								myVaisseau.get(1).gety(), Missile
-								.getvxmissile(), 0, r, myVaisseau
-								.get(1).getMat()));
-						missileJ2 = true;
+					if (!StdDraw.isKeyPressed(70)) {// 70 = touche F
+						mineJ2 = false;
+					}
+					if (mineJ2 == false) {
+						if (StdDraw.isKeyPressed(70)) {//
+							myMines.add(new Mines(myVaisseau.get(1).getx(),
+									myVaisseau.get(1).gety(), Missile
+									.getvxmissile(), 0, 0, myVaisseau
+									.get(1).getMat(), Terrain.speed, 4));
+							mineJ2 = true;
+
+						}
+					}
+				}else if(nbjoueurs==3){
+					// JOUEUR3
+					Vaisseau.controlPlayer3();
+
+					if (!StdDraw.isKeyPressed(73)) {// 73 = touche I
+						missileJ3 = false;
+					}
+					if (missileJ3 == false) {
+						if (StdDraw.isKeyPressed(73)) {// quand on appuie sur espace
+							myMissile.add(new Missile(myVaisseau.get(2).getx(),
+									myVaisseau.get(2).gety(), Missile
+									.getvxmissile(), 0, r, myVaisseau
+									.get(2).getMat()));
+							missileJ3 = true;
+						}
+					}
+					if (!StdDraw.isKeyPressed(76)) {// 76 = touche L
+						mineJ3 = false;
+					}
+					if (mineJ3 == false) {
+						if (StdDraw.isKeyPressed(76)) {//
+							myMines.add(new Mines(myVaisseau.get(2).getx(),
+									myVaisseau.get(2).gety(), Missile
+									.getvxmissile(), 0, 0, myVaisseau
+									.get(2).getMat(), Terrain.speed, 4));
+							mineJ3 = true;
+
+						}
 					}
 				}
-
-				if (!StdDraw.isKeyPressed(70)) {// 70 = touche F
-					mineJ2 = false;
-				}
-				if (mineJ2 == false) {
-					if (StdDraw.isKeyPressed(70)) {//
-						myMines.add(new Mines(myVaisseau.get(1).getx(),
-								myVaisseau.get(1).gety(), Missile
-								.getvxmissile(), 0, 0, myVaisseau
-								.get(1).getMat(), Terrain.speed, 4));
-						mineJ2 = true;
-
-					}
-				}
-				// JOUEUR3
-				Vaisseau.controlPlayer3();
-
-				if (!StdDraw.isKeyPressed(73)) {// 73 = touche I
-					missileJ3 = false;
-				}
-				if (missileJ3 == false) {
-					if (StdDraw.isKeyPressed(73)) {// quand on appuie sur espace
-						myMissile.add(new Missile(myVaisseau.get(2).getx(),
-								myVaisseau.get(2).gety(), Missile
-								.getvxmissile(), 0, r, myVaisseau
-								.get(2).getMat()));
-						missileJ3 = true;
-					}
-				}
-
-				if (!StdDraw.isKeyPressed(76)) {// 76 = touche L
-					mineJ3 = false;
-				}
-				if (mineJ3 == false) {
-					if (StdDraw.isKeyPressed(76)) {//
-						myMines.add(new Mines(myVaisseau.get(2).getx(),
-								myVaisseau.get(2).gety(), Missile
-								.getvxmissile(), 0, 0, myVaisseau
-								.get(2).getMat(), Terrain.speed, 4));
-						mineJ3 = true;
-
-					}
-				}
-
 			}else{
 				// JOUEUR ordi
 				AI vaisseauBleu=(AI) myVaisseau.get(1);//ici myVaisseau.get(1) correspond au vaisseau bleu (i.e l'ordi) mais defois i 
@@ -305,11 +387,8 @@ public class Isep {
 							.getvxmissile(), 0, r, myVaisseau
 							.get(0).getMat()));
 					missileJ1 = true;
-
 				}
 			}
-
-
 			if (!StdDraw.isKeyPressed(517)) {//
 				mineJ1 = false;
 			}
@@ -324,12 +403,9 @@ public class Isep {
 
 				}
 			}
-			
 			//VAISSEAU
 			// *************************************************************
-
 			for (int i = 0; i != myVaisseau.size(); i = i + 1) {
-
 				(myVaisseau.get(i)).paint(i+1);
 				(myVaisseau.get(i)).bordure();
 				(myVaisseau.get(i)).score();
@@ -339,14 +415,13 @@ public class Isep {
 				if (myVaisseau.get(i).getlife() <= 0) {// Condition de fin de partie
 					Vaisseau.FinDePartie();
 				}
-				
+
 				//ZONES PARTICULIERES************************
 				for(int k=0;k!=tabZonesParticuliere.length;k++){
 					myVaisseau.get(i).toucheInversee(2*tabZonesParticuliere[k],2*tabZonesParticuliere[k]+60);	// INVERSEMENT DES TOUCHES************************
 					myVaisseau.get(i).gravite(2*tabZonesParticuliere[k],2*tabZonesParticuliere[k]+60);// GRAVITE************************
 				}
 				//********* FIN ZONE PARTICULIERE
-
 			}
 			// ASTEROIDE******************************************************
 			for (int i = 0; i != myAsteroide.size(); i = i + 1) {
