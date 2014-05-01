@@ -3,6 +3,7 @@ import java.util.List;
 
 
 public class AI extends Vaisseau{
+	
 private boolean top;
 private boolean bottom;
 private boolean left;
@@ -86,14 +87,14 @@ public void setMine(boolean pMine){
 						}
 					}
 					//Dans le cas niveau = Hard
-					if(Isep.niveau.equals("Hard")){
+					if(Menu.niveau.equals("Hard")){
 						this.right=true;
 						if(this.x>=X_MAX-100){
 							this.left=true;
 						}
 
 					}//Dans le cas niveau = Normal
-					else if(Isep.niveau.equals("Normal")){
+					else if(Menu.niveau.equals("Normal")){
 						if(droiteTour%50==0){
 							this.right=true;
 						}
@@ -123,7 +124,7 @@ public void setMine(boolean pMine){
 
 			public void aiMine(){
 				myVaisseau=Isep.myVaisseau;//L'erreur des mines c'etait qu'il manquait d'importer la liste (non vide) de "myVaisseau"
-				if(Isep.niveau.equals("Normal")){
+				if(Menu.niveau.equals("Normal")){
 
 					if(myVaisseau.get(0).getx()+2000<=this.x){
 						this.mine=true;
@@ -138,7 +139,7 @@ public void setMine(boolean pMine){
 
 				}
 
-				if(Isep.niveau.equals("Hard")){
+				if(Menu.niveau.equals("Hard")){
 					
 					while(k!=myrectangle.size()){
 						double posYBoutRecthaut=myrectangle.get(k+1).getyter()-myrectangle.get(k+1).gethauteur();//la coordonnée en y des rectangles bleus qu'on voit

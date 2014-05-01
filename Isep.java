@@ -15,10 +15,9 @@ public class Isep {
 	protected static double speed=80;
 	protected static int tailleterrain=600;
 	public static double[] tab = new double[3000];
-    public static boolean multi=false;
-    public static boolean ai=false;
-    public static boolean menu=true;
-	public static boolean navigation=true;
+	public static boolean multi;
+	public static boolean ai=false;
+	public static boolean menu=true;
 	public static boolean missileJ1 = false;
 	public static boolean missileJ2 = false;
 	public static boolean missileJ3 = false;
@@ -76,51 +75,7 @@ public class Isep {
 		return nb100;
 	}
 
-	public static double[] tableauAleatoire(int nbvaleurs){ // Génere un tableau aléatoire pour la fonction decor
-		tab[0]=Math.random();
-		int k=0;
-		for(int i=1;i!=nbvaleurs;i++){
-			double nb=Math.random();
-			if(tab[i-1]<0.02){
-				tab[i]=tab[i-1]+0.13*nb;
-				k=0;
-			}
-			if(tab[i-1]>0.98){
-				tab[i]=tab[i-1]-0.13*nb;
-				k=1;
-			}
-			if(k==0){
-				tab[i]=tab[i-1]+0.13*nb;
-			}else if(k==1){
-				tab[i]=tab[i-1]-0.13*nb;
-			}
-		}
-		return tab;
-	}
-	public static void generateTerrain(){
-		double tab1[]=tableauAleatoire(tailleterrain);
-		myrectangle=Terrain.getListeTerrain();
-		for(int i=0;i!=tailleterrain;i++){
-			if(i<20){
-				myrectangle.add(new Terrain(10000+i*200, 200,90,i*100+1000,speed));//le bas /* variation lineaire croissante de la hauteur */
-				myrectangle.add(new Terrain(10000+i*200, 9800,90,i*100+1000,speed));//le haut
-			}else if(i>tabZonesParticuliere[0] && i<tabZonesParticuliere[0]+30){ // POUR LES ZONES PARTICULIERES
-				myrectangle.add(new TerrainParticulier(xrectangle+i*200, 200,90,500+(3900-(tab1[i]*3550)),speed));//le 3900 est une translation
-				myrectangle.add(new TerrainParticulier(xrectangle+i*200, 9800,90,500+tab1[i]*3900,speed));
-			}else if(i>tabZonesParticuliere[1] && i<tabZonesParticuliere[1]+30){ // POUR LES ZONES PARTICULIERES
-				myrectangle.add(new TerrainParticulier(xrectangle+i*200, 200,90,500+(3900-(tab1[i]*3550)),speed));//le 3900 est une translation
-				myrectangle.add(new TerrainParticulier(xrectangle+i*200, 9800,90,500+tab1[i]*3900,speed));
-			}else if(i>tabZonesParticuliere[2] && i<tabZonesParticuliere[2]+30){ // POUR LES ZONES PARTICULIERES
-				myrectangle.add(new TerrainParticulier(xrectangle+i*200, 200,90,500+(3900-(tab1[i]*3550)),speed));//le 3900 est une translation
-				myrectangle.add(new TerrainParticulier(xrectangle+i*200, 9800,90,500+tab1[i]*3900,speed));
-			}else{
-				myrectangle.add(new Terrain(xrectangle+i*200, 200,90,500+(3900-(tab1[i]*3550)),speed));
-				myrectangle.add(new Terrain(xrectangle+i*200, 9800,90,500+tab1[i]*3900,speed));
-			}
-
-
-		}
-	}
+	
 
 
 
@@ -137,7 +92,7 @@ public class Isep {
 		// CREATION D'OBJETS POUR LE TERRAIN
 		myrectangle = Terrain.getListeTerrain();
 		System.out.println("Chargement...");
-		generateTerrain();
+		Terrain.generateTerrain();
 
 		// FIN CREATION D'OBJETS
 
@@ -145,116 +100,16 @@ public class Isep {
 
 		//Audio son = new Audio();
 		//son.start();
-		
-		
-		
-		
-		
-		while(navigation){
 
 
-           /* if(StdDraw.mousePressed()){
-                    System.out.println("x:"+StdDraw.mouseX());
-                    System.out.println("y:"+StdDraw.mouseY());
-            }*/
-            StdDraw.show();
-            if(multi){
-                    StdDraw.picture( X_MAX/2,  Y_MAX/2, "./src/menu_multi.png");
-                    if(380<StdDraw.mouseX() && 1858>StdDraw.mouseX() && 754<StdDraw.mouseY() && 3900>StdDraw.mouseY()){
-                            if(StdDraw.mousePressed()){
-                                    nbjoueurs=1;
-                                    
-                                    myVaisseau.add(new Vaisseau(3000, 3000, 0, 0, 1000, 0, 0));
-                                    navigation=false;
-                            }
-                    }else if(3777<StdDraw.mouseX() && 6332>StdDraw.mouseX() && 754<StdDraw.mouseY() && 3900>StdDraw.mouseY()){
-                            if(StdDraw.mousePressed()){
-                                    nbjoueurs=2;
-                                    for(int g=0;g<nbjoueurs;g++){
-                        				myVaisseau.add(new Vaisseau(3000, 3000+g*1000, 0, 0, 1000, 0, g));
-                        			}
-                                    navigation=false;
-                            }
-                    }else if(7114<StdDraw.mouseX() && 9681>StdDraw.mouseX() && 754<StdDraw.mouseY() && 3900>StdDraw.mouseY()){
-                            if(StdDraw.mousePressed()){
-                                    nbjoueurs=3;
-                                    for(int g=0;g<nbjoueurs;g++){
-                        				myVaisseau.add(new Vaisseau(3000, 3000+g*1000, 0, 0, 1000, 0, g));
-                        			}
-                                    navigation=false;
-                            }
-                    }
-            }else if(ai){
-                    StdDraw.picture( X_MAX/2,  Y_MAX/2, "./src/menu_ai.png");
-                    if(380<StdDraw.mouseX() && 3863>StdDraw.mouseX() && 842<StdDraw.mouseY() && 4978>StdDraw.mouseY()){
-                            if(StdDraw.mousePressed()){
-                            	myVaisseau.add(new Vaisseau(3000, 5000, 0, 0, 10, 0, 0));
-                    			myVaisseau.add(new AI(6000, 5000, 0, 0, 1000, 0, 1,false,false,false,false, false, false));
-                                    navigation=false;
-                                    niveau="Normal";
-                            }
-                    }else if(5900<StdDraw.mouseX() && 9400>StdDraw.mouseX() && 842<StdDraw.mouseY() && 4978>StdDraw.mouseY()){
-                            if(StdDraw.mousePressed()){
-                            	myVaisseau.add(new Vaisseau(3000, 5000, 0, 0, 10, 0, 0));
-                    			myVaisseau.add(new AI(6000, 5000, 0, 0, 1000, 0, 1,false,false,false,false, false, false));
-                                    navigation=false;
-                                    niveau="Hard";
-                            }
-                    }
-            }else if(menu){
-                    StdDraw.picture( X_MAX/2,  Y_MAX/2, "./src/menu_principal.png");        
-                    if(210<StdDraw.mouseX() && 3200>StdDraw.mouseX() && 4400<StdDraw.mouseY() && 7046>StdDraw.mouseY()){
-                            if(StdDraw.mousePressed()){
-                                    multi=true;
-                                    ai=false;
-                                    menu=false;
-                            }
-                    }else if(6784<StdDraw.mouseX() && 9803>StdDraw.mouseX() && 4472<StdDraw.mouseY() && 7024>StdDraw.mouseY()){
-                            if(StdDraw.mousePressed()){
-                                    ai=true;
-                                    multi=false;
-                                    menu=false;
-                            }
-                    }
-            }
-    }
-		
-		
-		System.out.println("le jeu commence");
-		
-		
-		
-/*
-		System.out.println("Quel mode voulez vous ? (Multi/AI) :");//Au depart on nous demande quel mode choisir 
-		Scanner sc = new Scanner(System.in);
-		String demande = sc.nextLine();
 
-		if (demande.equals("Multi")){
-			multi = true;
-			System.out.println("Combien de joueurs? 1/2/3");
-			nbjoueurs = sc.nextInt(); 
-			for(int g=0;g<nbjoueurs;g++){
-				myVaisseau.add(new Vaisseau(3000, 3000+g*1000, 0, 0, 10, 0, g));
-			}
-		}
-		else{
-			multi = false;
-			myVaisseau.add(new Vaisseau(3000, 5000, 0, 0, 10, 0, 0));// Le derniers
-			myVaisseau.add(new AI(6000, 5000, 0, 0, 10, 0, 1,false,false,false,false, false, false));
-			System.out.println("Quel niveau ? (Hard/Normal) : ");
-			niveau = sc.nextLine();
-		}
-
-
-		*/
-
+		boolean navigation=true;
+		Menu.nav();
 
 		while (true) {
 			StdDraw.clear();
-			if (multi) {//Toute cette partie correspond au mode multi à 1, 2 ou 3 joueurs
-
-
-				if(nbjoueurs>=2){
+			if (Menu.multi) {//Toute cette partie correspond au mode multi à 1, 2 ou 3 joueurs
+				if(Menu.nbjoueurs==2){
 					// JOUEUR2
 					Vaisseau.controlPlayer2();
 					if (!StdDraw.isKeyPressed(69)) {// Si on n'appuye pas sur E
@@ -283,7 +138,7 @@ public class Isep {
 
 						}
 					}
-				}if(nbjoueurs==3){
+				}if(Menu.nbjoueurs==3){
 					// JOUEUR3
 					Vaisseau.controlPlayer3();
 
@@ -409,7 +264,7 @@ public class Isep {
 				(myVaisseau.get(i)).paint(i+1);
 				(myVaisseau.get(i)).bordure();
 				(myVaisseau.get(i)).score();
-				myVaisseau.get(i).vies();
+				 myVaisseau.get(i).vies();
 				(myVaisseau.get(i)).colisionMissileVaisseau();
 				(myVaisseau.get(i)).colisionMineVaisseau();
 				if (myVaisseau.get(i).getlife() <= 0) {// Condition de fin de partie
@@ -447,8 +302,7 @@ public class Isep {
 				if(myMissile.get(i).life)
 					(myMissile.get(i)).missile();
 				else
-					(myMissile.get(i)).setxmissile(20000);
-					
+					(myMissile.get(i)).setxmissile(20000);	
 			}
 			// MINES**********************************************************
 
@@ -457,7 +311,7 @@ public class Isep {
 					(myMines.get(i)).mines();
 				else
 					(myMines.get(i)).setxmissile(20000);
-					
+
 			}
 			StdDraw.show(10);
 		}
