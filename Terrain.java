@@ -92,7 +92,7 @@ public class Terrain {
 				myrectangle.add(new TerrainParticulier(xrectangle+i*200, 200,90,500+(3900-(tab1[i]*3550)),speed));//le 3900 est une translation
 				myrectangle.add(new TerrainParticulier(xrectangle+i*200, 9800,90,500+tab1[i]*3900,speed));
 			}else{
-				myrectangle.add(new Terrain(xrectangle+i*200, 200,90,500+(3900-(tab1[i]*3550)),speed));
+				myrectangle.add(new Terrain(xrectangle+i*200, 200,90,500+(tab1[i]*1500+2500-(tab1[i]*3550)),speed));
 				myrectangle.add(new Terrain(xrectangle+i*200, 9800,90,500+tab1[i]*3900,speed));
 			}
 
@@ -102,7 +102,7 @@ public class Terrain {
 
 	public void colision(){//POUR LES COLISIONS AVEC LES RECTANGLES DU BAS
 		myVaisseau=Isep.getListeVaisseau();		
-		double intermediaire=yter+hauteur;
+		double intermediaire=yter+hauteur+350;
 		for(int k=0;k!=myVaisseau.size();k++){
 			if(xter+100>myVaisseau.get(k).getx() && xter-100<myVaisseau.get(k).getx() && intermediaire>myVaisseau.get(k).gety()){
 				myVaisseau.get(k).setLife();	
@@ -112,7 +112,7 @@ public class Terrain {
 	}
 	public void colision1(){//POUR LES COLISIONS AVEC LES RECTANGLES DU HAUT
 		myVaisseau=Isep.getListeVaisseau();
-		double intermediaire=yter-hauteur;
+		double intermediaire=yter-hauteur-350;
 		for(int k=0;k!=myVaisseau.size();k++){
 			if(xter+100>myVaisseau.get(k).getx() && xter-100<myVaisseau.get(k).getx() && intermediaire<myVaisseau.get(k).gety()){
 				myVaisseau.get(k).setLife();
