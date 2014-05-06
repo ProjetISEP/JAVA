@@ -59,11 +59,11 @@ public class Isep {
 
 	public static int [] zonesParticuliere(int nbvaleurs){
 		int [] tableauZonesParticulieres= new int[nbvaleurs];
-		double nb=20+Math.random()*15;
+		double nb=60+Math.random()*25;
 		int entier=caster(nb,10);
 		tableauZonesParticulieres[0]=entier;
 		for(int k=1;k!=tableauZonesParticulieres.length;k++){
-			tableauZonesParticulieres[k]=tableauZonesParticulieres[k-1]+caster(40+Math.random()*90,10);
+			tableauZonesParticulieres[k]=tableauZonesParticulieres[k-1]+caster(80+Math.random()*140,10);
 		}
 		return tableauZonesParticulieres;
 	}
