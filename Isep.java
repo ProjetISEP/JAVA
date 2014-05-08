@@ -98,8 +98,8 @@ public class Isep {
 
 		int tab[] = Ralentir(10);// tableau pour les zones de ralentissement
 
-		//Audio son = new Audio();
-		//son.start();
+//		Audio son = new Audio();
+	//	son.start();
 
 
 
@@ -224,8 +224,10 @@ public class Isep {
 
 			// ***************************************************
 			// JOUEUR1
-			Vaisseau.controlPlayer1();
-
+			
+			
+			//Vaisseau.controlPlayer1();   //CHOISIR INERTIE OU NORMAL
+			myVaisseau.get(0).controlPlayerInertie();
 			if (!StdDraw.isKeyPressed(32)) {// Si on n'appuye pas sur espace
 				missileJ1 = false;
 			}

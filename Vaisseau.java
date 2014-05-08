@@ -14,12 +14,22 @@ public class Vaisseau {
 	public static boolean gravite;
 	public static boolean collisionmissile;
 	public static boolean collisionmine;
+	public static boolean top=false;
+	public static boolean bottom=false;
+	public static boolean right=false;
+	public static boolean left=false;
+	//public static boolean top1;
 	protected double y;
 	protected double x;
 	protected double vy;
 	protected double vx;
 	protected int score;
 	protected int matricule;
+	public static double inertieTop;
+	public static double inertieBottom;
+	public static double inertieRight;
+	public static double inertieLeft;
+
 
 	static double R = Math.random() * 255;
 	static double G = Math.random() * 255;
@@ -36,7 +46,7 @@ public class Vaisseau {
 		this.life = plife;
 		this.score = pscore;
 		matricule = pMatricule;
-
+	
 	}
 
 	public double getx() {
@@ -118,7 +128,7 @@ public class Vaisseau {
 	}
 
 	public void top() {
-		y = y + 75;
+		y  = y + 75;
 	}
 	public void bottom() {
 		y = y - 75;
@@ -129,8 +139,116 @@ public class Vaisseau {
 	public void right() {
 		x = x + 40;
 	}
+	
+	public void top1(){
+		
+		if(StdDraw.isKeyPressed(38)){
+			top=true;
+			bottom=false;
+			left=false;
+			right=false;
+			if(inertieTop<75){	
+				y=y+inertieTop;
+				inertieTop=inertieTop+1;
+			}
+			else{
+				y=y+75;
+			}
+		}
+		else{
+			if(top){
+				if(inertieTop>0){
+				y=y+inertieTop;
+				inertieTop=inertieTop-1;
+				}
+			}
+			else{
+				inertieTop=0;
+			}
+		}
+	}
+	
+	public void bottom1() {
+		if(StdDraw.isKeyPressed(40)){
+			top=false;
+			bottom=true;
+			left=false;
+			right=false;
+			if(inertieBottom<75){	
+				y=y-inertieBottom;
+				inertieBottom=inertieBottom+1;
+			}
+			else{
+				y=y-75;
+			}
+		}
+		else{
+			if(bottom){
+				if(inertieBottom>0){
+				y=y-inertieBottom;
+				inertieBottom=inertieBottom-1;
+				}
+			}
+			else{
+				inertieBottom=0;
+			}
+		}
+	}
+	public void left1() {
+		if(StdDraw.isKeyPressed(37)){
+			top=false;
+			bottom=false;
+			left=true;
+			right=false;
+			if(inertieLeft<40){	
+				x=x-inertieLeft;
+				inertieLeft=inertieLeft+0.5;
+			}
+			else{
+				x=x-40;
+			}
+		}
+		else{
+			if(left){
+				if(inertieLeft>0){
+				x=x-inertieLeft;
+				inertieLeft=inertieLeft-0.5;
+				}
+			}
+			else{
+				inertieLeft=0;
+			}
+		}
+	}
+	public void right1() {
+		if(StdDraw.isKeyPressed(39)){
+			top=false;
+			bottom=false;
+			left=false;
+			right=true;
+			if(inertieRight<40){	
+				x=x+inertieRight;
+				inertieRight=inertieRight+0.5;
+			}
+			else{
+				x=x+40;
+			}
+		}
+		else{
+			if(right){
+				if(inertieRight>0){
+				x=x+inertieRight;
+				inertieRight=inertieRight-0.5;
+				}
+			}
+			else{
+				inertieRight=0;
+			}
+		}
+	}
 	public static void controlPlayer1() {
 		if (!toucheinversee) {
+			
 			if (StdDraw.isKeyPressed(38))
 				(myVaisseau.get(0)).top();
 			if (StdDraw.isKeyPressed(37))
@@ -152,10 +270,19 @@ public class Vaisseau {
 		}
 	}
 
+	public void controlPlayerInertie(){
+
+			top1();
+			bottom1();
+			left1();
+			right1();
+			
+	
+	}
 	public static void controlPlayer2() {
 		if (!toucheinversee) {
 			if(StdDraw.isKeyPressed(90))
-				(myVaisseau.get(1)).top();
+			//	(myVaisseau.get(1)).top();
 			if(StdDraw.isKeyPressed(81))
 				(myVaisseau.get(1)).left();
 			if(StdDraw.isKeyPressed(68))
@@ -164,7 +291,7 @@ public class Vaisseau {
 				(myVaisseau.get(1)).bottom();
 		} else {
 			if (StdDraw.isKeyPressed(83))
-				(myVaisseau.get(1)).top();
+		//		(myVaisseau.get(1)).top();
 			if (StdDraw.isKeyPressed(68))
 				(myVaisseau.get(1)).left();
 			if (StdDraw.isKeyPressed(81))
@@ -177,7 +304,7 @@ public class Vaisseau {
 	public static void controlPlayer3() {
 		if (!toucheinversee) {
 			if(StdDraw.isKeyPressed(85))
-				(myVaisseau.get(2)).top();
+			//	(myVaisseau.get(2)).top();
 			if(StdDraw.isKeyPressed(72))
 				(myVaisseau.get(2)).left();
 			if(StdDraw.isKeyPressed(75))
@@ -186,7 +313,7 @@ public class Vaisseau {
 				(myVaisseau.get(2)).bottom();
 		} else {
 			if (StdDraw.isKeyPressed(74))
-				(myVaisseau.get(2)).top();
+			//	(myVaisseau.get(2)).top();
 			if (StdDraw.isKeyPressed(75))
 				(myVaisseau.get(2)).left();
 			if (StdDraw.isKeyPressed(72))

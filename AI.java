@@ -131,7 +131,7 @@ public void setMine(boolean pMine){
 				
 					}
 					else{
-						System.out.println("ok");
+					
 						this.mine=false;
 
 					}
@@ -148,7 +148,7 @@ public void setMine(boolean pMine){
 						if(myVaisseau.get(0).getx()+2000<=this.x && Math.abs(posYBoutRecthaut-posYBoutRectbas)<=4700){//Si le vaisseau adverse (J1) est proche du vaisseau AI et qu-il y a un passage etroit, il largue une mine 
 							this.mine=true;
 							k=k+2;
-							System.out.println("ok");
+						
 							break;
 						}
 						else{
@@ -169,7 +169,7 @@ public void setMine(boolean pMine){
 			public void controlAImove(){
 
 				if(this.top)
-					top();
+				//	top();
 				if(this.left)
 					left();
 				if(this.right)
