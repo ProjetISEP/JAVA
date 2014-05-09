@@ -202,7 +202,7 @@ public class Isep {
 
 
 
-			// RECTANGLES********************************************
+			// RECTANGLES******************************************
 			for (int i = 0; i != myrectangle.size(); i++) {
 				myrectangle.get(i).show();// methode qui permet le defilement de chaque rectangle de la liste
 				if (i % 2 == 0) {
