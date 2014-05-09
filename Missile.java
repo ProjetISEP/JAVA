@@ -13,6 +13,7 @@ public class Missile {
 	protected double rmissile;
 	protected int joueur;
 	protected boolean life;
+	
 	//protected int acceleration;
 	Missile(double xmissile, double ymissile, double vxmissile, double vymissile, double rmissile, int pJoueur,boolean pLife) {//Ajout d'un parametre en plus : le missile appartient � un seul joueur
 		//System.out.println("Cr�ation d'un missile avec des param�tres !");
@@ -32,8 +33,8 @@ public class Missile {
 		return ymissile;
 	}
 	public static double getvxmissile(){///////////////////////////////////////////////////////////////
-		 		return vxmissile;
-		 }
+		return vxmissile;
+	}
 	public int getJoueurMissile(){
 		return joueur;
 	}
@@ -43,16 +44,16 @@ public class Missile {
 	}
 
 	public void missile() {
-				if(this.joueur==0)
-					StdDraw.setPenColor(Color.green);
-				else if(this.joueur==1)
-					StdDraw.setPenColor(Color.red);
-				else
-					StdDraw.setPenColor(Color.blue);
-		 		StdDraw.filledRectangle(this.xmissile, this.ymissile, this.rmissile+100, this.rmissile);//le +qqch est la longeur du missile
-		  		this.xmissile=this.xmissile+this.vxmissile;	
+		if(this.joueur==0)
+			StdDraw.setPenColor(Color.green);
+		else if(this.joueur==1)
+			StdDraw.setPenColor(Color.red);
+		else
+			StdDraw.setPenColor(Color.blue);
+		StdDraw.filledRectangle(this.xmissile, this.ymissile, this.rmissile+100, this.rmissile);//le +qqch est la longeur du missile
+		this.xmissile=this.xmissile+this.vxmissile;	
 
-		  	}
+	}
 
 	public void mines(){//A ne pas effacer, la methode herité se trouve a la classe Mines
 
@@ -60,11 +61,11 @@ public class Missile {
 
 
 
-/*	public void demiparabole(double x0, double y0, double v0x, double g) {///////////////////////////////////////////////////////////////////////
-	
+	/*	public void demiparabole(double x0, double y0, double v0x, double g) {///////////////////////////////////////////////////////////////////////
+
 	///	x0=myVaisseau.get(0).getx();
 	//	y0=myVaisseau.get(0).gety();
-		
+
 		double y;
 		double x;
 
@@ -83,9 +84,9 @@ public class Missile {
 
 			x = v0x * t + x0;
 			y = -(g / 2.0) * Math.pow((double) (x / v0x), 2) - (g / 2.0)
-					* Math.pow((double) (x0 / v0x), 2) + g * x * x0
-					* Math.pow((double) (1 / v0x), 2) + y0;
-		
+	 * Math.pow((double) (x0 / v0x), 2) + g * x * x0
+	 * Math.pow((double) (1 / v0x), 2) + y0;
+
 			StdDraw.picture(x, y, "./src/mines.png", 180);
 			StdDraw.show(1);
 			System.out.println(y);

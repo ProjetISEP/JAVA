@@ -85,9 +85,8 @@ public class Isep {
 		StdDraw.setCanvasSize(900, 500);
 		StdDraw.setXscale(0, X_MAX);
 		StdDraw.setYscale(0, Y_MAX);
-
-		myAsteroide.add(new Asteroide(X_MAX, 0, 0, 0, 2));
-		myAsteroide.add(new Asteroide(X_MAX / 2, 0, 0, 0, 2));
+		myAsteroide.add(new Asteroide(X_MAX, 5000, 0, 0, 4));
+		myAsteroide.add(new Asteroide(X_MAX, 0, 0, 0, 4));
 
 		// CREATION D'OBJETS POUR LE TERRAIN
 		myrectangle = Terrain.getListeTerrain();
@@ -139,6 +138,34 @@ public class Isep {
 						}
 					}
 				}if(Menu.nbjoueurs==3){
+					// JOUEUR2
+					Vaisseau.controlPlayer2();
+					if (!StdDraw.isKeyPressed(69)) {// Si on n'appuye pas sur E
+						missileJ2 = false;
+					}
+					if (missileJ2 == false) {
+						if (StdDraw.isKeyPressed(69)) {// quand on appuie sur E
+							myMissile.add(new Missile(myVaisseau.get(1).getx(),
+									myVaisseau.get(1).gety(), Missile
+									.getvxmissile(), 0, r, myVaisseau
+									.get(1).getMat(),true));
+							missileJ2 = true;
+						}
+					}
+
+					if (!StdDraw.isKeyPressed(70)) {// 70 = touche F
+						mineJ2 = false;
+					}
+					if (mineJ2 == false) {
+						if (StdDraw.isKeyPressed(70)) {//
+							myMines.add(new Mines(myVaisseau.get(1).getx(),
+									myVaisseau.get(1).gety(), Missile
+									.getvxmissile(), 0, 0, myVaisseau
+									.get(1).getMat(), true, Terrain.speed, 4));
+							mineJ2 = true;
+
+						}
+					}
 					// JOUEUR3
 					Vaisseau.controlPlayer3();
 
@@ -226,8 +253,8 @@ public class Isep {
 			// JOUEUR1
 			
 			
-			//Vaisseau.controlPlayer1();   //CHOISIR INERTIE OU NORMAL
-			myVaisseau.get(0).controlPlayerInertie();
+			Vaisseau.controlPlayer1();   //CHOISIR INERTIE OU NORMAL
+			//myVaisseau.get(0).controlPlayerInertie();
 			if (!StdDraw.isKeyPressed(32)) {// Si on n'appuye pas sur espace
 				missileJ1 = false;
 			}
@@ -280,21 +307,20 @@ public class Isep {
 				}
 				//********* FIN ZONE PARTICULIERE
 			}
+			
 			// ASTEROIDE******************************************************
 			for (int i = 0; i != myAsteroide.size(); i = i + 1) {
 				(myAsteroide.get(i)).move();
-				if (myAsteroide.get(i).getlifeAste() > 0) {// on cache
-					// l'ast�roide
-					// si il n'a plu
-					// de vie
-					(myAsteroide.get(i)).paint1();
+				if (myAsteroide.get(i).getPositionxAste() == -100) {// on cache
+					myAsteroide.get(i).setX(13000);
+					myAsteroide.get(i).setY(Math.random()*10000);
 				}
-				if (myAsteroide.get(i).getlifeAste() == 0) {// on en rajoute
-					// un si un
-					// asteroide est
-					// supprime
-					myAsteroide.add(new Asteroide(X_MAX,
-							Math.random() * 10000, 0, 0, 2));
+				(myAsteroide.get(i)).paint1();
+				
+				if (myAsteroide.get(i).getlifeAste() <0) {// on en rajoute
+					myAsteroide.get(i).setX(10000);
+					myAsteroide.get(i).setY(Math.random()*10000);
+					myAsteroide.get(i).setLifeAste(-3);
 				}
 				(myAsteroide.get(i)).colision();
 				(myAsteroide.get(i)).colisionMissileAsteroide();

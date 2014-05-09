@@ -8,6 +8,7 @@ public class Terrain {
 	public static double xrectangle=10000;
 	public static List<Vaisseau> myVaisseau =new ArrayList<>();
 	public static List<Terrain> myrectangle =new ArrayList<>();
+	public static List<Missile> myMissile =new ArrayList<>();
 	protected double xter;
 	protected double yter;
 	protected double largeur;
@@ -91,20 +92,22 @@ public class Terrain {
 				myrectangle.add(new TerrainParticulier(xrectangle+i*200, 200,90,4000+-(tab1[i]*3550),speed));//le 3900 est une translation
 				myrectangle.add(new TerrainParticulier(xrectangle+i*200, 9800,90,500+tab1[i]*4500,speed));
 			}else{
-<<<<<<< HEAD
 				myrectangle.add(new Terrain(xrectangle+i*200, 200,90,500+(tab1[i]*1500+2500-(tab1[i]*3550)),speed));
 				myrectangle.add(new Terrain(xrectangle+i*200, 9800,90,500+tab1[i]*3900,speed));
-=======
-				myrectangle.add(new Terrain(xrectangle+i*200, 200,90,4000+-(tab1[i]*3550),speed));
-				myrectangle.add(new Terrain(xrectangle+i*200, 9800,90,500+tab1[i]*4500,speed));
->>>>>>> 994c82ba819b491d5b07ab6dab8c36b4c7d1a8f9
 			}
 		}
 	}
 
 	public void colision(){//POUR LES COLISIONS AVEC LES RECTANGLES DU BAS
-		myVaisseau=Isep.getListeVaisseau();		
+		myVaisseau=Isep.getListeVaisseau();	
+		myMissile=Isep.getListeMissile();
 		double intermediaire=yter+hauteur+350;
+		for(int i=0;i!=myMissile.size();i=i+1){ //colisions entre les missiles et le bas du tunnel
+			if(xter+100>myMissile.get(i).getxmissile() && xter-100<myMissile.get(i).getxmissile() && intermediaire>myMissile.get(i).getymissile()){
+				myMissile.get(i).setxmissile(100000);
+			}
+		}
+		
 		for(int k=0;k!=myVaisseau.size();k++){
 			if(xter+100>myVaisseau.get(k).getx() && xter-100<myVaisseau.get(k).getx() && intermediaire>myVaisseau.get(k).gety()){
 				myVaisseau.get(k).setLife();	
@@ -114,7 +117,14 @@ public class Terrain {
 	}
 	public void colision1(){//POUR LES COLISIONS AVEC LES RECTANGLES DU HAUT
 		myVaisseau=Isep.getListeVaisseau();
+		myMissile=Isep.getListeMissile();
 		double intermediaire=yter-hauteur-350;
+		for(int i=0;i!=myMissile.size();i=i+1){ //colisions entre les missiles et le bas du tunnel
+			if(xter+100>myMissile.get(i).getxmissile() && xter-100<myMissile.get(i).getxmissile() && intermediaire<myMissile.get(i).getymissile()){
+				myMissile.get(i).setxmissile(100000);
+			}
+		}
+		
 		for(int k=0;k!=myVaisseau.size();k++){
 			if(xter+100>myVaisseau.get(k).getx() && xter-100<myVaisseau.get(k).getx() && intermediaire<myVaisseau.get(k).gety()){
 				myVaisseau.get(k).setLife();
