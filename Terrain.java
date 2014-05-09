@@ -47,7 +47,6 @@ public class Terrain {
 		myVaisseau=Isep.getListeVaisseau();
 		speed=newSpeed;		
 	}
-
 	public void show(){
 		StdDraw.filledRectangle(xter, yter, largeur,hauteur);
 		Color RANDOM=new Color((int)R,(int)G,(int)B);
@@ -83,20 +82,23 @@ public class Terrain {
 				myrectangle.add(new Terrain(10000+i*200, 200,90,i*100+1000,speed));//le bas /* variation lineaire croissante de la hauteur */
 				myrectangle.add(new Terrain(10000+i*200, 9800,90,i*100+1000,speed));//le haut
 			}else if(i>Isep.tabZonesParticuliere[0] && i<Isep.tabZonesParticuliere[0]+30){ // POUR LES ZONES PARTICULIERES
-				myrectangle.add(new TerrainParticulier(xrectangle+i*200, 200,90,500+(3900-(tab1[i]*3550)),speed));//le 3900 est une translation
-				myrectangle.add(new TerrainParticulier(xrectangle+i*200, 9800,90,500+tab1[i]*3900,speed));
+				myrectangle.add(new TerrainParticulier(xrectangle+i*200, 200,90,4000+-(tab1[i]*3550),speed));//le 3900 est une translation
+				myrectangle.add(new TerrainParticulier(xrectangle+i*200, 9800,90,500+tab1[i]*4500,speed));
 			}else if(i>Isep.tabZonesParticuliere[1] && i<Isep.tabZonesParticuliere[1]+30){ // POUR LES ZONES PARTICULIERES
-				myrectangle.add(new TerrainParticulier(xrectangle+i*200, 200,90,500+(3900-(tab1[i]*3550)),speed));//le 3900 est une translation
-				myrectangle.add(new TerrainParticulier(xrectangle+i*200, 9800,90,500+tab1[i]*3900,speed));
+				myrectangle.add(new TerrainParticulier(xrectangle+i*200, 200,90,4000+-(tab1[i]*3550),speed));//le 3900 est une translation
+				myrectangle.add(new TerrainParticulier(xrectangle+i*200, 9800,90,500+tab1[i]*4500,speed));
 			}else if(i>Isep.tabZonesParticuliere[2] && i<Isep.tabZonesParticuliere[2]+30){ // POUR LES ZONES PARTICULIERES
-				myrectangle.add(new TerrainParticulier(xrectangle+i*200, 200,90,500+(3900-(tab1[i]*3550)),speed));//le 3900 est une translation
-				myrectangle.add(new TerrainParticulier(xrectangle+i*200, 9800,90,500+tab1[i]*3900,speed));
+				myrectangle.add(new TerrainParticulier(xrectangle+i*200, 200,90,4000+-(tab1[i]*3550),speed));//le 3900 est une translation
+				myrectangle.add(new TerrainParticulier(xrectangle+i*200, 9800,90,500+tab1[i]*4500,speed));
 			}else{
+<<<<<<< HEAD
 				myrectangle.add(new Terrain(xrectangle+i*200, 200,90,500+(tab1[i]*1500+2500-(tab1[i]*3550)),speed));
 				myrectangle.add(new Terrain(xrectangle+i*200, 9800,90,500+tab1[i]*3900,speed));
+=======
+				myrectangle.add(new Terrain(xrectangle+i*200, 200,90,4000+-(tab1[i]*3550),speed));
+				myrectangle.add(new Terrain(xrectangle+i*200, 9800,90,500+tab1[i]*4500,speed));
+>>>>>>> 994c82ba819b491d5b07ab6dab8c36b4c7d1a8f9
 			}
-
-
 		}
 	}
 

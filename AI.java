@@ -67,7 +67,7 @@ public void setMine(boolean pMine){
 
 
 					//cas pour une descente ****************
-					if(/*1°: */ i%2!=0 && /*2°: */ Math.abs(myrectangle.get(i).getyter()-myrectangle.get(i).gethauteur())<=(Y_MAX/2.0)+1000 &&
+					if(/*1°: */ i%2!=0  &&
 							/*3°: */(this.y+1000>=myrectangle.get(i).getyter()-myrectangle.get(i).gethauteur()) && /*4°: */Math.abs((this.x+1000)-myrectangle.get(i).getxter())<=500){
 
 						// 1° : on s'interesse qu'au rect du bas donc i doit etre impair,
@@ -77,19 +77,18 @@ public void setMine(boolean pMine){
 					}
 
 					//cas pour une montée ****************
-					if(i%2==0 && Math.abs(myrectangle.get(i).getyter()+myrectangle.get(i).gethauteur())>=(Y_MAX/2.0)-1000 &&
-							(this.y-1000<=myrectangle.get(i).getyter()+myrectangle.get(i).gethauteur()) && Math.abs((this.x+1000)-myrectangle.get(i).getxter())<=500){
+					if(i%2==0 && (this.y-3000<=myrectangle.get(i).getyter()+myrectangle.get(i).gethauteur()) && Math.abs((this.x+3000)-myrectangle.get(i).getxter())<=700){
 						this.top=true;
 					}
 					if(Vaisseau.gravite){
-						if(i%2==0 && this.y<=myrectangle.get(i).getyter()+myrectangle.get(i).gethauteur()+250){
+						if(i%2==0 && this.y<=myrectangle.get(i).getyter()+myrectangle.get(i).gethauteur()+750){
 							this.top=true;
 						}
 					}
 					//Dans le cas niveau = Hard
 					if(Menu.niveau.equals("Hard")){
 						this.right=true;
-						if(this.x>=X_MAX-100){
+						if(this.x>=X_MAX-1000){
 							this.left=true;
 						}
 
