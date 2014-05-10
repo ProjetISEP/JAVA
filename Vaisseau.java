@@ -282,7 +282,7 @@ public class Vaisseau {
 	public static void controlPlayer2() {
 		if (!toucheinversee) {
 			if(StdDraw.isKeyPressed(90))
-			//	(myVaisseau.get(1)).top();
+				(myVaisseau.get(1)).top();
 			if(StdDraw.isKeyPressed(81))
 				(myVaisseau.get(1)).left();
 			if(StdDraw.isKeyPressed(68))
@@ -291,7 +291,7 @@ public class Vaisseau {
 				(myVaisseau.get(1)).bottom();
 		} else {
 			if (StdDraw.isKeyPressed(83))
-		//		(myVaisseau.get(1)).top();
+		    	(myVaisseau.get(1)).top();
 			if (StdDraw.isKeyPressed(68))
 				(myVaisseau.get(1)).left();
 			if (StdDraw.isKeyPressed(81))
@@ -304,7 +304,7 @@ public class Vaisseau {
 	public static void controlPlayer3() {
 		if (!toucheinversee) {
 			if(StdDraw.isKeyPressed(85))
-			//	(myVaisseau.get(2)).top();
+				(myVaisseau.get(2)).top();
 			if(StdDraw.isKeyPressed(72))
 				(myVaisseau.get(2)).left();
 			if(StdDraw.isKeyPressed(75))
@@ -313,7 +313,7 @@ public class Vaisseau {
 				(myVaisseau.get(2)).bottom();
 		} else {
 			if (StdDraw.isKeyPressed(74))
-			//	(myVaisseau.get(2)).top();
+				(myVaisseau.get(2)).top();
 			if (StdDraw.isKeyPressed(75))
 				(myVaisseau.get(2)).left();
 			if (StdDraw.isKeyPressed(72))

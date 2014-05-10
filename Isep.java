@@ -52,7 +52,7 @@ public class Isep {
 		tableauRalentissement[0] = entier;
 
 		for (int k = 1; k != tableauRalentissement.length; k++) {
-			tableauRalentissement[k]=tableauRalentissement[k-1]+caster(20000+Math.random()*100000,100);
+			tableauRalentissement[k]=tableauRalentissement[k-1]+caster(40000+Math.random()*100000,100);
 		}
 		return tableauRalentissement;
 	}
@@ -107,7 +107,7 @@ public class Isep {
 
 		while (true) {
 			StdDraw.clear();
-			if (Menu.multi) {//Toute cette partie correspond au mode multi à 1, 2 ou 3 joueurs
+			if (Menu.multi1) {//Toute cette partie correspond au mode multi à 1, 2 ou 3 joueurs
 				if(Menu.nbjoueurs==2){
 					// JOUEUR2
 					Vaisseau.controlPlayer2();
@@ -242,9 +242,9 @@ public class Isep {
 							&& myVaisseau.get(0).getScore() >= tab[k] - 100) {
 						myrectangle.get(i).setSpeed(20);// on baisse la vitesse
 					}
-					if (myVaisseau.get(0).getScore() <= tab[k] + 20100
-							&& myVaisseau.get(0).getScore() >= tab[k] + 19900) {
-						myrectangle.get(i).setSpeed(60);// on la reaugmente 10000 unités de score plus tard)
+					if (myVaisseau.get(0).getScore() <= tab[k] + 30100
+							&& myVaisseau.get(0).getScore() >= tab[k] + 29900) {
+						myrectangle.get(i).setSpeed(60);// on la reaugmente 20000 unités de score plus tard)
 					}
 				}
 			}
