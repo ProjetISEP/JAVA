@@ -312,14 +312,14 @@ public class Isep {
 			for (int i = 0; i != myAsteroide.size(); i = i + 1) {
 				(myAsteroide.get(i)).move();
 				if (myAsteroide.get(i).getPositionxAste() == -100) {// on cache
-					myAsteroide.get(i).setX(13000);
+					myAsteroide.get(i).setX(13000+Math.random()*10000);
 					myAsteroide.get(i).setY(Math.random()*10000);
 				}
 				(myAsteroide.get(i)).paint1();
 				
 				if (myAsteroide.get(i).getlifeAste() <0) {// on en rajoute
-					myAsteroide.get(i).setX(10000);
-					myAsteroide.get(i).setY(Math.random()*10000);
+					myAsteroide.get(i).setX(13000);
+					myAsteroide.get(i).setY(13000+Math.random()*10000);
 					myAsteroide.get(i).setLifeAste(-3);
 				}
 				(myAsteroide.get(i)).colision();
