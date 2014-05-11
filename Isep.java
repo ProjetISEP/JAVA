@@ -87,6 +87,7 @@ public class Isep {
 		StdDraw.setYscale(0, Y_MAX);
 		myAsteroide.add(new Asteroide(X_MAX, 5000, 0, 0, 4));
 		myAsteroide.add(new Asteroide(X_MAX, 0, 0, 0, 4));
+		myAsteroide.add(new Bouclier(X_MAX/2, 0, 0, 0, 4));
 
 		// CREATION D'OBJETS POUR LE TERRAIN
 		myrectangle = Terrain.getListeTerrain();
@@ -290,7 +291,12 @@ public class Isep {
 			//VAISSEAU
 			// *************************************************************
 			for (int i = 0; i != myVaisseau.size(); i = i + 1) {
+				if(!myVaisseau.get(i).getBouclier()){
 				(myVaisseau.get(i)).paint(i+1);
+				}else{
+					(myVaisseau.get(i)).paintBouclier(i+1);
+					
+				}
 				(myVaisseau.get(i)).bordure();
 				(myVaisseau.get(i)).score();
 				 myVaisseau.get(i).vies();
@@ -312,14 +318,14 @@ public class Isep {
 			for (int i = 0; i != myAsteroide.size(); i = i + 1) {
 				(myAsteroide.get(i)).move();
 				if (myAsteroide.get(i).getPositionxAste() == -100) {// on cache
-					myAsteroide.get(i).setX(13000+Math.random()*10000);
+					myAsteroide.get(i).setX(10000);
 					myAsteroide.get(i).setY(Math.random()*10000);
 				}
 				(myAsteroide.get(i)).paint1();
 				
 				if (myAsteroide.get(i).getlifeAste() <0) {// on en rajoute
-					myAsteroide.get(i).setX(13000);
-					myAsteroide.get(i).setY(13000+Math.random()*10000);
+					myAsteroide.get(i).setX(10000);
+					myAsteroide.get(i).setY(Math.random()*10000);
 					myAsteroide.get(i).setLifeAste(-3);
 				}
 				(myAsteroide.get(i)).colision();

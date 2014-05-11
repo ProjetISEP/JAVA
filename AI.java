@@ -16,8 +16,8 @@ public static List<Terrain> myrectangle =new ArrayList<>();
 public static List<Asteroide> myAsteroide =new ArrayList<>();
 
 
-	AI(double x, double y, double vx, double vy, int life, int score, int pMatricule, boolean pTop,boolean pBottom,boolean pLeft,boolean pRight,boolean pMissile,boolean pMine) {
-		super(x, y, vx, vy, life, score, pMatricule);
+	AI(double x, double y, double vx, double vy, int life, int score, int pMatricule,boolean pBouclier, boolean pTop,boolean pBottom,boolean pLeft,boolean pRight,boolean pMissile,boolean pMine) {
+		super(x, y, vx, vy, life, score, pMatricule,pBouclier);
 		top=pTop;
 		bottom=pBottom;
 		left=pLeft;

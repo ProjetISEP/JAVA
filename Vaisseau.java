@@ -24,6 +24,7 @@ public class Vaisseau {
 	protected double vy;
 	protected double vx;
 	protected int score;
+	protected boolean bouclier;
 	protected int matricule;
 	public static double inertieTop;
 	public static double inertieBottom;
@@ -37,7 +38,7 @@ public class Vaisseau {
 	private int life;
 
 	Vaisseau(double px, double py, double pvx, double pvy, int plife, int pscore,
-			int pMatricule) {// Un vaisseau possède une matricule pour la
+			int pMatricule, boolean pbouclier) {// Un vaisseau possède une matricule pour la
 		// reconnaissance des missiles
 		this.x = px;
 		this.y = py;
@@ -45,6 +46,7 @@ public class Vaisseau {
 		this.vy = pvy;
 		this.life = plife;
 		this.score = pscore;
+		this.bouclier = pbouclier;
 		matricule = pMatricule;
 	
 	}
@@ -72,7 +74,9 @@ public class Vaisseau {
 	public int getMat() {
 		return matricule;
 	}
-
+	public boolean getBouclier() {
+		return bouclier;
+	}
 	public void vies() {
 		myVaisseau = Isep.getListeVaisseau();
 		for (int k = 0; k != myVaisseau.size(); k++) {
@@ -95,7 +99,9 @@ public class Vaisseau {
 	public void setY(double gravite) { // POUR LA GRAVITE
 		y = y - gravite;
 	}
-
+	public void setBouclier(boolean pbouclier) { // POUR LA GRAVITE
+		bouclier = pbouclier;
+	}
 	public void score() {
 		myVaisseau = Isep.getListeVaisseau();
 		if (0 < x && x < 4000)
@@ -342,6 +348,9 @@ public class Vaisseau {
 
 	public void paint(int i) {
 		StdDraw.picture(x, y, "./src/vaisseau"+intToString(i)+".png", 180);
+	}
+	public void paintBouclier(int i) {
+		StdDraw.picture(x, y, "./src/vaisseau"+intToString(i)+"_bouclier.png", 180);
 	}
 
 
