@@ -200,9 +200,9 @@ public class Isep {
 				AI vaisseauBleu=(AI) myVaisseau.get(1);//ici myVaisseau.get(1) correspond au vaisseau bleu (i.e l'ordi) mais defois i 
 
 				vaisseauBleu.aiMove();
-				vaisseauBleu.controlAImove();
 				vaisseauBleu.aiMissile();
 				vaisseauBleu.aiMine();
+				vaisseauBleu.controlAImove();
 				vaisseauBleu.controlAImissilemine();
 
 				for(int i=0;i<=myrectangle.size();i++){
@@ -221,6 +221,7 @@ public class Isep {
 				vaisseauBleu.setMine(false);
 
 				AI.droiteTour=AI.droiteTour+1;
+		
 			}
 
 

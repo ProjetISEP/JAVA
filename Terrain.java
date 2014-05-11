@@ -13,7 +13,7 @@ public class Terrain {
 	protected double yter;
 	protected double largeur;
 	protected double hauteur;
-	protected static double speed=60;
+	protected static double speed=220;
 	protected static int tailleterrain=600;
 	public static double[] tab = new double[3000];
 	public static int tabZonesParticuliere[];

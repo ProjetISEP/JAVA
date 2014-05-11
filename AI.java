@@ -11,9 +11,11 @@ private boolean right;
 private boolean missile;
 private boolean mine;
 public static int k=0;
+public static int n=0;
 public static int droiteTour=0;
 public static List<Terrain> myrectangle =new ArrayList<>();
 public static List<Asteroide> myAsteroide =new ArrayList<>();
+public static List<Missile> myMines = new ArrayList<>();
 
 
 	AI(double x, double y, double vx, double vy, int life, int score, int pMatricule, boolean pTop,boolean pBottom,boolean pLeft,boolean pRight,boolean pMissile,boolean pMine) {
@@ -62,24 +64,12 @@ public void setMine(boolean pMine){
 		//FONCTION AI ****************************************************************
 			public void aiMove(){//Methode qui permet au vaisseau de s'adapter aux situtation
 				myrectangle=Terrain.getListeTerrain();
+				myAsteroide =Isep.myAsteroide;
+				myVaisseau=Isep.myVaisseau;
+
+			
+				
 				for(int i=20;i!=myrectangle.size();i++){//on prepare l'ensemble des rectangles et ensuite on les analysera un par un
-
-
-
-					//cas pour une descente ****************
-					if(/*1°: */ i%2!=0  &&
-							/*3°: */(this.y+1000>=myrectangle.get(i).getyter()-myrectangle.get(i).gethauteur()) && /*4°: */Math.abs((this.x+1000)-myrectangle.get(i).getxter())<=500){
-
-						// 1° : on s'interesse qu'au rect du bas donc i doit etre impair,
-						// 2 ° : si le bout du rectangle depasse un peu moins de la moitié de l'ecran, // 3° : si le vaisseau est plus haut que la position en y du bout du rect
-						//4 °: si le vaisseau se trouve à une distance en x de moins de 500 au rectangle
-						this.bottom=true;
-					}
-
-					//cas pour une montée ****************
-					if(i%2==0 && (this.y-3000<=myrectangle.get(i).getyter()+myrectangle.get(i).gethauteur()) && Math.abs((this.x+3000)-myrectangle.get(i).getxter())<=700){
-						this.top=true;
-					}
 					if(Vaisseau.gravite){
 						if(i%2==0 && this.y<=myrectangle.get(i).getyter()+myrectangle.get(i).gethauteur()+750){
 							this.top=true;
@@ -88,6 +78,15 @@ public void setMine(boolean pMine){
 					//Dans le cas niveau = Hard
 					if(Menu.niveau.equals("Hard")){
 						this.right=true;
+						
+						if(Math.pow(myrectangle.get(i).getxter()-this.x,2)+Math.pow(myrectangle.get(i).getyter()-myrectangle.get(i).gethauteur()-this.y, 2)<=Math.pow(1700,2) && i%2!=0){
+							this.bottom=true;
+						}
+						
+						if(Math.pow(myrectangle.get(i).getxter()-this.x,2)+Math.pow(myrectangle.get(i).getyter()+myrectangle.get(i).gethauteur()-this.y, 2)<=Math.pow(1700,2) && i%2==0){	
+							this.top=true;
+						}
+						
 						if(this.x>=X_MAX-1000){
 							this.left=true;
 						}
@@ -97,8 +96,55 @@ public void setMine(boolean pMine){
 						if(droiteTour%50==0){
 							this.right=true;
 						}
+						//cas pour une descente ****************
+							if(/*1°: */ i%2!=0  &&
+									/*3°: */(this.y+1000>=myrectangle.get(i).getyter()-myrectangle.get(i).gethauteur()) && /*4°: */Math.abs((this.x+1000)-myrectangle.get(i).getxter())<=500){
+
+								// 1° : on s'interesse qu'au rect du bas donc i doit etre impair,
+								// 2 ° : si le bout du rectangle depasse un peu moins de la moitié de l'ecran, // 3° : si le vaisseau est plus haut que la position en y du bout du rect
+								//4 °: si le vaisseau se trouve à une distance en x de moins de 500 au rectangle
+								this.bottom=true;
+							}
+
+							//cas pour une montée ****************
+							if(i%2==0 && (this.y-1000<=myrectangle.get(i).getyter()+myrectangle.get(i).gethauteur()) && Math.abs((this.x+1000)-myrectangle.get(i).getxter())<=500){
+								this.top=true;
+							}
+						
 						if(this.x>=X_MAX-1000){
 							this.left=true;
+						}
+						if(myVaisseau.size()>=1){
+
+						
+							
+							
+							
+							if(n<myVaisseau.size()){
+								
+								if(n!=this.matricule){
+									if(myVaisseau.get(0).getx()+500>=this.x){
+										if(droiteTour%3==0){
+											this.right=true;
+										}
+							
+									}
+									else if(myVaisseau.get(0).getx()+500>=this.x){
+										if(droiteTour%2==0){
+											this.right=true;
+										}
+								
+									
+									}
+									else if(this.x>=X_MAX/2.0){
+										if(droiteTour%2==0){
+											this.left=true;
+										}
+									}
+								
+								}
+							
+							}
 						}
 					}
 				}
@@ -122,6 +168,7 @@ public void setMine(boolean pMine){
 			}
 
 			public void aiMine(){
+				myMines=Isep.myMines;
 				myVaisseau=Isep.myVaisseau;//L'erreur des mines c'etait qu'il manquait d'importer la liste (non vide) de "myVaisseau"
 				if(Menu.niveau.equals("Normal")){
 
@@ -134,8 +181,20 @@ public void setMine(boolean pMine){
 						this.mine=false;
 
 					}
+					for(int i=0;i!=myMines.size();i++){
+						if(myMines.get(i).joueur!=this.matricule){
+							if(this.x<=myVaisseau.get(0).getx() && myMines.get(i).getxmissile()-this.x<=1000 && Math.abs(myMines.get(i).getymissile()-this.y)<=1000 && myMines.get(i).getxmissile()>=this.x && myMines.get(i).getymissile()<=this.y){
+								this.top=true;
+		
+								
+							}
+						if(this.x<=myVaisseau.get(0).getx() && myMines.get(i).getxmissile()-this.x<=1000 && Math.abs(myMines.get(i).getymissile()-this.y)<=1000 && myMines.get(i).getxmissile()>=this.x && myMines.get(i).getymissile()>=this.y){
+								this.bottom=true;
 
-
+								
+							}
+						}
+					}
 				}
 
 				if(Menu.niveau.equals("Hard")){
@@ -158,6 +217,10 @@ public void setMine(boolean pMine){
 						else
 							break;
 					}
+					
+					
+					
+					
 
 				}
 
@@ -168,7 +231,7 @@ public void setMine(boolean pMine){
 			public void controlAImove(){
 
 				if(this.top)
-				//	top();
+					top();
 				if(this.left)
 					left();
 				if(this.right)
