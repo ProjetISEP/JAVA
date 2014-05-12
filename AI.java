@@ -120,7 +120,7 @@ public void setMine(boolean pMine){
 							
 							
 							
-							if(n<myVaisseau.size()){
+							if(n<myVaisseau.size()){//CE CODE PERMET au vaisseauAI d'avancer lorsque le vasseau adverse essaie d'avancer
 								
 								if(n!=this.matricule){
 									if(myVaisseau.get(0).getx()+500>=this.x){
@@ -170,8 +170,9 @@ public void setMine(boolean pMine){
 			public void aiMine(){
 				myMines=Isep.myMines;
 				myVaisseau=Isep.myVaisseau;//L'erreur des mines c'etait qu'il manquait d'importer la liste (non vide) de "myVaisseau"
+				//NIVEAU NORMAL
 				if(Menu.niveau.equals("Normal")){
-
+					//LANCMENT MISSILE************
 					if(myVaisseau.get(0).getx()+2000<=this.x){
 						this.mine=true;
 				
@@ -180,7 +181,9 @@ public void setMine(boolean pMine){
 					
 						this.mine=false;
 
-					}
+					}//************************************
+					
+					//ESQUIVE DES MISSILES ADVERSES*************
 					for(int i=0;i!=myMines.size();i++){
 						if(myMines.get(i).joueur!=this.matricule){
 							if(this.x<=myVaisseau.get(0).getx() && myMines.get(i).getxmissile()-this.x<=1000 && Math.abs(myMines.get(i).getymissile()-this.y)<=1000 && myMines.get(i).getxmissile()>=this.x && myMines.get(i).getymissile()<=this.y){
@@ -195,8 +198,9 @@ public void setMine(boolean pMine){
 							}
 						}
 					}
-				}
-
+				}//*****************************************************
+				
+				//NIVEAU HARD
 				if(Menu.niveau.equals("Hard")){
 					
 					while(k!=myrectangle.size()){
