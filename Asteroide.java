@@ -4,19 +4,18 @@ import java.util.List;
 
 public class Asteroide {
 	public static List<Vaisseau> myVaisseau =new ArrayList<>();
-	private double yAste;
-	private double vyAste;
-	private double vxAste;
+	protected double yAste;
+	protected double vyAste;
+	protected double vxAste;
 	private int rAste;
-	private double xAste=10000;
+	protected double xAste;
 	public static double X_MAX = 10000;
 	public static double Y_MAX = 10000;
 	public static int seconde=0;
-	private int lifeAste;
+	protected int lifeAste;
 	public static List<Missile> myMissile =new ArrayList<>();
 	public static List<Asteroide> myAsteroide =new ArrayList<>();
 	Asteroide(double xAste, double yAste, double vxAste, double vyAste, int lifeAste) {
-		//	System.out.println("Création d'un asteroide avec des paramètres !");
 		this.xAste = xAste;
 		this.yAste = yAste;
 		this.vxAste = vxAste;
@@ -71,7 +70,5 @@ public class Asteroide {
 	}
 	public void paint1(){
 		StdDraw.picture(xAste, yAste, "./src/asteroide.png",360);
-
-
 	}
 }

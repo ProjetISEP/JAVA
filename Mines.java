@@ -17,7 +17,6 @@ public class Mines extends Missile{
 	
 	public void mines(){
 		StdDraw.picture(this.xmissile, this.ymissile, "./src/mine2.png", 180);
-	//	boolean acceleration=false;
 		if(this.acceleration>0){// la mine largué aura une certaine acceleration pdt un temps bref
 			this.xmissile=this.xmissile-this.acceleration*(this.vxMine);
 			this.acceleration=this.acceleration-1;
