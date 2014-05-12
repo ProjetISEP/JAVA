@@ -80,9 +80,9 @@ public class Vaisseau {
 	public void vies() {
 		myVaisseau = Isep.getListeVaisseau();
 		for (int k = 0; k != myVaisseau.size(); k++) {
-			/*for (int g = 0; g != myVaisseau.get(k).life; g++) {
-				//StdDraw.picture(6000+1500*k+g*120, 8000, "./src/vie.png", 250, 280);
-			}*/
+			for (int g = 0; g != myVaisseau.get(k).life; g++) {
+				StdDraw.picture(5000+1700*k+g*220, 8000, "./src/vie.png", 250, 280);
+			}
 			if(myVaisseau.get(k).life==0){
 				StdDraw.text(X_MAX/2, Y_MAX/2, "GAME OVER");
 				StdDraw.setPenColor(Color.blue);

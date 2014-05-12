@@ -32,7 +32,7 @@ public class Asteroide {
 		return lifeAste;
 	}
 	public void setX(double m){
-		xAste=xAste+m;
+		xAste=m;
 	}
 	public void setY(double m){
 		yAste=m;
@@ -49,7 +49,9 @@ public class Asteroide {
 		myVaisseau=Isep.getListeVaisseau();
 		for(int i=0;i!=myVaisseau.size();i++){//colision pour tout les vaisseaux
 			if(yAste<myVaisseau.get(i).gety()+1000 && yAste>myVaisseau.get(i).gety()-1000 && xAste<myVaisseau.get(i).getx()+200 && xAste>myVaisseau.get(i).getx()-200 && this.lifeAste!=0){
-				myVaisseau.get(i).setLife();
+				if(!myVaisseau.get(i).getBouclier()){
+					myVaisseau.get(i).setLife();
+				}
 			}
 		}
 	}

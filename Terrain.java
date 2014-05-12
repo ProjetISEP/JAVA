@@ -13,7 +13,7 @@ public class Terrain {
 	protected double yter;
 	protected double largeur;
 	protected double hauteur;
-	protected static double speed=220;
+	protected static double speed=80;
 	protected static int tailleterrain=600;
 	public static double[] tab = new double[3000];
 	public static int tabZonesParticuliere[];
@@ -63,7 +63,7 @@ public class Terrain {
 				tab[i]=tab[i-1]+0.13*nb;
 				k=0;
 			}
-			if(tab[i-1]>0.98){
+			if(tab[i-1]>0.9){
 				tab[i]=tab[i-1]-0.13*nb;
 				k=1;
 			}
@@ -92,8 +92,8 @@ public class Terrain {
 				myrectangle.add(new TerrainParticulier(xrectangle+i*200, 200,90,4000+-(tab1[i]*3550),speed));//le 3900 est une translation
 				myrectangle.add(new TerrainParticulier(xrectangle+i*200, 9800,90,500+tab1[i]*4500,speed));
 			}else{
-				myrectangle.add(new Terrain(xrectangle+i*200, 200,90,500+(tab1[i]*1500+2500-(tab1[i]*3550)),speed));
-				myrectangle.add(new Terrain(xrectangle+i*200, 9800,90,500+tab1[i]*3900,speed));
+				myrectangle.add(new Terrain(xrectangle+i*200, 200,90,4000+-(tab1[i]*3550),speed));
+				myrectangle.add(new Terrain(xrectangle+i*200, 9800,90,500+tab1[i]*4500,speed));
 			}
 		}
 	}
@@ -107,11 +107,13 @@ public class Terrain {
 				myMissile.get(i).setxmissile(100000);
 			}
 		}
-		
+
 		for(int k=0;k!=myVaisseau.size();k++){
 			if(xter+100>myVaisseau.get(k).getx() && xter-100<myVaisseau.get(k).getx() && intermediaire>myVaisseau.get(k).gety()){
-				myVaisseau.get(k).setLife();	
 				myVaisseau.get(k).setY(-200);
+				if(!myVaisseau.get(k).getBouclier()){
+					myVaisseau.get(k).setLife();
+				}
 			}
 		}
 	}
@@ -124,11 +126,13 @@ public class Terrain {
 				myMissile.get(i).setxmissile(100000);
 			}
 		}
-		
+
 		for(int k=0;k!=myVaisseau.size();k++){
 			if(xter+100>myVaisseau.get(k).getx() && xter-100<myVaisseau.get(k).getx() && intermediaire<myVaisseau.get(k).gety()){
-				myVaisseau.get(k).setLife();
 				myVaisseau.get(k).setY(200);
+				if(!myVaisseau.get(k).getBouclier()){
+					myVaisseau.get(k).setLife();
+				}
 			}
 		}
 	}

@@ -300,7 +300,7 @@ public class Isep {
 				}
 				(myVaisseau.get(i)).bordure();
 				(myVaisseau.get(i)).score();
-				 myVaisseau.get(i).vies();
+				 //myVaisseau.get(i).vies();
 				(myVaisseau.get(i)).colisionMissileVaisseau();
 				(myVaisseau.get(i)).colisionMineVaisseau();
 				if (myVaisseau.get(i).getlife() <= 0) {// Condition de fin de partie
@@ -316,16 +316,18 @@ public class Isep {
 			}
 			
 			// ASTEROIDE******************************************************
+			System.out.println("0  "+myAsteroide.get(0).getPositionxAste());
+			System.out.println("1  "+myAsteroide.get(1).getPositionxAste());
 			for (int i = 0; i != myAsteroide.size(); i = i + 1) {
 				(myAsteroide.get(i)).move();
-				if (myAsteroide.get(i).getPositionxAste() == -100) {// on cache
-					myAsteroide.get(i).setX(10000);
+				if (myAsteroide.get(i).getPositionxAste() >-500 && myAsteroide.get(i).getPositionxAste() <-400) {// on cache
+					myAsteroide.get(i).setX(10000+Math.random()*20000);
 					myAsteroide.get(i).setY(Math.random()*10000);
 				}
 				(myAsteroide.get(i)).paint1();
 				
 				if (myAsteroide.get(i).getlifeAste() <0) {// on en rajoute
-					myAsteroide.get(i).setX(10000);
+					myAsteroide.get(i).setX(10000+Math.random()*20000);
 					myAsteroide.get(i).setY(Math.random()*10000);
 					myAsteroide.get(i).setLifeAste(-3);
 				}
