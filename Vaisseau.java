@@ -26,6 +26,7 @@ public class Vaisseau {
 	protected int score;
 	protected boolean bouclier;
 	protected int matricule;
+	protected int stockMine;
 	public static double inertieTop;
 	public static double inertieBottom;
 	public static double inertieRight;
@@ -38,7 +39,7 @@ public class Vaisseau {
 	private int life;
 
 	Vaisseau(double px, double py, double pvx, double pvy, int plife, int pscore,
-			int pMatricule, boolean pbouclier) {// Un vaisseau possède une matricule pour la
+			int pMatricule, boolean pbouclier, int pStock) {// Un vaisseau possède une matricule pour la
 		// reconnaissance des missiles
 		this.x = px;
 		this.y = py;
@@ -48,6 +49,7 @@ public class Vaisseau {
 		this.score = pscore;
 		this.bouclier = pbouclier;
 		matricule = pMatricule;
+		stockMine=pStock;
 	
 	}
 

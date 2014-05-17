@@ -131,13 +131,15 @@ public class Isep {
 						mineJ2 = false;
 					}
 					if (mineJ2 == false) {
-						if (StdDraw.isKeyPressed(70)) {//
+						if (StdDraw.isKeyPressed(70)) {
+							if(myVaisseau.get(1).stockMine>0){//
 							myMines.add(new Mines(myVaisseau.get(1).getx(),
 									myVaisseau.get(1).gety(), Missile
 									.getvxmissile(), 0, 0, myVaisseau
 									.get(1).getMat(), true, Terrain.speed, 4));
 							mineJ2 = true;
-
+							myVaisseau.get(1).stockMine=myVaisseau.get(1).stockMine-1;
+						}
 						}
 					}
 				}if(Menu.nbjoueurs==3){
@@ -161,12 +163,15 @@ public class Isep {
 					}
 					if (mineJ2 == false) {
 						if (StdDraw.isKeyPressed(70)) {//
+							if(myVaisseau.get(1).stockMine>0){
 							myMines.add(new Mines(myVaisseau.get(1).getx(),
 									myVaisseau.get(1).gety(), Missile
 									.getvxmissile(), 0, 0, myVaisseau
 									.get(1).getMat(), true, Terrain.speed, 4));
 							mineJ2 = true;
+							myVaisseau.get(1).stockMine=myVaisseau.get(1).stockMine-1;
 
+						}
 						}
 					}
 					// JOUEUR3
@@ -188,13 +193,15 @@ public class Isep {
 						mineJ3 = false;
 					}
 					if (mineJ3 == false) {
-						if (StdDraw.isKeyPressed(76)) {//
+						if (StdDraw.isKeyPressed(76)) {
+							if(myVaisseau.get(2).stockMine>0){//
 							myMines.add(new Mines(myVaisseau.get(2).getx(),
 									myVaisseau.get(2).gety(), Missile
 									.getvxmissile(), 0, 0, myVaisseau
 									.get(2).getMat(), true, Terrain.speed, 4));
 							mineJ3 = true;
-
+							myVaisseau.get(2).stockMine=myVaisseau.get(2).stockMine-1;
+						}
 						}
 					}
 				}
@@ -281,14 +288,16 @@ public class Isep {
 				mineJ1 = false;
 			}
 			if (mineJ1 == false) {
-				if (StdDraw.isKeyPressed(517)) {// 517 correspond à la touche "!"
+				if (StdDraw.isKeyPressed(517)) {
+					if(myVaisseau.get(0).stockMine>0){// 517 correspond à la touche "!"
 					myMines.add(new Mines(myVaisseau.get(0).getx(),
 							myVaisseau.get(0).gety(), Missile
 							.getvxmissile(), 0, 0, myVaisseau
 							.get(0).getMat(), true, Terrain.speed, 4));// Deux paramètres ont été rajoutés : la vitesse de la mine et son 
 					// acceleration, même si on voit getvxmissile on ne travaillera que sur vxMine
 					mineJ1 = true;
-
+					myVaisseau.get(0).stockMine=myVaisseau.get(0).stockMine-1;
+					}
 				}
 			}
 			//VAISSEAU
@@ -369,6 +378,7 @@ public class Isep {
 			}
 			Thread.sleep(10);
 			///////////FIN PARTIE COMPTEUR SECONDE
+			
 		}
 	}
 }

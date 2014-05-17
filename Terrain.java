@@ -97,6 +97,8 @@ public class Terrain {
 			}
 		}
 	}
+	
+	
 
 	public void colision(){//POUR LES COLISIONS AVEC LES RECTANGLES DU BAS
 		myVaisseau=Isep.getListeVaisseau();	

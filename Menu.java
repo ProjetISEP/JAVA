@@ -31,7 +31,7 @@ public class Menu {
 					if(StdDraw.mousePressed()){
 						nbjoueurs=1;
 						multi1=true;
-						myVaisseau.add(new Vaisseau(3000, 3000, 0, 0, 10, 0, 0,false));
+						myVaisseau.add(new Vaisseau(3000, 3000, 0, 0, 10, 0, 0,false,5));
 						multi=false;
 						navigation=false;
 					}
@@ -39,7 +39,7 @@ public class Menu {
 					if(StdDraw.mousePressed()){
 						nbjoueurs=2;
 						for(int g=0;g<nbjoueurs;g++){
-							myVaisseau.add(new Vaisseau(3000, 3000+g*1000, 0, 0, 10, 0, g,false));
+							myVaisseau.add(new Vaisseau(3000, 3000+g*1000, 0, 0, 10, 0, g,false,5));
 						}
 						multi1=true;
 						multi=false;
@@ -49,7 +49,7 @@ public class Menu {
 					if(StdDraw.mousePressed()){
 						nbjoueurs=3;
 						for(int g=0;g<nbjoueurs;g++){
-							myVaisseau.add(new Vaisseau(3000, 3000+g*1000, 0, 0, 10, 0, g,false));
+							myVaisseau.add(new Vaisseau(3000, 3000+g*1000, 0, 0, 10, 0, g,false,5));
 						}
 						multi1=true;
 						multi=false;
@@ -65,8 +65,8 @@ public class Menu {
 				StdDraw.picture( X_MAX/2,  Y_MAX/2, "./src/menu_ai.png");
 				if(380<StdDraw.mouseX() && 3863>StdDraw.mouseX() && 842<StdDraw.mouseY() && 4978>StdDraw.mouseY()){
 					if(StdDraw.mousePressed()){
-						myVaisseau.add(new Vaisseau(3000, 5000, 0, 0, 10, 0, 0,false));
-						myVaisseau.add(new AI(6000, 5000, 0, 0, 10, 0, 1,false,false,false,false,false, false, false));
+						myVaisseau.add(new Vaisseau(3000, 5000, 0, 0, 10, 0, 0,false,5));
+						myVaisseau.add(new AI(6000, 5000, 0, 0, 10, 0, 1,false,false,false,false,false, false, false,5));
 						niveau="Normal";
 						ai1=true;
 						ai=false;
@@ -75,8 +75,8 @@ public class Menu {
 					}
 				}else if(5900<StdDraw.mouseX() && 9400>StdDraw.mouseX() && 842<StdDraw.mouseY() && 4978>StdDraw.mouseY()){
 					if(StdDraw.mousePressed()){
-						myVaisseau.add(new Vaisseau(3000, 5000, 0, 0, 10, 0, 0,false));
-						myVaisseau.add(new AI(6000, 5000, 0, 0, 10, 0, 1,false,false,false,false,false, false, false));
+						myVaisseau.add(new Vaisseau(3000, 5000, 0, 0, 10, 0, 0,false,5));
+						myVaisseau.add(new AI(6000, 5000, 0, 0, 10, 0, 1,false,false,false,false,false, false, false,5));
 						niveau="Hard";
 						ai1=true;
 						ai=false;
