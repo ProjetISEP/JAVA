@@ -45,10 +45,13 @@ public class Asteroide {
 
 	}
 
-	public void colision() { //colision entre vaisseau et astéroide
+	public void colisionAsteroideVaisseau() { //colision entre vaisseau et astéroide
 		myVaisseau=Isep.getListeVaisseau();
 		for(int i=0;i!=myVaisseau.size();i++){//colision pour tout les vaisseaux
 			if(yAste<myVaisseau.get(i).gety()+1000 && yAste>myVaisseau.get(i).gety()-1000 && xAste<myVaisseau.get(i).getx()+200 && xAste>myVaisseau.get(i).getx()-200 && this.lifeAste!=0){
+				setX(10000+Math.random()*20000);
+				setY(Math.random()*10000);
+				// cas particulier: on enlève des vies uniquement si il n'y a pas de bouclier
 				if(!myVaisseau.get(i).getBouclier()){
 					myVaisseau.get(i).setLife();
 				}

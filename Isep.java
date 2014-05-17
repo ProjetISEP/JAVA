@@ -31,6 +31,8 @@ public class Isep {
 	public static List<Terrain> myrectangle = new ArrayList<>();
 	public static int tabZonesParticuliere[]= zonesParticuliere(3);//Nombre de zones particulieres
 	public static List<Missile> myMines = new ArrayList<>();
+	public static int compteurSeconde;
+	public static int seconde=0;
 
 	// GETTERS DES LISTES
 	public static List<Missile> getListeMissile() {
@@ -81,7 +83,7 @@ public class Isep {
 
 
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws InterruptedException {
 		StdDraw.setCanvasSize(900, 500);
 		StdDraw.setXscale(0, X_MAX);
 		StdDraw.setYscale(0, Y_MAX);
@@ -105,7 +107,7 @@ public class Isep {
 
 		boolean navigation=true;
 		Menu.nav();
-
+		compteurSeconde=0;
 		while (true) {
 			StdDraw.clear();
 			if (Menu.multi1) {//Toute cette partie correspond au mode multi à 1, 2 ou 3 joueurs
@@ -316,23 +318,24 @@ public class Isep {
 			}
 			
 			// ASTEROIDE******************************************************
-			System.out.println("0  "+myAsteroide.get(0).getPositionxAste());
-			System.out.println("1  "+myAsteroide.get(1).getPositionxAste());
 			for (int i = 0; i != myAsteroide.size(); i = i + 1) {
-				(myAsteroide.get(i)).move();
-				if (myAsteroide.get(i).getPositionxAste() >-500 && myAsteroide.get(i).getPositionxAste() <-400) {// on cache
+				// si l'asteroide sort de l'écran on le positionne à droite de l'écran
+				if (myAsteroide.get(i).getPositionxAste() >-500 && myAsteroide.get(i).getPositionxAste() <-400) {
 					myAsteroide.get(i).setX(10000+Math.random()*20000);
 					myAsteroide.get(i).setY(Math.random()*10000);
 				}
-				(myAsteroide.get(i)).paint1();
-				
-				if (myAsteroide.get(i).getlifeAste() <0) {// on en rajoute
+
+				// on rajoute des vies si un asteroide colissionne un vaisseau
+				if (myAsteroide.get(i).getlifeAste() <0) {
 					myAsteroide.get(i).setX(10000+Math.random()*20000);
 					myAsteroide.get(i).setY(Math.random()*10000);
 					myAsteroide.get(i).setLifeAste(-3);
 				}
-				(myAsteroide.get(i)).colision();
+				
+				(myAsteroide.get(i)).colisionAsteroideVaisseau();
 				(myAsteroide.get(i)).colisionMissileAsteroide();
+				(myAsteroide.get(i)).move();
+				(myAsteroide.get(i)).paint1();
 			}
 			// MISSILE**********************************************************
 			for (int i = 0; i != myMissile.size(); i = i + 1) {
@@ -351,6 +354,21 @@ public class Isep {
 
 			}
 			StdDraw.show(10);
+			
+			
+			
+			///////////PARTIE COMPTEUR SECONDE
+			compteurSeconde=compteurSeconde+1;
+			if(compteurSeconde%34==0){ // ca correspond environ à une seconde
+				seconde=seconde+1;
+				//System.out.println(seconde);
+				//String secondeString = Integer.toString(seconde);
+				//StdDraw.text(5000, 5000, secondeString);
+				//StdDraw.setPenColor(Color.black);
+				//StdDraw.setPenColor(210, 210, 210);
+			}
+			Thread.sleep(10);
+			///////////FIN PARTIE COMPTEUR SECONDE
 		}
 	}
 }
