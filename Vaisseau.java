@@ -50,7 +50,7 @@ public class Vaisseau {
 		this.bouclier = pbouclier;
 		matricule = pMatricule;
 		stockMine=pStock;
-	
+
 	}
 
 	public double getx() {
@@ -80,16 +80,30 @@ public class Vaisseau {
 		return bouclier;
 	}
 	public void vies() {
+
 		myVaisseau = Isep.getListeVaisseau();
 		for (int k = 0; k != myVaisseau.size(); k++) {
 			for (int g = 0; g != myVaisseau.get(k).life; g++) {
 				StdDraw.picture(5000+1700*k+g*220, 8000, "./src/vie.png", 250, 280);
 			}
+
+		}
+	}
+	public static boolean endGame(){
+		int p=0;
+
+		for (int k = 0; k != myVaisseau.size(); k++) {
+			//System.out.println("p :"+p);
+			//System.out.println("size :"+myVaisseau.size());
 			if(myVaisseau.get(k).life==0){
-				StdDraw.text(X_MAX/2, Y_MAX/2, "GAME OVER");
-				StdDraw.setPenColor(Color.blue);
+				p=p+1;
+				
+				if (p==myVaisseau.size()){
+					return false;
+				}
 			}
 		}
+		return true;
 	}
 
 	public void setLife() {
@@ -147,9 +161,9 @@ public class Vaisseau {
 	public void right() {
 		x = x + 40;
 	}
-	
+
 	public void top1(){
-		
+
 		if(StdDraw.isKeyPressed(38)){
 			top=true;
 			bottom=false;
@@ -166,8 +180,8 @@ public class Vaisseau {
 		else{
 			if(top){
 				if(inertieTop>0){
-				y=y+inertieTop;
-				inertieTop=inertieTop-1;
+					y=y+inertieTop;
+					inertieTop=inertieTop-1;
 				}
 			}
 			else{
@@ -175,7 +189,7 @@ public class Vaisseau {
 			}
 		}
 	}
-	
+
 	public void bottom1() {
 		if(StdDraw.isKeyPressed(40)){
 			top=false;
@@ -193,8 +207,8 @@ public class Vaisseau {
 		else{
 			if(bottom){
 				if(inertieBottom>0){
-				y=y-inertieBottom;
-				inertieBottom=inertieBottom-1;
+					y=y-inertieBottom;
+					inertieBottom=inertieBottom-1;
 				}
 			}
 			else{
@@ -219,8 +233,8 @@ public class Vaisseau {
 		else{
 			if(left){
 				if(inertieLeft>0){
-				x=x-inertieLeft;
-				inertieLeft=inertieLeft-0.5;
+					x=x-inertieLeft;
+					inertieLeft=inertieLeft-0.5;
 				}
 			}
 			else{
@@ -245,8 +259,8 @@ public class Vaisseau {
 		else{
 			if(right){
 				if(inertieRight>0){
-				x=x+inertieRight;
-				inertieRight=inertieRight-0.5;
+					x=x+inertieRight;
+					inertieRight=inertieRight-0.5;
 				}
 			}
 			else{
@@ -256,7 +270,7 @@ public class Vaisseau {
 	}
 	public static void controlPlayer1() {
 		if (!toucheinversee) {
-			
+
 			if (StdDraw.isKeyPressed(38))
 				(myVaisseau.get(0)).top();
 			if (StdDraw.isKeyPressed(37))
@@ -280,12 +294,12 @@ public class Vaisseau {
 
 	public void controlPlayerInertie(){
 
-			top1();
-			bottom1();
-			left1();
-			right1();
-			
-	
+		top1();
+		bottom1();
+		left1();
+		right1();
+
+
 	}
 	public static void controlPlayer2() {
 		if (!toucheinversee) {
@@ -299,7 +313,7 @@ public class Vaisseau {
 				(myVaisseau.get(1)).bottom();
 		} else {
 			if (StdDraw.isKeyPressed(83))
-		    	(myVaisseau.get(1)).top();
+				(myVaisseau.get(1)).top();
 			if (StdDraw.isKeyPressed(68))
 				(myVaisseau.get(1)).left();
 			if (StdDraw.isKeyPressed(81))
@@ -380,8 +394,8 @@ public class Vaisseau {
 													&& ((myMissile.get(i)).getJoueurMissile()) == (this.matricule)) {////seul les missiles "etrangers" ont de l'impact les vaisseau ne seront pas detruits par leurs propres missiles
 						StdDraw.picture(myVaisseau.get(k).getx(), myVaisseau
 								.get(k).gety(), "./src/crash.png");
-							myMissile.get(i).life=false;
-					
+						myMissile.get(i).life=false;
+
 						// MANQUE L'ENLEVEMENT DES VIES
 					}
 
@@ -414,7 +428,7 @@ public class Vaisseau {
 						StdDraw.picture(myVaisseau.get(k).getx(), myVaisseau
 								.get(k).gety(), "./src/crash.png");
 						myMines.get(i).life=false;
-						
+
 						// MANQUE L'ENLEVEMENT DES VIES
 					}
 

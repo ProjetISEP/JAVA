@@ -33,6 +33,7 @@ public class Isep {
 	public static List<Missile> myMines = new ArrayList<>();
 	public static int compteurSeconde;
 	public static int seconde=0;
+	public static boolean finDePartie=Vaisseau.endGame();
 
 	// GETTERS DES LISTES
 	public static List<Missile> getListeMissile() {
@@ -77,7 +78,7 @@ public class Isep {
 		return nb100;
 	}
 
-	
+
 
 
 
@@ -100,16 +101,22 @@ public class Isep {
 
 		int tab[] = Ralentir(10);// tableau pour les zones de ralentissement
 
-//		Audio son = new Audio();
-	//	son.start();
+		//		Audio son = new Audio();
+		//	son.start();
 
 
 
 		boolean navigation=true;
 		Menu.nav();
 		compteurSeconde=0;
-		while (true) {
+		while (finDePartie) {
 			StdDraw.clear();
+			if(Menu.nbjoueurs==1){
+				if(myVaisseau.get(0).getlife()<=3)
+				if(seconde%2==0){
+					StdDraw.clear(Color.red);
+				}
+			}
 			if (Menu.multi1) {//Toute cette partie correspond au mode multi à 1, 2 ou 3 joueurs
 				if(Menu.nbjoueurs==2){
 					// JOUEUR2
@@ -133,13 +140,13 @@ public class Isep {
 					if (mineJ2 == false) {
 						if (StdDraw.isKeyPressed(70)) {
 							if(myVaisseau.get(1).stockMine>0){//
-							myMines.add(new Mines(myVaisseau.get(1).getx(),
-									myVaisseau.get(1).gety(), Missile
-									.getvxmissile(), 0, 0, myVaisseau
-									.get(1).getMat(), true, Terrain.speed, 4));
-							mineJ2 = true;
-							myVaisseau.get(1).stockMine=myVaisseau.get(1).stockMine-1;
-						}
+								myMines.add(new Mines(myVaisseau.get(1).getx(),
+										myVaisseau.get(1).gety(), Missile
+										.getvxmissile(), 0, 0, myVaisseau
+										.get(1).getMat(), true, Terrain.speed, 4));
+								mineJ2 = true;
+								myVaisseau.get(1).stockMine=myVaisseau.get(1).stockMine-1;
+							}
 						}
 					}
 				}if(Menu.nbjoueurs==3){
@@ -164,14 +171,14 @@ public class Isep {
 					if (mineJ2 == false) {
 						if (StdDraw.isKeyPressed(70)) {//
 							if(myVaisseau.get(1).stockMine>0){
-							myMines.add(new Mines(myVaisseau.get(1).getx(),
-									myVaisseau.get(1).gety(), Missile
-									.getvxmissile(), 0, 0, myVaisseau
-									.get(1).getMat(), true, Terrain.speed, 4));
-							mineJ2 = true;
-							myVaisseau.get(1).stockMine=myVaisseau.get(1).stockMine-1;
+								myMines.add(new Mines(myVaisseau.get(1).getx(),
+										myVaisseau.get(1).gety(), Missile
+										.getvxmissile(), 0, 0, myVaisseau
+										.get(1).getMat(), true, Terrain.speed, 4));
+								mineJ2 = true;
+								myVaisseau.get(1).stockMine=myVaisseau.get(1).stockMine-1;
 
-						}
+							}
 						}
 					}
 					// JOUEUR3
@@ -195,13 +202,13 @@ public class Isep {
 					if (mineJ3 == false) {
 						if (StdDraw.isKeyPressed(76)) {
 							if(myVaisseau.get(2).stockMine>0){//
-							myMines.add(new Mines(myVaisseau.get(2).getx(),
-									myVaisseau.get(2).gety(), Missile
-									.getvxmissile(), 0, 0, myVaisseau
-									.get(2).getMat(), true, Terrain.speed, 4));
-							mineJ3 = true;
-							myVaisseau.get(2).stockMine=myVaisseau.get(2).stockMine-1;
-						}
+								myMines.add(new Mines(myVaisseau.get(2).getx(),
+										myVaisseau.get(2).gety(), Missile
+										.getvxmissile(), 0, 0, myVaisseau
+										.get(2).getMat(), true, Terrain.speed, 4));
+								mineJ3 = true;
+								myVaisseau.get(2).stockMine=myVaisseau.get(2).stockMine-1;
+							}
 						}
 					}
 				}
@@ -231,7 +238,7 @@ public class Isep {
 				vaisseauBleu.setMine(false);
 
 				AI.droiteTour=AI.droiteTour+1;
-		
+
 			}
 
 
@@ -262,8 +269,8 @@ public class Isep {
 
 			// ***************************************************
 			// JOUEUR1
-			
-			
+
+
 			Vaisseau.controlPlayer1();   //CHOISIR INERTIE OU NORMAL
 			//myVaisseau.get(0).controlPlayerInertie();
 			if (!StdDraw.isKeyPressed(32)) {// Si on n'appuye pas sur espace
@@ -290,33 +297,32 @@ public class Isep {
 			if (mineJ1 == false) {
 				if (StdDraw.isKeyPressed(517)) {
 					if(myVaisseau.get(0).stockMine>0){// 517 correspond à la touche "!"
-					myMines.add(new Mines(myVaisseau.get(0).getx(),
-							myVaisseau.get(0).gety(), Missile
-							.getvxmissile(), 0, 0, myVaisseau
-							.get(0).getMat(), true, Terrain.speed, 4));// Deux paramètres ont été rajoutés : la vitesse de la mine et son 
-					// acceleration, même si on voit getvxmissile on ne travaillera que sur vxMine
-					mineJ1 = true;
-					myVaisseau.get(0).stockMine=myVaisseau.get(0).stockMine-1;
+						myMines.add(new Mines(myVaisseau.get(0).getx(),
+								myVaisseau.get(0).gety(), Missile
+								.getvxmissile(), 0, 0, myVaisseau
+								.get(0).getMat(), true, Terrain.speed, 4));// Deux paramètres ont été rajoutés : la vitesse de la mine et son 
+						// acceleration, même si on voit getvxmissile on ne travaillera que sur vxMine
+						mineJ1 = true;
+						myVaisseau.get(0).stockMine=myVaisseau.get(0).stockMine-1;
 					}
 				}
 			}
 			//VAISSEAU
 			// *************************************************************
+			Vaisseau.endGame();
 			for (int i = 0; i != myVaisseau.size(); i = i + 1) {
 				if(!myVaisseau.get(i).getBouclier()){
-				(myVaisseau.get(i)).paint(i+1);
+					(myVaisseau.get(i)).paint(i+1);
 				}else{
 					(myVaisseau.get(i)).paintBouclier(i+1);
-					
+
 				}
 				(myVaisseau.get(i)).bordure();
 				(myVaisseau.get(i)).score();
-				 //myVaisseau.get(i).vies();
+				myVaisseau.get(i).vies();
 				(myVaisseau.get(i)).colisionMissileVaisseau();
 				(myVaisseau.get(i)).colisionMineVaisseau();
-				if (myVaisseau.get(i).getlife() <= 0) {// Condition de fin de partie
-					Vaisseau.FinDePartie();
-				}
+
 
 				//ZONES PARTICULIERES************************
 				for(int k=0;k!=tabZonesParticuliere.length;k++){
@@ -325,7 +331,7 @@ public class Isep {
 				}
 				//********* FIN ZONE PARTICULIERE
 			}
-			
+
 			// ASTEROIDE******************************************************
 			for (int i = 0; i != myAsteroide.size(); i = i + 1) {
 				// si l'asteroide sort de l'écran on le positionne à droite de l'écran
@@ -340,7 +346,7 @@ public class Isep {
 					myAsteroide.get(i).setY(Math.random()*10000);
 					myAsteroide.get(i).setLifeAste(-3);
 				}
-				
+
 				(myAsteroide.get(i)).colisionAsteroideVaisseau();
 				(myAsteroide.get(i)).colisionMissileAsteroide();
 				(myAsteroide.get(i)).move();
@@ -363,22 +369,29 @@ public class Isep {
 
 			}
 			StdDraw.show(10);
-			
-			
-			
+
+
+
 			///////////PARTIE COMPTEUR SECONDE
 			compteurSeconde=compteurSeconde+1;
 			if(compteurSeconde%34==0){ // ca correspond environ à une seconde
 				seconde=seconde+1;
-				//System.out.println(seconde);
+				//
 				//String secondeString = Integer.toString(seconde);
 				//StdDraw.text(5000, 5000, secondeString);
 				//StdDraw.setPenColor(Color.black);
 				//StdDraw.setPenColor(210, 210, 210);
+
+
 			}
+
+			//
 			Thread.sleep(10);
 			///////////FIN PARTIE COMPTEUR SECONDE
-			
+
 		}
+		System.out.println("GAME OVER");
+		System.out.println("GAME OVER");
+		System.out.println("GAME OVER");
 	}
 }
