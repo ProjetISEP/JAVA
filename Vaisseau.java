@@ -110,6 +110,23 @@ public class Vaisseau {
 		myVaisseau = Isep.getListeVaisseau();
 		life = getlife() - 1;
 		StdDraw.picture(x, y, "./src/crash.png");
+		System.out.println("ok");
+		
+		
+		
+	//	for (int k = 0; k != myVaisseau.size(); k++) {
+				if(this.matricule==0){
+					StdDraw.clear(Color.green);
+				}
+				if(this.matricule==1){
+					StdDraw.clear(Color.red);
+					}
+				if(this.matricule==2){
+					StdDraw.clear(Color.blue);
+					}	
+	//	}
+
+		
 	}
 
 	public void setY(double gravite) { // POUR LA GRAVITE

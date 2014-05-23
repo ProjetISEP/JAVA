@@ -110,11 +110,12 @@ public class Isep {
 		Menu.nav();
 		compteurSeconde=0;
 		while (finDePartie) {
+			System.out.println(finDePartie);
 			StdDraw.clear();
 			if(Menu.nbjoueurs==1){
 				if(myVaisseau.get(0).getlife()<=3)
 				if(seconde%2==0){
-					StdDraw.clear(Color.red);
+					StdDraw.clear(Color.green);
 				}
 			}
 			if (Menu.multi1) {//Toute cette partie correspond au mode multi à 1, 2 ou 3 joueurs
@@ -309,10 +310,12 @@ public class Isep {
 			}
 			//VAISSEAU
 			// *************************************************************
-			Vaisseau.endGame();
+			finDePartie=Vaisseau.endGame();
 			for (int i = 0; i != myVaisseau.size(); i = i + 1) {
 				if(!myVaisseau.get(i).getBouclier()){
+					if(myVaisseau.get(i).getlife()>0){
 					(myVaisseau.get(i)).paint(i+1);
+					}
 				}else{
 					(myVaisseau.get(i)).paintBouclier(i+1);
 
@@ -382,16 +385,15 @@ public class Isep {
 				//StdDraw.setPenColor(Color.black);
 				//StdDraw.setPenColor(210, 210, 210);
 
-
+				
 			}
 
 			//
 			Thread.sleep(10);
 			///////////FIN PARTIE COMPTEUR SECONDE
+	
 
 		}
-		System.out.println("GAME OVER");
-		System.out.println("GAME OVER");
-		System.out.println("GAME OVER");
+	
 	}
 }

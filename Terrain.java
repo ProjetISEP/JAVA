@@ -114,6 +114,7 @@ public class Terrain {
 			if(xter+100>myVaisseau.get(k).getx() && xter-100<myVaisseau.get(k).getx() && intermediaire>myVaisseau.get(k).gety()){
 				myVaisseau.get(k).setY(-200);
 				if(!myVaisseau.get(k).getBouclier()){
+					
 					myVaisseau.get(k).setLife();
 				}
 			}
