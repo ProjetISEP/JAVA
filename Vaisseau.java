@@ -89,7 +89,7 @@ public class Vaisseau {
 						StdDraw.picture(5000+1700*k+g*220, 8000, "./src/vie.png", 250, 280);
 				}
 			}else{
-				 int SecondeStart=Isep.seconde;
+				int SecondeStart=Isep.seconde;
 				StdDraw.text(5000, 5000, "Le joueur "+k+ " est mort");
 			}
 
@@ -97,17 +97,14 @@ public class Vaisseau {
 	}
 	public static boolean endGame(){
 		int p=0;
-
 		for (int k = 0; k != myVaisseau.size(); k++) {
-			//System.out.println("p :"+p);
-			//System.out.println("size :"+myVaisseau.size());
-			if(myVaisseau.get(k).life==0){
+			if(myVaisseau.get(k).life<0){
 				p=p+1;
-
 				if (p==myVaisseau.size()){
 					return false;
 				}
 			}
+			//System.out.println("p :"+p);
 		}
 		return true;
 	}
@@ -116,10 +113,6 @@ public class Vaisseau {
 		myVaisseau = Isep.getListeVaisseau();
 		life = getlife() - 1;
 		StdDraw.picture(x, y, "./src/crash.png");
-		System.out.println("ok");
-
-
-
 		//	for (int k = 0; k != myVaisseau.size(); k++) {
 		if(this.matricule==0){
 			StdDraw.clear(Color.green);
@@ -131,8 +124,6 @@ public class Vaisseau {
 			StdDraw.clear(Color.blue);
 		}	
 		//	}
-
-
 	}
 
 	public void setY(double gravite) { // POUR LA GRAVITE

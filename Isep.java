@@ -110,7 +110,7 @@ public class Isep {
 		Menu.nav();
 		compteurSeconde=0;
 		while (finDePartie) {
-			System.out.println(finDePartie);
+			//System.out.println(finDePartie);
 			StdDraw.clear();
 			if(Menu.nbjoueurs==1){
 				if(myVaisseau.get(0).getlife()<=3)
@@ -316,7 +316,7 @@ public class Isep {
 			}
 			//VAISSEAU
 			// *************************************************************
-			//finDePartie=Vaisseau.endGame();
+			finDePartie=Vaisseau.endGame();
 			for (int i = 0; i != myVaisseau.size(); i = i + 1) {
 				if(!myVaisseau.get(i).getBouclier()){
 					(myVaisseau.get(i)).paint(i+1);
@@ -400,9 +400,22 @@ public class Isep {
 			//
 			Thread.sleep(10);
 			///////////FIN PARTIE COMPTEUR SECONDE
-
-
 		}
-
+		int winnerScore=myVaisseau.get(0).score;
+		int winner=myVaisseau.get(0).matricule;
+		for (int i = 1; i != myVaisseau.size(); i = i + 1) {
+			if(myVaisseau.get(i).score>winnerScore){
+				winnerScore=myVaisseau.get(i).score;
+				winner=myVaisseau.get(i).matricule;
+			}
+		}
+		winner=winner+1;
+		while(true){
+			StdDraw.clear();
+			StdDraw.clear(Color.orange);
+			StdDraw.text(5000, 5000, "Le joueur"+winner+" est vainqueur avec un score de "+winnerScore+" ");
+			StdDraw.rectangle(X_MAX/2, Y_MAX/2, 6000, 2000);
+			StdDraw.show(1);
+		}
 	}
 }
