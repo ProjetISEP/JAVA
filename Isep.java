@@ -114,14 +114,16 @@ public class Isep {
 			StdDraw.clear();
 			if(Menu.nbjoueurs==1){
 				if(myVaisseau.get(0).getlife()<=3)
-				if(seconde%2==0){
-					StdDraw.clear(Color.green);
-				}
+					if(seconde%2==0){
+						StdDraw.clear(Color.green);
+					}
 			}
 			if (Menu.multi1) {//Toute cette partie correspond au mode multi à 1, 2 ou 3 joueurs
 				if(Menu.nbjoueurs==2){
 					// JOUEUR2
+					if(myVaisseau.get(1).getlife()>0){
 					Vaisseau.controlPlayer2();
+					}
 					if (!StdDraw.isKeyPressed(69)) {// Si on n'appuye pas sur E
 						missileJ2 = false;
 					}
@@ -152,7 +154,9 @@ public class Isep {
 					}
 				}if(Menu.nbjoueurs==3){
 					// JOUEUR2
+					if(myVaisseau.get(1).getlife()>0){
 					Vaisseau.controlPlayer2();
+					}
 					if (!StdDraw.isKeyPressed(69)) {// Si on n'appuye pas sur E
 						missileJ2 = false;
 					}
@@ -183,8 +187,9 @@ public class Isep {
 						}
 					}
 					// JOUEUR3
+					if(myVaisseau.get(2).getlife()>0){
 					Vaisseau.controlPlayer3();
-
+					}
 					if (!StdDraw.isKeyPressed(73)) {// 73 = touche I
 						missileJ3 = false;
 					}
@@ -271,9 +276,10 @@ public class Isep {
 			// ***************************************************
 			// JOUEUR1
 
-
-			Vaisseau.controlPlayer1();   //CHOISIR INERTIE OU NORMAL
-			//myVaisseau.get(0).controlPlayerInertie();
+			if(myVaisseau.get(0).getlife()>0){
+				Vaisseau.controlPlayer1();   //CHOISIR INERTIE OU NORMAL
+				//myVaisseau.get(0).controlPlayerInertie();
+			}
 			if (!StdDraw.isKeyPressed(32)) {// Si on n'appuye pas sur espace
 				missileJ1 = false;
 			}
@@ -310,19 +316,24 @@ public class Isep {
 			}
 			//VAISSEAU
 			// *************************************************************
-			finDePartie=Vaisseau.endGame();
+			//finDePartie=Vaisseau.endGame();
 			for (int i = 0; i != myVaisseau.size(); i = i + 1) {
 				if(!myVaisseau.get(i).getBouclier()){
-					if(myVaisseau.get(i).getlife()>0){
 					(myVaisseau.get(i)).paint(i+1);
-					}
 				}else{
 					(myVaisseau.get(i)).paintBouclier(i+1);
 
 				}
-				(myVaisseau.get(i)).bordure();
+				if(myVaisseau.get(i).getlife()>0){ //si le vaisseau est en vie il y a des borduress
+					(myVaisseau.get(i)).bordure();
+				}else{ //si il n'est plus en vie, il est attire sur la gauche 
+					(myVaisseau.get(i)).setX(10);
+				}
+				if(myVaisseau.get(i).getx()<-500){
+					(myVaisseau.get(i)).setX(100000000);// on sort le vaisseau en questiondu terrain pour plus qu'il interfère
+				}
 				(myVaisseau.get(i)).score();
-				myVaisseau.get(i).vies();
+				myVaisseau.get(i).vies();// c'est pour afficher les coeurs
 				(myVaisseau.get(i)).colisionMissileVaisseau();
 				(myVaisseau.get(i)).colisionMineVaisseau();
 
@@ -384,16 +395,14 @@ public class Isep {
 				//StdDraw.text(5000, 5000, secondeString);
 				//StdDraw.setPenColor(Color.black);
 				//StdDraw.setPenColor(210, 210, 210);
-
-				
 			}
 
 			//
 			Thread.sleep(10);
 			///////////FIN PARTIE COMPTEUR SECONDE
-	
+
 
 		}
-	
+
 	}
 }
