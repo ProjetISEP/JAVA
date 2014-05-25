@@ -82,9 +82,15 @@ public class Vaisseau {
 	public void vies() {
 
 		myVaisseau = Isep.getListeVaisseau();
-		for (int k = 0; k != myVaisseau.size(); k++) {
-			for (int g = 0; g != myVaisseau.get(k).life; g++) {
-				StdDraw.picture(5000+1700*k+g*220, 8000, "./src/vie.png", 250, 280);
+		for (int k = 0; k != myVaisseau.size(); k++) {// on parcourt tous les vaisseaux
+			if(myVaisseau.get(k).life>1){
+				for (int g = 0; g != myVaisseau.get(k).life; g++) {
+					if(myVaisseau.get(k).getlife()!=0)
+						StdDraw.picture(5000+1700*k+g*220, 8000, "./src/vie.png", 250, 280);
+				}
+			}else{
+				 int SecondeStart=Isep.seconde;
+				StdDraw.text(5000, 5000, "Le joueur "+k+ " est mort");
 			}
 
 		}
@@ -97,7 +103,7 @@ public class Vaisseau {
 			//System.out.println("size :"+myVaisseau.size());
 			if(myVaisseau.get(k).life==0){
 				p=p+1;
-				
+
 				if (p==myVaisseau.size()){
 					return false;
 				}
@@ -111,26 +117,29 @@ public class Vaisseau {
 		life = getlife() - 1;
 		StdDraw.picture(x, y, "./src/crash.png");
 		System.out.println("ok");
-		
-		
-		
-	//	for (int k = 0; k != myVaisseau.size(); k++) {
-				if(this.matricule==0){
-					StdDraw.clear(Color.green);
-				}
-				if(this.matricule==1){
-					StdDraw.clear(Color.red);
-					}
-				if(this.matricule==2){
-					StdDraw.clear(Color.blue);
-					}	
-	//	}
 
-		
+
+
+		//	for (int k = 0; k != myVaisseau.size(); k++) {
+		if(this.matricule==0){
+			StdDraw.clear(Color.green);
+		}
+		if(this.matricule==1){
+			StdDraw.clear(Color.red);
+		}
+		if(this.matricule==2){
+			StdDraw.clear(Color.blue);
+		}	
+		//	}
+
+
 	}
 
 	public void setY(double gravite) { // POUR LA GRAVITE
 		y = y - gravite;
+	}
+	public void setX(double dead) { // POUR LA GRAVITE
+		x = x - dead;
 	}
 	public void setBouclier(boolean pbouclier) { // POUR LA GRAVITE
 		bouclier = pbouclier;
