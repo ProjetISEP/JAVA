@@ -18,6 +18,7 @@ public class Vaisseau {
 	public static boolean bottom=false;
 	public static boolean right=false;
 	public static boolean left=false;
+	public static boolean droite;
 	//public static boolean top1;
 	protected double y;
 	protected double x;
@@ -63,6 +64,10 @@ public class Vaisseau {
 
 	public void sety(double py){
 		y=py;
+	}
+	
+	public void setx(double px){
+		x=px;
 	}
 
 	public int getlife() {
@@ -110,7 +115,7 @@ public class Vaisseau {
 		myVaisseau = Isep.getListeVaisseau();
 		life = getlife() - 1;
 		StdDraw.picture(x, y, "./src/crash.png");
-		System.out.println("ok");
+		//System.out.println("ok");
 		
 		
 		
@@ -292,8 +297,13 @@ public class Vaisseau {
 				(myVaisseau.get(0)).top();
 			if (StdDraw.isKeyPressed(37))
 				(myVaisseau.get(0)).left();
-			if (StdDraw.isKeyPressed(39))
+			if (StdDraw.isKeyPressed(39)){
 				(myVaisseau.get(0)).right();
+					droite=true;
+			}
+			else{
+			droite=false;
+			}
 			if (StdDraw.isKeyPressed(40))
 				(myVaisseau.get(0)).bottom();
 		} else {
@@ -458,6 +468,23 @@ public class Vaisseau {
 
 
 
+	}
+	
+	
+	public void colisionVaisseauAVaisseau(){
+		myVaisseau = Isep.myVaisseau;
+		for(int i=0;i!=myVaisseau.size();i++){
+			if(this.matricule!=myVaisseau.get(1).matricule){
+				if (Math.abs(this.x-myVaisseau.get(i).getx())<=1000 && Math.abs(this.y-myVaisseau.get(i).gety())<=1000 && this.x<myVaisseau.get(i).getx() && droite ==true){
+				myVaisseau.get(i).setx(this.x+100);//
+				System.out.println("okok");
+				}
+			}
+		}
+		
+		
+		
+		
 	}
 
 	public void toucheInversee(int x1, int x2) {// la fonction de controle des touches a besoin du while true pour etre executé du

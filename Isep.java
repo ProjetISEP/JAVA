@@ -110,7 +110,7 @@ public class Isep {
 		Menu.nav();
 		compteurSeconde=0;
 		while (finDePartie) {
-			System.out.println(finDePartie);
+	
 			StdDraw.clear();
 			if(Menu.nbjoueurs==1){
 				if(myVaisseau.get(0).getlife()<=3)
@@ -322,10 +322,10 @@ public class Isep {
 				}
 				(myVaisseau.get(i)).bordure();
 				(myVaisseau.get(i)).score();
-				myVaisseau.get(i).vies();
+				//myVaisseau.get(i).vies();
 				(myVaisseau.get(i)).colisionMissileVaisseau();
 				(myVaisseau.get(i)).colisionMineVaisseau();
-
+				(myVaisseau.get(i)).colisionVaisseauAVaisseau();
 
 				//ZONES PARTICULIERES************************
 				for(int k=0;k!=tabZonesParticuliere.length;k++){
