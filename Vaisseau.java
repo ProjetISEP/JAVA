@@ -1,4 +1,4 @@
-﻿import java.awt.Color;
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,7 +18,6 @@ public class Vaisseau {
 	public static boolean bottom=false;
 	public static boolean right=false;
 	public static boolean left=false;
-	public static boolean droite;
 	//public static boolean top1;
 	protected double y;
 	protected double x;
@@ -51,7 +50,6 @@ public class Vaisseau {
 		this.bouclier = pbouclier;
 		matricule = pMatricule;
 		stockMine=pStock;
-
 	}
 
 	public double getx() {
@@ -61,23 +59,15 @@ public class Vaisseau {
 	public double gety() {
 		return y;
 	}
-
 	public void sety(double py){
 		y=py;
 	}
-	
-	public void setx(double px){
-		x=px;
-	}
-
 	public int getlife() {
 		return life;
 	}
-
 	public int getScore() {
 		return score;
 	}
-
 	public int getMat() {
 		return matricule;
 	}
@@ -87,26 +77,28 @@ public class Vaisseau {
 	public void vies() {
 
 		myVaisseau = Isep.getListeVaisseau();
-		for (int k = 0; k != myVaisseau.size(); k++) {
-			for (int g = 0; g != myVaisseau.get(k).life; g++) {
-				StdDraw.picture(5000+1700*k+g*220, 8000, "./src/vie.png", 250, 280);
+		for (int k = 0; k != myVaisseau.size(); k++) {// on parcourt tous les vaisseaux
+			if(myVaisseau.get(k).life>1){
+				for (int g = 0; g != myVaisseau.get(k).life; g++) {
+					if(myVaisseau.get(k).getlife()!=0)
+						StdDraw.picture(5000+1700*k+g*220, 8000, "./src/vie.png", 250, 280);
+				}
+			}else{
+				int SecondeStart=Isep.seconde;
+				StdDraw.text(5000, 5000, "Le joueur "+k+ " est mort");
 			}
-
 		}
 	}
 	public static boolean endGame(){
 		int p=0;
-
 		for (int k = 0; k != myVaisseau.size(); k++) {
-			//System.out.println("p :"+p);
-			//System.out.println("size :"+myVaisseau.size());
-			if(myVaisseau.get(k).life==0){
+			if(myVaisseau.get(k).life<0){
 				p=p+1;
-				
 				if (p==myVaisseau.size()){
 					return false;
 				}
 			}
+			//System.out.println("p :"+p);
 		}
 		return true;
 	}
@@ -115,27 +107,24 @@ public class Vaisseau {
 		myVaisseau = Isep.getListeVaisseau();
 		life = getlife() - 1;
 		StdDraw.picture(x, y, "./src/crash.png");
-		//System.out.println("ok");
-		
-		
-		
-	//	for (int k = 0; k != myVaisseau.size(); k++) {
-				if(this.matricule==0){
-					StdDraw.clear(Color.green);
-				}
-				if(this.matricule==1){
-					StdDraw.clear(Color.red);
-					}
-				if(this.matricule==2){
-					StdDraw.clear(Color.blue);
-					}	
-	//	}
-
-		
+		//	for (int k = 0; k != myVaisseau.size(); k++) {
+		if(this.matricule==0){
+			StdDraw.clear(Color.green);
+		}
+		if(this.matricule==1){
+			StdDraw.clear(Color.red);
+		}
+		if(this.matricule==2){
+			StdDraw.clear(Color.blue);
+		}	
+		//	}
 	}
 
 	public void setY(double gravite) { // POUR LA GRAVITE
 		y = y - gravite;
+	}
+	public void setX(double dead) { // POUR LA GRAVITE
+		x = x - dead;
 	}
 	public void setBouclier(boolean pbouclier) { // POUR LA GRAVITE
 		bouclier = pbouclier;
@@ -297,13 +286,8 @@ public class Vaisseau {
 				(myVaisseau.get(0)).top();
 			if (StdDraw.isKeyPressed(37))
 				(myVaisseau.get(0)).left();
-			if (StdDraw.isKeyPressed(39)){
+			if (StdDraw.isKeyPressed(39))
 				(myVaisseau.get(0)).right();
-					droite=true;
-			}
-			else{
-			droite=false;
-			}
 			if (StdDraw.isKeyPressed(40))
 				(myVaisseau.get(0)).bottom();
 		} else {
@@ -468,23 +452,6 @@ public class Vaisseau {
 
 
 
-	}
-	
-	
-	public void colisionVaisseauAVaisseau(){
-		myVaisseau = Isep.myVaisseau;
-		for(int i=0;i!=myVaisseau.size();i++){
-			if(this.matricule!=myVaisseau.get(1).matricule){
-				if (Math.abs(this.x-myVaisseau.get(i).getx())<=1000 && Math.abs(this.y-myVaisseau.get(i).gety())<=1000 && this.x<myVaisseau.get(i).getx() && droite ==true){
-				myVaisseau.get(i).setx(this.x+100);//
-				System.out.println("okok");
-				}
-			}
-		}
-		
-		
-		
-		
 	}
 
 	public void toucheInversee(int x1, int x2) {// la fonction de controle des touches a besoin du while true pour etre executé du
