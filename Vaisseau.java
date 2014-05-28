@@ -50,7 +50,6 @@ public class Vaisseau {
 		this.bouclier = pbouclier;
 		matricule = pMatricule;
 		stockMine=pStock;
-
 	}
 
 	public double getx() {
@@ -60,19 +59,15 @@ public class Vaisseau {
 	public double gety() {
 		return y;
 	}
-
 	public void sety(double py){
 		y=py;
 	}
-
 	public int getlife() {
 		return life;
 	}
-
 	public int getScore() {
 		return score;
 	}
-
 	public int getMat() {
 		return matricule;
 	}
@@ -92,7 +87,6 @@ public class Vaisseau {
 				int SecondeStart=Isep.seconde;
 				StdDraw.text(5000, 5000, "Le joueur "+k+ " est mort");
 			}
-
 		}
 	}
 	public static boolean endGame(){
