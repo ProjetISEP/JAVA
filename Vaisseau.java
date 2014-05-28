@@ -18,6 +18,10 @@ public class Vaisseau {
 	public static boolean bottom=false;
 	public static boolean right=false;
 	public static boolean left=false;
+	public static boolean droite;
+	public static boolean gauche;
+	public static boolean haut;
+	public static boolean bas;
 	//public static boolean top1;
 	protected double y;
 	protected double x;
@@ -31,6 +35,7 @@ public class Vaisseau {
 	public static double inertieBottom;
 	public static double inertieRight;
 	public static double inertieLeft;
+	
 
 
 	static double R = Math.random() * 255;
@@ -61,6 +66,9 @@ public class Vaisseau {
 	}
 	public void sety(double py){
 		y=py;
+	}
+	public void setx(double px){
+		x=px;
 	}
 	public int getlife() {
 		return life;
@@ -282,14 +290,30 @@ public class Vaisseau {
 	public static void controlPlayer1() {
 		if (!toucheinversee) {
 
-			if (StdDraw.isKeyPressed(38))
+			if (StdDraw.isKeyPressed(38)){
 				(myVaisseau.get(0)).top();
-			if (StdDraw.isKeyPressed(37))
+				haut=true;
+			}
+			else
+				haut=false;
+			if (StdDraw.isKeyPressed(37)){
 				(myVaisseau.get(0)).left();
-			if (StdDraw.isKeyPressed(39))
+				gauche=true;
+			}
+			else
+				gauche=false;
+			if (StdDraw.isKeyPressed(39)){
 				(myVaisseau.get(0)).right();
-			if (StdDraw.isKeyPressed(40))
+					droite=true;
+			}
+			else
+				droite=false;
+			if (StdDraw.isKeyPressed(40)){
 				(myVaisseau.get(0)).bottom();
+				bas=true;
+			}
+			else
+				bas=false;
 		} else {
 			if (StdDraw.isKeyPressed(40))
 				(myVaisseau.get(0)).top();
@@ -453,6 +477,35 @@ public class Vaisseau {
 
 
 	}
+	
+	public void colisionVaisseauAVaisseau(){
+		myVaisseau = Isep.myVaisseau;
+		for(int i=0;i!=myVaisseau.size();i++){
+			if(this.matricule!=myVaisseau.get(i).matricule){
+				if (Math.abs(this.x-myVaisseau.get(i).getx())<=500 && Math.abs(this.y-myVaisseau.get(i).gety())<=250 && this.x-300<myVaisseau.get(i).getx() && this.droite){
+				myVaisseau.get(i).setx(myVaisseau.get(i).getx()+80);//
+				System.out.println("okdr");
+				}
+				if (Math.abs(this.x-myVaisseau.get(i).getx())<=500 && Math.abs(this.y-myVaisseau.get(i).gety())<=250 && this.x+300>myVaisseau.get(i).getx() && this.gauche){
+					myVaisseau.get(i).setx(myVaisseau.get(i).getx()-80);//
+					System.out.println("okgau");
+					}
+				if (Math.abs(this.x-myVaisseau.get(i).getx())<=250 && Math.abs(this.y-myVaisseau.get(i).gety())<=1000 && this.y-300<myVaisseau.get(i).gety() && this.haut){
+					myVaisseau.get(i).sety(myVaisseau.get(i).gety()+75);//
+					System.out.println("okhau");
+					}
+				if (Math.abs(this.x-myVaisseau.get(i).getx())<=250 && Math.abs(this.y-myVaisseau.get(i).gety())<=1000 && this.y+300<myVaisseau.get(i).gety() && this.bas){
+					myVaisseau.get(i).sety(myVaisseau.get(i).gety()-75);//
+					System.out.println("okhau");
+					}
+				
+			}
+		}
+		
+		
+		
+		
+	}
 
 	public void toucheInversee(int x1, int x2) {// la fonction de controle des touches a besoin du while true pour etre executé du
 		// coup elle est remise dans la
@@ -470,6 +523,8 @@ public class Vaisseau {
 		}
 
 	}
+	
+	
 
 	public void gravite(int x1, int x2) {
 

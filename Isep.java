@@ -336,6 +336,7 @@ public class Isep {
 				myVaisseau.get(i).vies();// c'est pour afficher les coeurs
 				(myVaisseau.get(i)).colisionMissileVaisseau();
 				(myVaisseau.get(i)).colisionMineVaisseau();
+				(myVaisseau.get(i)).colisionVaisseauAVaisseau();
 
 
 				//ZONES PARTICULIERES************************
