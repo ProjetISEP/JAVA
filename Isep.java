@@ -1,4 +1,4 @@
-﻿import java.awt.Color;
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -33,17 +33,18 @@ public class Isep {
 	public static List<Missile> myMines = new ArrayList<>();
 	public static int compteurSeconde;
 	public static int seconde=0;
+	public static int secondeRalentissement;
+	public static int dureeDuRalentissement=4;
+
 	public static boolean finDePartie=Vaisseau.endGame();
 
 	// GETTERS DES LISTES
 	public static List<Missile> getListeMissile() {
 		return myMissile;
 	}
-
 	public static List<Asteroide> getListeAsteroide() {
 		return myAsteroide;
 	}
-
 	public static List<Vaisseau> getListeVaisseau() {
 		return myVaisseau;
 	}
@@ -53,9 +54,19 @@ public class Isep {
 		double nb = 20000 + Math.random() * 40000;
 		int entier=caster(nb,100);
 		tableauRalentissement[0] = entier;
-
-		for (int k = 1; k != tableauRalentissement.length; k++) {
+		for (int k = 1; k != tableauRalentissement.length; k++){
 			tableauRalentissement[k]=tableauRalentissement[k-1]+caster(40000+Math.random()*100000,100);
+		}
+		return tableauRalentissement;
+	}
+	public static int[] Ralentir2(int nbvaleurs) {
+		int[] tableauRalentissement = new int[nbvaleurs];
+		double nb = 7 + Math.random() * 15;
+		int entier=caster(nb,1);
+		tableauRalentissement[0] = entier;
+		for (int k = 1; k != tableauRalentissement.length; k++){
+			tableauRalentissement[k]=tableauRalentissement[k-1]+caster(7+Math.random()*15,1);
+			System.out.println(tableauRalentissement[k]);
 		}
 		return tableauRalentissement;
 	}
@@ -66,7 +77,7 @@ public class Isep {
 		int entier=caster(nb,10);
 		tableauZonesParticulieres[0]=entier;
 		for(int k=1;k!=tableauZonesParticulieres.length;k++){
-			tableauZonesParticulieres[k]=tableauZonesParticulieres[k-1]+caster(40+Math.random()*90,10);
+			tableauZonesParticulieres[k]=tableauZonesParticulieres[k-1]+caster(80+Math.random()*90,10);
 		}
 		return tableauZonesParticulieres;
 	}
@@ -77,11 +88,6 @@ public class Isep {
 		int nb100=entier+(multiple-nbIntermedaire);
 		return nb100;
 	}
-
-
-
-
-
 
 
 	public static void main(String[] args) throws InterruptedException {
@@ -99,18 +105,15 @@ public class Isep {
 
 		// FIN CREATION D'OBJETS
 
-		int tab[] = Ralentir(10);// tableau pour les zones de ralentissement
+		int tab[] = Ralentir2(10);// tableau pour les zones de ralentissement à partir des secondes
 
 		//		Audio son = new Audio();
 		//	son.start();
-
-
 
 		boolean navigation=true;
 		Menu.nav();
 		compteurSeconde=0;
 		while (finDePartie) {
-			//System.out.println(finDePartie);
 			StdDraw.clear();
 			if(Menu.nbjoueurs==1){
 				if(myVaisseau.get(0).getlife()<=3)
@@ -118,11 +121,15 @@ public class Isep {
 						StdDraw.clear(Color.green);
 					}
 			}
-			if (Menu.multi1) {//Toute cette partie correspond au mode multi à 1, 2 ou 3 joueurs
+			if (Menu.multi1) {
 				if(Menu.nbjoueurs==2){
 					// JOUEUR2
 					if(myVaisseau.get(1).getlife()>0){
-					Vaisseau.controlPlayer2();
+						if(Menu.inertieJ2==false){
+							Vaisseau.controlPlayer2();   //CHOISIR INERTIE OU NORMAL
+						}else if (Menu.inertieJ2==true){
+							myVaisseau.get(1).controlPlayerInertie();
+						}
 					}
 					if (!StdDraw.isKeyPressed(69)) {// Si on n'appuye pas sur E
 						missileJ2 = false;
@@ -155,7 +162,7 @@ public class Isep {
 				}if(Menu.nbjoueurs==3){
 					// JOUEUR2
 					if(myVaisseau.get(1).getlife()>0){
-					Vaisseau.controlPlayer2();
+						Vaisseau.controlPlayer2();
 					}
 					if (!StdDraw.isKeyPressed(69)) {// Si on n'appuye pas sur E
 						missileJ2 = false;
@@ -188,7 +195,7 @@ public class Isep {
 					}
 					// JOUEUR3
 					if(myVaisseau.get(2).getlife()>0){
-					Vaisseau.controlPlayer3();
+						Vaisseau.controlPlayer3();
 					}
 					if (!StdDraw.isKeyPressed(73)) {// 73 = touche I
 						missileJ3 = false;
@@ -261,24 +268,33 @@ public class Isep {
 				} else {
 					myrectangle.get(i).colision1();// colision avec le haut
 				}
-				for (int k = 0; k <= 5; k++) { // boucle pour les ralentissements
-					if (myVaisseau.get(0).getScore() <= tab[k] + 100
-							&& myVaisseau.get(0).getScore() >= tab[k] - 100) {
+				/*for (int k = 0; k <= 5; k++) { // boucle pour les ralentissements
+					if (myVaisseau.get(0).getScore() <= tab[k] + 100 && myVaisseau.get(0).getScore() >= tab[k] - 100) {
 						myrectangle.get(i).setSpeed(20);// on baisse la vitesse
 					}
-					if (myVaisseau.get(0).getScore() <= tab[k] + 30100
-							&& myVaisseau.get(0).getScore() >= tab[k] + 29900) {
+					if (myVaisseau.get(0).getScore() <= tab[k] + 30100	&& myVaisseau.get(0).getScore() >= tab[k] + 29900) {
 						myrectangle.get(i).setSpeed(60);// on la reaugmente 20000 unités de score plus tard)
+					}
+				}*/
+				for (int k = 0; k <= 5; k++) { // boucle pour les ralentissements
+					if (seconde==tab[k]) {
+						secondeRalentissement=seconde;
+						myrectangle.get(i).setSpeed(20);// on baisse la vitesse
+					}
+					if (seconde==secondeRalentissement+dureeDuRalentissement) {
+						myrectangle.get(i).setSpeed(80);// on la reaugmente 20000 unités de score plus tard)
 					}
 				}
 			}
-
 			// ***************************************************
 			// JOUEUR1
 
 			if(myVaisseau.get(0).getlife()>0){
-				Vaisseau.controlPlayer1();   //CHOISIR INERTIE OU NORMAL
-				//myVaisseau.get(0).controlPlayerInertie();
+				if(Menu.inertieJ1==false){
+					Vaisseau.controlPlayer1();   //CHOISIR INERTIE OU NORMAL
+				}else if(Menu.inertieJ1==true){
+					myVaisseau.get(0).controlPlayerInertie();
+				}
 			}
 			if (!StdDraw.isKeyPressed(32)) {// Si on n'appuye pas sur espace
 				missileJ1 = false;
@@ -330,18 +346,19 @@ public class Isep {
 					(myVaisseau.get(i)).setX(10);
 				}
 				if(myVaisseau.get(i).getx()<-500){
-					(myVaisseau.get(i)).setX(100000000);// on sort le vaisseau en questiondu terrain pour plus qu'il interfère
+					(myVaisseau.get(i)).setX(100000000);// on sort le vaisseau en question du terrain pour plus qu'il interfère
 				}
 				(myVaisseau.get(i)).score();
 				myVaisseau.get(i).vies();// c'est pour afficher les coeurs
 				(myVaisseau.get(i)).colisionMissileVaisseau();
-				(myVaisseau.get(i)).colisionMineVaisseau();
+				(myVaisseau.get(i)).colisionMineVaisseau(); 
+				(myVaisseau.get(i)).colisionVaisseauAVaisseau();
 
 
 				//ZONES PARTICULIERES************************
 				for(int k=0;k!=tabZonesParticuliere.length;k++){
-					myVaisseau.get(i).toucheInversee(2*tabZonesParticuliere[k],2*tabZonesParticuliere[k]+60);	// INVERSEMENT DES TOUCHES************************
-					myVaisseau.get(i).gravite(2*tabZonesParticuliere[k],2*tabZonesParticuliere[k]+60);// GRAVITE************************
+					myVaisseau.get(i).toucheInversee(2*tabZonesParticuliere[k],2*tabZonesParticuliere[k]+120);	// INVERSEMENT DES TOUCHES************************
+					myVaisseau.get(i).gravite(2*tabZonesParticuliere[k],2*tabZonesParticuliere[k]+120);// GRAVITE************************
 				}
 				//********* FIN ZONE PARTICULIERE
 			}

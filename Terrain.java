@@ -11,7 +11,7 @@ public class Terrain {
 	public static List<Missile> myMissile =new ArrayList<>();
 	protected double xter;
 	protected double yter;
-	protected double largeur;
+	protected double largeur=110;
 	protected double hauteur;
 	protected static double speed=80;
 	protected static int tailleterrain=600;
@@ -20,6 +20,7 @@ public class Terrain {
 	static double R=Math.random()*255;
 	static double G=Math.random()*255;
 	static double B=Math.random()*255;
+	public static int largeurRectangle=110;
 
 
 	Terrain(double xter, double yter, double largeur, double hauteur, double speed) {
@@ -80,20 +81,20 @@ public class Terrain {
 		myrectangle=Terrain.getListeTerrain();
 		for(int i=0;i!=tailleterrain;i++){
 			if(i<20){
-				myrectangle.add(new Terrain(10000+i*200, 200,90,i*100+1000,speed));//le bas /* variation lineaire croissante de la hauteur */
-				myrectangle.add(new Terrain(10000+i*200, 9800,90,i*100+1000,speed));//le haut
-			}else if(i>Isep.tabZonesParticuliere[0] && i<Isep.tabZonesParticuliere[0]+30){ // POUR LES ZONES PARTICULIERES
-				myrectangle.add(new TerrainParticulier(xrectangle+i*200, 200,90,4000+-(tab1[i]*3550),speed));//le 3900 est une translation
-				myrectangle.add(new TerrainParticulier(xrectangle+i*200, 9800,90,500+tab1[i]*4500,speed));
-			}else if(i>Isep.tabZonesParticuliere[1] && i<Isep.tabZonesParticuliere[1]+30){ // POUR LES ZONES PARTICULIERES
-				myrectangle.add(new TerrainParticulier(xrectangle+i*200, 200,90,4000+-(tab1[i]*3550),speed));//le 3900 est une translation
-				myrectangle.add(new TerrainParticulier(xrectangle+i*200, 9800,90,500+tab1[i]*4500,speed));
-			}else if(i>Isep.tabZonesParticuliere[2] && i<Isep.tabZonesParticuliere[2]+30){ // POUR LES ZONES PARTICULIERES
-				myrectangle.add(new TerrainParticulier(xrectangle+i*200, 200,90,4000+-(tab1[i]*3550),speed));//le 3900 est une translation
-				myrectangle.add(new TerrainParticulier(xrectangle+i*200, 9800,90,500+tab1[i]*4500,speed));
+				myrectangle.add(new Terrain(10000+i*200, 200,largeurRectangle,i*100+1000,speed));//le bas /* variation lineaire croissante de la hauteur */
+				myrectangle.add(new Terrain(10000+i*200, 9800,largeurRectangle,i*100+1000,speed));//le haut
+			}else if(i>Isep.tabZonesParticuliere[0] && i<Isep.tabZonesParticuliere[0]+60){ // POUR LES ZONES PARTICULIERES
+				myrectangle.add(new TerrainParticulier(xrectangle+i*200, 200,largeurRectangle,4000+-(tab1[i]*3550),speed));//le 3900 est une translation
+				myrectangle.add(new TerrainParticulier(xrectangle+i*200, 9800,largeurRectangle,500+tab1[i]*4500,speed));
+			}else if(i>Isep.tabZonesParticuliere[1] && i<Isep.tabZonesParticuliere[1]+60){ // POUR LES ZONES PARTICULIERES
+				myrectangle.add(new TerrainParticulier(xrectangle+i*200, 200,largeurRectangle,4000+-(tab1[i]*3550),speed));//le 3900 est une translation
+				myrectangle.add(new TerrainParticulier(xrectangle+i*200, 9800,largeurRectangle,500+tab1[i]*4500,speed));
+			}else if(i>Isep.tabZonesParticuliere[2] && i<Isep.tabZonesParticuliere[2]+60){ // POUR LES ZONES PARTICULIERES
+				myrectangle.add(new TerrainParticulier(xrectangle+i*200, 200,largeurRectangle,4000+-(tab1[i]*3550),speed));//le 3900 est une translation
+				myrectangle.add(new TerrainParticulier(xrectangle+i*200, 9800,largeurRectangle,500+tab1[i]*4500,speed));
 			}else{
-				myrectangle.add(new Terrain(xrectangle+i*200, 200,90,4000+-(tab1[i]*3550),speed));
-				myrectangle.add(new Terrain(xrectangle+i*200, 9800,90,500+tab1[i]*4500,speed));
+				myrectangle.add(new Terrain(xrectangle+i*200, 200,largeurRectangle,4000+-(tab1[i]*3550),speed));
+				myrectangle.add(new Terrain(xrectangle+i*200, 9800,largeurRectangle,500+tab1[i]*4500,speed));
 			}
 		}
 	}
