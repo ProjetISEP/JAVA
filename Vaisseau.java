@@ -18,10 +18,10 @@ public class Vaisseau {
 	public static boolean bottom=false;
 	public static boolean right=false;
 	public static boolean left=false;
-	public static boolean droite;
-	public static boolean gauche;
-	public static boolean haut;
-	public static boolean bas;
+	protected static boolean droite;
+	protected static boolean gauche;
+	protected static boolean haut;
+	protected static boolean bas;
 	//public static boolean top1;
 	protected double y;
 	protected double x;
@@ -44,7 +44,7 @@ public class Vaisseau {
 	private int life;
 
 	Vaisseau(double px, double py, double pvx, double pvy, int plife, int pscore,
-			int pMatricule, boolean pbouclier, int pStock) {// Un vaisseau possède une matricule pour la
+			int pMatricule, boolean pbouclier, int pStock, boolean pHaut,boolean pBas,boolean pDroite,boolean pGauche) {// Un vaisseau possède une matricule pour la
 		// reconnaissance des missiles
 		this.x = px;
 		this.y = py;
@@ -55,6 +55,10 @@ public class Vaisseau {
 		this.bouclier = pbouclier;
 		matricule = pMatricule;
 		stockMine=pStock;
+		droite=pDroite;
+		gauche=pGauche;
+		haut=pHaut;
+        bas=pBas;
 	}
 
 	public double getx() {
@@ -69,6 +73,18 @@ public class Vaisseau {
 	}
 	public void setx(double px){
 		x=px;
+	}
+	public void setHaut(boolean h){
+		haut=h;
+	}
+	public void setBas(boolean h){
+		bas=h;
+	}
+	public void setGauche(boolean h){
+		gauche=h;
+	}
+	public void setDroite(boolean h){
+		droite=h;
 	}
 	public int getlife() {
 		return life;
@@ -292,22 +308,29 @@ public class Vaisseau {
 
 			if (StdDraw.isKeyPressed(38)){
 				(myVaisseau.get(0)).top();
-				haut=true;
+				(myVaisseau.get(0)).setHaut(true);		
+				
 			}
-			else
-				haut=false;
+		//	else
+			//	(myVaisseau.get(0)).setHaut(false);
 			if (StdDraw.isKeyPressed(37)){
 				(myVaisseau.get(0)).left();
-				gauche=true;
+				(myVaisseau.get(0)).setGauche(true);
 			}
-			else
-				gauche=false;
+	//		else
+			//	(myVaisseau.get(0)).setGauche(false);
 			if (StdDraw.isKeyPressed(39)){
 				(myVaisseau.get(0)).right();
-					droite=true;
+				(myVaisseau.get(0)).setDroite(true);
 			}
-			else
-				droite=false;
+		//	else
+			//	(myVaisseau.get(0)).setDroite(false);
+			if (StdDraw.isKeyPressed(40)){
+				(myVaisseau.get(0)).bottom();
+				(myVaisseau.get(0)).setBas(true);
+			}
+			//else
+				//(myVaisseau.get(0)).setBas(false);
 			if (StdDraw.isKeyPressed(40)){
 				(myVaisseau.get(0)).bottom();
 				bas=true;
@@ -338,14 +361,31 @@ public class Vaisseau {
 	}
 	public static void controlPlayer2() {
 		if (!toucheinversee) {
-			if(StdDraw.isKeyPressed(90))
+			if (StdDraw.isKeyPressed(90)){
 				(myVaisseau.get(1)).top();
-			if(StdDraw.isKeyPressed(81))
+				(myVaisseau.get(1)).setHaut(true);		
+				
+			}
+		//	else
+			//	(myVaisseau.get(0)).setHaut(false);
+			if (StdDraw.isKeyPressed(81)){
 				(myVaisseau.get(1)).left();
-			if(StdDraw.isKeyPressed(68))
+				(myVaisseau.get(1)).setGauche(true);
+			}
+	//		else
+			//	(myVaisseau.get(0)).setGauche(false);
+			if (StdDraw.isKeyPressed(68)){
 				(myVaisseau.get(1)).right();
-			if(StdDraw.isKeyPressed(83))
+				(myVaisseau.get(1)).setDroite(true);
+			}
+		//	else
+			//	(myVaisseau.get(0)).setDroite(false);
+			if (StdDraw.isKeyPressed(83)){
 				(myVaisseau.get(1)).bottom();
+				(myVaisseau.get(1)).setBas(true);
+			}
+			//else
+				//(myVaisseau.get(0)).setBas(false);
 		} else {
 			if (StdDraw.isKeyPressed(83))
 				(myVaisseau.get(1)).top();
@@ -482,6 +522,7 @@ public class Vaisseau {
 		myVaisseau = Isep.myVaisseau;
 		for(int i=0;i!=myVaisseau.size();i++){
 			if(this.matricule!=myVaisseau.get(i).matricule){
+				System.out.print(this.droite);
 				if (Math.abs(this.x-myVaisseau.get(i).getx())<=500 && Math.abs(this.y-myVaisseau.get(i).gety())<=250 && this.x-300<myVaisseau.get(i).getx() && this.droite){
 				myVaisseau.get(i).setx(myVaisseau.get(i).getx()+80);//
 				System.out.println("okdr");
@@ -489,15 +530,15 @@ public class Vaisseau {
 				if (Math.abs(this.x-myVaisseau.get(i).getx())<=500 && Math.abs(this.y-myVaisseau.get(i).gety())<=250 && this.x+300>myVaisseau.get(i).getx() && this.gauche){
 					myVaisseau.get(i).setx(myVaisseau.get(i).getx()-80);//
 					System.out.println("okgau");
-					}
+				}
 				if (Math.abs(this.x-myVaisseau.get(i).getx())<=250 && Math.abs(this.y-myVaisseau.get(i).gety())<=1000 && this.y-300<myVaisseau.get(i).gety() && this.haut){
 					myVaisseau.get(i).sety(myVaisseau.get(i).gety()+75);//
 					System.out.println("okhau");
-					}
+				}
 				if (Math.abs(this.x-myVaisseau.get(i).getx())<=250 && Math.abs(this.y-myVaisseau.get(i).gety())<=1000 && this.y+300<myVaisseau.get(i).gety() && this.bas){
 					myVaisseau.get(i).sety(myVaisseau.get(i).gety()-75);//
 					System.out.println("okhau");
-					}
+				}
 				
 			}
 		}

@@ -18,8 +18,8 @@ public class AI extends Vaisseau {
 
 	AI(double x, double y, double vx, double vy, int life, int score,
 			int pMatricule, boolean pBouclier, boolean pTop, boolean pBottom,
-			boolean pLeft, boolean pRight, boolean pMissile, boolean pMine, int pStock) {
-		super(x, y, vx, vy, life, score, pMatricule, pBouclier, pStock);
+			boolean pLeft, boolean pRight, boolean pMissile, boolean pMine, int pStock,boolean pHaut,boolean pBas,boolean pDroite,boolean pGauche) {
+		super(x, y, vx, vy, life, score, pMatricule, pBouclier, pStock,pHaut, pBas, pDroite, pGauche);
 		top = pTop;
 		bottom = pBottom;
 		left = pLeft;
