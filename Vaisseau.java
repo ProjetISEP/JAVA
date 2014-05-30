@@ -14,14 +14,15 @@ public class Vaisseau {
 	public static boolean gravite;
 	public static boolean collisionmissile;
 	public static boolean collisionmine;
-	public static boolean top=false;
-	public static boolean bottom=false;
-	public static boolean right=false;
-	public static boolean left=false;
-	protected static boolean droite;
-	protected static boolean gauche;
-	protected static boolean haut;
-	protected static boolean bas;
+//	public static boolean top=false;
+//	public static boolean bottom=false;
+//	public static boolean right=false;
+//	public static boolean left=false;
+	protected  boolean droite=false;
+	protected  boolean gauche;
+	protected  boolean haut;
+	protected boolean bas;
+	protected boolean inertie;
 	//public static boolean top1;
 	protected double y;
 	protected double x;
@@ -31,10 +32,10 @@ public class Vaisseau {
 	protected boolean bouclier;
 	protected int matricule;
 	protected int stockMine;
-	public static double inertieTop;
-	public static double inertieBottom;
-	public static double inertieRight;
-	public static double inertieLeft;
+	private double inertieTop;
+	private double inertieBottom;
+	private double inertieRight;
+	private double inertieLeft;
 	
 
 
@@ -44,7 +45,7 @@ public class Vaisseau {
 	private int life;
 
 	Vaisseau(double px, double py, double pvx, double pvy, int plife, int pscore,
-			int pMatricule, boolean pbouclier, int pStock, boolean pHaut,boolean pBas,boolean pDroite,boolean pGauche) {// Un vaisseau possède une matricule pour la
+			int pMatricule, boolean pbouclier, int pStock, boolean pHaut,boolean pBas,boolean pDroite,boolean pGauche,boolean pInertie, double pItop,double pIbottom, double pIright,double pIleft) {// Un vaisseau possède une matricule pour la
 		// reconnaissance des missiles
 		this.x = px;
 		this.y = py;
@@ -59,6 +60,12 @@ public class Vaisseau {
 		gauche=pGauche;
 		haut=pHaut;
         bas=pBas;
+        inertie=pInertie;
+        inertieTop=pItop;
+    	inertieBottom=pIbottom;
+    	inertieRight=pIright;
+    	inertieLeft=pIleft;
+        
 	}
 
 	public double getx() {
@@ -85,6 +92,9 @@ public class Vaisseau {
 	}
 	public void setDroite(boolean h){
 		droite=h;
+	}
+	public void setInertie(boolean pInertie){
+		inertie=pInertie;
 	}
 	public int getlife() {
 		return life;
@@ -198,12 +208,18 @@ public class Vaisseau {
 	}
 
 	public void top1(){
-
-		if(StdDraw.isKeyPressed(38)){
-			top=true;
-			bottom=false;
-			left=false;
-			right=false;
+		int k=0;
+		if(matricule==0)
+			k=38;
+		else if(matricule==1)
+			k=90;
+		else if(matricule==2)
+			k=85;
+		if(StdDraw.isKeyPressed(k)){
+			haut=true;
+			bas=false;
+			gauche=false;
+			droite=false;
 			if(inertieTop<75){	
 				y=y+inertieTop;
 				inertieTop=inertieTop+1;
@@ -213,7 +229,7 @@ public class Vaisseau {
 			}
 		}
 		else{
-			if(top){
+			if(haut){
 				if(inertieTop>0){
 					y=y+inertieTop;
 					inertieTop=inertieTop-1;
@@ -226,11 +242,18 @@ public class Vaisseau {
 	}
 
 	public void bottom1() {
-		if(StdDraw.isKeyPressed(40)){
-			top=false;
-			bottom=true;
-			left=false;
-			right=false;
+		int k=0;
+		if(matricule==0)
+			k=40;
+		else if(matricule==1)
+			k=83;
+		else if(matricule==2)
+			k=74;
+		if(StdDraw.isKeyPressed(k)){
+			haut=false;
+			bas=true;
+			gauche=false;
+			droite=false;
 			if(inertieBottom<75){	
 				y=y-inertieBottom;
 				inertieBottom=inertieBottom+1;
@@ -240,7 +263,7 @@ public class Vaisseau {
 			}
 		}
 		else{
-			if(bottom){
+			if(bas){
 				if(inertieBottom>0){
 					y=y-inertieBottom;
 					inertieBottom=inertieBottom-1;
@@ -252,11 +275,18 @@ public class Vaisseau {
 		}
 	}
 	public void left1() {
-		if(StdDraw.isKeyPressed(37)){
-			top=false;
-			bottom=false;
-			left=true;
-			right=false;
+		int k=0;
+		if(matricule==0)
+			k=37;
+		else if(matricule==1)
+			k=81;
+		else if(matricule==2)
+			k=72;
+		if(StdDraw.isKeyPressed(k)){
+			haut=false;
+			bas=false;
+			gauche=true;
+			droite=false;
 			if(inertieLeft<40){	
 				x=x-inertieLeft;
 				inertieLeft=inertieLeft+0.5;
@@ -266,7 +296,7 @@ public class Vaisseau {
 			}
 		}
 		else{
-			if(left){
+			if(gauche){
 				if(inertieLeft>0){
 					x=x-inertieLeft;
 					inertieLeft=inertieLeft-0.5;
@@ -278,11 +308,18 @@ public class Vaisseau {
 		}
 	}
 	public void right1() {
-		if(StdDraw.isKeyPressed(39)){
-			top=false;
-			bottom=false;
-			left=false;
-			right=true;
+		int k=0;
+		if(matricule==0)
+			k=39;
+		else if(matricule==1)
+			k=68;
+		else if(matricule==2)
+			k=75;
+		if(StdDraw.isKeyPressed(k)){
+			haut=false;
+			bas=false;
+			gauche=false;
+			droite=true;
 			if(inertieRight<40){	
 				x=x+inertieRight;
 				inertieRight=inertieRight+0.5;
@@ -292,7 +329,7 @@ public class Vaisseau {
 			}
 		}
 		else{
-			if(right){
+			if(droite){
 				if(inertieRight>0){
 					x=x+inertieRight;
 					inertieRight=inertieRight-0.5;
@@ -331,12 +368,6 @@ public class Vaisseau {
 			}
 			//else
 				//(myVaisseau.get(0)).setBas(false);
-			if (StdDraw.isKeyPressed(40)){
-				(myVaisseau.get(0)).bottom();
-				bas=true;
-			}
-			else
-				bas=false;
 		} else {
 			if (StdDraw.isKeyPressed(40))
 				(myVaisseau.get(0)).top();
@@ -521,23 +552,23 @@ public class Vaisseau {
 	public void colisionVaisseauAVaisseau(){
 		myVaisseau = Isep.myVaisseau;
 		for(int i=0;i!=myVaisseau.size();i++){
-			if(this.matricule!=myVaisseau.get(i).matricule){
-				System.out.print(this.droite);
-				if (Math.abs(this.x-myVaisseau.get(i).getx())<=500 && Math.abs(this.y-myVaisseau.get(i).gety())<=250 && this.x-300<myVaisseau.get(i).getx() && this.droite){
+			if(this.matricule!=myVaisseau.get(i).matricule && !this.inertie){
+			//	System.out.print(this.droite);
+				if (Math.abs(this.x-myVaisseau.get(i).getx())<=500 && Math.abs(this.y-myVaisseau.get(i).gety())<=250 && this.x-300<myVaisseau.get(i).getx() && this.droite ){
 				myVaisseau.get(i).setx(myVaisseau.get(i).getx()+80);//
-				System.out.println("okdr");
+			//	System.out.println("okdr");
 				}
 				if (Math.abs(this.x-myVaisseau.get(i).getx())<=500 && Math.abs(this.y-myVaisseau.get(i).gety())<=250 && this.x+300>myVaisseau.get(i).getx() && this.gauche){
 					myVaisseau.get(i).setx(myVaisseau.get(i).getx()-80);//
-					System.out.println("okgau");
+				//	System.out.println("okgau");
 				}
 				if (Math.abs(this.x-myVaisseau.get(i).getx())<=250 && Math.abs(this.y-myVaisseau.get(i).gety())<=1000 && this.y-300<myVaisseau.get(i).gety() && this.haut){
 					myVaisseau.get(i).sety(myVaisseau.get(i).gety()+75);//
-					System.out.println("okhau");
+			//		System.out.println("okhau");
 				}
 				if (Math.abs(this.x-myVaisseau.get(i).getx())<=250 && Math.abs(this.y-myVaisseau.get(i).gety())<=1000 && this.y+300<myVaisseau.get(i).gety() && this.bas){
 					myVaisseau.get(i).sety(myVaisseau.get(i).gety()-75);//
-					System.out.println("okhau");
+			//		System.out.println("okhau");
 				}
 				
 			}

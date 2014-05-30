@@ -128,7 +128,9 @@ public class Isep {
 						if(Menu.inertieJ2==false){
 							Vaisseau.controlPlayer2();   //CHOISIR INERTIE OU NORMAL
 						}else if (Menu.inertieJ2==true){
+							myVaisseau.get(1).setInertie(true);
 							myVaisseau.get(1).controlPlayerInertie();
+							
 						}
 					}
 					if (!StdDraw.isKeyPressed(69)) {// Si on n'appuye pas sur E
@@ -293,6 +295,7 @@ public class Isep {
 				if(Menu.inertieJ1==false){
 					Vaisseau.controlPlayer1();   //CHOISIR INERTIE OU NORMAL
 				}else if(Menu.inertieJ1==true){
+					myVaisseau.get(0).setInertie(true);
 					myVaisseau.get(0).controlPlayerInertie();
 				}
 			}
