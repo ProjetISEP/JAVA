@@ -35,7 +35,10 @@ public class Isep {
 	public static int seconde=0;
 	public static int secondeRalentissement;
 	public static int dureeDuRalentissement=4;
-
+	static double[] xter2=new double[50000];
+	static double[] yter2=new double[50000];
+	public static int bcl=0;
+	public static boolean pass=false;
 	public static boolean finDePartie=Vaisseau.endGame();
 
 	// GETTERS DES LISTES
@@ -263,6 +266,7 @@ public class Isep {
 
 
 			// RECTANGLES********************************************
+			if(Terrain.niveau1){
 			for (int i = 0; i != myrectangle.size(); i++) {
 				myrectangle.get(i).show();// methode qui permet le defilement de chaque rectangle de la liste
 				if (i % 2 == 0) {
@@ -287,6 +291,78 @@ public class Isep {
 						myrectangle.get(i).setSpeed(80);// on la reaugmente 20000 unités de score plus tard)
 					}
 				}
+			}
+			}
+			else{
+				double a;
+				double b;
+				double c;
+				myrectangle.add(new Terrain(0, 0.3*Y_MAX,0,0,speed));
+				if(!pass){
+				for(int k=bcl;k!=bcl+Terrain.tailleterrain;k++){
+				//bcl=k;
+					if(k==bcl+Terrain.tailleterrain-1){
+					
+						myrectangle.add(new Terrain(myrectangle.get(k-1).getxter(), 0,0,0,speed));
+						xter2[k]=myrectangle.get(k-1).getxter(); yter2[k]=0;
+					}
+					else{
+						if(k%7==0){
+							a=((double)(Math.random()*(0.65*Y_MAX-0.25*Y_MAX+1))+0.25*Y_MAX);
+							myrectangle.add(new Terrain(k*(0.01*X_MAX), a-1000,0,0,speed));
+							xter2[k] =myrectangle.get(k).getxter();  yter2[k] = a;
+						}
+						if(k%19==0){
+							c=((double)(Math.random()*(0.55*Y_MAX-0.13*Y_MAX+1))+0.13*Y_MAX);
+							myrectangle.add(new Terrain(k*(0.01*X_MAX), c,0,0,speed));
+							xter2[k] =myrectangle.get(k).getxter();  yter2[k] = c;
+						}
+						else{
+							b=((double)(Math.random()*(0.35*Y_MAX-0.25*Y_MAX+1))+0.25*Y_MAX);
+							myrectangle.add(new Terrain(k*0.01*X_MAX, b,0,0,speed));
+							xter2[k] = myrectangle.get(k).getxter();  yter2[k] = b;
+						}
+					}
+				pass=true;
+				
+			
+				}
+				}
+				//StdDraw.polygon(xter2, yter2);
+			
+				Color RANDOM=new Color((int)R,(int)G,(int)B);
+				StdDraw.setPenColor(Color.blue);
+				for(int k=bcl;k!=bcl+Terrain.tailleterrain;k++){
+					StdDraw.line(myrectangle.get(k).getxter(), myrectangle.get(k).getyter(),myrectangle.get(k+1).getxter(),myrectangle.get(k+1).getyter());
+					myrectangle.get(k).setxter(myrectangle.get(k).getxter()-myrectangle.get(k).speed);
+				}
+			}
+			//COLISION*********************************************************
+			for(int k=0;k!=myVaisseau.size();k++){
+				for(int j=bcl;j!=bcl+Terrain.tailleterrain;j++){
+				double intermediaire=myrectangle.get(k).getyter()+350;
+			//	if(myrectangle.get(j).getxter()+100>myVaisseau.get(k).getx() && myrectangle.get(j).getxter()-100<myVaisseau.get(k).getx() && intermediaire>myVaisseau.get(k).gety()){
+				/*	if(myVaisseau.get(k).getx()+500<=myrectangle.get(j+1).getxter() && myVaisseau.get(k).getx()-500<=myrectangle.get(j+1).getxter() 
+							&& myVaisseau.get(k).getx()+100>=myrectangle.get(j).getxter() && myVaisseau.get(k).getx()-100>=myrectangle.get(j).getxter() && 
+							myVaisseau.get(k).gety()+100<=myrectangle.get(j+1).getyter() && 	myVaisseau.get(k).gety()-100<=myrectangle.get(j+1).getyter()
+							&& myVaisseau.get(k).gety()+100>=myrectangle.get(j).getyter() && myVaisseau.get(k).gety()-100>=myrectangle.get(j).getyter() ){*/
+				if(0.5>=-myVaisseau.get(k).gety()+((myrectangle.get(j+1).getyter()-myrectangle.get(j).getyter())*(myVaisseau.get(k).getx()))/(myrectangle.get(j+1).getxter()-myrectangle.get(j).getxter()) +myrectangle.get(j).getyter()- 
+						((myrectangle.get(j+1).getyter()-myrectangle.get(j).getyter())*(myrectangle.get(j).getxter()))/(myrectangle.get(j+1).getxter()-myrectangle.get(j).getxter()) &&
+						
+						-0.5<=-myVaisseau.get(k).gety()+((myrectangle.get(j+1).getyter()-myrectangle.get(j).getyter())*(myVaisseau.get(k).getx()))/(myrectangle.get(j+1).getxter()-myrectangle.get(j).getxter()) +myrectangle.get(j).getyter()- 
+						((myrectangle.get(j+1).getyter()-myrectangle.get(j).getyter())*(myrectangle.get(j).getxter()))/(myrectangle.get(j+1).getxter()-myrectangle.get(j).getxter())
+						){
+					
+					
+					if(intermediaire>myVaisseau.get(k).gety()){
+						myVaisseau.get(k).setY(-200);
+					}
+					if(!myVaisseau.get(k).getBouclier()){
+						System.out.println("ok");
+						myVaisseau.get(k).setLife();
+					}
+				}
+			}
 			}
 			// ***************************************************
 			// JOUEUR1

@@ -583,7 +583,7 @@ public class Vaisseau {
 		// coup elle est remise dans la
 		// classe Isep
 		myrectangle = Terrain.getListeTerrain();
-
+		if(Terrain.niveau1){
 		if (this.x >= myrectangle.get(x1).getxter()
 				&& this.x <= myrectangle.get(x2).getxter()) {//Il faut que la position en x du vaisseau soit compris entre x1eme rectangle et x2eme rectangle
 			//pour que l'effet s'applique
@@ -593,7 +593,7 @@ public class Vaisseau {
 			toucheinversee = false;
 			//		System.out.println("pas inversée");
 		}
-
+		}
 	}
 	
 	
@@ -601,6 +601,7 @@ public class Vaisseau {
 	public void gravite(int x1, int x2) {
 
 		myrectangle = Terrain.getListeTerrain();
+		if(Terrain.niveau1){
 		if (this.x >= myrectangle.get(x1).getxter()
 				&& this.x <= myrectangle.get(x2).getxter()) {// PARTIE GRAVITE
 			this.setY(20); // setY est dans la class Vaisseau
@@ -611,6 +612,6 @@ public class Vaisseau {
 			//	System.out.println("pas de gravité");
 		}
 	}
-
+	}
 
 }

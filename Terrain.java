@@ -21,6 +21,10 @@ public class Terrain {
 	static double G=Math.random()*255;
 	static double B=Math.random()*255;
 	public static int largeurRectangle=110;
+	public static boolean niveau1=false;
+	public static boolean niveau2=true;
+	static double[] xter2=new double[50000];
+	static double[] yter2=new double[50000];
 
 
 	Terrain(double xter, double yter, double largeur, double hauteur, double speed) {
@@ -49,12 +53,78 @@ public class Terrain {
 		myVaisseau=Isep.getListeVaisseau();
 		speed=newSpeed;		
 	}
+	public void setxter(double d){
+		xter=d;
+	}
+	public void setyter(double a){
+		yter=a;
+	}
 	public void show(){
-		StdDraw.filledRectangle(xter, yter, largeur,hauteur);
+		if(niveau1)
+			StdDraw.filledRectangle(xter, yter, largeur,hauteur);
+		/*else{
+			double[] xTer=new double[50000];
+			double[] yTer=new double[50000];
+			double a;
+			double b;
+			for(int k=1;k!=myrectangle.size();k++){
+			//	if(k==100){
+			//		xter[k]=xter[k-1]; yter[k]=0;
+				//	myrectangle.add(new Terrain(myrectangle.get(k-1).getxter(), 0,0,0,speed));
+			//	}
+		//		else{
+				//	if(k%5==0){
+						//a=((double)(Math.random()*(0.65*Y_MAX-0.15*Y_MAX+1))+0.15*Y_MAX);
+					//	myrectangle.add(new Terrain(k*10, a,0,0,speed));
+					//	xter[k] = k*10;  yter[k] = a;
+						xTer[k] = myrectangle.get(k).getxter();  yTer[k] = myrectangle.get(k).getyter();
+					//}
+				//	else{
+					//	b=((double)(Math.random()*(0.35*Y_MAX-0.25*Y_MAX+1))+0.25*Y_MAX);
+				//		myrectangle.add(new Terrain(k*10, b,0,0,speed));
+						//xter[k] = k*10;  yter[k] = b;
+				//	}
+		//		}
+						StdDraw.polygon(xTer, yTer);
+			}
+			
+		
+		}*/
+		//	StdDraw.polygon(xter, yter);
 		Color RANDOM=new Color((int)R,(int)G,(int)B);
 		StdDraw.setPenColor(Color.black);
 		xter=xter-speed;
 	}
+	
+	/*public static void showniv2(){
+		double a;
+		double b;
+		myrectangle.add(new Terrain(0, 0.3*Y_MAX,0,0,speed));
+		for(int k=1;k!=110;k++){
+			if(k==110-1){
+			
+				myrectangle.add(new Terrain(myrectangle.get(k-1).getxter(), 0,0,0,speed));
+				xter2[k]=myrectangle.get(k-1).getxter(); yter2[k]=0;
+			}
+			else{
+				if(k%5==0){
+					a=((double)(Math.random()*(0.65*Y_MAX-0.15*Y_MAX+1))+0.15*Y_MAX);
+					myrectangle.add(new Terrain(k*(0.01*X_MAX), a,0,0,speed));
+					xter2[k] =myrectangle.get(k).getxter();  yter2[k] = a;
+				}
+				else{
+					b=((double)(Math.random()*(0.35*Y_MAX-0.25*Y_MAX+1))+0.25*Y_MAX);
+					myrectangle.add(new Terrain(k*0.01*X_MAX, b,0,0,speed));
+					xter2[k] = myrectangle.get(k).getxter();  yter2[k] = b;
+				}
+			}
+		
+		}
+		StdDraw.polygon(xter2, yter2);
+		Color RANDOM=new Color((int)R,(int)G,(int)B);
+		StdDraw.setPenColor(Color.black);
+	}*/
+	
 	public static double[] tableauAleatoire(int nbvaleurs){ // G�nere un tableau al�atoire pour la fonction decor
 		tab[0]=Math.random();
 		int k=0;
@@ -77,6 +147,7 @@ public class Terrain {
 		return tab;
 	}
 	public static void generateTerrain(){
+		if(niveau1){
 		double tab1[]=tableauAleatoire(tailleterrain);
 		myrectangle=Terrain.getListeTerrain();
 		for(int i=0;i!=tailleterrain;i++){
@@ -97,9 +168,20 @@ public class Terrain {
 				myrectangle.add(new Terrain(xrectangle+i*200, 9800,largeurRectangle,500+tab1[i]*4500,speed));
 			}
 		}
+		}
+		else if(niveau2){
+		
+			
+			System.out.println("ok");
+			for (int i=0;i!=1000;i++){
+			System.out.println(xter2[i]+"   "+yter2[i]);}
+		
+		}
 	}
 	
-	
+	public static void colision2(){
+		
+	}
 
 	public void colision(){//POUR LES COLISIONS AVEC LES RECTANGLES DU BAS
 		myVaisseau=Isep.getListeVaisseau();	
