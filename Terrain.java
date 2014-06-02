@@ -21,8 +21,8 @@ public class Terrain {
 	static double G=Math.random()*255;
 	static double B=Math.random()*255;
 	public static int largeurRectangle=110;
-	public static boolean niveau1=false;
-	public static boolean niveau2=true;
+	public static boolean niveau1=true;
+	public static boolean niveau2=false;
 	static double[] xter2=new double[50000];
 	static double[] yter2=new double[50000];
 
@@ -60,8 +60,8 @@ public class Terrain {
 		yter=a;
 	}
 	public void show(){
-		if(niveau1)
-			StdDraw.filledRectangle(xter, yter, largeur,hauteur);
+		//if(niveau1)
+		StdDraw.filledRectangle(xter, yter, largeur,hauteur);
 		/*else{
 			double[] xTer=new double[50000];
 			double[] yTer=new double[50000];

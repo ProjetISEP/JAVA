@@ -294,6 +294,7 @@ public class Isep {
 			}
 			}
 			else{
+				System.out.println("NIVEAU2");
 				double a;
 				double b;
 				double c;
@@ -336,7 +337,7 @@ public class Isep {
 					StdDraw.line(myrectangle.get(k).getxter(), myrectangle.get(k).getyter(),myrectangle.get(k+1).getxter(),myrectangle.get(k+1).getyter());
 					myrectangle.get(k).setxter(myrectangle.get(k).getxter()-myrectangle.get(k).speed);
 				}
-			}
+			
 			//COLISION*********************************************************
 			for(int k=0;k!=myVaisseau.size();k++){
 				for(int j=bcl;j!=bcl+Terrain.tailleterrain;j++){
@@ -346,11 +347,12 @@ public class Isep {
 							&& myVaisseau.get(k).getx()+100>=myrectangle.get(j).getxter() && myVaisseau.get(k).getx()-100>=myrectangle.get(j).getxter() && 
 							myVaisseau.get(k).gety()+100<=myrectangle.get(j+1).getyter() && 	myVaisseau.get(k).gety()-100<=myrectangle.get(j+1).getyter()
 							&& myVaisseau.get(k).gety()+100>=myrectangle.get(j).getyter() && myVaisseau.get(k).gety()-100>=myrectangle.get(j).getyter() ){*/
-				if(0.5>=-myVaisseau.get(k).gety()+((myrectangle.get(j+1).getyter()-myrectangle.get(j).getyter())*(myVaisseau.get(k).getx()))/(myrectangle.get(j+1).getxter()-myrectangle.get(j).getxter()) +myrectangle.get(j).getyter()- 
+				if(300>=-myVaisseau.get(k).gety()+((myrectangle.get(j+1).getyter()-myrectangle.get(j).getyter())*(myVaisseau.get(k).getx()))/(myrectangle.get(j+1).getxter()-myrectangle.get(j).getxter()) +myrectangle.get(j).getyter()- 
 						((myrectangle.get(j+1).getyter()-myrectangle.get(j).getyter())*(myrectangle.get(j).getxter()))/(myrectangle.get(j+1).getxter()-myrectangle.get(j).getxter()) &&
 						
-						-0.5<=-myVaisseau.get(k).gety()+((myrectangle.get(j+1).getyter()-myrectangle.get(j).getyter())*(myVaisseau.get(k).getx()))/(myrectangle.get(j+1).getxter()-myrectangle.get(j).getxter()) +myrectangle.get(j).getyter()- 
+						-300<=-myVaisseau.get(k).gety()+((myrectangle.get(j+1).getyter()-myrectangle.get(j).getyter())*(myVaisseau.get(k).getx()))/(myrectangle.get(j+1).getxter()-myrectangle.get(j).getxter()) +myrectangle.get(j).getyter()- 
 						((myrectangle.get(j+1).getyter()-myrectangle.get(j).getyter())*(myrectangle.get(j).getxter()))/(myrectangle.get(j+1).getxter()-myrectangle.get(j).getxter())
+						&& myVaisseau.get(k).getx()<=myrectangle.get(j+1).getxter() && myVaisseau.get(k).getx()>=myrectangle.get(j).getxter()
 						){
 					
 					
@@ -362,6 +364,7 @@ public class Isep {
 						myVaisseau.get(k).setLife();
 					}
 				}
+			}
 			}
 			}
 			// ***************************************************

@@ -109,6 +109,7 @@ public class Menu {
 				}else if(6800<StdDraw.mouseX() && 8600>StdDraw.mouseX() && 3746<StdDraw.mouseY() && 6000>StdDraw.mouseY() && !J1){
 					if(StdDraw.mousePressed()){
 						inertieJ1=true;
+						
 					//	compteurClic=compteurClic+1;
 						J1=true;
 					}
@@ -121,6 +122,7 @@ public class Menu {
 						
 					}
 				}
+				
 			}
 			while(ai){
 				StdDraw.picture( X_MAX/2,  Y_MAX/2, "./src/menu_ai.png");
