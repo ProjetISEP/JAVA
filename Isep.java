@@ -232,6 +232,7 @@ public class Isep {
 				vaisseauBleu.aiMine();
 				vaisseauBleu.controlAImove();
 				vaisseauBleu.controlAImissilemine();
+				vaisseauBleu.takeBouclier();
 
 				for(int i=0;i<=myrectangle.size();i++){
 					if(i%2!=0){

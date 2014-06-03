@@ -12,6 +12,7 @@ public class AI extends Vaisseau {
 	public static int k = 0;
 	public static int n = 0;
 	public static int droiteTour = 0;
+	public static boolean bouclierOn=false;
 	public static List<Terrain> myrectangle = new ArrayList<>();
 	public static List<Asteroide> myAsteroide = new ArrayList<>();
 	public static List<Missile> myMines = new ArrayList<>();
@@ -88,30 +89,30 @@ public class AI extends Vaisseau {
 				}
 			}
 			// Dans le cas niveau = Hard
-			if (Menu.niveau.equals("Hard")) {
+			if (Menu.niveau.equals("Hard")) {/////////A ALTERTNER NORMAL ET HARD
 				this.right = true;
 
 				if (Math.pow(myrectangle.get(i).getxter() - this.x, 2)
 						+ Math.pow(myrectangle.get(i).getyter()
 								- myrectangle.get(i).gethauteur() - this.y, 2) <= Math
-							.pow(1700, 2) && i % 2 != 0) {
+							.pow(4000, 2) && i % 2 != 0) {
 					this.bottom = true;
 				}
 
 				if (Math.pow(myrectangle.get(i).getxter() - this.x, 2)
 						+ Math.pow(myrectangle.get(i).getyter()
 								+ myrectangle.get(i).gethauteur() - this.y, 2) <= Math
-							.pow(1700, 2) && i % 2 == 0) {
+							.pow(4000, 2) && i % 2 == 0) {
 					this.top = true;
 				}
 
-				if (this.x >= X_MAX - 1000) {
+				if (this.x >= X_MAX - 300) {
 					this.left = true;
 				}
 
 			}// Dans le cas niveau = Normal
 			else if (Menu.niveau.equals("Normal")) {
-				if (droiteTour % 50 == 0) {
+				if (droiteTour % 50 == 0 && !bouclierOn) {
 					this.right = true;
 				}
 				// cas pour une descente ****************
@@ -288,6 +289,44 @@ public class AI extends Vaisseau {
 
 		}
 
+	}
+	
+	public void takeBouclier(){
+		
+		myAsteroide = Isep.myAsteroide;
+		Bouclier b;
+		b=(Bouclier) myAsteroide.get(2);
+		if(b.xAste>0 && b.xAste<X_MAX){
+			if(b.xAste>=this.x){
+				this.right=true;
+				System.out.println("okr");
+				bouclierOn=true;
+			}
+			else
+				bouclierOn=false;
+			if(b.xAste<this.x){
+				this.left=true;
+				bouclierOn=true;
+				System.out.println("okl");
+			}
+			else
+				bouclierOn=false;
+			if(b.yAste>=this.y){
+				this.top=true;
+				bouclierOn=true;
+				System.out.println("oktop");
+			}
+			else
+				bouclierOn=false;
+			if(b.yAste<=this.y){
+				this.bottom=true;
+				bouclierOn=true;
+				System.out.println("okbo");
+			}
+			else
+				bouclierOn=false;
+		}
+		
 	}
 
 	// FONCTION de CONTROLE AI*******************************************
