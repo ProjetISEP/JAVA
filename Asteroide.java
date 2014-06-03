@@ -7,7 +7,6 @@ public class Asteroide {
 	protected double yAste;
 	protected double vyAste;
 	protected double vxAste;
-	private int rAste;
 	protected double xAste;
 	public static double X_MAX = 10000;
 	public static double Y_MAX = 10000;
@@ -15,6 +14,7 @@ public class Asteroide {
 	protected int lifeAste;
 	public static List<Missile> myMissile =new ArrayList<>();
 	public static List<Asteroide> myAsteroide =new ArrayList<>();
+	
 	Asteroide(double xAste, double yAste, double vxAste, double vyAste, int lifeAste) {
 		this.xAste = xAste;
 		this.yAste = yAste;
@@ -69,7 +69,6 @@ public class Asteroide {
 						myMissile.get(i).setxmissile(100000);
 					}
 				}
-
 			}
 		}	
 	}

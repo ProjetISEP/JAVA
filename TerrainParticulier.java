@@ -11,8 +11,6 @@ public class TerrainParticulier extends Terrain  {
 		Color RANDOM=new Color((int)R,(int)G,(int)B);
 		StdDraw.setPenColor(RANDOM);
 		xter=xter-speed;
-		
-		
 	}
 	public void setSpeed(int newSpeed){//NOUVELLE VITESSE DES TERRAINS
 		myVaisseau=Isep.getListeVaisseau();
@@ -21,5 +19,4 @@ public class TerrainParticulier extends Terrain  {
 	TerrainParticulier(double xter, double yter, double largeur, double hauteur,double vitesse) {
 		super(xter, yter, largeur, hauteur, vitesse);
 	}
-
 }

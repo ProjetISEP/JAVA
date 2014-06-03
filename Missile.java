@@ -9,14 +9,13 @@ public class Missile {
 	protected double ymissile;
 	protected double xmissile;
 	protected double vymissile;
-	protected static double vxmissile=120;//variable de classe ///////////////////////
+	protected static double vxmissile=120;//variable de classe 
 	protected double rmissile;
 	protected int joueur;
 	protected boolean life;
 	
 	//protected int acceleration;
-	Missile(double xmissile, double ymissile, double vxmissile, double vymissile, double rmissile, int pJoueur,boolean pLife) {//Ajout d'un parametre en plus : le missile appartient � un seul joueur
-		//System.out.println("Cr�ation d'un missile avec des param�tres !");
+	Missile(double xmissile, double ymissile, double vxmissile, double vymissile, double rmissile, int pJoueur,boolean pLife) {
 		this.xmissile = xmissile;
 		this.ymissile = ymissile;
 		this.vxmissile = vxmissile;
@@ -32,7 +31,7 @@ public class Missile {
 	public double getymissile(){
 		return ymissile;
 	}
-	public static double getvxmissile(){///////////////////////////////////////////////////////////////
+	public static double getvxmissile(){
 		return vxmissile;
 	}
 	public int getJoueurMissile(){
@@ -42,7 +41,7 @@ public class Missile {
 	public void setxmissile(double setxmissile){
 		xmissile=setxmissile+xmissile;
 	}
-
+	// cette fonction permet d'attribuer la couleur des missiles en fonction des vaisseaux
 	public void missile() {
 		if(this.joueur==0)
 			StdDraw.setPenColor(Color.green);
@@ -54,13 +53,9 @@ public class Missile {
 		this.xmissile=this.xmissile+this.vxmissile;	
 
 	}
-
 	public void mines(){//A ne pas effacer, la methode herité se trouve a la classe Mines
 
 	}
-
-
-
 	/*	public void demiparabole(double x0, double y0, double v0x, double g) {///////////////////////////////////////////////////////////////////////
 
 	///	x0=myVaisseau.get(0).getx();

@@ -16,10 +16,8 @@ public class Menu {
 	public static int nbjoueurs;
 	public static String niveau;
 	public static boolean navigation=true;
-	public static int compteurClic=0;
 	public static boolean inertieJ1;
 	public static boolean inertieJ2;
-	public static int p=1;
 	public static boolean J1=false;
 	public static boolean J2=false;
 	public static void nav() {
@@ -27,13 +25,10 @@ public class Menu {
 
 		while(navigation){
 			StdDraw.show();
-
 			//ai, multi, navigation, instruction et menu sont des varaibles propres au menu
 			//ai1 et multi1 sert à la classe Isep
 			while(multi){
 				StdDraw.picture( X_MAX/2,  Y_MAX/2, "./src/menu_multii.png");
-				//System.out.println("x: "+StdDraw.mouseX());
-				//System.out.println("y: "+StdDraw.mouseY());
 				if(367<StdDraw.mouseX() && 2897>StdDraw.mouseX() && 732<StdDraw.mouseY() && 3856>StdDraw.mouseY()){
 					if(StdDraw.mousePressed()){
 						nbjoueurs=1;
@@ -51,7 +46,6 @@ public class Menu {
 						multi1=true;
 						multi=false;
 						multi2joueurs=true;
-						//navigation=false;
 					}
 				}else if(7163<StdDraw.mouseX() && 9776>StdDraw.mouseX() && 732<StdDraw.mouseY() && 3856>StdDraw.mouseY()){
 					if(StdDraw.mousePressed()){
@@ -61,7 +55,6 @@ public class Menu {
 						}
 						multi1=true;
 						multi=false;
-
 						navigation=false;
 					}
 				}else if(9277<StdDraw.mouseX() && 10060>StdDraw.mouseX() && 8542<StdDraw.mouseY() && 9972>StdDraw.mouseY()){
@@ -73,18 +66,6 @@ public class Menu {
 			}
 			while(multi2joueurs){
 				StdDraw.picture( X_MAX/2,  Y_MAX/2, "./src/menu_multi(2joueurs).png");
-				//System.out.println("x: "+StdDraw.mouseX());
-				//System.out.println("y: "+StdDraw.mouseY());
-				//System.out.println("compteurclic: "+compteurClic);
-				//System.out.println("j2: "+inertieJ2);
-				//System.out.println("j1: "+inertieJ1);
-				
-				/*if(compteurClic==50){
-					nbjoueurs=2;
-					multi1=true;
-					multi2joueurs=false;
-					navigation=false;
-				}*/
 				if(J1 && J2){
 					nbjoueurs=2;
 					multi1=true;
@@ -95,34 +76,26 @@ public class Menu {
 				if(1345<StdDraw.mouseX() && 3242>StdDraw.mouseX() && 4000<StdDraw.mouseY() && 6000>StdDraw.mouseY() && !J1){
 					if(StdDraw.mousePressed()){
 						inertieJ1=false;
-				//		compteurClic=compteurClic+1;
-						J1=true;
-						
+						J1=true;					
 					}
-					//joueur2 sans inertie
+				//joueur2 sans inertie
 				}else if(1345<StdDraw.mouseX() && 3242>StdDraw.mouseX() && 534<StdDraw.mouseY() && 2500>StdDraw.mouseY() && !J2){
 					if(StdDraw.mousePressed()){
 						inertieJ2=false;
-				//		compteurClic=compteurClic+1;
 						J2=true;
 					}//joueur1 avec inertie
 				}else if(6800<StdDraw.mouseX() && 8600>StdDraw.mouseX() && 3746<StdDraw.mouseY() && 6000>StdDraw.mouseY() && !J1){
 					if(StdDraw.mousePressed()){
 						inertieJ1=true;
-						
-					//	compteurClic=compteurClic+1;
 						J1=true;
 					}
 					//joueur2 avec inertie
 				}else if(6800<StdDraw.mouseX() && 8600>StdDraw.mouseX() && 380<StdDraw.mouseY() && 2500>StdDraw.mouseY() && !J2){
 					if(StdDraw.mousePressed()){
 						inertieJ2=true;
-					//	compteurClic=compteurClic+1;
-						J2=true;
-						
+						J2=true;		
 					}
-				}
-				
+				}	
 			}
 			while(ai){
 				StdDraw.picture( X_MAX/2,  Y_MAX/2, "./src/menu_ai.png");
@@ -134,7 +107,6 @@ public class Menu {
 						ai1=true;
 						ai=false;
 						navigation=false;
-
 					}
 				}else if(5900<StdDraw.mouseX() && 9400>StdDraw.mouseX() && 842<StdDraw.mouseY() && 4978>StdDraw.mouseY()){
 					if(StdDraw.mousePressed()){
@@ -144,7 +116,6 @@ public class Menu {
 						ai1=true;
 						ai=false;
 						navigation=false;
-
 					}
 				}else if(9277<StdDraw.mouseX() && 10060>StdDraw.mouseX() && 8542<StdDraw.mouseY() && 9972>StdDraw.mouseY()){
 					if(StdDraw.mousePressed()){

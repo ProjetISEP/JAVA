@@ -128,46 +128,49 @@ public class Terrain {
 	public static double[] tableauAleatoire(int nbvaleurs){ // G�nere un tableau al�atoire pour la fonction decor
 		tab[0]=Math.random();
 		int k=0;
+		System.out.println("tab0  "+tab[0]);
 		for(int i=1;i!=nbvaleurs;i++){
+
 			double nb=Math.random();
-			if(tab[i-1]<0.02){
-				tab[i]=tab[i-1]+0.13*nb;
+			if(tab[i-1]<0.06){
+				tab[i]=tab[i-1]+0.15*nb;
 				k=0;
-			}
-			if(tab[i-1]>0.9){
-				tab[i]=tab[i-1]-0.13*nb;
+			}else if(tab[i-1]>0.9){
+				tab[i]=tab[i-1]-0.15*nb;
 				k=1;
+			}else{
+				if(nb>0.7)
+				tab[i]=tab[i-1]+0.2*nb;
+				else{
+					tab[i]=tab[i-1]-0.2*nb;
+				}
 			}
-			if(k==0){
-				tab[i]=tab[i-1]+0.13*nb;
-			}else if(k==1){
-				tab[i]=tab[i-1]-0.13*nb;
-			}
+			System.out.println(tab[i]);
 		}
 		return tab;
 	}
 	public static void generateTerrain(){
 		if(niveau1){
-		double tab1[]=tableauAleatoire(tailleterrain);
-		myrectangle=Terrain.getListeTerrain();
-		for(int i=0;i!=tailleterrain;i++){
-			if(i<20){
-				myrectangle.add(new Terrain(10000+i*200, 200,largeurRectangle,i*100+1000,speed));//le bas /* variation lineaire croissante de la hauteur */
-				myrectangle.add(new Terrain(10000+i*200, 9800,largeurRectangle,i*100+1000,speed));//le haut
-			}else if(i>Isep.tabZonesParticuliere[0] && i<Isep.tabZonesParticuliere[0]+60){ // POUR LES ZONES PARTICULIERES
-				myrectangle.add(new TerrainParticulier(xrectangle+i*200, 200,largeurRectangle,4000+-(tab1[i]*3550),speed));//le 3900 est une translation
-				myrectangle.add(new TerrainParticulier(xrectangle+i*200, 9800,largeurRectangle,500+tab1[i]*4500,speed));
-			}else if(i>Isep.tabZonesParticuliere[1] && i<Isep.tabZonesParticuliere[1]+60){ // POUR LES ZONES PARTICULIERES
-				myrectangle.add(new TerrainParticulier(xrectangle+i*200, 200,largeurRectangle,4000+-(tab1[i]*3550),speed));//le 3900 est une translation
-				myrectangle.add(new TerrainParticulier(xrectangle+i*200, 9800,largeurRectangle,500+tab1[i]*4500,speed));
-			}else if(i>Isep.tabZonesParticuliere[2] && i<Isep.tabZonesParticuliere[2]+60){ // POUR LES ZONES PARTICULIERES
-				myrectangle.add(new TerrainParticulier(xrectangle+i*200, 200,largeurRectangle,4000+-(tab1[i]*3550),speed));//le 3900 est une translation
-				myrectangle.add(new TerrainParticulier(xrectangle+i*200, 9800,largeurRectangle,500+tab1[i]*4500,speed));
-			}else{
-				myrectangle.add(new Terrain(xrectangle+i*200, 200,largeurRectangle,4000+-(tab1[i]*3550),speed));
-				myrectangle.add(new Terrain(xrectangle+i*200, 9800,largeurRectangle,500+tab1[i]*4500,speed));
+			double tab1[]=tableauAleatoire(tailleterrain);
+			myrectangle=Terrain.getListeTerrain();
+			for(int i=0;i!=tailleterrain;i++){
+				if(i<20){
+					myrectangle.add(new Terrain(10000+i*200, 200,largeurRectangle,i*100+1000,speed));//le bas /* variation lineaire croissante de la hauteur */
+					myrectangle.add(new Terrain(10000+i*200, 9800,largeurRectangle,i*100+1000,speed));//le haut
+				}else if(i>Isep.tabZonesParticuliere[0] && i<Isep.tabZonesParticuliere[0]+60){ // POUR LES ZONES PARTICULIERES
+					myrectangle.add(new TerrainParticulier(xrectangle+i*200, 200,largeurRectangle,5000+-(tab1[i]*3550),speed));//le 3900 est une translation
+					myrectangle.add(new TerrainParticulier(xrectangle+i*200, 9800,largeurRectangle,500+tab1[i]*4500,speed));
+				}else if(i>Isep.tabZonesParticuliere[1] && i<Isep.tabZonesParticuliere[1]+60){ // POUR LES ZONES PARTICULIERES
+					myrectangle.add(new TerrainParticulier(xrectangle+i*200, 200,largeurRectangle,5000+-(tab1[i]*3550),speed));//le 3900 est une translation
+					myrectangle.add(new TerrainParticulier(xrectangle+i*200, 9800,largeurRectangle,500+tab1[i]*4500,speed));
+				}else if(i>Isep.tabZonesParticuliere[2] && i<Isep.tabZonesParticuliere[2]+60){ // POUR LES ZONES PARTICULIERES
+					myrectangle.add(new TerrainParticulier(xrectangle+i*200, 200,largeurRectangle,5000+-(tab1[i]*3550),speed));//le 3900 est une translation
+					myrectangle.add(new TerrainParticulier(xrectangle+i*200, 9800,largeurRectangle,500+tab1[i]*4500,speed));
+				}else{
+					myrectangle.add(new Terrain(xrectangle+i*200, 200,largeurRectangle,5000+-(tab1[i]*3550),speed));
+					myrectangle.add(new Terrain(xrectangle+i*200, 9800,largeurRectangle,500+tab1[i]*4500,speed));
+				}
 			}
-		}
 		}
 		else if(niveau2){
 		

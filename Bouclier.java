@@ -1,7 +1,9 @@
 
 public class Bouclier extends Asteroide {
+	
 	public int laSeconde;//correspond à l'instant où le vaisseau capture le bouclier
 	public int deltaT=20;//interval de temps pour le bouclier
+	
 	Bouclier(double xAste, double yAste, double vxAste, double vyAste,int lifeAste) {
 		super(xAste, yAste, vxAste, vyAste, lifeAste);
 	}
@@ -23,9 +25,7 @@ public class Bouclier extends Asteroide {
 			}
 		}
 	}
-	
 	public void paint1(){
 		StdDraw.picture(xAste, yAste, "./src/bulle.png",360);
 	}
-
 }
