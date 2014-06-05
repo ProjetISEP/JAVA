@@ -102,6 +102,9 @@ public class Vaisseau {
 	public int getScore() {
 		return score;
 	}
+	public int getmine() {
+		return stockMine;
+	}
 	public int getMat() {
 		return matricule;
 	}
@@ -115,11 +118,26 @@ public class Vaisseau {
 			if(myVaisseau.get(k).life>1){
 				for (int g = 0; g != myVaisseau.get(k).life; g++) {
 					if(myVaisseau.get(k).getlife()!=0)
-						StdDraw.picture(5000+1700*k+g*220, 8000, "./src/vie.png", 250, 280);
+						StdDraw.picture(5200+1800*k+g*155, 8800, "./src/vie.png", 250, 280);
 				}
 			}else{
 				int SecondeStart=Isep.seconde;
 				StdDraw.text(5000, 5000, "Le joueur "+k+ " est mort");
+			}
+		}
+	}
+	
+	public void mines() {
+
+		myVaisseau = Isep.getListeVaisseau();
+		for (int k = 0; k != myVaisseau.size(); k++) {// on parcourt tous les vaisseaux
+			if(myVaisseau.get(k).stockMine>1){
+				for (int g = 0; g != myVaisseau.get(k).life; g++) {
+					if(myVaisseau.get(k).getmine()!=0)
+						StdDraw.picture(5500+1700*k, 8000, "./src/mine2.png");
+					    String pstockMine = Integer.toString(stockMine);
+					    StdDraw.text(6000+1700*k, 8000, pstockMine);
+				}
 			}
 		}
 	}
@@ -176,7 +194,7 @@ public class Vaisseau {
 
 		for (int k = 0; k != myVaisseau.size(); k++) {
 			String scoreString = Integer.toString(myVaisseau.get(k).score);
-			StdDraw.text(7000 + k * 1000, 8500, scoreString);
+			StdDraw.text(6000 + k * 1700, 9300, scoreString);
 			StdDraw.setPenColor(Color.WHITE);
 		}
 
