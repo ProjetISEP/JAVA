@@ -16,7 +16,7 @@ public class Terrain {
 	protected double hauteur;
 	protected static double speed=80;
 	protected static int tailleterrain=600;
-	protected static int tailleterrain2=110;
+	protected static int tailleterrain2=100;
 	public static double[] tab = new double[3000];
 	public static int tabZonesParticuliere[];
 	static double R=Math.random()*255;
@@ -176,8 +176,13 @@ public class Terrain {
 				}
 			}
 		}
-		else if(niveau2){
+
+	}
+	
+	public static void generateTerrain2(){
 		
+	
+			
 			double a=0;
 			double b = 0;
 			double c;
@@ -234,14 +239,14 @@ public class Terrain {
 			for (int i=0;i!=1000;i++){
 			System.out.println(xter2[i]+"   "+yter2[i]);}*/
 		System.out.println(b);
-		}
+		
 	}
 	
 	public static void show2(){
 		Color RANDOM=new Color((int)R,(int)G,(int)B);
 		StdDraw.setPenColor(Color.blue);
 		double inter;
-		for(int k=0;k!=Terrain.tailleterrain2;k++){
+		for(int k=0;k!=Terrain.tailleterrain2-1;k++){
 		//	StdDraw.line(myrectangle.get(k+bcl2).getxter(),myrectangle.get(k+bcl2).getyter(),myrectangle.get(k+1+bcl2).getxter(),myrectangle.get(k+1+bcl2).getyter());
 			StdDraw.line(xter2[k],yter2[k],xter2[k+1],yter2[k+1]);
 			StdDraw.line(xter2[k],yter2haut[k],xter2[k+1],yter2haut[k+1]);

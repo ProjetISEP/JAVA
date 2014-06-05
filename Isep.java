@@ -107,7 +107,7 @@ public class Isep {
 		Menu.nav();
 		compteurSeconde=0; // on initialise le compteur de seconde à 0.
 		while (finDePartie) {
-			
+			Terrain.generateTerrain2();
 			StdDraw.clear();
 
 			//on fait clignoter l'écran si pour 1 joueur, ce dernier a moins de 3 vies
