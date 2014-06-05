@@ -7,7 +7,6 @@ public class Isep {
 	public static double X_MAX = 10000;
 	public static double Y_MAX = 10000;
 	public static double xrectangle = 10000;
-	public static float r = 60;
 	public static int nbjoueurs;
 	static double R = Math.random() * 255;
 	static double G = Math.random() * 255;
@@ -18,12 +17,6 @@ public class Isep {
 	public static boolean multi;
 	public static boolean ai=false;
 	public static boolean menu=true;
-	public static boolean missileJ1 = false;
-	public static boolean missileJ2 = false;
-	public static boolean missileJ3 = false;
-	public static boolean mineJ1 = false;
-	public static boolean mineJ2 = false;
-	public static boolean mineJ3 = false;
 	public static String niveau;
 	public static List<Asteroide> myAsteroide = new ArrayList<>();
 	public static List<Missile> myMissile = new ArrayList<>();
@@ -130,102 +123,20 @@ public class Isep {
 
 						}
 					}
-					if (!StdDraw.isKeyPressed(69)) {// Si on n'appuye pas sur E
-						missileJ2 = false;
-					}
-					if (missileJ2 == false) {
-						if (StdDraw.isKeyPressed(69)) {// quand on appuie sur E
-							myMissile.add(new Missile(myVaisseau.get(1).getx(),
-									myVaisseau.get(1).gety(), Missile
-									.getvxmissile(), 0, r, myVaisseau
-									.get(1).getMat(),true));
-							missileJ2 = true;
-						}
-					}
-
-					if (!StdDraw.isKeyPressed(70)) {// 70 = touche F
-						mineJ2 = false;
-					}
-					if (mineJ2 == false) {
-						if (StdDraw.isKeyPressed(70)) {
-							if(myVaisseau.get(1).stockMine>0){//
-								myMines.add(new Mines(myVaisseau.get(1).getx(),
-										myVaisseau.get(1).gety(), Missile
-										.getvxmissile(), 0, 0, myVaisseau
-										.get(1).getMat(), true, Terrain.speed, 4));
-								mineJ2 = true;
-								myVaisseau.get(1).stockMine=myVaisseau.get(1).stockMine-1;
-							}
-						}
-					}
+					
 				}if(Menu.nbjoueurs==3){
 					// JOUEUR2
 					if(myVaisseau.get(1).getlife()>0){
 						Vaisseau.controlPlayer2();
 					}
-					if (!StdDraw.isKeyPressed(69)) {// Si on n'appuye pas sur E
-						missileJ2 = false;
-					}
-					if (missileJ2 == false) {
-						if (StdDraw.isKeyPressed(69)) {// quand on appuie sur E
-							myMissile.add(new Missile(myVaisseau.get(1).getx(),
-									myVaisseau.get(1).gety(), Missile
-									.getvxmissile(), 0, r, myVaisseau
-									.get(1).getMat(),true));
-							missileJ2 = true;
-						}
-					}
-
-					if (!StdDraw.isKeyPressed(70)) {// 70 = touche F
-						mineJ2 = false;
-					}
-					if (mineJ2 == false) {
-						if (StdDraw.isKeyPressed(70)) {//
-							if(myVaisseau.get(1).stockMine>0){
-								myMines.add(new Mines(myVaisseau.get(1).getx(),
-										myVaisseau.get(1).gety(), Missile
-										.getvxmissile(), 0, 0, myVaisseau
-										.get(1).getMat(), true, Terrain.speed, 4));
-								mineJ2 = true;
-								myVaisseau.get(1).stockMine=myVaisseau.get(1).stockMine-1;
-
-							}
-						}
-					}
 					// JOUEUR3
 					if(myVaisseau.get(2).getlife()>0){
 						Vaisseau.controlPlayer3();
 					}
-					if (!StdDraw.isKeyPressed(73)) {// 73 = touche I
-						missileJ3 = false;
-					}
-					if (missileJ3 == false) {
-						if (StdDraw.isKeyPressed(73)) {// quand on appuie sur espace
-							myMissile.add(new Missile(myVaisseau.get(2).getx(),
-									myVaisseau.get(2).gety(), Missile
-									.getvxmissile(), 0, r, myVaisseau
-									.get(2).getMat(),true));
-							missileJ3 = true;
-						}
-					}
-					if (!StdDraw.isKeyPressed(76)) {// 76 = touche L
-						mineJ3 = false;
-					}
-					if (mineJ3 == false) {
-						if (StdDraw.isKeyPressed(76)) {
-							if(myVaisseau.get(2).stockMine>0){//
-								myMines.add(new Mines(myVaisseau.get(2).getx(),
-										myVaisseau.get(2).gety(), Missile
-										.getvxmissile(), 0, 0, myVaisseau
-										.get(2).getMat(), true, Terrain.speed, 4));
-								mineJ3 = true;
-								myVaisseau.get(2).stockMine=myVaisseau.get(2).stockMine-1;
-							}
-						}
-					}
+					
 				}
 			}else{
-				// JOUEUR ordi
+				// JOUEUR ordi*************************************
 				AI vaisseauBleu=(AI) myVaisseau.get(1);//ici myVaisseau.get(1) correspond au vaisseau bleu (i.e l'ordi) mais defois i 
 
 				vaisseauBleu.aiMove();
@@ -252,7 +163,7 @@ public class Isep {
 
 				AI.droiteTour=AI.droiteTour+1;
 
-			}
+			}//******************************************************************************
 
 
 
@@ -297,39 +208,7 @@ public class Isep {
 					myVaisseau.get(0).controlPlayerInertie();
 				}
 			}
-			if (!StdDraw.isKeyPressed(32)) {// Si on n'appuye pas sur espace
-				missileJ1 = false;
-			}
-			if (missileJ1 == false) {
-				if (StdDraw.isKeyPressed(32)) {// L'idee est qu'en restant
-					// appuy sur espace il y aura
-					// seulement un ajout la liste
-					// puisque missile sera "tru
-					// quand on appuie sur espace
-
-					myMissile.add(new Missile(myVaisseau.get(0).getx(),
-							myVaisseau.get(0).gety(), Missile
-							.getvxmissile(), 0, r, myVaisseau
-							.get(0).getMat(),true));
-					missileJ1 = true;
-				}
-			}
-			if (!StdDraw.isKeyPressed(517)) {//
-				mineJ1 = false;
-			}
-			if (mineJ1 == false) {
-				if (StdDraw.isKeyPressed(517)) {
-					if(myVaisseau.get(0).stockMine>0){// 517 correspond à la touche "!"
-						myMines.add(new Mines(myVaisseau.get(0).getx(),
-								myVaisseau.get(0).gety(), Missile
-								.getvxmissile(), 0, 0, myVaisseau
-								.get(0).getMat(), true, Terrain.speed, 4));// Deux paramètres ont été rajoutés : la vitesse de la mine et son 
-						// acceleration, même si on voit getvxmissile on ne travaillera que sur vxMine
-						mineJ1 = true;
-						myVaisseau.get(0).stockMine=myVaisseau.get(0).stockMine-1;
-					}
-				}
-			}
+	
 			//VAISSEAU
 			// *************************************************************
 			finDePartie=Vaisseau.endGame(); // condition de fin de partie

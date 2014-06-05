@@ -36,6 +36,13 @@ public class Vaisseau {
 	private double inertieBottom;
 	private double inertieRight;
 	private double inertieLeft;
+	public static float r = 60;
+	public static boolean missileJ1 = false;
+	public static boolean missileJ2 = false;
+	public static boolean missileJ3 = false;
+	public static boolean mineJ1 = false;
+	public static boolean mineJ2 = false;
+	public static boolean mineJ3 = false;
 	
 
 
@@ -397,6 +404,41 @@ public class Vaisseau {
 				(myVaisseau.get(0)).bottom();
 
 		}
+	
+		if (!StdDraw.isKeyPressed(32)) {// Si on n'appuye pas sur espace
+			missileJ1 = false;
+		}
+		if (missileJ1 == false) {
+			if (StdDraw.isKeyPressed(32)) {// L'idee est qu'en restant
+				// appuy sur espace il y aura
+				// seulement un ajout la liste
+				// puisque missile sera "tru
+				// quand on appuie sur espace
+
+				myMissile.add(new Missile(myVaisseau.get(0).getx(),
+						myVaisseau.get(0).gety(), Missile
+						.getvxmissile(), 0, r, myVaisseau
+						.get(0).getMat(),true));
+				missileJ1 = true;
+			}
+		}
+	
+		if (!StdDraw.isKeyPressed(517)) {//
+			mineJ1 = false;
+		}
+		if (mineJ1 == false) {
+			if (StdDraw.isKeyPressed(517)) {
+				if(myVaisseau.get(0).stockMine>0){// 517 correspond à la touche "!"
+					myMines.add(new Mines(myVaisseau.get(0).getx(),
+							myVaisseau.get(0).gety(), Missile
+							.getvxmissile(), 0, 0, myVaisseau
+							.get(0).getMat(), true, Terrain.speed, 4));// Deux paramètres ont été rajoutés : la vitesse de la mine et son 
+					// acceleration, même si on voit getvxmissile on ne travaillera que sur vxMine
+					mineJ1 = true;
+					myVaisseau.get(0).stockMine=myVaisseau.get(0).stockMine-1;
+				}
+			}
+		}
 	}
 
 	public void controlPlayerInertie(){
@@ -446,6 +488,34 @@ public class Vaisseau {
 				(myVaisseau.get(1)).bottom();
 
 		}
+		if (!StdDraw.isKeyPressed(69)) {// Si on n'appuye pas sur E
+			missileJ2 = false;
+		}
+		if (missileJ2 == false) {
+			if (StdDraw.isKeyPressed(69)) {// quand on appuie sur E
+				myMissile.add(new Missile(myVaisseau.get(1).getx(),
+						myVaisseau.get(1).gety(), Missile
+						.getvxmissile(), 0, r, myVaisseau
+						.get(1).getMat(),true));
+				missileJ2 = true;
+			}
+		}
+
+		if (!StdDraw.isKeyPressed(70)) {// 70 = touche F
+			mineJ2 = false;
+		}
+		if (mineJ2 == false) {
+			if (StdDraw.isKeyPressed(70)) {
+				if(myVaisseau.get(1).stockMine>0){//
+					myMines.add(new Mines(myVaisseau.get(1).getx(),
+							myVaisseau.get(1).gety(), Missile
+							.getvxmissile(), 0, 0, myVaisseau
+							.get(1).getMat(), true, Terrain.speed, 4));
+					mineJ2 = true;
+					myVaisseau.get(1).stockMine=myVaisseau.get(1).stockMine-1;
+				}
+			}
+		}
 	}
 	public static void controlPlayer3() {
 		if (!toucheinversee) {
@@ -467,6 +537,33 @@ public class Vaisseau {
 			if (StdDraw.isKeyPressed(85))
 				(myVaisseau.get(2)).bottom();
 
+		}
+		if (!StdDraw.isKeyPressed(73)) {// 73 = touche I
+			missileJ3 = false;
+		}
+		if (missileJ3 == false) {
+			if (StdDraw.isKeyPressed(73)) {// quand on appuie sur espace
+				myMissile.add(new Missile(myVaisseau.get(2).getx(),
+						myVaisseau.get(2).gety(), Missile
+						.getvxmissile(), 0, r, myVaisseau
+						.get(2).getMat(),true));
+				missileJ3 = true;
+			}
+		}
+		if (!StdDraw.isKeyPressed(76)) {// 76 = touche L
+			mineJ3 = false;
+		}
+		if (mineJ3 == false) {
+			if (StdDraw.isKeyPressed(76)) {
+				if(myVaisseau.get(2).stockMine>0){//
+					myMines.add(new Mines(myVaisseau.get(2).getx(),
+							myVaisseau.get(2).gety(), Missile
+							.getvxmissile(), 0, 0, myVaisseau
+							.get(2).getMat(), true, Terrain.speed, 4));
+					mineJ3 = true;
+					myVaisseau.get(2).stockMine=myVaisseau.get(2).stockMine-1;
+				}
+			}
 		}
 	}
 
@@ -552,7 +649,7 @@ public class Vaisseau {
 						StdDraw.picture(myVaisseau.get(k).getx(), myVaisseau
 								.get(k).gety(), "./src/crash.png");
 						myMines.get(i).life=false;
-
+						myVaisseau.get(k).setLife();
 						// MANQUE L'ENLEVEMENT DES VIES
 					}
 

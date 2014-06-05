@@ -344,31 +344,31 @@ public class AI extends Vaisseau {
 
 	public void controlAImissilemine() {
 		if (!this.missile) {// Si on n'appuye pas sur espace
-			Isep.missileJ2 = false;
+			missileJ2 = false;
 		}
 
-		if (Isep.missileJ2 == false) {
+		if (missileJ2 == false) {
 			if (this.missile) {
 
 				myMissile.add(new Missile(myVaisseau.get(1).getx(), myVaisseau
-						.get(1).gety(), Missile.getvxmissile(), 0, Isep.r,
+						.get(1).gety(), Missile.getvxmissile(), 0, r,
 						myVaisseau.get(1).getMat(), true));
 
-				Isep.missileJ2 = true;
+				missileJ2 = true;
 
 			}
 		}
 
 		if (!this.mine) {//
-			Isep.mineJ2 = false;
+			mineJ2 = false;
 		}
-		if (Isep.mineJ2 == false) {
+		if (mineJ2 == false) {
 			if (this.mine) {
 				myMines.add(new Mines(myVaisseau.get(1).getx(), myVaisseau.get(
 						1).gety(), Missile.getvxmissile(), 0, 0, myVaisseau
 						.get(1).getMat(), true, Terrain.speed, 4));
 
-				Isep.mineJ2 = true;
+				mineJ2 = true;
 
 			}
 		}
