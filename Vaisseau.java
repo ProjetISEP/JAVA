@@ -190,15 +190,9 @@ public class Vaisseau {
 	}
 	public void score() {
 		myVaisseau = Isep.getListeVaisseau();
-		if (0 < x && x < 4000)
-			score = score + 100;
-		if (4000 < x && x < 6000)
-			score = score + 200;
-		if (6000 < x && x < 8000)
-			score = score + 400;
-		if (8000 < x && x < 10000)
-			score = score + 600;
-
+		if(Isep.compteurSeconde%9==0){
+			score = score + (int)x/100;
+		}
 		for (int k = 0; k != myVaisseau.size(); k++) {
 			String scoreString = Integer.toString(myVaisseau.get(k).score);
 			StdDraw.text(6000 + k * 1700, 9300, scoreString);
