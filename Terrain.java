@@ -207,21 +207,24 @@ public class Terrain {
 							xter2[k] =k*(0.01*X_MAX);  yter2[k] = a;
 							h=((double)(Math.random()*(0.8*Y_MAX-0.7*Y_MAX+1))+0.7*Y_MAX);
 							yter2haut[k] = h;
+							myrectangle.add(new Terrain(k*(0.01*X_MAX), a,0,0,speed));
 						}
 						else if(Isep.compteurSeconde%23==0){
 							c=((double)(Math.random()*(0.55*Y_MAX-0.13*Y_MAX+1))+0.13*Y_MAX);
-						//	myrectangle.add(new Terrain(k*(0.01*X_MAX), c,0,0,speed));
+						
 							xter2[k] =k*(0.01*X_MAX);  yter2[k] = c;
 							h=((double)(Math.random()*(0.9*Y_MAX-0.75*Y_MAX+1))+0.75*Y_MAX);
 							yter2haut[k] = h;
+							myrectangle.add(new Terrain(k*(0.01*X_MAX), c,0,0,speed));
 						}
 						else{
 					
 							b=((double)(Math.random()*(0.35*Y_MAX-0.20*Y_MAX+1))+0.20*Y_MAX);
-							//myrectangle.add(new Terrain((k+Isep.bcl)*0.01*X_MAX, b,0,0,speed));
+						
 							xter2[k] =k*(0.01*X_MAX);  yter2[k] = b; 
 							h=((double)(Math.random()*(0.9*Y_MAX-0.75*Y_MAX+1))+0.75*Y_MAX);
 							yter2haut[k] = h;
+							myrectangle.add(new Terrain((k+Isep.bcl)*0.01*X_MAX, b,0,0,speed));
 						
 						}
 					//	System.out.println("ok");

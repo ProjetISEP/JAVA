@@ -100,7 +100,8 @@ public class Isep {
 		Menu.nav();
 		compteurSeconde=0; // on initialise le compteur de seconde à 0.
 		while (finDePartie) {
-			Terrain.generateTerrain2();
+			if(Terrain.niveau2)
+				Terrain.generateTerrain2();
 			StdDraw.clear();
 
 			//on fait clignoter l'écran si pour 1 joueur, ce dernier a moins de 3 vies
@@ -229,7 +230,7 @@ public class Isep {
 				}
 				(myVaisseau.get(i)).score();
 				myVaisseau.get(i).vies();// c'est pour afficher les coeurs
-				myVaisseau.get(i).mines();
+				myVaisseau.get(i).affichageMines();
 				(myVaisseau.get(i)).colisionMissileVaisseau();
 				(myVaisseau.get(i)).colisionMineVaisseau(); 
 				(myVaisseau.get(i)).colisionVaisseauAVaisseau();

@@ -69,7 +69,7 @@ public class AI extends Vaisseau {
 		mine = pMine;
 	}
 
-	// FONCTION AI
+	// FONCTIONS AI
 	// ****************************************************************
 	public void aiMove() {// Methode qui permet au vaisseau de s'adapter aux
 							// situtation
@@ -304,13 +304,13 @@ public class AI extends Vaisseau {
 			}
 			else
 				bouclierOn=false;
-			if(b.xAste<this.x){
+		/*	if(b.xAste<this.x){
 				this.left=true;
 				bouclierOn=true;
 				System.out.println("okl");
 			}
 			else
-				bouclierOn=false;
+				bouclierOn=false;*/
 			if(b.yAste>=this.y){
 				this.top=true;
 				bouclierOn=true;
@@ -367,7 +367,7 @@ public class AI extends Vaisseau {
 				myMines.add(new Mines(myVaisseau.get(1).getx(), myVaisseau.get(
 						1).gety(), Missile.getvxmissile(), 0, 0, myVaisseau
 						.get(1).getMat(), true, Terrain.speed, 4));
-
+				myVaisseau.get(1).stockMine=myVaisseau.get(1).stockMine-1;
 				mineJ2 = true;
 
 			}

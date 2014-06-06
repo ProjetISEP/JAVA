@@ -134,7 +134,7 @@ public class Vaisseau {
 		}
 	}
 	
-	public void mines() {
+	public void affichageMines() {
 
 		myVaisseau = Isep.getListeVaisseau();
 		for (int k = 0; k != myVaisseau.size(); k++) {// on parcourt tous les vaisseaux
