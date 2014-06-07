@@ -14,8 +14,9 @@ public class Terrain {
 	protected double yter;
 	protected double largeur=110;
 	protected double hauteur;
-	protected static double speed=80;
-	protected static int tailleterrain=600;
+	protected static double speed;
+	public static double speedTerrain=120;
+	protected static int tailleterrain=800;
 	protected static int tailleterrain2=100;
 	public static double[] tab = new double[3000];
 	public static int tabZonesParticuliere[];
@@ -53,7 +54,10 @@ public class Terrain {
 	public double gethauteur(){
 		return hauteur;
 	}
-	public void setSpeed(int newSpeed){
+	public double getSpeed(){
+		return speed;
+	}
+	public void setSpeed(double newSpeed){
 		myVaisseau=Isep.getListeVaisseau();
 		speed=newSpeed;		
 	}
@@ -159,20 +163,20 @@ public class Terrain {
 			myrectangle=Terrain.getListeTerrain();
 			for(int i=0;i!=tailleterrain;i++){
 				if(i<20){
-					myrectangle.add(new Terrain(10000+i*200, 200,largeurRectangle,i*100+1000,speed));//le bas /* variation lineaire croissante de la hauteur */
-					myrectangle.add(new Terrain(10000+i*200, 9800,largeurRectangle,i*100+1000,speed));//le haut
+					myrectangle.add(new Terrain(10000+i*200, 200,largeurRectangle,i*100+1000,speedTerrain));//le bas /* variation lineaire croissante de la hauteur */
+					myrectangle.add(new Terrain(10000+i*200, 9800,largeurRectangle,i*100+1000,speedTerrain));//le haut
 				}else if(i>Isep.tabZonesParticuliere[0] && i<Isep.tabZonesParticuliere[0]+60){ // POUR LES ZONES PARTICULIERES
-					myrectangle.add(new TerrainParticulier(xrectangle+i*200, 200,largeurRectangle,5000+-(tab1[i]*3550),speed));//le 3900 est une translation
-					myrectangle.add(new TerrainParticulier(xrectangle+i*200, 9800,largeurRectangle,500+tab1[i]*4500,speed));
+					myrectangle.add(new TerrainParticulier(xrectangle+i*200, 200,largeurRectangle,5000+-(tab1[i]*3550),speedTerrain));//le 3900 est une translation
+					myrectangle.add(new TerrainParticulier(xrectangle+i*200, 9800,largeurRectangle,500+tab1[i]*4500,speedTerrain));
 				}else if(i>Isep.tabZonesParticuliere[1] && i<Isep.tabZonesParticuliere[1]+60){ // POUR LES ZONES PARTICULIERES
-					myrectangle.add(new TerrainParticulier(xrectangle+i*200, 200,largeurRectangle,5000+-(tab1[i]*3550),speed));//le 3900 est une translation
-					myrectangle.add(new TerrainParticulier(xrectangle+i*200, 9800,largeurRectangle,500+tab1[i]*4500,speed));
+					myrectangle.add(new TerrainParticulier(xrectangle+i*200, 200,largeurRectangle,5000+-(tab1[i]*3550),speedTerrain));//le 3900 est une translation
+					myrectangle.add(new TerrainParticulier(xrectangle+i*200, 9800,largeurRectangle,500+tab1[i]*4500,speedTerrain));
 				}else if(i>Isep.tabZonesParticuliere[2] && i<Isep.tabZonesParticuliere[2]+60){ // POUR LES ZONES PARTICULIERES
-					myrectangle.add(new TerrainParticulier(xrectangle+i*200, 200,largeurRectangle,5000+-(tab1[i]*3550),speed));//le 3900 est une translation
-					myrectangle.add(new TerrainParticulier(xrectangle+i*200, 9800,largeurRectangle,500+tab1[i]*4500,speed));
+					myrectangle.add(new TerrainParticulier(xrectangle+i*200, 200,largeurRectangle,5000+-(tab1[i]*3550),speedTerrain));//le 3900 est une translation
+					myrectangle.add(new TerrainParticulier(xrectangle+i*200, 9800,largeurRectangle,500+tab1[i]*4500,speedTerrain));
 				}else{
-					myrectangle.add(new Terrain(xrectangle+i*200, 200,largeurRectangle,5000+-(tab1[i]*3550),speed));
-					myrectangle.add(new Terrain(xrectangle+i*200, 9800,largeurRectangle,500+tab1[i]*4500,speed));
+					myrectangle.add(new Terrain(xrectangle+i*200, 200,largeurRectangle,5000+-(tab1[i]*3550),speedTerrain));
+					myrectangle.add(new Terrain(xrectangle+i*200, 9800,largeurRectangle,500+tab1[i]*4500,speedTerrain));
 				}
 			}
 		}
@@ -207,7 +211,7 @@ public class Terrain {
 							xter2[k] =k*(0.01*X_MAX);  yter2[k] = a;
 							h=((double)(Math.random()*(0.8*Y_MAX-0.7*Y_MAX+1))+0.7*Y_MAX);
 							yter2haut[k] = h;
-							myrectangle.add(new Terrain(k*(0.01*X_MAX), a,0,0,speed));
+							myrectangle.add(new Terrain(k*(0.01*X_MAX), a,0,0,120));
 						}
 						else if(Isep.compteurSeconde%23==0){
 							c=((double)(Math.random()*(0.55*Y_MAX-0.13*Y_MAX+1))+0.13*Y_MAX);
@@ -215,7 +219,7 @@ public class Terrain {
 							xter2[k] =k*(0.01*X_MAX);  yter2[k] = c;
 							h=((double)(Math.random()*(0.9*Y_MAX-0.75*Y_MAX+1))+0.75*Y_MAX);
 							yter2haut[k] = h;
-							myrectangle.add(new Terrain(k*(0.01*X_MAX), c,0,0,speed));
+							myrectangle.add(new Terrain(k*(0.01*X_MAX), c,0,0,120));
 						}
 						else{
 					
@@ -224,7 +228,7 @@ public class Terrain {
 							xter2[k] =k*(0.01*X_MAX);  yter2[k] = b; 
 							h=((double)(Math.random()*(0.9*Y_MAX-0.75*Y_MAX+1))+0.75*Y_MAX);
 							yter2haut[k] = h;
-							myrectangle.add(new Terrain((k+Isep.bcl)*0.01*X_MAX, b,0,0,speed));
+							myrectangle.add(new Terrain((k+Isep.bcl)*0.01*X_MAX, b,0,0,120));
 						
 						}
 					//	System.out.println("ok");
@@ -253,7 +257,7 @@ public class Terrain {
 		//	StdDraw.line(myrectangle.get(k+bcl2).getxter(),myrectangle.get(k+bcl2).getyter(),myrectangle.get(k+1+bcl2).getxter(),myrectangle.get(k+1+bcl2).getyter());
 			StdDraw.line(xter2[k],yter2[k],xter2[k+1],yter2[k+1]);
 			StdDraw.line(xter2[k],yter2haut[k],xter2[k+1],yter2haut[k+1]);
-			xter2[k]=xter2[k]-Terrain.speed;
+			xter2[k]=xter2[k]-Terrain.speedTerrain;
 			
 		//	xter2[k]=xter2[k+1];
 		//	yter2[k]=yter2[k+1];

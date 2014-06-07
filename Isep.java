@@ -14,6 +14,7 @@ public class Isep {
 	protected static double speed=80;
 	protected static int tailleterrain=600;
 	public static double[] tab = new double[3000];
+	public static boolean boucle=true;
 	public static boolean multi;
 	public static boolean ai=false;
 	public static boolean menu=true;
@@ -24,10 +25,10 @@ public class Isep {
 	public static List<Terrain> myrectangle = new ArrayList<>();
 	public static int tabZonesParticuliere[]= zonesParticuliere(3);//Nombre de zones particulieres
 	public static List<Missile> myMines = new ArrayList<>();
-	public static int compteurSeconde;
+	public static int compteurSeconde=0;
 	public static int seconde=0;
 	public static int secondeRalentissement;
-	public static int dureeDuRalentissement=4; //durée des ralentissements en seconds
+	public static int dureeDuRalentissement=2; //durée des ralentissements en seconds
 	static double[] xter2=new double[50000];
 	static double[] yter2=new double[50000];
 	public static int bcl=0;
@@ -46,11 +47,11 @@ public class Isep {
 	}
 	public static int[] Ralentir2(int nbvaleurs) { // retourne au tableau de valeur qui permet de ralentir le terrain
 		int[] tableauRalentissement = new int[nbvaleurs];
-		double nb = 7 + Math.random() * 10;
+		double nb = 13 + Math.random() * 10;
 		int entier=caster(nb,1);
 		tableauRalentissement[0] = entier;
 		for (int k = 1; k != tableauRalentissement.length; k++){
-			tableauRalentissement[k]=tableauRalentissement[k-1]+caster(7+Math.random()*15,1);
+			tableauRalentissement[k]=tableauRalentissement[k-1]+caster(10+Math.random()*15,1);
 			//System.out.println(tableauRalentissement[k]);
 		}
 		return tableauRalentissement;
@@ -90,6 +91,7 @@ public class Isep {
 		// CREATION D'OBJETS POUR LE TERRAIN
 		myrectangle = Terrain.getListeTerrain();
 		System.out.println("Chargement...");
+		System.out.println("tab0 "+tab[0]);
 		Terrain.generateTerrain();
 		// FIN CREATION D'OBJETS
 
@@ -98,10 +100,11 @@ public class Isep {
 		//Audio son = new Audio();
 		//son.start();
 		Menu.nav();
-		compteurSeconde=0; // on initialise le compteur de seconde à 0.
-		while (finDePartie) {
-			if(Terrain.niveau2)
+	
+		while (finDePartie){
+			if(Terrain.niveau2){
 				Terrain.generateTerrain2();
+			}
 			StdDraw.clear();
 
 			//on fait clignoter l'écran si pour 1 joueur, ce dernier a moins de 3 vies
@@ -139,13 +142,13 @@ public class Isep {
 			}else{
 				// JOUEUR ordi*************************************
 				AI vaisseauBleu=(AI) myVaisseau.get(1);//ici myVaisseau.get(1) correspond au vaisseau bleu (i.e l'ordi) mais defois i 
-
+				vaisseauBleu.takeBouclier();
 				vaisseauBleu.aiMove();
 				vaisseauBleu.aiMissile();
 				vaisseauBleu.aiMine();
 				vaisseauBleu.controlAImove();
 				vaisseauBleu.controlAImissilemine();
-				vaisseauBleu.takeBouclier();
+				
 
 				for(int i=0;i<=myrectangle.size();i++){
 					if(i%2!=0){
@@ -169,6 +172,7 @@ public class Isep {
 
 
 			// RECTANGLES********************************************
+
 			if(Terrain.niveau1){
 				for (int i = 0; i != myrectangle.size(); i++) {
 					myrectangle.get(i).show();// methode qui permet le defilement de chaque rectangle de la liste
@@ -178,12 +182,15 @@ public class Isep {
 						myrectangle.get(i).colision1();// colision avec le haut
 					}
 					for (int k = 0; k <= tab.length-2; k++) { // boucle pour les ralentissements
+						
 						if (seconde==tab[k]) {
 							secondeRalentissement=seconde;
-							myrectangle.get(i).setSpeed(20);// on baisse la vitesse
+							System.out.println("ok  :");
+							final double vitesse=myrectangle.get(i).getSpeed();
+							myrectangle.get(i).setSpeed(Terrain.speedTerrain-100);// on baisse la vitesse
 						}
 						if (seconde==secondeRalentissement+dureeDuRalentissement) {
-							myrectangle.get(i).setSpeed(80);// on la reaugmente x secondes plus tard
+							myrectangle.get(i).setSpeed(Terrain.speedTerrain);// on la reaugmente x secondes plus tard
 						}
 					}
 				}
@@ -198,6 +205,14 @@ public class Isep {
 				
 				Terrain.colision2();
 			}
+			
+			if(compteurSeconde%(12*34)==0 && seconde!=0){ //on augmente la vitesse du terrain toutes les 12 secondes
+				Terrain.speedTerrain=Terrain.speedTerrain+10;
+				System.out.println("speed terrain   :"+Terrain.speedTerrain);
+			}
+			
+			
+			
 			// ***************************************************
 			// JOUEUR1
 
@@ -213,6 +228,7 @@ public class Isep {
 			//VAISSEAU
 			// *************************************************************
 			finDePartie=Vaisseau.endGame(); // condition de fin de partie
+	
 			for (int i = 0; i != myVaisseau.size(); i = i + 1) {
 				if(!myVaisseau.get(i).getBouclier()){ // si les vaisseaux n'ont pas de bouclier
 					(myVaisseau.get(i)).paint(i+1);
@@ -222,13 +238,14 @@ public class Isep {
 				}
 				if(myVaisseau.get(i).getlife()>0){ //si le vaisseau est en vie il y a des borduress
 					(myVaisseau.get(i)).bordure();
+					(myVaisseau.get(i)).score();
 				}else{ //si il n'est plus en vie, il est attire sur la gauche 
 					(myVaisseau.get(i)).setX(10);
 				}
 				if(myVaisseau.get(i).getx()<-500){
+					//myVaisseau.remove(i);
 					(myVaisseau.get(i)).setX(100000000);// on sort le vaisseau en question du terrain pour plus qu'il interfère
 				}
-				(myVaisseau.get(i)).score();
 				myVaisseau.get(i).vies();// c'est pour afficher les coeurs
 				myVaisseau.get(i).affichageMines();
 				(myVaisseau.get(i)).colisionMissileVaisseau();

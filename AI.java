@@ -10,12 +10,17 @@ public class AI extends Vaisseau {
 	private boolean missile;
 	private boolean mine;
 	public static int k = 0;
+	public static int h = 0;
+	public static int b = 0;
 	public static int n = 0;
 	public static int droiteTour = 0;
 	public static boolean bouclierOn=false;
 	public static List<Terrain> myrectangle = new ArrayList<>();
 	public static List<Asteroide> myAsteroide = new ArrayList<>();
 	public static List<Missile> myMines = new ArrayList<>();
+	public static List<Double> haut = new ArrayList<>();
+	public static List<Double> bas = new ArrayList<>();
+	
 
 	AI(double x, double y, double vx, double vy, int life, int score,
 			int pMatricule, boolean pBouclier, boolean pTop, boolean pBottom,
@@ -68,6 +73,13 @@ public class AI extends Vaisseau {
 	public void setMine(boolean pMine) {
 		mine = pMine;
 	}
+	
+	public static double normeVect(double xv, double yv, double xrect, double yrect){
+		
+		double norme;
+		norme=Math.sqrt(Math.pow(xv-xrect, 2)+Math.pow(yv-yrect, 2));
+		return norme;
+	}
 
 	// FONCTIONS AI
 	// ****************************************************************
@@ -76,7 +88,7 @@ public class AI extends Vaisseau {
 		myrectangle = Terrain.getListeTerrain();
 		myAsteroide = Isep.myAsteroide;
 		myVaisseau = Isep.myVaisseau;
-
+		boolean cercle=false;
 		for (int i = 20; i != myrectangle.size(); i++) {// on prepare l'ensemble
 														// des rectangles et
 														// ensuite on les
@@ -89,28 +101,85 @@ public class AI extends Vaisseau {
 				}
 			}
 			// Dans le cas niveau = Hard
+			
 			if (Menu.niveau.equals("Hard")) {/////////A ALTERTNER NORMAL ET HARD
-				this.right = true;
+				if(!bouclierOn)
+					this.right = true;
 
 				if (Math.pow(myrectangle.get(i).getxter() - this.x, 2)
 						+ Math.pow(myrectangle.get(i).getyter()
 								- myrectangle.get(i).gethauteur() - this.y, 2) <= Math
-							.pow(4000, 2) && i % 2 != 0) {
+							.pow(2000, 2) && i % 2 != 0 ) {
 					this.bottom = true;
 				}
 
 				if (Math.pow(myrectangle.get(i).getxter() - this.x, 2)
 						+ Math.pow(myrectangle.get(i).getyter()
 								+ myrectangle.get(i).gethauteur() - this.y, 2) <= Math
-							.pow(4000, 2) && i % 2 == 0) {
+							.pow(2000, 2) && i % 2 == 0) {
 					this.top = true;
 				}
+				
 
+		
+			/*	if (Math.pow(myrectangle.get(i).getxter() - this.x, 2)
+						+ Math.pow(myrectangle.get(i).getyter()
+								+ myrectangle.get(i).gethauteur() - this.y, 2) <= Math
+							.pow(2000, 2)) {
+					
+					if(i%2==0){//On s'occupe des rectangles du haut 
+						
+						haut.add(normeVect(this.x,this.y,myrectangle.get(i).getxter(),myrectangle.get(i).getyter()));
+						h=h+1;
+					
+					}
+					else{
+						bas.add(normeVect(this.x,this.y,myrectangle.get(i).getxter(),myrectangle.get(i).getyter()));
+						b=b+1;
+					}
+					cercle=true;
+				}
+				else if(cercle){
+					double maxH=0;
+					double maxB=0;
+				if(i<haut.size()){
+						if(haut.get(i)>maxH){
+							maxH=haut.get(i);
+						}
+						
+					}
+				if(i<bas.size()){
+						if(bas.get(i)>maxB){
+							maxB=bas.get(i);
+						}
+					
+					}
+					if(maxH>maxB && (h>5||b>5)){
+						this.top=true;
+						h=0;
+						b=0;
+					}
+					if(maxH<maxB && (h>5||b>5)){
+						this.bottom=true;
+						h=0;
+						b=0;
+					}
+				}
+			*/
+				
+				
+
+				
+				
+				
+				
+				
+				
 				if (this.x >= X_MAX - 300) {
 					this.left = true;
 				}
 
-			}// Dans le cas niveau = Normal
+			}// Dans le cas niveau = NORMAL*************************************************************************************
 			else if (Menu.niveau.equals("Normal")) {
 				if (droiteTour % 50 == 0 && !bouclierOn) {
 					this.right = true;
@@ -159,11 +228,13 @@ public class AI extends Vaisseau {
 							} else if (myVaisseau.get(0).getx() + 500 >= this.x) {
 								if (droiteTour % 2 == 0) {
 									this.right = true;
+									System.out.println("okrigh");
 								}
 
 							} else if (this.x >= X_MAX / 2.0) {
 								if (droiteTour % 2 == 0) {
 									this.left = true;
+									System.out.println("okleft");
 								}
 							}
 							
@@ -177,21 +248,30 @@ public class AI extends Vaisseau {
 
 					}
 				}
-			}
+			}//**********************************************************************************************
 		}
 	}
 
 	public void aiMissile() {
 		myAsteroide = Isep.myAsteroide;
-		for (int i = 0; i != myAsteroide.size(); i++) {
-			if (Math.abs(this.x - myAsteroide.get(i).getPositionxAste()) <= 1500
-					&& Math.abs(this.y - myAsteroide.get(i).getPositionyAste()) <= 500
-					&& myAsteroide.get(i).getPositionxAste() <= X_MAX - 100) {
+		boolean passage=false;
+		for (int i = 0; i != myAsteroide.size()-1; i++) {
+				if (myAsteroide.get(i).getPositionxAste()-this.x<=4000
+					&& Math.abs(myAsteroide.get(i).getPositionyAste()-this.y) <= 1000
+					&& myAsteroide.get(i).getPositionxAste() <= X_MAX - 1000 && !passage) {
+					
 				this.missile = true;// Si l'asteroide se trouve a une distance
 									// assez proche du vaisseau AI, il lui tire
 									// dessus
-
-			} else {
+				passage=true;
+			}
+				else if(passage){
+					if(Isep.compteurSeconde%18==0){
+						missileJ2 = false;
+					}
+			}
+				
+			else {
 				this.missile = false;
 			}
 
@@ -237,6 +317,26 @@ public class AI extends Vaisseau {
 					}
 				}
 			}
+			// ESQUIVE DES ASTEROIDES*************
+			for (int i = 0; i != myAsteroide.size()-1; i++) {
+					if (
+							myAsteroide.get(i).getPositionxAste() - this.x <= 1000
+							&& Math.abs(myAsteroide.get(i).getPositionyAste()  - this.y) <= 1000
+							&& myAsteroide.get(i).getPositionxAste()  >= this.x
+							&& myAsteroide.get(i).getPositionyAste()  <= this.y) {
+						this.top = true;
+
+					}
+					if (
+							myAsteroide.get(i).getPositionxAste() - this.x <= 1000
+							&& Math.abs(myAsteroide.get(i).getPositionyAste()  - this.y) <= 1000
+							&& myAsteroide.get(i).getPositionxAste()  >= this.x
+							&& myAsteroide.get(i).getPositionyAste()  >= this.y) {
+						this.bottom = true;
+
+					}
+			}
+			
 		}// *****************************************************
 
 		// NIVEAU HARD
@@ -294,8 +394,9 @@ public class AI extends Vaisseau {
 	public void takeBouclier(){
 		
 		myAsteroide = Isep.myAsteroide;
+		for(int k=2;k<myAsteroide.size();k++){
 		Bouclier b;
-		b=(Bouclier) myAsteroide.get(2);
+		b=(Bouclier) myAsteroide.get(k);
 		if(b.xAste>0 && b.xAste<X_MAX){
 			if(b.xAste>=this.x){
 				this.right=true;
@@ -304,13 +405,13 @@ public class AI extends Vaisseau {
 			}
 			else
 				bouclierOn=false;
-		/*	if(b.xAste<this.x){
+			if(b.xAste<this.x){
 				this.left=true;
 				bouclierOn=true;
 				System.out.println("okl");
 			}
 			else
-				bouclierOn=false;*/
+				bouclierOn=false;
 			if(b.yAste>=this.y){
 				this.top=true;
 				bouclierOn=true;
@@ -326,7 +427,7 @@ public class AI extends Vaisseau {
 			else
 				bouclierOn=false;
 		}
-		
+	}
 	}
 
 	// FONCTION de CONTROLE AI*******************************************
@@ -353,11 +454,13 @@ public class AI extends Vaisseau {
 				myMissile.add(new Missile(myVaisseau.get(1).getx(), myVaisseau
 						.get(1).gety(), Missile.getvxmissile(), 0, r,
 						myVaisseau.get(1).getMat(), true));
-
-				missileJ2 = true;
+				
+				missileJ2=true;
 
 			}
 		}
+		
+	
 
 		if (!this.mine) {//
 			mineJ2 = false;
@@ -366,7 +469,7 @@ public class AI extends Vaisseau {
 			if (this.mine) {
 				myMines.add(new Mines(myVaisseau.get(1).getx(), myVaisseau.get(
 						1).gety(), Missile.getvxmissile(), 0, 0, myVaisseau
-						.get(1).getMat(), true, Terrain.speed, 4));
+						.get(1).getMat(), true, Terrain.speedTerrain, 4));
 				myVaisseau.get(1).stockMine=myVaisseau.get(1).stockMine-1;
 				mineJ2 = true;
 
