@@ -138,13 +138,10 @@ public class Vaisseau {
 
 		myVaisseau = Isep.getListeVaisseau();
 		for (int k = 0; k != myVaisseau.size(); k++) {// on parcourt tous les vaisseaux
-			if(myVaisseau.get(k).stockMine>1){
-				for (int g = 0; g != myVaisseau.get(k).life; g++) {
-					if(myVaisseau.get(k).getmine()!=0)
+			if(myVaisseau.get(k).stockMine>=0){
 						StdDraw.picture(5500+1700*k, 8000, "./src/mine2.png");
 					    String pstockMine = Integer.toString(stockMine);
 					    StdDraw.text(6000+1700*k, 8000, pstockMine);
-				}
 			}
 		}
 	}
@@ -158,6 +155,7 @@ public class Vaisseau {
 				}
 			}
 			//System.out.println("p :"+p);
+			//System.out.println("size :"+myVaisseau.size());
 		}
 		return true;
 	}
@@ -214,16 +212,16 @@ public class Vaisseau {
 	}
 
 	public void top() {
-		y  = y + 75;
+		y  = y + 120;
 	}
 	public void bottom() {
-		y = y - 75;
+		y = y - 120;
 	}
 	public void left() {
-		x = x - 40;
+		x = x - 50;
 	}
 	public void right() {
-		x = x + 40;
+		x = x + 50;
 	}
 
 	public void top1(){
@@ -426,7 +424,7 @@ public class Vaisseau {
 					myMines.add(new Mines(myVaisseau.get(0).getx(),
 							myVaisseau.get(0).gety(), Missile
 							.getvxmissile(), 0, 0, myVaisseau
-							.get(0).getMat(), true, Terrain.speed, 4));// Deux paramètres ont été rajoutés : la vitesse de la mine et son 
+							.get(0).getMat(), true, Terrain.speedTerrain, 4));// Deux paramètres ont été rajoutés : la vitesse de la mine et son 
 					// acceleration, même si on voit getvxmissile on ne travaillera que sur vxMine
 					mineJ1 = true;
 					myVaisseau.get(0).stockMine=myVaisseau.get(0).stockMine-1;
@@ -504,7 +502,7 @@ public class Vaisseau {
 					myMines.add(new Mines(myVaisseau.get(1).getx(),
 							myVaisseau.get(1).gety(), Missile
 							.getvxmissile(), 0, 0, myVaisseau
-							.get(1).getMat(), true, Terrain.speed, 4));
+							.get(1).getMat(), true, Terrain.speedTerrain, 4));
 					mineJ2 = true;
 					myVaisseau.get(1).stockMine=myVaisseau.get(1).stockMine-1;
 				}
@@ -553,7 +551,7 @@ public class Vaisseau {
 					myMines.add(new Mines(myVaisseau.get(2).getx(),
 							myVaisseau.get(2).gety(), Missile
 							.getvxmissile(), 0, 0, myVaisseau
-							.get(2).getMat(), true, Terrain.speed, 4));
+							.get(2).getMat(), true, Terrain.speedTerrain, 4));
 					mineJ3 = true;
 					myVaisseau.get(2).stockMine=myVaisseau.get(2).stockMine-1;
 				}

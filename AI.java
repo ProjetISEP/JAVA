@@ -366,7 +366,7 @@ public class AI extends Vaisseau {
 			if (this.mine) {
 				myMines.add(new Mines(myVaisseau.get(1).getx(), myVaisseau.get(
 						1).gety(), Missile.getvxmissile(), 0, 0, myVaisseau
-						.get(1).getMat(), true, Terrain.speed, 4));
+						.get(1).getMat(), true, Terrain.speedTerrain, 4));
 				myVaisseau.get(1).stockMine=myVaisseau.get(1).stockMine-1;
 				mineJ2 = true;
 
