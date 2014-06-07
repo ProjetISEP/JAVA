@@ -424,8 +424,13 @@ public class Vaisseau {
 					myMines.add(new Mines(myVaisseau.get(0).getx(),
 							myVaisseau.get(0).gety(), Missile
 							.getvxmissile(), 0, 0, myVaisseau
+<<<<<<< HEAD
 							.get(0).getMat(), true, Terrain.speedTerrain, 4));// Deux paramï¿½tres ont ï¿½tï¿½ rajoutï¿½s : la vitesse de la mine et son 
 					// acceleration, mï¿½me si on voit getvxmissile on ne travaillera que sur vxMine
+=======
+							.get(0).getMat(), true, Terrain.speedTerrain, 4));// Deux paramètres ont été rajoutés : la vitesse de la mine et son 
+					// acceleration, même si on voit getvxmissile on ne travaillera que sur vxMine
+>>>>>>> b42a8810d60aa11be8c564087418735888fb8326
 					mineJ1 = true;
 					myVaisseau.get(0).stockMine=myVaisseau.get(0).stockMine-1;
 				}
