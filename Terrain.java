@@ -15,7 +15,7 @@ public class Terrain {
 	protected double largeur=110;
 	protected double hauteur;
 	protected static double speed;
-	public static double speedTerrain=120;
+	public static double speedTerrain=80;
 	protected static int tailleterrain=800;
 	protected static int tailleterrain2=100;
 	public static double[] tab = new double[3000];

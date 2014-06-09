@@ -44,7 +44,7 @@ public class Vaisseau {
 	public static boolean mineJ2 = false;
 	public static boolean mineJ3 = false;
 	
-
+	static boolean turbulence;
 
 	static double R = Math.random() * 255;
 	static double G = Math.random() * 255;
@@ -138,7 +138,7 @@ public class Vaisseau {
 
 		myVaisseau = Isep.getListeVaisseau();
 		for (int k = 0; k != myVaisseau.size(); k++) {// on parcourt tous les vaisseaux
-			if(myVaisseau.get(k).stockMine>=0){
+			if(myVaisseau.get(k).stockMine>=1){
 						StdDraw.picture(5500+1700*k, 8000, "./src/mine2.png");
 					    String pstockMine = Integer.toString(stockMine);
 					    StdDraw.text(6000+1700*k, 8000, pstockMine);
@@ -421,16 +421,10 @@ public class Vaisseau {
 		if (mineJ1 == false) {
 			if (StdDraw.isKeyPressed(517)) {
 				if(myVaisseau.get(0).stockMine>0){// 517 correspond ï¿½ la touche "!"
-					myMines.add(new Mines(myVaisseau.get(0).getx(),
-							myVaisseau.get(0).gety(), Missile
-							.getvxmissile(), 0, 0, myVaisseau
-<<<<<<< HEAD
-							.get(0).getMat(), true, Terrain.speedTerrain, 4));// Deux paramï¿½tres ont ï¿½tï¿½ rajoutï¿½s : la vitesse de la mine et son 
+					myMines.add(new Mines(myVaisseau.get(0).getx(),myVaisseau.get(0).gety(), Missile.getvxmissile(), 0, 0, myVaisseau.get(0).getMat(), true, Terrain.speedTerrain, 4));// Deux paramï¿½tres ont ï¿½tï¿½ rajoutï¿½s : la vitesse de la mine et son 
 					// acceleration, mï¿½me si on voit getvxmissile on ne travaillera que sur vxMine
-=======
-							.get(0).getMat(), true, Terrain.speedTerrain, 4));// Deux paramètres ont été rajoutés : la vitesse de la mine et son 
-					// acceleration, même si on voit getvxmissile on ne travaillera que sur vxMine
->>>>>>> b42a8810d60aa11be8c564087418735888fb8326
+						//	.get(0).getMat(), true, Terrain.speedTerrain, 4));// Deux paramï¿½tres ont ï¿½tï¿½ rajoutï¿½s : la vitesse de la mine et son 
+					// acceleration, mï¿½me si on voit getvxmissile on ne travaillera que sur vxMine
 					mineJ1 = true;
 					myVaisseau.get(0).stockMine=myVaisseau.get(0).stockMine-1;
 				}
@@ -717,10 +711,24 @@ public class Vaisseau {
 		if (this.x >= myrectangle.get(x1).getxter()
 				&& this.x <= myrectangle.get(x2).getxter()) {// PARTIE GRAVITE
 			this.setY(20); // setY est dans la class Vaisseau
+			turbulence=true;
 			gravite=true;
-			//	System.out.println("gravitÃ©");
+			if(Isep.compteurSeconde%30==0){
+				
+				Isep.X_MAX=12000;
+			}else if (Isep.compteurSeconde%20==0){
+				Isep.Y_MAX=12000;
+			}else{
+				Isep.Y_MAX=10000;
+				Isep.X_MAX=10000;
+			}
+			//Isep.Y_MAX=10000;
+			//System.out.println(turbulence);
 		} else {
+			turbulence=false;
 			gravite=false;
+			//Isep.Y_MAX=10000;
+			
 			//	System.out.println("pas de gravitÃ©");
 		}
 	}

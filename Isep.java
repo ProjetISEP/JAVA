@@ -29,6 +29,10 @@ public class Isep {
 	public static int seconde=0;
 	public static int secondeRalentissement;
 	public static int dureeDuRalentissement=2; //durée des ralentissements en seconds
+	public static int longueurFenetre;
+	public static int largeurFenetre;
+
+
 	static double[] xter2=new double[50000];
 	static double[] yter2=new double[50000];
 	public static int bcl=0;
@@ -80,13 +84,15 @@ public class Isep {
 	// LE MAIN /////////////////////////////////////
 	public static void main(String[] args) throws InterruptedException {
 		//On agrandit la fenetre d'origine
-		StdDraw.setCanvasSize(900, 500);
+		longueurFenetre=900;
+		largeurFenetre=500;
+		StdDraw.setCanvasSize(longueurFenetre, largeurFenetre);
 		StdDraw.setXscale(0, X_MAX);
 		StdDraw.setYscale(0, Y_MAX);
 
 		myAsteroide.add(new Asteroide(X_MAX, 5000, 0, 0, 4));
 		myAsteroide.add(new Asteroide(X_MAX, 0, 0, 0, 4));
-		myAsteroide.add(new Bouclier(X_MAX/2, 0, 0, 0, 4));
+		myAsteroide.add(new Bouclier(X_MAX*2, 0, 0, 0, 4));
 
 		// CREATION D'OBJETS POUR LE TERRAIN
 		myrectangle = Terrain.getListeTerrain();
@@ -102,6 +108,8 @@ public class Isep {
 		Menu.nav();
 	
 		while (finDePartie){
+			StdDraw.setXscale(0, X_MAX);
+			StdDraw.setYscale(0, Y_MAX);
 			if(Terrain.niveau2){
 				Terrain.generateTerrain2();
 			}
@@ -185,8 +193,6 @@ public class Isep {
 						
 						if (seconde==tab[k]) {
 							secondeRalentissement=seconde;
-							System.out.println("ok  :");
-							final double vitesse=myrectangle.get(i).getSpeed();
 							myrectangle.get(i).setSpeed(Terrain.speedTerrain-100);// on baisse la vitesse
 						}
 						if (seconde==secondeRalentissement+dureeDuRalentissement) {
@@ -196,17 +202,14 @@ public class Isep {
 				}
 			}
 			else if(Terrain.niveau2){
-			
-
 				Terrain.show2();
 			
-
 				//COLISION*********************************************************
-				
 				Terrain.colision2();
 			}
 			
-			if(compteurSeconde%(12*34)==0 && seconde!=0){ //on augmente la vitesse du terrain toutes les 12 secondes
+			//on augmente la vitesse du terrain toutes les 12 secondes
+			if(compteurSeconde%(12*34)==0 && seconde!=0){ 
 				Terrain.speedTerrain=Terrain.speedTerrain+10;
 				System.out.println("speed terrain   :"+Terrain.speedTerrain);
 			}
@@ -251,7 +254,7 @@ public class Isep {
 				(myVaisseau.get(i)).colisionMissileVaisseau();
 				(myVaisseau.get(i)).colisionMineVaisseau(); 
 				(myVaisseau.get(i)).colisionVaisseauAVaisseau();
-
+				
 
 				//ZONES PARTICULIERES************************
 				for(int k=0;k!=tabZonesParticuliere.length;k++){
@@ -260,7 +263,7 @@ public class Isep {
 				}
 				//********* FIN ZONE PARTICULIERE
 			}
-
+			
 			// ASTEROIDE******************************************************
 			for (int i = 0; i != myAsteroide.size(); i = i + 1) {
 				// si l'asteroide sort de l'écran on le positionne à droite de l'écran
@@ -294,7 +297,6 @@ public class Isep {
 					(myMines.get(i)).mines();
 				else
 					(myMines.get(i)).setxmissile(20000);
-
 			}
 			StdDraw.show(10);
 
@@ -313,6 +315,8 @@ public class Isep {
 			//
 			Thread.sleep(10); // on fait patienter le programme 10ms pour le compteur de seconde
 			///////////FIN PARTIE COMPTEUR SECONDE
+			
+			
 		}
 		int winnerScore=myVaisseau.get(0).score;
 		int winner=myVaisseau.get(0).matricule; // le gagnant est le joueur 1
