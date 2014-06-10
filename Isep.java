@@ -92,7 +92,7 @@ public class Isep {
 
 		myAsteroide.add(new Asteroide(X_MAX, 5000, 0, 0, 4));
 		myAsteroide.add(new Asteroide(X_MAX, 0, 0, 0, 4));
-		myAsteroide.add(new Bouclier(X_MAX*2, 0, 0, 0, 4));
+		myAsteroide.add(new Bouclier(X_MAX/2, 0, 0, 0, 4));
 
 		// CREATION D'OBJETS POUR LE TERRAIN
 		myrectangle = Terrain.getListeTerrain();

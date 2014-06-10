@@ -10,7 +10,7 @@ public class TerrainParticulier extends Terrain  {
 		StdDraw.filledRectangle(xter, yter, largeur,hauteur);
 		Color RANDOM=new Color((int)R,(int)G,(int)B);
 		StdDraw.setPenColor(RANDOM);
-		xter=xter-speed;
+		xter=xter-speedTerrain;
 	}
 	public void setSpeed(int newSpeed){//NOUVELLE VITESSE DES TERRAINS
 		myVaisseau=Isep.getListeVaisseau();

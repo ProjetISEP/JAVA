@@ -15,7 +15,7 @@ public class Terrain {
 	protected double largeur=110;
 	protected double hauteur;
 	protected static double speed;
-	public static double speedTerrain=80;
+	public static double speedTerrain=120;
 	protected static int tailleterrain=800;
 	protected static int tailleterrain2=100;
 	public static double[] tab = new double[3000];
@@ -101,7 +101,7 @@ public class Terrain {
 		//	StdDraw.polygon(xter, yter);
 		Color RANDOM=new Color((int)R,(int)G,(int)B);
 		StdDraw.setPenColor(Color.black);
-		xter=xter-speed;
+		xter=xter-speedTerrain;
 	}
 	
 	/*public static void showniv2(){
@@ -211,7 +211,7 @@ public class Terrain {
 							xter2[k] =k*(0.01*X_MAX);  yter2[k] = a;
 							h=((double)(Math.random()*(0.8*Y_MAX-0.7*Y_MAX+1))+0.7*Y_MAX);
 							yter2haut[k] = h;
-							myrectangle.add(new Terrain(k*(0.01*X_MAX), a,0,0,120));
+							myrectangle.add(new Terrain(k*(0.01*X_MAX), a,0,0,speedTerrain));
 						}
 						else if(Isep.compteurSeconde%23==0){
 							c=((double)(Math.random()*(0.55*Y_MAX-0.13*Y_MAX+1))+0.13*Y_MAX);
@@ -219,7 +219,7 @@ public class Terrain {
 							xter2[k] =k*(0.01*X_MAX);  yter2[k] = c;
 							h=((double)(Math.random()*(0.9*Y_MAX-0.75*Y_MAX+1))+0.75*Y_MAX);
 							yter2haut[k] = h;
-							myrectangle.add(new Terrain(k*(0.01*X_MAX), c,0,0,120));
+							myrectangle.add(new Terrain(k*(0.01*X_MAX), c,0,0,speedTerrain));
 						}
 						else{
 					
@@ -228,7 +228,7 @@ public class Terrain {
 							xter2[k] =k*(0.01*X_MAX);  yter2[k] = b; 
 							h=((double)(Math.random()*(0.9*Y_MAX-0.75*Y_MAX+1))+0.75*Y_MAX);
 							yter2haut[k] = h;
-							myrectangle.add(new Terrain((k+Isep.bcl)*0.01*X_MAX, b,0,0,120));
+							myrectangle.add(new Terrain((k+Isep.bcl)*0.01*X_MAX, b,0,0,speedTerrain));
 						
 						}
 					//	System.out.println("ok");

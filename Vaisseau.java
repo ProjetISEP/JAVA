@@ -211,18 +211,19 @@ public class Vaisseau {
 
 	}
 
-	public void top() {
-		y  = y + 120;
-	}
-	public void bottom() {
-		y = y - 120;
-	}
-	public void left() {
-		x = x - 50;
-	}
-	public void right() {
-		x = x + 50;
-	}
+	public void top() { 		
+		 		y  = y + 120;
+		  	}
+		  	public void bottom() {
+		 		y = y - 120;
+		  	}
+		  	public void left() {
+		 		x = x - 50;
+		  	}
+		  	public void right() {
+		 		x = x + 50;
+		  	}
+		  
 
 	public void top1(){
 		int k=0;
@@ -576,6 +577,7 @@ public class Vaisseau {
 
 	public void paint(int i) {
 		StdDraw.picture(x, y, "./src/vaisseau"+intToString(i)+".png", 180);
+		StdDraw.circle(x, y, 2000);
 	}
 	public void paintBouclier(int i) {
 		StdDraw.picture(x, y, "./src/vaisseau"+intToString(i)+"_bouclier.png", 180);
@@ -713,7 +715,7 @@ public class Vaisseau {
 			this.setY(20); // setY est dans la class Vaisseau
 			turbulence=true;
 			gravite=true;
-			if(Isep.compteurSeconde%30==0){
+			/*if(Isep.compteurSeconde%30==0){
 				
 				Isep.X_MAX=12000;
 			}else if (Isep.compteurSeconde%20==0){
@@ -721,7 +723,7 @@ public class Vaisseau {
 			}else{
 				Isep.Y_MAX=10000;
 				Isep.X_MAX=10000;
-			}
+			}*/
 			//Isep.Y_MAX=10000;
 			//System.out.println(turbulence);
 		} else {
