@@ -577,7 +577,6 @@ public class Vaisseau {
 
 	public void paint(int i) {
 		StdDraw.picture(x, y, "./src/vaisseau"+intToString(i)+".png", 180);
-		StdDraw.circle(x, y, 2000);
 	}
 	public void paintBouclier(int i) {
 		StdDraw.picture(x, y, "./src/vaisseau"+intToString(i)+"_bouclier.png", 180);
@@ -660,33 +659,50 @@ public class Vaisseau {
 	public void colisionVaisseauAVaisseau(){
 		myVaisseau = Isep.myVaisseau;
 		for(int i=0;i!=myVaisseau.size();i++){
-			if(this.matricule!=myVaisseau.get(i).matricule && !this.inertie){
-			//	System.out.print(this.droite);
-				if (Math.abs(this.x-myVaisseau.get(i).getx())<=500 && Math.abs(this.y-myVaisseau.get(i).gety())<=250 && this.x-300<myVaisseau.get(i).getx() && this.droite ){
-				myVaisseau.get(i).setx(myVaisseau.get(i).getx()+80);//
-			//	System.out.println("okdr");
+			if(this.matricule!=myVaisseau.get(i).matricule){
+	
+				if (Math.abs(this.x-myVaisseau.get(i).getx())<=500 && Math.abs(this.y-myVaisseau.get(i).gety())<=250 && this.x+300<myVaisseau.get(i).getx() && this.droite ){
+					if((!this.inertie && !myVaisseau.get(i).inertie) || (this.inertie && myVaisseau.get(i).inertie) )//Les vaisseaux de même type transmettent des collisions moindres
+						myVaisseau.get(i).setx(myVaisseau.get(i).getx()+80);//
+					else if(this.inertie && !myVaisseau.get(i).inertie)// un vaisseau sans inertie qui se fait touché par un vaisseau avec de l'inertie se déplace suivant le vecteur vitesse de ce dernier 
+						myVaisseau.get(i).setx(myVaisseau.get(i).getx()+this.inertieRight);//
+					else if(!this.inertie && myVaisseau.get(i).inertie)
+						myVaisseau.get(i).setx(myVaisseau.get(i).getx()+5);//Un vaisseau sans inertie qui touche un vaisseau avec inertie n'aura que trés peu d'impacts
+	
 				}
-				if (Math.abs(this.x-myVaisseau.get(i).getx())<=500 && Math.abs(this.y-myVaisseau.get(i).gety())<=250 && this.x+300>myVaisseau.get(i).getx() && this.gauche){
-					myVaisseau.get(i).setx(myVaisseau.get(i).getx()-80);//
-				//	System.out.println("okgau");
+				if (Math.abs(this.x-myVaisseau.get(i).getx())<=500 && Math.abs(this.y-myVaisseau.get(i).gety())<=250 && this.x-300>myVaisseau.get(i).getx() && this.gauche){
+					if(!this.inertie && !myVaisseau.get(i).inertie)
+						myVaisseau.get(i).setx(myVaisseau.get(i).getx()-80);//
+					else if(this.inertie && !myVaisseau.get(i).inertie)
+						myVaisseau.get(i).setx(myVaisseau.get(i).getx()-this.inertieLeft);//
+					else if(!this.inertie && myVaisseau.get(i).inertie)
+						myVaisseau.get(i).setx(myVaisseau.get(i).getx()-5);//
+
+	
 				}
-				if (Math.abs(this.x-myVaisseau.get(i).getx())<=250 && Math.abs(this.y-myVaisseau.get(i).gety())<=1000 && this.y-300<myVaisseau.get(i).gety() && this.haut){
-					myVaisseau.get(i).sety(myVaisseau.get(i).gety()+75);//
-			//		System.out.println("okhau");
+				if (Math.abs(this.x-myVaisseau.get(i).getx())<=250 && Math.abs(this.y-myVaisseau.get(i).gety())<=1000 && this.y+300<myVaisseau.get(i).gety() && this.haut){
+					if(!this.inertie && !myVaisseau.get(i).inertie)
+						myVaisseau.get(i).sety(myVaisseau.get(i).gety()+75);//
+					else if(this.inertie && !myVaisseau.get(i).inertie)
+						myVaisseau.get(i).sety(myVaisseau.get(i).gety()+this.inertieTop);//
+					else if(!this.inertie && myVaisseau.get(i).inertie)
+						myVaisseau.get(i).sety(myVaisseau.get(i).gety()+5);//
+
 				}
-				if (Math.abs(this.x-myVaisseau.get(i).getx())<=250 && Math.abs(this.y-myVaisseau.get(i).gety())<=1000 && this.y+300<myVaisseau.get(i).gety() && this.bas){
-					myVaisseau.get(i).sety(myVaisseau.get(i).gety()-75);//
-			//		System.out.println("okhau");
+				if (Math.abs(this.x-myVaisseau.get(i).getx())<=250 && Math.abs(this.y-myVaisseau.get(i).gety())<=1000 && this.y-300>myVaisseau.get(i).gety() && this.bas){
+					if(!this.inertie && !myVaisseau.get(i).inertie)
+						myVaisseau.get(i).sety(myVaisseau.get(i).gety()-75);//
+					else if(this.inertie && !myVaisseau.get(i).inertie)
+						myVaisseau.get(i).sety(myVaisseau.get(i).gety()-this.inertieBottom);//
+					else if(!this.inertie && myVaisseau.get(i).inertie)
+						myVaisseau.get(i).sety(myVaisseau.get(i).gety()-5);//
+
 				}
 				
 			}
 		}
-		
-		
-		
-		
 	}
-
+	
 	public void toucheInversee(int x1, int x2) {// la fonction de controle des touches a besoin du while true pour etre executé du
 		// coup elle est remise dans la
 		// classe Isep
@@ -734,6 +750,7 @@ public class Vaisseau {
 			//	System.out.println("pas de gravité");
 		}
 	}
+		
 	}
 
 }

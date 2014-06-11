@@ -189,7 +189,7 @@ public class AI extends Vaisseau {
 
 						if (n != this.matricule) {
 							if (myVaisseau.get(0).getx() + 500 >= this.x) {
-								if (droiteTour % 3 == 0) {
+								if (droiteTour % 3 == 0) {//Le vaisseau va avancer progressivement
 									this.right = true;
 								}
 
